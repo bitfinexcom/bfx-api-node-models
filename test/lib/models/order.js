@@ -17,18 +17,6 @@ describe('Order model', () => {
     ]
   })
 
-  it('getLastFillAmount: respects _lastAmount & amount', () => {
-    const o = new Order()
-    o.amount = 5
-    o._lastAmount = 7
-    assert.equal(o.getLastFillAmount(), 2)
-    o._lastAmount = 6
-    assert.equal(o.getLastFillAmount(), 1)
-    o._lastAmount = 3
-    o.amount = 1
-    assert.equal(o.getLastFillAmount(), 2)
-  })
-
   it('toNewOrderPacket: uses correct values', () => {
     const o = new Order({
       id: 1,
