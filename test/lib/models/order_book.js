@@ -119,6 +119,14 @@ describe('OrderBook model', () => {
     )
   })
 
+  it('updateWith: does not insert removals if the side is empty', () => {
+    const ob = new OrderBook([], true)
+    ob.updateWith([123, 0, -1])
+    assert.equal(ob.asks.length, 0)
+    ob.updateWith([123, 0, 1])
+    assert.equal(ob.bids.length, 0)
+  })
+
   it('updateWith: correctly applies update', () => {
     const entries = [
       [100, 2, 10],
