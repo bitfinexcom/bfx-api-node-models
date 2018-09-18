@@ -119,6 +119,22 @@ describe('OrderBook model', () => {
     )
   })
 
+  it('volBPSMid: returns volume at n basis points from mid price', () => {
+    const ob = new OrderBook([
+      [98, 5800, 1],
+      [99, 5900, 1],
+      [100, 6000, 1],
+      [101, 6000, 2],
+      [102, 6100, -3],
+      [103, 6100, -4],
+      [104, 6200, -4],
+      [105, 6300, -4]
+    ], true)
+
+    assert.equal(ob.volBPSMid(100), 10)
+    assert.equal(ob.volBPSMid(300), 15)
+  })
+
   it('updateWith: does not insert removals if the side is empty', () => {
     const ob = new OrderBook([], true)
     ob.updateWith([123, 0, -1])
