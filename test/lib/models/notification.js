@@ -8,7 +8,7 @@ describe('Notification model', () => {
   testModel({
     model: Notification,
     orderedFields: [
-      'mts', 'type', 'messageID', 'notifyInfo', 'code', 'status', 'text'
+      'mts', 'type', 'messageID', null, 'notifyInfo', 'code', 'status', 'text'
     ]
   })
 })
