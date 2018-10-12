@@ -27,6 +27,7 @@ Some models, such as `Order` and `OrderBook` provide higher level methods which 
 * Trade
 * TradingTicker
 * Wallet
+* Currency
 
 ### Data Manipulation
 All models provide `serialize()` and `unserialize()` methods, which convert to/from array-format payloads respectively. All model constructors can take either array-format payloads, or objects/other model instances. A helper `toJS()` method is also provided for converting models to plain JS objects (POJOs).
