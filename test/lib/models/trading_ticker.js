@@ -4,7 +4,7 @@
 const assert = require('assert')
 const { TradingTicker } = require('../../../lib')
 
-const DATA = ['tETHUSD', [
+const DATA = [
   228.56,
   430.1902224,
   228.58,
@@ -15,13 +15,12 @@ const DATA = ['tETHUSD', [
   881908.12214509,
   284.62,
   211.19
-]]
+]
 
 describe('TradingTicker model', () => {
   it('initializes correctly', () => {
     const ticker = new TradingTicker(DATA)
 
-    assert.equal(ticker.symbol, 'tETHUSD')
     assert.equal(ticker.bid, 228.56)
     assert.equal(ticker.bidSize, 430.1902224)
     assert.equal(ticker.ask, 228.58)
@@ -44,7 +43,6 @@ describe('TradingTicker model', () => {
   it('unserializes correctly', () => {
     const obj = TradingTicker.unserialize(DATA)
 
-    assert.equal(obj.symbol, 'tETHUSD')
     assert.equal(obj.bid, 228.56)
     assert.equal(obj.bidSize, 430.1902224)
     assert.equal(obj.ask, 228.58)
