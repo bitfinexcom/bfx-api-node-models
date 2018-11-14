@@ -5,6 +5,7 @@ const assert = require('assert')
 const { FundingTicker } = require('../../../lib')
 
 const DATA = [
+  'fZRX',
   0.00009351,
   0.00009526,
   30,
@@ -24,6 +25,7 @@ describe('FundingTicker model', () => {
   it('initializes correctly', () => {
     const ticker = new FundingTicker(DATA)
 
+    assert.equal(ticker.symbol, 'fZRX')
     assert.equal(ticker.frr, 0.00009351)
     assert.equal(ticker.bid, 0.00009526)
     assert.equal(ticker.bidPeriod, 30)
@@ -49,6 +51,7 @@ describe('FundingTicker model', () => {
   it('unserializes correctly', () => {
     const obj = FundingTicker.unserialize(DATA)
 
+    assert.equal(obj.symbol, 'fZRX')
     assert.equal(obj.frr, 0.00009351)
     assert.equal(obj.bid, 0.00009526)
     assert.equal(obj.bidPeriod, 30)

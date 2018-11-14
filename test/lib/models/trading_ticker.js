@@ -5,6 +5,7 @@ const assert = require('assert')
 const { TradingTicker } = require('../../../lib')
 
 const DATA = [
+  'tBTCUSD',
   228.56,
   430.1902224,
   228.58,
@@ -21,6 +22,7 @@ describe('TradingTicker model', () => {
   it('initializes correctly', () => {
     const ticker = new TradingTicker(DATA)
 
+    assert.equal(ticker.symbol, 'tBTCUSD')
     assert.equal(ticker.bid, 228.56)
     assert.equal(ticker.bidSize, 430.1902224)
     assert.equal(ticker.ask, 228.58)
@@ -40,9 +42,24 @@ describe('TradingTicker model', () => {
     assert.deepStrictEqual(arr, DATA)
   })
 
+  it('returns quote correctly', () => {
+    const ticker = new TradingTicker(DATA)
+    const quote = ticker.quote()
+
+    assert.equal(quote, 'USD')
+  })
+
+  it('returns base correctly', () => {
+    const ticker = new TradingTicker(DATA)
+    const base = ticker.base()
+
+    assert.equal(base, 'BTC')
+  })
+
   it('unserializes correctly', () => {
     const obj = TradingTicker.unserialize(DATA)
 
+    assert.equal(obj.symbol, 'tBTCUSD')
     assert.equal(obj.bid, 228.56)
     assert.equal(obj.bidSize, 430.1902224)
     assert.equal(obj.ask, 228.58)
