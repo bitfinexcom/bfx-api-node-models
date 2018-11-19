@@ -3,6 +3,7 @@
 
 const assert = require('assert')
 const CRC = require('crc-32')
+const { RESTv2 } = require('bfx-api-node-rest')
 const { OrderBook } = require('../../../lib')
 
 describe('OrderBook model', () => {
@@ -741,5 +742,53 @@ describe('OrderBook model', () => {
 
     assert.deepEqual(entryA, expA)
     assert.deepEqual(entryB, expB)
+  })
+
+  it('unserializes live trading data correctly', async () => {
+    const rest = new RESTv2()
+    const book = await rest.orderBook('tBTCUSD', 'P0')
+    const obj = new OrderBook(book)
+    let firstAsk = -1
+
+    book.forEach((entry, i) => {
+      if (entry[2] < 0) {
+        if (firstAsk === -1) {
+          firstAsk = i
+        }
+
+        assert.equal(obj.asks[i - firstAsk][0], entry[0])
+        assert.equal(obj.asks[i - firstAsk][1], entry[1])
+        assert.equal(obj.asks[i - firstAsk][2], entry[2])
+      } else {
+        assert.equal(obj.bids[i][0], entry[0])
+        assert.equal(obj.bids[i][1], entry[1])
+        assert.equal(obj.bids[i][2], entry[2])
+      }
+    })
+  })
+
+  it('unserializes live funding data correctly', async () => {
+    const rest = new RESTv2()
+    const book = await rest.orderBook('fUSD', 'P0')
+    const obj = new OrderBook(book)
+    let firstAsk = -1
+
+    book.forEach((entry, i) => {
+      if (entry[3] > 0) {
+        if (firstAsk === -1) {
+          firstAsk = i
+        }
+
+        assert.equal(obj.asks[i - firstAsk][0], entry[0])
+        assert.equal(obj.asks[i - firstAsk][1], entry[1])
+        assert.equal(obj.asks[i - firstAsk][2], entry[2])
+        assert.equal(obj.asks[i - firstAsk][3], entry[3])
+      } else {
+        assert.equal(obj.bids[i][0], entry[0])
+        assert.equal(obj.bids[i][1], entry[1])
+        assert.equal(obj.bids[i][2], entry[2])
+        assert.equal(obj.bids[i][3], entry[3])
+      }
+    })
   })
 })

@@ -2,6 +2,7 @@
 'use strict'
 
 const assert = require('assert')
+const { RESTv2 } = require('bfx-api-node-rest')
 const { FundingTicker } = require('../../../lib')
 
 const DATA = [
@@ -62,5 +63,25 @@ describe('FundingTicker model', () => {
     assert.equal(obj.volume, 255643282.81674618)
     assert.equal(obj.high, 0.000163)
     assert.equal(obj.low, 2.7e-7)
+  })
+
+  it('unserializes live data correctly', async () => {
+    const rest = new RESTv2()
+    const arr = await rest.ticker('fUSD')
+    const obj = FundingTicker.unserialize(arr)
+
+    assert.equal(obj.frr, arr[0])
+    assert.equal(obj.bid, arr[1])
+    assert.equal(obj.bidPeriod, arr[2])
+    assert.equal(obj.bidSize, arr[3])
+    assert.equal(obj.ask, arr[4])
+    assert.equal(obj.askPeriod, arr[5])
+    assert.equal(obj.askSize, arr[6])
+    assert.equal(obj.dailyChange, arr[7])
+    assert.equal(obj.dailyChangePerc, arr[8])
+    assert.equal(obj.lastPrice, arr[9])
+    assert.equal(obj.volume, arr[10])
+    assert.equal(obj.high, arr[11])
+    assert.equal(obj.low, arr[12])
   })
 })
