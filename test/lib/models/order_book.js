@@ -20,10 +20,10 @@ describe('OrderBook model', () => {
 
   it('topBid/topAsk: returns the top bid/ask, or null', () => {
     const ob = new OrderBook([
-      [140, 1, 10],
-      [145, 1, 10],
-      [148, 1, 10],
       [149, 1, 10],
+      [148, 1, 10],
+      [145, 1, 10],
+      [140, 1, 10],
       [151, 1, -10],
       [152, 1, -10],
       [158, 1, -10],
@@ -36,10 +36,10 @@ describe('OrderBook model', () => {
 
   it('topBidLevel/topAskLevel: returns the top bid/ask levels, or null', () => {
     const ob = new OrderBook([
-      [140, 1, 10],
-      [145, 1, 10],
-      [148, 1, 10],
       [149, 1, 10],
+      [148, 1, 10],
+      [145, 1, 10],
+      [140, 1, 10],
       [151, 1, -10],
       [152, 1, -10],
       [158, 1, -10],
