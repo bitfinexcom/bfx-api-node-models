@@ -6,13 +6,14 @@ const { RESTv2 } = require('bfx-api-node-rest')
 const { FundingTicker } = require('../../../lib')
 
 const DATA = [
+  'fUSD',
   0.00009351,
   0.00009526,
-  30,
   1365265.8039803,
+  30,
   0.00009042,
-  2,
   1920909.19369824,
+  2,
   -0.00001159,
   -0.1136,
   0.00009041,
@@ -24,7 +25,7 @@ const DATA = [
 describe('FundingTicker model', () => {
   it('initializes correctly', () => {
     const ticker = new FundingTicker(DATA)
-
+    assert.equal(ticker.symbol, 'fUSD')
     assert.equal(ticker.frr, 0.00009351)
     assert.equal(ticker.bid, 0.00009526)
     assert.equal(ticker.bidPeriod, 30)
@@ -49,7 +50,7 @@ describe('FundingTicker model', () => {
 
   it('unserializes correctly', () => {
     const obj = FundingTicker.unserialize(DATA)
-
+    assert.equal(obj.symbol, 'fUSD')
     assert.equal(obj.frr, 0.00009351)
     assert.equal(obj.bid, 0.00009526)
     assert.equal(obj.bidPeriod, 30)
@@ -70,18 +71,19 @@ describe('FundingTicker model', () => {
     const arr = await rest.ticker('fUSD')
     const obj = FundingTicker.unserialize(arr)
 
-    assert.equal(obj.frr, arr[0])
-    assert.equal(obj.bid, arr[1])
-    assert.equal(obj.bidPeriod, arr[2])
+    assert.equal(obj.symbol, arr[0])
+    assert.equal(obj.frr, arr[1])
+    assert.equal(obj.bid, arr[2])
     assert.equal(obj.bidSize, arr[3])
-    assert.equal(obj.ask, arr[4])
-    assert.equal(obj.askPeriod, arr[5])
+    assert.equal(obj.bidPeriod, arr[4])
+    assert.equal(obj.ask, arr[5])
     assert.equal(obj.askSize, arr[6])
-    assert.equal(obj.dailyChange, arr[7])
-    assert.equal(obj.dailyChangePerc, arr[8])
-    assert.equal(obj.lastPrice, arr[9])
-    assert.equal(obj.volume, arr[10])
-    assert.equal(obj.high, arr[11])
-    assert.equal(obj.low, arr[12])
+    assert.equal(obj.askPeriod, arr[7])
+    assert.equal(obj.dailyChange, arr[8])
+    assert.equal(obj.dailyChangePerc, arr[9])
+    assert.equal(obj.lastPrice, arr[10])
+    assert.equal(obj.volume, arr[11])
+    assert.equal(obj.high, arr[12])
+    assert.equal(obj.low, arr[13])
   })
 })

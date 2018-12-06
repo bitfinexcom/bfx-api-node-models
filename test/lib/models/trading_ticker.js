@@ -6,6 +6,7 @@ const { RESTv2 } = require('bfx-api-node-rest')
 const { TradingTicker } = require('../../../lib')
 
 const DATA = [
+  'tBTCUSD',
   228.56,
   430.1902224,
   228.58,
@@ -22,6 +23,7 @@ describe('TradingTicker model', () => {
   it('initializes correctly', () => {
     const ticker = new TradingTicker(DATA)
 
+    assert.equal(ticker.symbol, 'tBTCUSD')
     assert.equal(ticker.bid, 228.56)
     assert.equal(ticker.bidSize, 430.1902224)
     assert.equal(ticker.ask, 228.58)
@@ -44,6 +46,7 @@ describe('TradingTicker model', () => {
   it('unserializes correctly', () => {
     const obj = TradingTicker.unserialize(DATA)
 
+    assert.equal(obj.symbol, 'tBTCUSD')
     assert.equal(obj.bid, 228.56)
     assert.equal(obj.bidSize, 430.1902224)
     assert.equal(obj.ask, 228.58)
@@ -61,15 +64,16 @@ describe('TradingTicker model', () => {
     const arr = await rest.ticker('tBTCUSD')
     const obj = TradingTicker.unserialize(arr)
 
-    assert.equal(obj.bid, arr[0])
-    assert.equal(obj.bidSize, arr[1])
-    assert.equal(obj.ask, arr[2])
-    assert.equal(obj.askSize, arr[3])
-    assert.equal(obj.dailyChange, arr[4])
-    assert.equal(obj.dailyChangePerc, arr[5])
-    assert.equal(obj.lastPrice, arr[6])
-    assert.equal(obj.volume, arr[7])
-    assert.equal(obj.high, arr[8])
-    assert.equal(obj.low, arr[9])
+    assert.equal(obj.symbol, arr[0])
+    assert.equal(obj.bid, arr[1])
+    assert.equal(obj.bidSize, arr[2])
+    assert.equal(obj.ask, arr[3])
+    assert.equal(obj.askSize, arr[4])
+    assert.equal(obj.dailyChange, arr[5])
+    assert.equal(obj.dailyChangePerc, arr[6])
+    assert.equal(obj.lastPrice, arr[7])
+    assert.equal(obj.volume, arr[8])
+    assert.equal(obj.high, arr[9])
+    assert.equal(obj.low, arr[10])
   })
 })
