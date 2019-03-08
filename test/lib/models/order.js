@@ -11,7 +11,7 @@ describe('Order model', () => {
     boolFields: ['notify'],
     orderedFields: [
       'id', 'gid', 'cid', 'symbol', 'mtsCreate', 'mtsUpdate', 'amount',
-      'amountOrig', 'type', 'typePrev', null, null, 'flags', 'status', null,
+      'amountOrig', 'type', 'typePrev', 'mtsTIF', null, 'flags', 'status', null,
       null, 'price', 'priceAvg', 'priceTrailing', 'priceAuxLimit', null, null,
       null, 'notify', null, 'placedId'
     ]
