@@ -26,5 +26,5 @@ describe('Candle model', () => {
       assert.equal(obj.low, candle[4])
       assert.equal(obj.volume, candle[5])
     })
-  })
+  }).timeout(4000)
 })
