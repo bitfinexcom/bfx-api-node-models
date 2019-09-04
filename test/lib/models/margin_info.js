@@ -17,12 +17,12 @@ describe('MarginInfo model', () => {
       ]
     ])
 
-    assert.equal(miSym.type, 'sym')
-    assert.equal(miSym.symbol, 'tEOSUSD')
-    assert.equal(miSym.tradableBalance, 26912)
-    assert.equal(miSym.grossBalance, 51443)
-    assert.equal(miSym.buy, 23397)
-    assert.equal(miSym.sell, 26912)
+    assert.strictEqual(miSym.type, 'sym')
+    assert.strictEqual(miSym.symbol, 'tEOSUSD')
+    assert.strictEqual(miSym.tradableBalance, 26912)
+    assert.strictEqual(miSym.grossBalance, 51443)
+    assert.strictEqual(miSym.buy, 23397)
+    assert.strictEqual(miSym.sell, 26912)
   })
 
   it('initializes correctly for base', () => {
@@ -36,11 +36,11 @@ describe('MarginInfo model', () => {
       ]
     ])
 
-    assert.equal(miBase.type, 'base')
-    assert.equal(miBase.userPL, -4784)
-    assert.equal(miBase.userSwaps, -251)
-    assert.equal(miBase.marginBalance, 16392)
-    assert.equal(miBase.marginNet, 11355)
+    assert.strictEqual(miBase.type, 'base')
+    assert.strictEqual(miBase.userPL, -4784)
+    assert.strictEqual(miBase.userSwaps, -251)
+    assert.strictEqual(miBase.marginBalance, 16392)
+    assert.strictEqual(miBase.marginNet, 11355)
   })
 
   it('serializes correctly w/ sym', () => {
@@ -104,12 +104,12 @@ describe('MarginInfo model', () => {
       ]
     ])
 
-    assert.equal(obj.type, 'sym')
-    assert.equal(obj.symbol, 'tEOSUSD')
-    assert.equal(obj.tradableBalance, 26912)
-    assert.equal(obj.grossBalance, 51443)
-    assert.equal(obj.buy, 23397)
-    assert.equal(obj.sell, 26912)
+    assert.strictEqual(obj.type, 'sym')
+    assert.strictEqual(obj.symbol, 'tEOSUSD')
+    assert.strictEqual(obj.tradableBalance, 26912)
+    assert.strictEqual(obj.grossBalance, 51443)
+    assert.strictEqual(obj.buy, 23397)
+    assert.strictEqual(obj.sell, 26912)
   })
 
   it('unserializes correctly for base', () => {
@@ -123,10 +123,10 @@ describe('MarginInfo model', () => {
       ]
     ])
 
-    assert.equal(obj.type, 'base')
-    assert.equal(obj.userPL, -4784)
-    assert.equal(obj.userSwaps, -251)
-    assert.equal(obj.marginBalance, 16392)
-    assert.equal(obj.marginNet, 11355)
+    assert.strictEqual(obj.type, 'base')
+    assert.strictEqual(obj.userPL, -4784)
+    assert.strictEqual(obj.userSwaps, -251)
+    assert.strictEqual(obj.marginBalance, 16392)
+    assert.strictEqual(obj.marginNet, 11355)
   })
 })

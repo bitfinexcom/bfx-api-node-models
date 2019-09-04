@@ -17,11 +17,11 @@ describe('FundingInfo model', () => {
       ]
     ])
 
-    assert.equal(fi.symbol, 'ftEOSUSD')
-    assert.equal(fi.yieldLoan, 12)
-    assert.equal(fi.yieldLend, 24)
-    assert.equal(fi.durationLoan, 48)
-    assert.equal(fi.durationLend, 96)
+    assert.strictEqual(fi.symbol, 'ftEOSUSD')
+    assert.strictEqual(fi.yieldLoan, 12)
+    assert.strictEqual(fi.yieldLend, 24)
+    assert.strictEqual(fi.durationLoan, 48)
+    assert.strictEqual(fi.durationLend, 96)
   })
 
   it('serializes correctly', () => {
@@ -61,10 +61,10 @@ describe('FundingInfo model', () => {
       ]
     ])
 
-    assert.equal(obj.symbol, 'ftEOSUSD')
-    assert.equal(obj.yieldLoan, 12)
-    assert.equal(obj.yieldLend, 24)
-    assert.equal(obj.durationLoan, 48)
-    assert.equal(obj.durationLend, 96)
+    assert.strictEqual(obj.symbol, 'ftEOSUSD')
+    assert.strictEqual(obj.yieldLoan, 12)
+    assert.strictEqual(obj.yieldLend, 24)
+    assert.strictEqual(obj.durationLoan, 48)
+    assert.strictEqual(obj.durationLend, 96)
   })
 })

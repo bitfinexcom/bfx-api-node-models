@@ -27,11 +27,11 @@ const DATA = [
 describe('FundingTicker history model', () => {
   it('initializes correctly', () => {
     const ticker = new FundingTickerHist(DATA)
-    assert.equal(ticker.symbol, 'fUSD')
-    assert.equal(ticker.bid, 0.00009526)
-    assert.equal(ticker.bidPeriod, 30)
-    assert.equal(ticker.ask, 0.00009042)
-    assert.equal(ticker.mtsUpdate, 1544097835000)
+    assert.strictEqual(ticker.symbol, 'fUSD')
+    assert.strictEqual(ticker.bid, 0.00009526)
+    assert.strictEqual(ticker.bidPeriod, 30)
+    assert.strictEqual(ticker.ask, 0.00009042)
+    assert.strictEqual(ticker.mtsUpdate, 1544097835000)
   })
 
   it('serializes correctly', () => {
@@ -42,11 +42,11 @@ describe('FundingTicker history model', () => {
 
   it('unserializes correctly', () => {
     const obj = FundingTickerHist.unserialize(DATA)
-    assert.equal(obj.symbol, 'fUSD')
-    assert.equal(obj.bid, 0.00009526)
-    assert.equal(obj.bidPeriod, 30)
-    assert.equal(obj.ask, 0.00009042)
-    assert.equal(obj.mtsUpdate, 1544097835000)
+    assert.strictEqual(obj.symbol, 'fUSD')
+    assert.strictEqual(obj.bid, 0.00009526)
+    assert.strictEqual(obj.bidPeriod, 30)
+    assert.strictEqual(obj.ask, 0.00009042)
+    assert.strictEqual(obj.mtsUpdate, 1544097835000)
   })
 
   it('unserializes live data correctly', async () => {
@@ -54,10 +54,10 @@ describe('FundingTicker history model', () => {
     const arr = await rest.ticker('fUSD')
     const obj = FundingTickerHist.unserialize(arr)
 
-    assert.equal(obj.symbol, arr[0])
-    assert.equal(obj.bid, arr[2])
-    assert.equal(obj.bidPeriod, arr[4])
-    assert.equal(obj.ask, arr[5])
-    assert.equal(obj.mtsUpdate, arr[15])
+    assert.strictEqual(obj.symbol, arr[0])
+    assert.strictEqual(obj.bid, arr[2])
+    assert.strictEqual(obj.bidPeriod, arr[4])
+    assert.strictEqual(obj.ask, arr[5])
+    assert.strictEqual(obj.mtsUpdate, arr[15])
   })
 })

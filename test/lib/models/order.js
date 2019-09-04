@@ -32,16 +32,16 @@ describe('Order model', () => {
 
     let p = o.toNewOrderPacket()
 
-    assert.equal(p.constructor.name, 'Object')
+    assert.strictEqual(p.constructor.name, 'Object')
     assert(!p.id)
-    assert.equal(p.gid, 2)
-    assert.equal(p.cid, 3)
-    assert.equal(p.symbol, 'tBTCUSD')
-    assert.equal(p.type, 'EXCHANGE LIMIT')
-    assert.equal(p.price_trailing, '0.1')
-    assert.equal(p.price_aux_limit, '0.2')
-    assert.equal(p.price, '0.3')
-    assert.equal(p.amount, '0.4')
+    assert.strictEqual(p.gid, 2)
+    assert.strictEqual(p.cid, 3)
+    assert.strictEqual(p.symbol, 'tBTCUSD')
+    assert.strictEqual(p.type, 'EXCHANGE LIMIT')
+    assert.strictEqual(p.price_trailing, '0.1')
+    assert.strictEqual(p.price_aux_limit, '0.2')
+    assert.strictEqual(p.price, '0.3')
+    assert.strictEqual(p.amount, '0.4')
     assert(!(p.flags & Order.flags.OCO))
     assert(!(p.flags & Order.flags.HIDDEN))
     assert(!(p.flags & Order.flags.POSTONLY))
@@ -103,7 +103,7 @@ describe('Order model', () => {
     assert(oOCO.flags & Order.flags.OCO)
     assert(!(oOCO.flags & Order.flags.HIDDEN))
     assert(!(oOCO.flags & Order.flags.POSTONLY))
-    assert.equal(oOCO.priceAuxLimit, 42)
+    assert.strictEqual(oOCO.priceAuxLimit, 42)
   })
 
   it('isOCO, setOCO: updates/reads OCO flag & price', () => {
@@ -112,7 +112,7 @@ describe('Order model', () => {
     assert(!o.isOCO())
     o.setOCO(true, 42)
     assert(o.isOCO())
-    assert.equal(o.priceAuxLimit, 42)
+    assert.strictEqual(o.priceAuxLimit, 42)
 
     o.setOCO(false)
     assert(!o.isOCO())
@@ -188,27 +188,27 @@ describe('Order model', () => {
 
   it('update: applies changeset to order model', (done) => {
     const o = new Order({ price: 42, amount: 1 }, { updateOrder: () => Promise.resolve() })
-    assert.equal(o.price, 42)
-    assert.equal(o.amount, 1)
+    assert.strictEqual(o.price, 42)
+    assert.strictEqual(o.amount, 1)
 
     o.update({ delta: 1, price: 43 }).catch(done)
 
-    assert.equal(o.price, 43)
-    assert.equal(o.amount, 2)
+    assert.strictEqual(o.price, 43)
+    assert.strictEqual(o.amount, 2)
 
     assert(typeof o.priceAuxLimit === 'undefined')
     o.update({ price_aux_limit: 42 }).catch(done)
     assert(typeof o.price_aux_limit === 'undefined')
-    assert.equal(o.priceAuxLimit, 42)
+    assert.strictEqual(o.priceAuxLimit, 42)
 
     assert(typeof o.priceTrailing === 'undefined')
     o.update({ price_trailing: 42 }).catch(done)
     assert(typeof o.price_trailing === 'undefined')
-    assert.equal(o.priceTrailing, 42)
+    assert.strictEqual(o.priceTrailing, 42)
 
     assert(o.gid !== 42)
     o.update({ gid: 42 }).catch(done)
-    assert.equal(o.gid, 42)
+    assert.strictEqual(o.gid, 42)
 
     done()
   })
@@ -282,7 +282,7 @@ describe('Order model', () => {
     const o = new Order({}, { // dirty ws2 mock
       updateOrder: (o) => {
         assert(o)
-        assert.equal(o.test, 42)
+        assert.strictEqual(o.test, 42)
         done()
       }
     })

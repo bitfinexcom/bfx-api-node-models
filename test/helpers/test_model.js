@@ -29,11 +29,11 @@ const testModel = ({ values = {}, model, orderedFields, boolFields = [] }) => {
     if (f === null) return
 
     if (boolFields.indexOf(f) !== -1) {
-      assert.equal(m[f], false)
+      assert.strictEqual(m[f], false)
     } else if (values[f]) {
-      assert.equal(m[f], values[f])
+      assert.strictEqual(m[f], values[f])
     } else {
-      assert.equal(m[f], f)
+      assert.strictEqual(m[f], f)
     }
   }
 

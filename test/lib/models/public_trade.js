@@ -22,7 +22,7 @@ describe('Public Trade model', () => {
       const obj = PublicTrade.unserialize(trade)
 
       Object.keys(PublicTrade.TRADING_FIELDS).forEach(field => {
-        assert.equal(obj[field], trade[PublicTrade.TRADING_FIELDS[field]])
+        assert.strictEqual(obj[field], trade[PublicTrade.TRADING_FIELDS[field]])
       })
     })
   })
@@ -35,7 +35,7 @@ describe('Public Trade model', () => {
       const obj = PublicTrade.unserialize(trade)
 
       Object.keys(PublicTrade.FUNDING_FIELDS).forEach(field => {
-        assert.equal(obj[field], trade[PublicTrade.FUNDING_FIELDS[field]])
+        assert.strictEqual(obj[field], trade[PublicTrade.FUNDING_FIELDS[field]])
       })
     })
   })
