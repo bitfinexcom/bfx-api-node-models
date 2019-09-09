@@ -9,7 +9,8 @@
   "scripts": {
     "lint": "standard",
     "test": "npm run lint && npm run unit",
-    "unit": "NODE_ENV=test mocha -b --recursive"
+    "unit": "NODE_ENV=test mocha -b --recursive",
+    "build": "babel -q ./index.js -d ./dist && babel -q ./lib -d ./dist/lib && copy package.json dist"
   },
   "repository": {
     "type": "git",
