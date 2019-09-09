@@ -19,12 +19,12 @@ describe('Candle model', () => {
     arr.forEach(candle => {
       const obj = Candle.unserialize(candle)
 
-      assert.equal(obj.mts, candle[0])
-      assert.equal(obj.open, candle[1])
-      assert.equal(obj.close, candle[2])
-      assert.equal(obj.high, candle[3])
-      assert.equal(obj.low, candle[4])
-      assert.equal(obj.volume, candle[5])
+      assert.strictEqual(obj.mts, candle[0])
+      assert.strictEqual(obj.open, candle[1])
+      assert.strictEqual(obj.close, candle[2])
+      assert.strictEqual(obj.high, candle[3])
+      assert.strictEqual(obj.low, candle[4])
+      assert.strictEqual(obj.volume, candle[5])
     })
   }).timeout(4000)
 })
