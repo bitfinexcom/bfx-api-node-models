@@ -1,0 +1,58 @@
+# 1.0.13
+- fix: (Model bool field handling) un-quote key in indexOf call
+- manifest: add build script
+- manifest: update dependencies
+- meta: standardize travis conig
+- meta: add github issue/pr templates
+- meta: init changelog
+
+# 1.0.12
+- Order fix: prepare prices & amounts in new order packet
+- Order refactor: require gid to match to apply an update
+
+# 1.0.11
+- Order fix: init reduce-only flag in constructor
+- Position fix: add missing fields
+- feature: StatusMessagesDeriv model
+- feature: Liquidation model
+
+# 1.0.10
+- feature: make all model collections iterable
+
+# 1.0.9
+- Currency: add symbol field
+
+# 1.0.8
+- feature: populate tif & mtsTIF on Order
+
+# 1.0.7
+- refactor: convert PositionHist to Position
+
+# 1.0.6
+- feature: WalletHistory model
+- feature: PositionHistory model
+- feature: TradingTickerHist model
+- feature: FundingTickerHist model
+- fix: tests for FundingTicker & TradingTicker
+
+# 1.0.5
+- OrderBook refactor: assumy OB snapshots are sorted in update method
+- OrderBook fix: support update with empty snapshot
+- feature: add live REST tests where possible
+
+# 1.0.4
+- OrderBook fix: guard against empty array OB updates in updateArrayOBWith
+
+# 1.0.3
+- fix: update FundingTicker & TradingTicker formats
+
+# 1.0.2
+- fix: allow creating orders w/ amount or amountOrig 0
+
+# 1.0.1
+- feature: Currency model
+- feature: UserInfo model
+- LedgerEntry feature: add wallet field
+
+# 1.0.0
+* Initial version
