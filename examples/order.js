@@ -9,7 +9,7 @@ const o = new Order({
   symbol: 'tBTCUSD',
   amount: 0.05,
   price: 10000,
-  hidden: true,
+  hidden: true
 })
 
 debug('generated ws2 compatible new order packet:')
