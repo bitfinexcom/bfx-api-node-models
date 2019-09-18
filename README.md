@@ -10,13 +10,16 @@ Some models, such as `Order` and `OrderBook` provide higher level methods which 
 * Alert
 * BalanceInfo
 * Candle
+* Currency
 * FundingCredit
 * FundingInfo
 * FundingLoan
 * FundingOffer
+* FundingTickerHist
 * FundingTicker
 * FundingTrade
 * LedgerEntry
+* Liquidations
 * MarginInfo
 * Movement
 * Notification
@@ -24,9 +27,13 @@ Some models, such as `Order` and `OrderBook` provide higher level methods which 
 * Order
 * Position
 * PublicTrade
+* StatusMessagesDeriv
 * Trade
 * TradingTicker
+* TradingTickerHist
+* UserInfo
 * Wallet
+* WalletHist
 * Currency
 
 ### Data Manipulation
