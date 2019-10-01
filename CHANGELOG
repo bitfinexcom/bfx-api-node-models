@@ -1,3 +1,9 @@
+# 1.1.0
+- adds function Position.claim
+- adds function FundingOffer.submit
+- adds function FundingOffer.close
+- adds function FundingOffer.cancel
+
 # 1.0.13
 - fix: (Model bool field handling) un-quote key in indexOf call
 - manifest: add build script
