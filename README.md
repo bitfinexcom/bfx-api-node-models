@@ -1,4 +1,4 @@
-# Bitfinex Node API Data Models
+# Bitfinex Data Models for Node.JS
 
 [![Build Status](https://travis-ci.org/bitfinexcom/bfx-api-node-models.svg?branch=master)](https://travis-ci.org/bitfinexcom/bfx-api-node-models)
 
@@ -6,7 +6,14 @@ This repo contains model classes for working with the data structures returned b
 
 Some models, such as `Order` and `OrderBook` provide higher level methods which operate on the underlying data sets.
 
-### Models
+All models provide `serialize()` and `unserialize()` methods, which convert to/from array-format payloads respectively. All model constructors can take either array-format payloads, or objects/other model instances. A helper `toJS()` method is also provided for converting models to plain JS objects (POJOs).
+
+### Features
+
+* Convert between array, object, and class representations of API data
+* Class methods for operating on model data where applicable (i.e. `OrderBook`)
+
+Classes for the following Bitfinex API data types:
 * Alert
 * BalanceInfo
 * Candle
@@ -36,10 +43,35 @@ Some models, such as `Order` and `OrderBook` provide higher level methods which 
 * WalletHist
 * Currency
 
-### Data Manipulation
-All models provide `serialize()` and `unserialize()` methods, which convert to/from array-format payloads respectively. All model constructors can take either array-format payloads, or objects/other model instances. A helper `toJS()` method is also provided for converting models to plain JS objects (POJOs).
+### Installation
 
-### Order
+```js
+npm i --save bfx-api-node-models
+```
+
+### Quickstart
+
+```js
+const { Order } = require('bfx-api-node-models')
+
+const o = new Order({
+  cid: Date.now(),
+  symbol: 'tBTCUSD',
+  price: 7000.0,
+  amount: -0.02,
+  type: Order.type.EXCHANGE_LIMIT
+})
+
+// Generate an API-compatible order creation packet for later submit
+console.log(o.toNewOrderPacket())
+```
+
+### Docs
+
+Refer to `docs/model_docs.md` for JSDoc-generated API documentation covering each model class.
+
+### Examples
+
 The order model provides helper methods for order submission, updates, and cancellation. These methods are compatible with version 2.0.0 of `bitfinex-api-node`, and return promises which resolve upon receival of the relevant success/error notifications.
 
 Orders are matched with their API packets by one/all of `id`, `gid`, and `cid`.
@@ -81,7 +113,6 @@ o.submit().then(() => {
 })
 ```
 
-### OrderBook
 The order book model constructor takes either entire book snapshots as returned by the WSv2 API, or individual update packets with single bids/asks. Once constructed, order books may be updated either with complete snapshots via `updateFromSnapshot(snapshot)` or individual update packets via `updateWidth(entry)`.
 
 Static helpers are also provided for working with array-format order books, in the form of `updateArrayOBWith(ob, entry, raw)`, `arrayOBMidPrice(ob, raw)`, and `checksumArr(ob, raw)`.
@@ -106,3 +137,11 @@ ob.updateWith([158, 3, -15]) // update ask
 
 console.log(ob.serialize())
 ```
+
+### Contributing
+
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create a new Pull Request

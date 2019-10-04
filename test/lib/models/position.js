@@ -10,7 +10,7 @@ describe('Position model', () => {
     orderedFields: [
       'symbol', 'status', 'amount', 'basePrice', 'marginFunding',
       'marginFundingType', 'pl', 'plPerc', 'liquidationPrice', 'leverage',
-      'placeholder', 'id', 'mtsCreate', 'mtsUpdate', null, 'type', null,
+      null, 'id', 'mtsCreate', 'mtsUpdate', null, 'type', null,
       'collateral', 'collateralMin', 'meta'
     ]
   })

@@ -1,3 +1,6 @@
+# 1.1.1
+- docs: create/update
+
 # 1.1.0
 - adds function Position.claim
 - adds function FundingOffer.submit
@@ -62,4 +65,3 @@
 
 # 1.0.0
 * Initial version
-
