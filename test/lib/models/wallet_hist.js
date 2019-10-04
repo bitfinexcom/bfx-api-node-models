@@ -8,7 +8,7 @@ describe('Historical wallet model', () => {
   testModel({
     model: WalletHist,
     orderedFields: [
-      'type', 'currency', 'balance', 'unsettledInterest', 'balanceAvailable', 'placeHolder', 'mtsUpdate'
+      'type', 'currency', 'balance', 'unsettledInterest', 'balanceAvailable', null, 'mtsUpdate'
     ]
   })
 })

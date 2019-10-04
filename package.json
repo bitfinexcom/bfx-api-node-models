@@ -1,6 +1,6 @@
 {
   "name": "bfx-api-node-models",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Object models for usage with the Bitfinex node API",
   "engines": {
     "node": ">=7"
@@ -10,7 +10,9 @@
     "lint": "standard",
     "test": "npm run lint && npm run unit",
     "unit": "NODE_ENV=test mocha -b --recursive",
-    "build": "babel -q ./index.js -d ./dist && babel -q ./lib -d ./dist/lib && copy package.json dist"
+    "build": "babel -q ./index.js -d ./dist && babel -q ./lib -d ./dist/lib && copy package.json dist",
+    "docs": "npm run model_docs",
+    "model_docs": "node_modules/jsdoc-to-markdown/bin/cli.js lib/*.js > docs/model_docs.md"
   },
   "repository": {
     "type": "git",
@@ -37,6 +39,7 @@
     "babel-eslint": "^10.0.3",
     "bfx-api-node-rest": "git+http://github.com/bitfinexcom/bfx-api-node-rest.git#semver:^1.1.3",
     "chai": "^4.2.0",
+    "jsdoc-to-markdown": "^5.0.1",
     "mocha": "^6.2.0",
     "standard": "^14.1.0"
   },
