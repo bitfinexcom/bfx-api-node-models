@@ -68,7 +68,7 @@ console.log(o.toNewOrderPacket())
 
 ### Docs
 
-Refer to `docs/model_docs.md` for JSDoc-generated API documentation covering each model class.
+[Refer to `docs/model_docs.md`](/docs/model_docs.md) for JSDoc-generated API documentation covering each model class.
 
 ### Examples
 
