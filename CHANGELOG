@@ -1,3 +1,6 @@
+# 1.1.2
+- models/order: add fields hidden, routing and meta
+
 # 1.1.1
 - docs: create/update
 
