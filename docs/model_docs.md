@@ -87,6 +87,9 @@ a WSv2 connection or used to execute as a rest payload</p>
 <dt><a href="#Wallet">Wallet</a></dt>
 <dd><p>Wallet model</p>
 </dd>
+<dt><a href="#Login">Login</a></dt>
+<dd><p>Login model</p>
+</dd>
 </dl>
 
 <a name="Alert"></a>
@@ -106,11 +109,11 @@ Price alert model
 
 | Param | Type |
 | --- | --- |
-| data | <code>Object</code> \| <code>Array</code> | 
-| data.key | <code>string</code> | 
-| data.type | <code>string</code> | 
-| data.symbol | <code>string</code> | 
-| data.price | <code>string</code> | 
+| data | <code>Object</code> \| <code>Array</code> |
+| data.key | <code>string</code> |
+| data.type | <code>string</code> |
+| data.symbol | <code>string</code> |
+| data.price | <code>string</code> |
 
 <a name="Alert.unserialize"></a>
 
@@ -120,7 +123,7 @@ Price alert model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> | 
+| arr | <code>Object</code> \| <code>Array</code> |
 
 <a name="BalanceInfo"></a>
 
@@ -139,9 +142,9 @@ Wallet balance information model
 
 | Param | Type |
 | --- | --- |
-| data | <code>Object</code> \| <code>Array</code> | 
-| data.amount | <code>number</code> | 
-| data.amountNet | <code>number</code> | 
+| data | <code>Object</code> \| <code>Array</code> |
+| data.amount | <code>number</code> |
+| data.amountNet | <code>number</code> |
 
 <a name="BalanceInfo.unserialize"></a>
 
@@ -151,7 +154,7 @@ Wallet balance information model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> | 
+| arr | <code>Object</code> \| <code>Array</code> |
 
 <a name="Candle"></a>
 
@@ -170,13 +173,13 @@ OHLCV Candle model
 
 | Param | Type |
 | --- | --- |
-| data | <code>Object</code> \| <code>Array</code> | 
-| data.mts | <code>number</code> | 
-| data.open | <code>number</code> | 
-| data.close | <code>number</code> | 
-| data.high | <code>number</code> | 
-| data.low | <code>number</code> | 
-| data.volume | <code>number</code> | 
+| data | <code>Object</code> \| <code>Array</code> |
+| data.mts | <code>number</code> |
+| data.open | <code>number</code> |
+| data.close | <code>number</code> |
+| data.high | <code>number</code> |
+| data.low | <code>number</code> |
+| data.volume | <code>number</code> |
 
 <a name="Candle.unserialize"></a>
 
@@ -186,7 +189,7 @@ OHLCV Candle model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> | 
+| arr | <code>Object</code> \| <code>Array</code> |
 
 <a name="Currency"></a>
 
@@ -205,12 +208,12 @@ Currency model
 
 | Param | Type |
 | --- | --- |
-| data | <code>Object</code> \| <code>Array</code> | 
-| data.id | <code>string</code> | 
-| data.name | <code>string</code> | 
-| data.pool | <code>string</code> | 
-| data.exporer | <code>string</code> | 
-| data.symbol | <code>string</code> | 
+| data | <code>Object</code> \| <code>Array</code> |
+| data.id | <code>string</code> |
+| data.name | <code>string</code> |
+| data.pool | <code>string</code> |
+| data.exporer | <code>string</code> |
+| data.symbol | <code>string</code> |
 
 <a name="Currency.unserialize"></a>
 
@@ -220,7 +223,7 @@ Currency model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> | 
+| arr | <code>Object</code> \| <code>Array</code> |
 
 <a name="FundingCredit"></a>
 
@@ -239,25 +242,25 @@ Funding Credit model
 
 | Param | Type |
 | --- | --- |
-| data | <code>Object</code> \| <code>Array</code> | 
-| data.id | <code>number</code> | 
-| data.symbol | <code>string</code> | 
-| data.side | <code>number</code> | 
-| data.mtsCreate | <code>number</code> | 
-| data.mtsUpdate | <code>number</code> | 
-| data.mtsOpening | <code>number</code> | 
-| data.mtsLastPayout | <code>number</code> | 
-| data.amount | <code>number</code> | 
-| data.flags | <code>number</code> | 
-| data.status | <code>number</code> | 
-| data.rate | <code>number</code> | 
-| data.rateReal | <code>number</code> | 
-| data.period | <code>number</code> | 
-| data.positionPair | <code>string</code> | 
-| data.notify | <code>number</code> \| <code>boolean</code> | 
-| data.hidden | <code>number</code> \| <code>boolean</code> | 
-| data.renew | <code>number</code> \| <code>boolean</code> | 
-| data.noClose | <code>number</code> \| <code>boolean</code> | 
+| data | <code>Object</code> \| <code>Array</code> |
+| data.id | <code>number</code> |
+| data.symbol | <code>string</code> |
+| data.side | <code>number</code> |
+| data.mtsCreate | <code>number</code> |
+| data.mtsUpdate | <code>number</code> |
+| data.mtsOpening | <code>number</code> |
+| data.mtsLastPayout | <code>number</code> |
+| data.amount | <code>number</code> |
+| data.flags | <code>number</code> |
+| data.status | <code>number</code> |
+| data.rate | <code>number</code> |
+| data.rateReal | <code>number</code> |
+| data.period | <code>number</code> |
+| data.positionPair | <code>string</code> |
+| data.notify | <code>number</code> \| <code>boolean</code> |
+| data.hidden | <code>number</code> \| <code>boolean</code> |
+| data.renew | <code>number</code> \| <code>boolean</code> |
+| data.noClose | <code>number</code> \| <code>boolean</code> |
 
 <a name="FundingCredit.unserialize"></a>
 
@@ -267,7 +270,7 @@ Funding Credit model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> | 
+| arr | <code>Object</code> \| <code>Array</code> |
 
 <a name="FundingInfo"></a>
 
@@ -297,7 +300,7 @@ Return an array representation of this model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> | 
+| arr | <code>Object</code> \| <code>Array</code> |
 
 <a name="FundingLoan"></a>
 
@@ -316,24 +319,24 @@ Funding Loan model
 
 | Param | Type |
 | --- | --- |
-| data | <code>Object</code> \| <code>Array</code> | 
-| data.id | <code>number</code> | 
-| data.symbol | <code>string</code> | 
-| data.side | <code>number</code> | 
-| data.mtsCreate | <code>number</code> | 
-| data.mtsUpdate | <code>number</code> | 
-| data.mtsOpening | <code>number</code> | 
-| data.mtsLastPayout | <code>number</code> | 
-| data.amount | <code>number</code> | 
-| data.flags | <code>number</code> | 
-| data.status | <code>number</code> | 
-| data.rate | <code>number</code> | 
-| data.rateReal | <code>number</code> | 
-| data.period | <code>number</code> | 
-| data.notify | <code>number</code> \| <code>boolean</code> | 
-| data.hidden | <code>number</code> \| <code>boolean</code> | 
-| data.renew | <code>number</code> \| <code>boolean</code> | 
-| data.noClose | <code>number</code> \| <code>boolean</code> | 
+| data | <code>Object</code> \| <code>Array</code> |
+| data.id | <code>number</code> |
+| data.symbol | <code>string</code> |
+| data.side | <code>number</code> |
+| data.mtsCreate | <code>number</code> |
+| data.mtsUpdate | <code>number</code> |
+| data.mtsOpening | <code>number</code> |
+| data.mtsLastPayout | <code>number</code> |
+| data.amount | <code>number</code> |
+| data.flags | <code>number</code> |
+| data.status | <code>number</code> |
+| data.rate | <code>number</code> |
+| data.rateReal | <code>number</code> |
+| data.period | <code>number</code> |
+| data.notify | <code>number</code> \| <code>boolean</code> |
+| data.hidden | <code>number</code> \| <code>boolean</code> |
+| data.renew | <code>number</code> \| <code>boolean</code> |
+| data.noClose | <code>number</code> \| <code>boolean</code> |
 
 <a name="FundingLoan.unserialize"></a>
 
@@ -343,7 +346,7 @@ Funding Loan model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> | 
+| arr | <code>Object</code> \| <code>Array</code> |
 
 <a name="FundingOffer"></a>
 
@@ -432,7 +435,7 @@ command or a rest request body
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> | 
+| arr | <code>Object</code> \| <code>Array</code> |
 
 <a name="FundingTickerHist"></a>
 
@@ -455,12 +458,12 @@ Historical Funding Ticker model
 
 | Param | Type |
 | --- | --- |
-| data | <code>Object</code> \| <code>Array</code> | 
-| data.symbol | <code>string</code> | 
-| data.bid | <code>number</code> | 
-| data.bidPeriod | <code>number</code> | 
-| data.ask | <code>number</code> | 
-| data.mtsUpdate | <code>number</code> | 
+| data | <code>Object</code> \| <code>Array</code> |
+| data.symbol | <code>string</code> |
+| data.bid | <code>number</code> |
+| data.bidPeriod | <code>number</code> |
+| data.ask | <code>number</code> |
+| data.mtsUpdate | <code>number</code> |
 
 <a name="FundingTickerHist+quote"></a>
 
@@ -480,7 +483,7 @@ Historical Funding Ticker model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> | 
+| arr | <code>Object</code> \| <code>Array</code> |
 
 <a name="FundingTicker"></a>
 
@@ -503,21 +506,21 @@ Funding Ticker model
 
 | Param | Type |
 | --- | --- |
-| data | <code>Object</code> \| <code>Array</code> | 
-| data.symbol | <code>string</code> | 
-| data.frr | <code>number</code> \| <code>boolean</code> | 
-| data.bid | <code>number</code> | 
-| data.bidSize | <code>number</code> | 
-| data.bidPeriod | <code>number</code> | 
-| data.ask | <code>number</code> | 
-| data.askSize | <code>number</code> | 
-| data.askPeriod | <code>number</code> | 
-| data.dailyChange | <code>number</code> | 
-| data.dailyChangePerc | <code>number</code> | 
-| data.lastPrice | <code>number</code> | 
-| data.volume | <code>number</code> | 
-| data.high | <code>number</code> | 
-| data.low | <code>number</code> | 
+| data | <code>Object</code> \| <code>Array</code> |
+| data.symbol | <code>string</code> |
+| data.frr | <code>number</code> \| <code>boolean</code> |
+| data.bid | <code>number</code> |
+| data.bidSize | <code>number</code> |
+| data.bidPeriod | <code>number</code> |
+| data.ask | <code>number</code> |
+| data.askSize | <code>number</code> |
+| data.askPeriod | <code>number</code> |
+| data.dailyChange | <code>number</code> |
+| data.dailyChangePerc | <code>number</code> |
+| data.lastPrice | <code>number</code> |
+| data.volume | <code>number</code> |
+| data.high | <code>number</code> |
+| data.low | <code>number</code> |
 
 <a name="FundingTicker+quote"></a>
 
@@ -537,7 +540,7 @@ Funding Ticker model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> | 
+| arr | <code>Object</code> \| <code>Array</code> |
 
 <a name="FundingTrade"></a>
 
@@ -556,15 +559,15 @@ Funding Trade model
 
 | Param | Type |
 | --- | --- |
-| data | <code>Object</code> \| <code>Array</code> | 
-| data.id | <code>number</code> | 
-| data.symbol | <code>string</code> | 
-| data.mtsCreate | <code>number</code> | 
-| data.offerID | <code>number</code> | 
-| data.amount | <code>number</code> | 
-| data.rate | <code>number</code> | 
-| data.period | <code>number</code> | 
-| data.maker | <code>number</code> \| <code>boolean</code> | 
+| data | <code>Object</code> \| <code>Array</code> |
+| data.id | <code>number</code> |
+| data.symbol | <code>string</code> |
+| data.mtsCreate | <code>number</code> |
+| data.offerID | <code>number</code> |
+| data.amount | <code>number</code> |
+| data.rate | <code>number</code> |
+| data.period | <code>number</code> |
+| data.maker | <code>number</code> \| <code>boolean</code> |
 
 <a name="FundingTrade.unserialize"></a>
 
@@ -574,7 +577,7 @@ Funding Trade model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> | 
+| arr | <code>Object</code> \| <code>Array</code> |
 
 <a name="LedgerEntry"></a>
 
@@ -594,13 +597,13 @@ is provided.
 
 | Param | Type |
 | --- | --- |
-| data | <code>Object</code> \| <code>Array</code> | 
-| data.id | <code>number</code> | 
-| data.currency | <code>string</code> | 
-| data.mts | <code>number</code> | 
-| data.amount | <code>number</code> | 
-| data.balance | <code>number</code> | 
-| data.description | <code>string</code> | 
+| data | <code>Object</code> \| <code>Array</code> |
+| data.id | <code>number</code> |
+| data.currency | <code>string</code> |
+| data.mts | <code>number</code> |
+| data.amount | <code>number</code> |
+| data.balance | <code>number</code> |
+| data.description | <code>string</code> |
 
 <a name="LedgerEntry.unserialize"></a>
 
@@ -610,7 +613,7 @@ is provided.
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> | 
+| arr | <code>Object</code> \| <code>Array</code> |
 
 <a name="Liquidations"></a>
 
@@ -629,14 +632,14 @@ Liquidation Info model
 
 | Param | Type |
 | --- | --- |
-| data | <code>Object</code> \| <code>Array</code> | 
-| data.posId | <code>number</code> | 
-| data.mtsUpdated | <code>number</code> | 
-| data.symbol | <code>string</code> | 
-| data.amount | <code>number</code> | 
-| data.basePrice | <code>number</code> | 
-| data.isMatch | <code>number</code> \| <code>boolean</code> | 
-| data.isMarketSold | <code>number</code> \| <code>boolean</code> | 
+| data | <code>Object</code> \| <code>Array</code> |
+| data.posId | <code>number</code> |
+| data.mtsUpdated | <code>number</code> |
+| data.symbol | <code>string</code> |
+| data.amount | <code>number</code> |
+| data.basePrice | <code>number</code> |
+| data.isMatch | <code>number</code> \| <code>boolean</code> |
+| data.isMarketSold | <code>number</code> \| <code>boolean</code> |
 
 <a name="Liquidations.unserialize"></a>
 
@@ -646,7 +649,7 @@ Liquidation Info model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> | 
+| arr | <code>Object</code> \| <code>Array</code> |
 
 <a name="MarginInfo"></a>
 
@@ -676,7 +679,7 @@ Return an array representation of this model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Array</code> | 
+| arr | <code>Array</code> |
 
 <a name="Model"></a>
 
@@ -751,17 +754,17 @@ Currency Movement model
 
 | Param | Type |
 | --- | --- |
-| data | <code>Object</code> \| <code>Array</code> | 
-| data.id | <code>number</code> | 
-| data.currency | <code>string</code> | 
-| data.currencyName | <code>string</code> | 
-| data.mtsStarted | <code>number</code> | 
-| data.mtsUpdated | <code>number</code> | 
-| data.status | <code>string</code> | 
-| data.amount | <code>number</code> | 
-| data.fees | <code>number</code> | 
-| data.destinationAddress | <code>string</code> | 
-| data.transactionId | <code>number</code> | 
+| data | <code>Object</code> \| <code>Array</code> |
+| data.id | <code>number</code> |
+| data.currency | <code>string</code> |
+| data.currencyName | <code>string</code> |
+| data.mtsStarted | <code>number</code> |
+| data.mtsUpdated | <code>number</code> |
+| data.status | <code>string</code> |
+| data.amount | <code>number</code> |
+| data.fees | <code>number</code> |
+| data.destinationAddress | <code>string</code> |
+| data.transactionId | <code>number</code> |
 
 <a name="Movement.unserialize"></a>
 
@@ -771,7 +774,7 @@ Currency Movement model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> | 
+| arr | <code>Object</code> \| <code>Array</code> |
 
 <a name="Notification"></a>
 
@@ -790,14 +793,14 @@ Notification model
 
 | Param | Type |
 | --- | --- |
-| data | <code>Object</code> \| <code>Array</code> | 
-| data.mts | <code>number</code> | 
-| data.type | <code>string</code> | 
-| data.messageID | <code>number</code> | 
-| data.notifyInfo | <code>Object</code> | 
-| data.code | <code>number</code> | 
-| data.status | <code>string</code> | 
-| data.text | <code>string</code> | 
+| data | <code>Object</code> \| <code>Array</code> |
+| data.mts | <code>number</code> |
+| data.type | <code>string</code> |
+| data.messageID | <code>number</code> |
+| data.notifyInfo | <code>Object</code> |
+| data.code | <code>number</code> |
+| data.status | <code>string</code> |
+| data.text | <code>string</code> |
 
 <a name="Notification.unserialize"></a>
 
@@ -807,7 +810,7 @@ Notification model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> | 
+| arr | <code>Object</code> \| <code>Array</code> |
 
 <a name="OrderBook"></a>
 
@@ -882,7 +885,7 @@ snapshot.
 
 | Param | Type |
 | --- | --- |
-| snapshot | <code>Array.&lt;Array&gt;</code> | 
+| snapshot | <code>Array.&lt;Array&gt;</code> |
 
 <a name="OrderBook+updateWith"></a>
 
@@ -895,7 +898,7 @@ Integrate an update packet (add, update, or remove a price level). Emits an
 
 | Param | Type |
 | --- | --- |
-| entry | <code>Array</code> | 
+| entry | <code>Array</code> |
 
 <a name="OrderBook+topBid"></a>
 
@@ -945,7 +948,7 @@ Integrate an update packet (add, update, or remove a price level). Emits an
 
 | Param | Type |
 | --- | --- |
-| price | <code>number</code> | 
+| price | <code>number</code> |
 
 <a name="OrderBook+serialize"></a>
 
@@ -1129,7 +1132,7 @@ a WSv2 connection or used to execute as a rest payload
 
 | Param | Type |
 | --- | --- |
-| v | <code>boolean</code> | 
+| v | <code>boolean</code> |
 
 <a name="Order+setPostOnly"></a>
 
@@ -1138,7 +1141,7 @@ a WSv2 connection or used to execute as a rest payload
 
 | Param | Type |
 | --- | --- |
-| v | <code>boolean</code> | 
+| v | <code>boolean</code> |
 
 <a name="Order+setNoVariableRates"></a>
 
@@ -1147,7 +1150,7 @@ a WSv2 connection or used to execute as a rest payload
 
 | Param | Type |
 | --- | --- |
-| v | <code>boolean</code> | 
+| v | <code>boolean</code> |
 
 <a name="Order+setPositionClose"></a>
 
@@ -1156,7 +1159,7 @@ a WSv2 connection or used to execute as a rest payload
 
 | Param | Type |
 | --- | --- |
-| v | <code>boolean</code> | 
+| v | <code>boolean</code> |
 
 <a name="Order+setReduceOnly"></a>
 
@@ -1165,7 +1168,7 @@ a WSv2 connection or used to execute as a rest payload
 
 | Param | Type |
 | --- | --- |
-| v | <code>boolean</code> | 
+| v | <code>boolean</code> |
 
 <a name="Order+update"></a>
 
@@ -1260,7 +1263,7 @@ order ID/CID/GID do not match
 
 | Param | Type |
 | --- | --- |
-| order | [<code>Order</code>](#Order) | 
+| order | [<code>Order</code>](#Order) |
 
 <a name="Order+getLastFillAmount"></a>
 
@@ -1310,7 +1313,7 @@ Creates an order map that can be passed to the `on` command.
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> | 
+| arr | <code>Object</code> \| <code>Array</code> |
 
 <a name="Order.getBaseCurrency"></a>
 
@@ -1391,7 +1394,7 @@ Position model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> | 
+| arr | <code>Object</code> \| <code>Array</code> |
 
 <a name="PublicTrade"></a>
 
@@ -1410,7 +1413,7 @@ Public Trade model, supporting both funding & ordinary trades
 
 | Param | Type |
 | --- | --- |
-| data | <code>Object</code> \| <code>Array</code> | 
+| data | <code>Object</code> \| <code>Array</code> |
 
 <a name="PublicTrade.unserialize"></a>
 
@@ -1420,7 +1423,7 @@ Public Trade model, supporting both funding & ordinary trades
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> | 
+| arr | <code>Object</code> \| <code>Array</code> |
 
 <a name="StatusMessagesDeriv"></a>
 
@@ -1439,14 +1442,14 @@ Derivatives Status Message model
 
 | Param | Type |
 | --- | --- |
-| data | <code>Object</code> \| <code>Array</code> | 
-| data.key | <code>string</code> | 
-| data.timestamp | <code>number</code> | 
-| data.price | <code>string</code> | 
-| data.priceSpot | <code>string</code> | 
-| data.fundBal | <code>string</code> | 
-| data.fundingAccrued | <code>string</code> | 
-| data.fundingStep | <code>string</code> | 
+| data | <code>Object</code> \| <code>Array</code> |
+| data.key | <code>string</code> |
+| data.timestamp | <code>number</code> |
+| data.price | <code>string</code> |
+| data.priceSpot | <code>string</code> |
+| data.fundBal | <code>string</code> |
+| data.fundingAccrued | <code>string</code> |
+| data.fundingStep | <code>string</code> |
 
 <a name="StatusMessagesDeriv.unserialize"></a>
 
@@ -1456,7 +1459,7 @@ Derivatives Status Message model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> | 
+| arr | <code>Object</code> \| <code>Array</code> |
 
 <a name="Trade"></a>
 
@@ -1475,18 +1478,18 @@ Private Trade model
 
 | Param | Type |
 | --- | --- |
-| data | <code>Object</code> \| <code>Array</code> | 
-| data.id | <code>number</code> | 
-| data.symbol | <code>string</code> | 
-| data.mtsCreate | <code>number</code> | 
-| data.orderID | <code>number</code> | 
-| data.execAmount | <code>string</code> | 
-| data.execPrice | <code>string</code> | 
-| data.orderType | <code>string</code> | 
-| data.orderPrice | <code>string</code> | 
-| data.maker | <code>number</code> \| <code>boolean</code> | 
-| data.fee | <code>string</code> | 
-| data.feeCurrency | <code>string</code> | 
+| data | <code>Object</code> \| <code>Array</code> |
+| data.id | <code>number</code> |
+| data.symbol | <code>string</code> |
+| data.mtsCreate | <code>number</code> |
+| data.orderID | <code>number</code> |
+| data.execAmount | <code>string</code> |
+| data.execPrice | <code>string</code> |
+| data.orderType | <code>string</code> |
+| data.orderPrice | <code>string</code> |
+| data.maker | <code>number</code> \| <code>boolean</code> |
+| data.fee | <code>string</code> |
+| data.feeCurrency | <code>string</code> |
 
 <a name="Trade.unserialize"></a>
 
@@ -1496,7 +1499,7 @@ Private Trade model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> | 
+| arr | <code>Object</code> \| <code>Array</code> |
 
 <a name="TradingTickerHist"></a>
 
@@ -1519,11 +1522,11 @@ Historical Trading Ticker model
 
 | Param | Type |
 | --- | --- |
-| data | <code>Object</code> \| <code>Array</code> | 
-| data.symbol | <code>string</code> | 
-| data.bid | <code>string</code> | 
-| data.ask | <code>string</code> | 
-| data.mtsUpdate | <code>number</code> | 
+| data | <code>Object</code> \| <code>Array</code> |
+| data.symbol | <code>string</code> |
+| data.bid | <code>string</code> |
+| data.ask | <code>string</code> |
+| data.mtsUpdate | <code>number</code> |
 
 <a name="TradingTickerHist+quote"></a>
 
@@ -1543,7 +1546,7 @@ Historical Trading Ticker model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> | 
+| arr | <code>Object</code> \| <code>Array</code> |
 
 <a name="TradingTicker"></a>
 
@@ -1566,18 +1569,18 @@ Trading Ticker model
 
 | Param | Type |
 | --- | --- |
-| data | <code>Object</code> \| <code>Array</code> | 
-| data.symbol | <code>string</code> | 
-| data.bid | <code>number</code> | 
-| data.bidSize | <code>number</code> | 
-| data.ask | <code>number</code> | 
-| data.askSize | <code>number</code> | 
-| data.dailyChange | <code>number</code> | 
-| data.dailyChangePerc | <code>number</code> | 
-| data.lastPrice | <code>number</code> | 
-| data.volume | <code>number</code> | 
-| data.high | <code>number</code> | 
-| data.low | <code>number</code> | 
+| data | <code>Object</code> \| <code>Array</code> |
+| data.symbol | <code>string</code> |
+| data.bid | <code>number</code> |
+| data.bidSize | <code>number</code> |
+| data.ask | <code>number</code> |
+| data.askSize | <code>number</code> |
+| data.dailyChange | <code>number</code> |
+| data.dailyChangePerc | <code>number</code> |
+| data.lastPrice | <code>number</code> |
+| data.volume | <code>number</code> |
+| data.high | <code>number</code> |
+| data.low | <code>number</code> |
 
 <a name="TradingTicker+quote"></a>
 
@@ -1597,7 +1600,7 @@ Trading Ticker model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> | 
+| arr | <code>Object</code> \| <code>Array</code> |
 
 <a name="UserInfo"></a>
 
@@ -1616,11 +1619,11 @@ User Info model
 
 | Param | Type |
 | --- | --- |
-| data | <code>Object</code> \| <code>Array</code> | 
-| data.id | <code>number</code> | 
-| data.email | <code>string</code> | 
-| data.username | <code>string</code> | 
-| data.timezone | <code>number</code> | 
+| data | <code>Object</code> \| <code>Array</code> |
+| data.id | <code>number</code> |
+| data.email | <code>string</code> |
+| data.username | <code>string</code> |
+| data.timezone | <code>number</code> |
 
 <a name="UserInfo.unserialize"></a>
 
@@ -1630,7 +1633,7 @@ User Info model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> | 
+| arr | <code>Object</code> \| <code>Array</code> |
 
 <a name="WalletHist"></a>
 
@@ -1649,13 +1652,13 @@ Historical Wallet Update model
 
 | Param | Type |
 | --- | --- |
-| data | <code>Object</code> \| <code>Array</code> | 
-| data.type | <code>string</code> | 
-| data.currency | <code>string</code> | 
-| data.balance | <code>number</code> | 
-| data.unsettledInterest | <code>number</code> | 
-| data.balanceAvailable | <code>number</code> | 
-| data.mtsUpdate | <code>number</code> | 
+| data | <code>Object</code> \| <code>Array</code> |
+| data.type | <code>string</code> |
+| data.currency | <code>string</code> |
+| data.balance | <code>number</code> |
+| data.unsettledInterest | <code>number</code> |
+| data.balanceAvailable | <code>number</code> |
+| data.mtsUpdate | <code>number</code> |
 
 <a name="WalletHist.unserialize"></a>
 
@@ -1665,7 +1668,7 @@ Historical Wallet Update model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> | 
+| arr | <code>Object</code> \| <code>Array</code> |
 
 <a name="Wallet"></a>
 
@@ -1684,12 +1687,12 @@ Wallet model
 
 | Param | Type |
 | --- | --- |
-| data | <code>Object</code> \| <code>Array</code> | 
-| data.type | <code>string</code> | 
-| data.currency | <code>string</code> | 
-| data.balance | <code>number</code> | 
-| data.unsettledInterest | <code>number</code> | 
-| data.balanceAvailable | <code>number</code> | 
+| data | <code>Object</code> \| <code>Array</code> |
+| data.type | <code>string</code> |
+| data.currency | <code>string</code> |
+| data.balance | <code>number</code> |
+| data.unsettledInterest | <code>number</code> |
+| data.balanceAvailable | <code>number</code> |
 
 <a name="Wallet.unserialize"></a>
 
@@ -1699,5 +1702,37 @@ Wallet model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> | 
+| arr | <code>Object</code> \| <code>Array</code> |
 
+<a name="Login"></a>
+
+## Login
+Historical Users Login model
+
+**Kind**: global class  
+
+* [Login](#Login)
+    * [new Login(data)](#new_Login_new)
+    * [.unserialize(arr)](#Login.unserialize) ⇒ <code>Object</code>
+
+<a name="new_WalletHist_new"></a>
+
+### new Login(data)
+
+| Param | Type |
+| --- | --- |
+| data | <code>Object</code> \| <code>Array</code> |
+| data.id | <code>number</code> |
+| data.time | <code>number</code> |
+| data.ip | <code>string</code> |
+| data.extraData | <code>Object</code> |
+
+<a name="Login.unserialize"></a>
+
+### Login.unserialize(arr) ⇒ <code>Object</code>
+**Kind**: static method of [<code>Login</code>](#Login)  
+**Returns**: <code>Object</code> - pojo  
+
+| Param | Type |
+| --- | --- |
+| arr | <code>Object</code> \| <code>Array</code> |
