@@ -60,6 +60,26 @@ describe('OrderBook model', () => {
     assert.strictEqual(ob.checksum(), CRC.str('6000:1:6100:-3:5900:2:6200:-4'))
   })
 
+  it('checksum: returns expected value for high precision numbers', () => {
+    const ob = new OrderBook({
+      bids: [['0.000000001', 1, 1], ['0.0000000001', 1, '0.0000000002']],
+      asks: [['0.000000002', 1, -3], ['0.000000003', 1, -4]]
+    })
+
+    assert.strictEqual(ob.checksum(), CRC.str('0.000000001:1:0.000000002:-3:0.0000000001:0.0000000002:0.000000003:-4'))
+  })
+
+  it('updateWith: string update place the entry in the correct position in the book', () => {
+    const ob = new OrderBook({
+      bids: [['0.1', 1, 1], ['0.09', 1, '5']],
+      asks: [['0.2', 1, -3], ['0.3', 1, -4]]
+    })
+    ob.updateWith(['0.15', 1, -1])
+    ob.updateWith(['0.089', 1, 1])
+
+    assert.strictEqual(ob.checksum(), CRC.str('0.1:1:0.15:-1:0.09:5:0.2:-3:0.089:1:0.3:-4'))
+  })
+
   it('checksum: returns expected value for raw OB', () => {
     const ob = new OrderBook({
       bids: [[100, 6000, 1], [101, 6000, 2]], // first field is order ID here
