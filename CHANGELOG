@@ -2,7 +2,6 @@
 - fix: increase test timeout in a few places
 
 # 1.1.6
-
 - fix: generate orderbook checksum using strings to prevent
   https://github.com/bitfinexcom/bitfinex-api-node/issues/511
 
