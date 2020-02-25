@@ -1,5 +1,5 @@
 # 1.1.7
-- fix: refactor tests so they can run alongside all other HF/API library tests
+- fix: increase test timeout in a few places
 
 # 1.1.6
 
