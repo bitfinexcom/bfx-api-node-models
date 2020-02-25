@@ -85,5 +85,5 @@ describe('FundingTicker model', () => {
     assert.strictEqual(obj.volume, arr[11])
     assert.strictEqual(obj.high, arr[12])
     assert.strictEqual(obj.low, arr[13])
-  })
+  }).timeout(60000)
 })

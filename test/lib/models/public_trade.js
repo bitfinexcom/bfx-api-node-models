@@ -25,7 +25,7 @@ describe('Public Trade model', () => {
         assert.strictEqual(obj[field], trade[PublicTrade.TRADING_FIELDS[field]])
       })
     })
-  })
+  }).timeout(60000)
 
   it('unserializes live funding data correctly', async () => {
     const rest = new RESTv2()
@@ -38,5 +38,5 @@ describe('Public Trade model', () => {
         assert.strictEqual(obj[field], trade[PublicTrade.FUNDING_FIELDS[field]])
       })
     })
-  })
+  }).timeout(60000)
 })

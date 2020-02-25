@@ -59,5 +59,5 @@ describe('FundingTicker history model', () => {
     assert.strictEqual(obj.bidPeriod, arr[4])
     assert.strictEqual(obj.ask, arr[5])
     assert.strictEqual(obj.mtsUpdate, arr[15])
-  })
+  }).timeout(60000)
 })
