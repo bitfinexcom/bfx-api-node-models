@@ -785,7 +785,7 @@ describe('OrderBook model', () => {
         assert.strictEqual(obj.bids[i][2], entry[2])
       }
     })
-  })
+  }).timeout(60000)
 
   it('unserializes live funding data correctly', async () => {
     const rest = new RESTv2()
@@ -810,5 +810,5 @@ describe('OrderBook model', () => {
         assert.strictEqual(obj.bids[i][3], entry[3])
       }
     })
-  })
+  }).timeout(60000)
 })
