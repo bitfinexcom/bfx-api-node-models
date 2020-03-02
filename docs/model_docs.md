@@ -253,6 +253,7 @@ Funding Credit model
 | data.amount | <code>number</code> |
 | data.flags | <code>number</code> |
 | data.status | <code>number</code> |
+| data.type | <code>string</code> |
 | data.rate | <code>number</code> |
 | data.rateReal | <code>number</code> |
 | data.period | <code>number</code> |
@@ -330,6 +331,7 @@ Funding Loan model
 | data.amount | <code>number</code> |
 | data.flags | <code>number</code> |
 | data.status | <code>number</code> |
+| data.type | <code>string</code> |
 | data.rate | <code>number</code> |
 | data.rateReal | <code>number</code> |
 | data.period | <code>number</code> |
