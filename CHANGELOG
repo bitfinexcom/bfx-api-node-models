@@ -1,3 +1,6 @@
+# 1.1.9
+- feature: Add type to FundingCredit and FundingLoan
+
 # 1.1.8
 - Order feature: add toString() method
 
