@@ -2,8 +2,12 @@
 'use strict'
 
 const assert = require('assert')
+const { SYMBOLS } = require('bfx-hf-util')
 const { FundingTrade } = require('../../../lib')
 const testModel = require('../../helpers/test_model')
+const testModelValidation = require('../../helpers/test_model_validation')
+
+const VALID_SYMBOLS = Object.values(SYMBOLS)
 
 describe('FundingTrade model', () => {
   testModel({
@@ -12,6 +16,20 @@ describe('FundingTrade model', () => {
       'id', 'symbol', 'mtsCreate', 'offerID', 'amount', 'rate', 'period',
       'maker'
     ]
+  })
+
+  testModelValidation({
+    model: FundingTrade,
+    validData: {
+      symbol: VALID_SYMBOLS,
+      id: new Array(...(new Array(5))).map(() => Math.random()),
+      mtsCreate: new Array(...(new Array(5))).map(() => Math.random()),
+      offerID: new Array(...(new Array(5))).map(() => Math.random()),
+      amount: new Array(...(new Array(5))).map(() => Math.random()),
+      rate: new Array(...(new Array(5))).map(() => Math.random()),
+      period: new Array(...(new Array(5))).map(() => Math.random()),
+      maker: new Array(...(new Array(5))).map(() => Math.random() > 0.5)
+    }
   })
 
   describe('toString', () => {

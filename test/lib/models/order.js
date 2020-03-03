@@ -3,8 +3,12 @@
 
 const assert = require('assert')
 const _isFunction = require('lodash/isFunction')
+const { SYMBOLS } = require('bfx-hf-util')
 const { Order } = require('../../../lib')
 const testModel = require('../../helpers/test_model')
+const testModelValidation = require('../../helpers/test_model_validation')
+
+const VALID_SYMBOLS = Object.values(SYMBOLS)
 
 describe('Order model', () => {
   testModel({
@@ -16,6 +20,32 @@ describe('Order model', () => {
       null, 'price', 'priceAvg', 'priceTrailing', 'priceAuxLimit', null, null,
       null, 'notify', 'hidden', 'placedId', null, null, 'routing', null, null, 'meta'
     ]
+  })
+
+  testModelValidation({
+    model: Order,
+    validData: {
+      symbol: VALID_SYMBOLS,
+      id: new Array(...(new Array(5))).map(() => Math.random()),
+      gid: new Array(...(new Array(5))).map(() => Math.random()),
+      cid: new Array(...(new Array(5))).map(() => Math.random()),
+      mtsCreate: new Array(...(new Array(5))).map(() => Math.random()),
+      mtsUpdate: new Array(...(new Array(5))).map(() => Math.random()),
+      amount: new Array(...(new Array(5))).map(() => Math.random()),
+      amountOrig: new Array(...(new Array(5))).map(() => Math.random()),
+      type: Object.values(Order.type),
+      typePrev: Object.values(Order.type),
+      status: Object.values(Order.type), // get some data
+      mtsTIF: new Array(...(new Array(5))).map(() => Math.random()),
+      flags: new Array(...(new Array(5))).map(() => Math.random()),
+      price: new Array(...(new Array(5))).map(() => Math.random()),
+      priceAvg: new Array(...(new Array(5))).map(() => Math.random()),
+      priceTrailing: new Array(...(new Array(5))).map(() => Math.random()),
+      priceAuxLimit: new Array(...(new Array(5))).map(() => Math.random()),
+      notify: new Array(...(new Array(5))).map(() => Math.random() > 0.5),
+      hidden: new Array(...(new Array(5))).map(() => Math.random() > 0.5),
+      placedId: new Array(...(new Array(5))).map(() => Math.random())
+    }
   })
 
   it('toNewOrderPacket: uses correct values', () => {

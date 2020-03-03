@@ -12,6 +12,8 @@ describe('Public Trade model', () => {
     orderedFields: ['id', 'mts', 'amount', 'price']
   })
 
+  // TODO: test validation (varies funding/trading)
+
   it('unserializes live trading data correctly', async () => {
     const rest = new RESTv2()
     const arr = await rest.trades('tBTCUSD')

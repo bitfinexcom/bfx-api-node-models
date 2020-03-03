@@ -3,8 +3,12 @@
 
 const assert = require('assert')
 const { RESTv2 } = require('bfx-api-node-rest')
+const { SYMBOLS } = require('bfx-hf-util')
 const { TradingTickerHist } = require('../../../lib')
+const testModel = require('../../helpers/test_model')
+const testModelValidation = require('../../helpers/test_model_validation')
 
+const VALID_SYMBOLS = Object.values(SYMBOLS)
 const DATA = [
   'tBTCUSD',
   228.56,
@@ -22,6 +26,24 @@ const DATA = [
 ]
 
 describe('TradingTickerHistory model', () => {
+  testModel({
+    model: TradingTickerHist,
+    orderedFields: [
+      'symbol', 'bid', null, 'ask', null, null, null, null, null, null, null,
+      null, 'mtsUpdate'
+    ]
+  })
+
+  testModelValidation({
+    model: TradingTickerHist,
+    validData: {
+      symbol: VALID_SYMBOLS,
+      bid: new Array(...(new Array(5))).map(() => Math.random()),
+      ask: new Array(...(new Array(5))).map(() => Math.random()),
+      mtsUpdated: new Array(...(new Array(5))).map(() => Math.random())
+    }
+  })
+
   it('initializes correctly', () => {
     const ticker = new TradingTickerHist(DATA)
 

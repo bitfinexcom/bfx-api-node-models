@@ -2,8 +2,12 @@
 'use strict'
 
 const assert = require('assert')
+const { SYMBOLS } = require('bfx-hf-util')
 const { Position, Order } = require('../../../lib')
 const testModel = require('../../helpers/test_model')
+const testModelValidation = require('../../helpers/test_model_validation')
+
+const VALID_SYMBOLS = Object.values(SYMBOLS)
 
 const getTestPosition = (opts = {}) => new Position({
   symbol: 'tLEOUDS',
@@ -21,6 +25,28 @@ describe('Position model', () => {
       null, 'id', 'mtsCreate', 'mtsUpdate', null, 'type', null,
       'collateral', 'collateralMin', 'meta'
     ]
+  })
+
+  testModelValidation({
+    model: Position,
+    validData: {
+      symbol: VALID_SYMBOLS,
+      status: VALID_SYMBOLS, // grab data from somewhere
+      amount: new Array(...(new Array(5))).map(() => Math.random()),
+      basePrice: new Array(...(new Array(5))).map(() => Math.random()),
+      marginFunding: new Array(...(new Array(5))).map(() => Math.random()),
+      marginFundingType: VALID_SYMBOLS, // grab data from somewhere
+      pl: new Array(...(new Array(5))).map(() => Math.random()),
+      plPerc: new Array(...(new Array(5))).map(() => Math.random()),
+      liquidationPrice: new Array(...(new Array(5))).map(() => Math.random()),
+      leverage: new Array(...(new Array(5))).map(() => Math.random()),
+      id: new Array(...(new Array(5))).map(() => Math.random()),
+      mtsCreate: new Array(...(new Array(5))).map(() => Math.random()),
+      mtsUpdate: new Array(...(new Array(5))).map(() => Math.random()),
+      type: VALID_SYMBOLS, // grab data from somewhere
+      collateral: new Array(...(new Array(5))).map(() => Math.random()),
+      collateralMin: new Array(...(new Array(5))).map(() => Math.random())
+    }
   })
 
   describe('orderToClose', () => {

@@ -5,6 +5,8 @@ const assert = require('assert')
 const { MarginInfo } = require('../../../lib')
 
 describe('MarginInfo model', () => {
+  // TODO: test validation
+
   it('initializes correctly w/ sym', () => {
     const miSym = new MarginInfo([
       'sym',
