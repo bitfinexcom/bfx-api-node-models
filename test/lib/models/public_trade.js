@@ -5,6 +5,7 @@ const assert = require('assert')
 const { RESTv2 } = require('bfx-api-node-rest')
 const { PublicTrade } = require('../../../lib')
 const testModel = require('../../helpers/test_model')
+const testModelValidation = require('../../helpers/test_model_validation')
 
 describe('Public Trade model', () => {
   testModel({
@@ -12,7 +13,29 @@ describe('Public Trade model', () => {
     orderedFields: ['id', 'mts', 'amount', 'price']
   })
 
-  // TODO: test validation (varies funding/trading)
+  // TODO: Fix this
+  /*
+  testModelValidation({ // funding
+    model: PublicTrade,
+    validData: {
+      id: new Array(...(new Array(5))).map(() => Math.random()),
+      mts: new Array(...(new Array(5))).map(() => Math.random()),
+      amount: new Array(...(new Array(5))).map(() => Math.random()),
+      rate: new Array(...(new Array(5))).map(() => Math.random()),
+      period: new Array(...(new Array(5))).map(() => Math.random())
+    }
+  })
+    */
+
+  testModelValidation({ // trading
+    model: PublicTrade,
+    validData: {
+      id: new Array(...(new Array(5))).map(() => Math.random()),
+      mts: new Array(...(new Array(5))).map(() => Math.random()),
+      amount: new Array(...(new Array(5))).map(() => Math.random()),
+      price: new Array(...(new Array(5))).map(() => Math.random())
+    }
+  })
 
   it('unserializes live trading data correctly', async () => {
     const rest = new RESTv2()
