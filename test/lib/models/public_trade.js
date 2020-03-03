@@ -9,9 +9,7 @@ const testModel = require('../../helpers/test_model')
 describe('Public Trade model', () => {
   testModel({
     model: PublicTrade,
-    orderedFields: [
-      'id', 'mts', 'amount', 'price'
-    ]
+    orderedFields: ['id', 'mts', 'amount', 'price']
   })
 
   it('unserializes live trading data correctly', async () => {
@@ -39,4 +37,19 @@ describe('Public Trade model', () => {
       })
     })
   }).timeout(60000)
+
+  describe('toString', () => {
+    it('includes pertinent information', () => {
+      const t = new PublicTrade({
+        id: 42,
+        amount: 3,
+        price: 7
+      })
+
+      const str = t.toString()
+      assert.ok(str.indexOf('42') !== -1, 'id missing')
+      assert.ok(str.indexOf('3') !== -1, 'amount missing')
+      assert.ok(str.indexOf('7') !== -1, 'price missing')
+    })
+  })
 })

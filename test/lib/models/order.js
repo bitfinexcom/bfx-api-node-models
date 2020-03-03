@@ -2,6 +2,7 @@
 'use strict'
 
 const assert = require('assert')
+const _isFunction = require('lodash/isFunction')
 const { Order } = require('../../../lib')
 const testModel = require('../../helpers/test_model')
 
@@ -27,7 +28,8 @@ describe('Order model', () => {
       priceTrailing: 0.1,
       priceAuxLimit: 0.2,
       price: 0.3,
-      amount: 0.4
+      amount: 0.4,
+      affiliateCode: 'insert some unique/thoughtful comment here'
     })
 
     let p = o.toNewOrderPacket()
@@ -45,6 +47,7 @@ describe('Order model', () => {
     assert(!(p.flags & Order.flags.OCO))
     assert(!(p.flags & Order.flags.HIDDEN))
     assert(!(p.flags & Order.flags.POSTONLY))
+    assert.strictEqual(p.meta.aff_code, 'insert some unique/thoughtful comment here')
 
     o.setHidden(true)
     p = o.toNewOrderPacket()
@@ -303,5 +306,342 @@ describe('Order model', () => {
       lev: 100
     })
     assert(o.toNewOrderPacket().lev, 100)
+  })
+
+  describe('toString', () => {
+    it('includes pertinent information', () => {
+      const o = new Order({
+        symbol: 'tBTCUSD',
+        amount: 42,
+        price: 1,
+        type: 'STOP',
+        hidden: true,
+        postonly: true,
+        reduceonly: true
+      })
+
+      o.amount = 41
+      o.status = 'awesome'
+
+      const str = o.toString()
+      assert.ok(/BTC\/USD/.test(str), 'symbol missing')
+      assert.ok(/STOP/.test(str), 'type missing')
+      assert.ok(/hidden/.test(str), 'hidden flag missing')
+      assert.ok(/post-only/.test(str), 'post-only flag missing')
+      assert.ok(/reduce-only/.test(str), 'reduce-only flag missing')
+      assert.ok(/awesome/.test(str), 'status missing')
+      assert.ok(str.indexOf('1') !== -1, 'price missing')
+      assert.ok(str.indexOf('41') !== -1, 'amount missing')
+      assert.ok(str.indexOf('42') !== -1, 'original amount missing')
+    })
+  })
+
+  describe('toPreview', () => {
+    it('returns a valid preview object for the HF', () => {
+      const data = {
+        gid: 1,
+        cid: 2,
+        symbol: 'tBTCUSD',
+        amount: 42,
+        type: 'LIMIT',
+        price: 41,
+        notify: false,
+        flags: 0
+      }
+
+      const o = new Order(data)
+      assert.deepStrictEqual(o.toPreview(), data)
+    })
+  })
+
+  describe('registerListeners', () => {
+    it('does nothing if no interface available', () => {
+      const o = new Order()
+
+      o.registerListeners({
+        onOrderNew: () => assert(false),
+        onOrderUpdate: () => assert(false),
+        onOrderClose: () => assert(false)
+      })
+    })
+
+    it('sets up listeners with correct channel filters', () => {
+      const o = new Order({
+        symbol: 'tBTCUSD',
+        id: '1',
+        gid: '2',
+        cid: '3'
+      })
+
+      o.cbGID = () => -1
+
+      const testListener = (chanData, cb) => {
+        assert.ok(_isFunction(cb), 'listener was not given cb')
+        assert.deepStrictEqual(chanData, {
+          symbol: 'tBTCUSD',
+          cbGID: -1,
+          id: 1,
+          gid: 2,
+          cid: 3
+        }, 'listener was given invalid channel filters')
+      }
+
+      o.registerListeners({
+        onOrderNew: testListener,
+        onOrderUpdate: testListener,
+        onOrderClose: testListener
+      })
+    })
+  })
+
+  describe('removeListeners', () => {
+    it('calls removeListeners on the interface if provided', (done) => {
+      const o = new Order()
+      o.cbGID = () => -1
+      o.removeListeners({
+        removeListeners: (cbGID) => {
+          assert.strictEqual(cbGID, -1)
+          done()
+        }
+      })
+    })
+  })
+
+  describe('cbGID', () => {
+    it('includes cid', () => {
+      const o = new Order({ cid: 'test' })
+      assert.ok(/test/.test(o.cbGID()), 'cid not on callback group ID')
+    })
+
+    it('includes gid', () => {
+      const o = new Order({ gid: 'test' })
+      assert.ok(/test/.test(o.cbGID()), 'gid not on callback group ID')
+    })
+  })
+
+  describe('submit', () => {
+    it('throws an error if no interface provided', (done) => {
+      const o = new Order()
+      o.submit().catch(() => done())
+    })
+
+    it('calls submitOrder on the interface', (done) => {
+      const o = new Order()
+      o.submit({
+        submitOrder: async () => {
+          done()
+          return []
+        }
+      })
+    })
+
+    it('saves received data on itself', async () => {
+      const o = new Order({ symbol: 'tBTCUSD' })
+      const remoteO = new Order({ symbol: 'just-testing' })
+
+      await o.submit({
+        submitOrder: async () => remoteO.serialize()
+      })
+
+      assert.strictEqual(o.symbol, 'just-testing')
+    })
+  })
+
+  describe('cancel', () => {
+    it('throws an error if no interface provided', (done) => {
+      const o = new Order({ id: 42 })
+      o.cancel().catch(() => done())
+    })
+
+    it('throws an error if the order lacks an ID', (done) => {
+      const o = new Order()
+      o.cancel({
+        cancelOrder: async () => {}
+      }).catch(() => done())
+    })
+
+    it('calls cancelOrder on the interface', (done) => {
+      const o = new Order({ id: 42 })
+      o.cancel({
+        cancelOrder: async (id) => {
+          assert.strictEqual(id, 42)
+          done()
+          return []
+        }
+      })
+    })
+  })
+
+  describe('recreate', () => {
+    it('throws an error if no interface provided', (done) => {
+      const o = new Order({ id: 42 })
+      o.recreate().catch(() => done())
+    })
+
+    it('throws an error if the order lacks an ID', (done) => {
+      const o = new Order()
+      o.recreate({
+        cancelOrder: async () => {}
+      }).catch(() => done())
+    })
+
+    it('cancels itself', (done) => {
+      const o = new Order({ id: 42 })
+
+      o.cancel = async () => { done() }
+      o.submit = async () => {}
+      o.recreate({})
+    })
+
+    it('clears its ID', async () => {
+      const o = new Order({ id: 42 })
+
+      o.cancel = async () => {}
+      o.submit = async () => {}
+
+      await o.recreate({})
+      assert.ok(!o.id, 'ID not cleared')
+    })
+
+    it('submits itself after ID clear', (done) => {
+      const o = new Order({ id: 42 })
+
+      o.cancel = async () => {}
+      o.submit = async () => {
+        assert.ok(!o.id, 'ID not cleared')
+        done()
+      }
+
+      o.recreate({})
+    })
+  })
+
+  describe('updateFrom', () => {
+    it('throws an error if order IDs and CIDs, or GIDs, do not match', () => {
+      const o = new Order({ id: 1, gid: 2, cid: 3 })
+
+      assert.throws(() => o.updateFrom({}))
+      assert.throws(() => o.updateFrom({ id: 1 }))
+      assert.throws(() => o.updateFrom({ id: 1, cid: 4 }))
+      assert.throws(() => o.updateFrom({ gid: 3 }))
+    })
+
+    it('does not throw error if IDs and CIDs, or GIDs match', () => {
+      const oByCID = new Order({ id: 1, cid: 3 })
+      const oByGID = new Order({ gid: 42 })
+
+      oByCID.updateFrom({ id: 1, cid: 3 })
+      oByGID.updateFrom({ gid: 42 })
+    })
+
+    it('updates properties from the provided order', () => {
+      const o = new Order({
+        id: 1,
+        gid: -1,
+        amount: 42,
+        status: 'TESTING',
+        mtsUpdate: 0,
+        priceAvg: 41
+      })
+
+      o.updateFrom({
+        id: 999,
+        gid: -1,
+        amount: 41,
+        status: 'TESTED',
+        mtsUpdate: -1,
+        priceAvg: 42
+      })
+
+      assert.strictEqual(o.id, 999)
+      assert.strictEqual(o.amount, 41)
+      assert.strictEqual(o.status, 'TESTED')
+      assert.strictEqual(o.mtsUpdate, -1)
+      assert.strictEqual(o.priceAvg, 42)
+    })
+  })
+
+  describe('getLastFillAmount', () => {
+    it('returns difference in amount since last update', () => {
+      const o = new Order({ gid: 42, amount: 40 })
+      o.updateFrom({ gid: 42, amount: 10 })
+      assert.strictEqual(o.getLastFillAmount(), 30)
+    })
+  })
+
+  describe('resetFilledAmount', () => {
+    it('clears last fill amount', () => {
+      const o = new Order({ gid: 42, amount: 40 })
+      o.updateFrom({ gid: 42, amount: 10 })
+      o.resetFilledAmount()
+      assert.strictEqual(o.getLastFillAmount(), 0)
+    })
+  })
+
+  describe('getBaseCurrent', () => {
+    it('returns the base currency for the order', () => {
+      const o = new Order({ symbol: 'tBTCUSD' })
+      assert.strictEqual(o.getBaseCurrency(), 'BTC')
+    })
+  })
+
+  describe('getQuoteCurrency', () => {
+    it('returns the base currency for the order', () => {
+      const o = new Order({ symbol: 'tBTCUSD' })
+      assert.strictEqual(o.getQuoteCurrency(), 'USD')
+    })
+  })
+
+  describe('getNotionalValue', () => {
+    it('returns the nv for the order', () => {
+      const o = new Order({ price: 2, amount: 10 })
+      assert.strictEqual(o.getNotionalValue(), 20)
+    })
+  })
+
+  describe('_onWSOrderUpdate', () => {
+    it('updates from the provided packet', () => {
+      const o = new Order({ symbol: 'tBTCUSD' })
+      o._onWSOrderUpdate(new Order({ symbol: 'fUSD' }))
+      assert.strictEqual(o.symbol, 'fUSD')
+    })
+
+    it('emits an update event', (done) => {
+      const o = new Order({ symbol: 'tBTCUSD' })
+      o.once('update', () => done())
+      o._onWSOrderUpdate(new Order({ symbol: 'fUSD' }))
+    })
+  })
+
+  describe('_onWSOderClose', () => {
+    it('updates from the provided packet', () => {
+      const o = new Order({ symbol: 'tBTCUSD' })
+      o._onWSOrderClose(new Order({ symbol: 'fUSD' }))
+      assert.strictEqual(o.symbol, 'fUSD')
+    })
+
+    it('emits an update event', (done) => {
+      const o = new Order({ symbol: 'tBTCUSD' })
+      o.once('update', () => done())
+      o._onWSOrderClose(new Order({ symbol: 'fUSD' }))
+    })
+
+    it('emits a close event', (done) => {
+      const o = new Order({ symbol: 'tBTCUSD' })
+      o.once('close', () => done())
+      o._onWSOrderClose(new Order({ symbol: 'fUSD' }))
+    })
+  })
+
+  describe('static getBaseCurrency', () => {
+    it('returns the base currency for an array-format order', () => {
+      assert.strictEqual(Order.getBaseCurrency([null, null, null, 'tBTCUSD']), 'BTC')
+    })
+  })
+
+  describe('static getQuoteCurrency', () => {
+    it('returns the quote currency for an array-format order', () => {
+      assert.strictEqual(Order.getQuoteCurrency([null, null, null, 'tBTCUSD']), 'USD')
+    })
   })
 })

@@ -86,4 +86,18 @@ describe('FundingTicker model', () => {
     assert.strictEqual(obj.high, arr[12])
     assert.strictEqual(obj.low, arr[13])
   }).timeout(60000)
+
+  describe('quote', () => {
+    it('returns quote currency', () => {
+      const t = new FundingTicker({ symbol: 'tBTCUSD' })
+      assert.strictEqual(t.quote(), 'USD')
+    })
+  })
+
+  describe('base', () => {
+    it('returns base currency', () => {
+      const t = new FundingTicker({ symbol: 'tBTCUSD' })
+      assert.strictEqual(t.base(), 'BTC')
+    })
+  })
 })

@@ -811,4 +811,43 @@ describe('OrderBook model', () => {
       }
     })
   }).timeout(60000)
+
+  describe.skip('volBPSMid', () => {})
+
+  describe('spread', () => {
+    it('returns total spread', () => {
+      const book = new OrderBook({
+        bids: [[1, 0, 1]],
+        asks: [[2, 0, -1]]
+      })
+      assert.strictEqual(book.spread(), 1)
+    })
+  })
+
+  describe('bidAmount', () => {
+    it('returns total bid amount', () => {
+      const book = new OrderBook({
+        bids: [[1, 0, 1], [1.1, 0, 1]],
+        asks: [[2, 0, -1]]
+      })
+      assert.strictEqual(book.bidAmount(), 2)
+    })
+  })
+
+  describe('askAmount', () => {
+    it('returns total ask amount', () => {
+      const book = new OrderBook({
+        bids: [[1, 0, 1]],
+        asks: [[2, 0, -1], [2.1, 0, -1]]
+      })
+      assert.strictEqual(book.askAmount(), 2)
+    })
+  })
+
+  describe('static arrayOBMidPrice', () => {
+    it('returns mid price for an array-format OB', () => {
+      const book = [[2, 0, -1], [1, 0, 1]]
+      assert.strictEqual(OrderBook.arrayOBMidPrice(book), 1.5)
+    })
+  })
 })

@@ -76,4 +76,18 @@ describe('TradingTicker model', () => {
     assert.strictEqual(obj.high, arr[9])
     assert.strictEqual(obj.low, arr[10])
   })
+
+  describe('base', () => {
+    it('returns the base currency for the ticker', () => {
+      const t = new TradingTicker({ symbol: 'tBTCUSD' })
+      assert.strictEqual(t.base(), 'BTC')
+    })
+  })
+
+  describe('quote', () => {
+    it('returns the quote currency for the ticker', () => {
+      const t = new TradingTicker({ symbol: 'tBTCUSD' })
+      assert.strictEqual(t.quote(), 'USD')
+    })
+  })
 })
