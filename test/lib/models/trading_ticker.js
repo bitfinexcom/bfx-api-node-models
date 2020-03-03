@@ -2,9 +2,13 @@
 'use strict'
 
 const assert = require('assert')
+const { SYMBOLS } = require('bfx-hf-util')
 const { RESTv2 } = require('bfx-api-node-rest')
 const { TradingTicker } = require('../../../lib')
+const testModel = require('../../helpers/test_model')
+const testModelValidation = require('../../helpers/test_model_validation')
 
+const VALID_SYMBOLS = Object.values(SYMBOLS)
 const DATA = [
   'tBTCUSD',
   228.56,
@@ -20,6 +24,31 @@ const DATA = [
 ]
 
 describe('TradingTicker model', () => {
+  testModel({
+    model: TradingTicker,
+    orderedFields: [
+      'symbol', 'bid', 'bidSize', 'ask', 'askSize', 'dailyChange',
+      'dailyChangePerc', 'lastPrice', 'volume', 'high', 'low'
+    ]
+  })
+
+  testModelValidation({
+    model: TradingTicker,
+    validData: {
+      symbol: VALID_SYMBOLS,
+      bid: new Array(...(new Array(5))).map(() => Math.random()),
+      bidSize: new Array(...(new Array(5))).map(() => Math.random()),
+      ask: new Array(...(new Array(5))).map(() => Math.random()),
+      askSize: new Array(...(new Array(5))).map(() => Math.random()),
+      dailyChange: new Array(...(new Array(5))).map(() => Math.random()),
+      dailyChangePerc: new Array(...(new Array(5))).map(() => Math.random()),
+      lastPrice: new Array(...(new Array(5))).map(() => Math.random()),
+      volume: new Array(...(new Array(5))).map(() => Math.random()),
+      high: new Array(...(new Array(5))).map(() => Math.random()),
+      low: new Array(...(new Array(5))).map(() => Math.random())
+    }
+  })
+
   it('initializes correctly', () => {
     const ticker = new TradingTicker(DATA)
 

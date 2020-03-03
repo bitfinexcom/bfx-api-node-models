@@ -2,8 +2,13 @@
 'use strict'
 
 const assert = require('assert')
-const { Trade } = require('../../../lib')
+const { SYMBOLS, CURRENCIES } = require('bfx-hf-util')
+const { Trade, Order } = require('../../../lib')
 const testModel = require('../../helpers/test_model')
+const testModelValidation = require('../../helpers/test_model_validation')
+
+const VALID_CURRENCIES = Object.values(CURRENCIES)
+const VALID_SYMBOLS = Object.values(SYMBOLS)
 
 describe('Trade model', () => {
   testModel({
@@ -13,6 +18,23 @@ describe('Trade model', () => {
       'id', 'symbol', 'mtsCreate', 'orderID', 'execAmount', 'execPrice',
       'orderType', 'orderPrice', 'maker', 'fee', 'feeCurrency'
     ]
+  })
+
+  testModelValidation({
+    model: Trade,
+    validData: {
+      symbol: VALID_SYMBOLS,
+      orderID: VALID_SYMBOLS, // get some data
+      orderType: Object.values(Order.type),
+      id: new Array(...(new Array(5))).map(() => Math.random()),
+      mtsCreate: new Array(...(new Array(5))).map(() => Math.random()),
+      execAmount: new Array(...(new Array(5))).map(() => Math.random()),
+      execPrice: new Array(...(new Array(5))).map(() => Math.random()),
+      orderPrice: new Array(...(new Array(5))).map(() => Math.random()),
+      maker: new Array(...(new Array(5))).map(() => Math.random() > 0.5),
+      fee: new Array(...(new Array(5))).map(() => Math.random()),
+      feeCurrency: VALID_CURRENCIES
+    }
   })
 
   describe('toString', () => {

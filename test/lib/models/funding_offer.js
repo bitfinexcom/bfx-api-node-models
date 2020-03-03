@@ -2,10 +2,14 @@
 'use strict'
 
 const assert = require('assert')
+const { SYMBOLS } = require('bfx-hf-util')
 const { prepareAmount } = require('bfx-api-node-util')
 const { RESTv2 } = require('bfx-api-node-rest')
 const { FundingOffer } = require('../../../lib')
 const testModel = require('../../helpers/test_model')
+const testModelValidation = require('../../helpers/test_model_validation')
+
+const VALID_SYMBOLS = Object.values(SYMBOLS)
 
 describe('FundingOffer model', () => {
   testModel({
@@ -16,6 +20,30 @@ describe('FundingOffer model', () => {
       null, null, 'flags', 'status', null, null, null, 'rate', 'period',
       'notify', 'hidden', null, 'renew', 'rateReal'
     ]
+  })
+
+  testModelValidation({
+    model: FundingOffer,
+    validData: {
+      symbol: VALID_SYMBOLS,
+      status: VALID_SYMBOLS, // need data from somewhere
+      type: VALID_SYMBOLS, // need data from somewhere
+      id: new Array(...(new Array(5))).map(() => Math.random()),
+      mtsCreate: new Array(...(new Array(5))).map(() => Math.random()),
+      mtsUpdate: new Array(...(new Array(5))).map(() => Math.random()),
+      mtsOpening: new Array(...(new Array(5))).map(() => Math.random()),
+      mtsLastPayout: new Array(...(new Array(5))).map(() => Math.random()),
+      amountOrig: new Array(...(new Array(5))).map(() => Math.random()),
+      amount: new Array(...(new Array(5))).map(() => Math.random()),
+      flags: new Array(...(new Array(5))).map(() => Math.random()),
+      rate: new Array(...(new Array(5))).map(() => Math.random()),
+      period: new Array(...(new Array(5))).map(() => Math.random()),
+      rateReal: new Array(...(new Array(5))).map(() => Math.random()),
+      notify: new Array(...(new Array(5))).map(() => Math.random() > 0.5),
+      hidden: new Array(...(new Array(5))).map(() => Math.random() > 0.5),
+      renew: new Array(...(new Array(5))).map(() => Math.random() > 0.5),
+      noClose: new Array(...(new Array(5))).map(() => Math.random() > 0.5)
+    }
   })
 
   describe('toNewOfferPacket', () => {

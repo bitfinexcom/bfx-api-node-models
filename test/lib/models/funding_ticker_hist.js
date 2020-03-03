@@ -2,9 +2,13 @@
 'use strict'
 
 const assert = require('assert')
+const { SYMBOLS } = require('bfx-hf-util')
 const { RESTv2 } = require('bfx-api-node-rest')
 const { FundingTickerHist } = require('../../../lib')
+const testModel = require('../../helpers/test_model')
+const testModelValidation = require('../../helpers/test_model_validation')
 
+const VALID_SYMBOLS = Object.values(SYMBOLS)
 const DATA = [
   'fUSD',
   null,
@@ -25,6 +29,25 @@ const DATA = [
 ]
 
 describe('FundingTicker history model', () => {
+  testModel({
+    model: FundingTickerHist,
+    orderedFields: [
+      'symbol', null, 'bid', null, 'bidPeriod', 'ask', null, null, null, null,
+      null, null, null, null, null, 'mtsUpdate'
+    ]
+  })
+
+  testModelValidation({
+    model: FundingTickerHist,
+    validData: {
+      symbol: VALID_SYMBOLS,
+      bid: new Array(...(new Array(5))).map(() => Math.random()),
+      bidPeriod: new Array(...(new Array(5))).map(() => Math.random()),
+      ask: new Array(...(new Array(5))).map(() => Math.random()),
+      mtsUpdate: new Array(...(new Array(5))).map(() => Math.random())
+    }
+  })
+
   it('initializes correctly', () => {
     const ticker = new FundingTickerHist(DATA)
     assert.strictEqual(ticker.symbol, 'fUSD')

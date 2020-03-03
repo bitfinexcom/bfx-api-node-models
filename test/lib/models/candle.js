@@ -5,11 +5,24 @@ const assert = require('assert')
 const { RESTv2 } = require('bfx-api-node-rest')
 const { Candle } = require('../../../lib')
 const testModel = require('../../helpers/test_model')
+const testModelValidation = require('../../helpers/test_model_validation')
 
 describe('Candle model', () => {
   testModel({
     model: Candle,
     orderedFields: ['mts', 'open', 'close', 'high', 'low', 'volume']
+  })
+
+  testModelValidation({
+    model: Candle,
+    validData: {
+      mts: new Array(...(new Array(5))).map(() => Math.random()),
+      open: new Array(...(new Array(5))).map(() => Math.random()),
+      high: new Array(...(new Array(5))).map(() => Math.random()),
+      low: new Array(...(new Array(5))).map(() => Math.random()),
+      close: new Array(...(new Array(5))).map(() => Math.random()),
+      volume: new Array(...(new Array(5))).map(() => Math.random())
+    }
   })
 
   it('unserializes live data correctly', async () => {

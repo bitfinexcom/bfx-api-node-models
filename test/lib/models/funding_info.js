@@ -5,6 +5,8 @@ const assert = require('assert')
 const { FundingInfo } = require('../../../lib')
 
 describe('FundingInfo model', () => {
+  // TODO: test validation
+
   it('initializes correctly', () => {
     const fi = new FundingInfo([
       'sym',
