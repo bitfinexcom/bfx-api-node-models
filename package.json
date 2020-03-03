@@ -6,6 +6,11 @@
     "node": ">=7"
   },
   "main": "index.js",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test"
+    }
+  },
   "scripts": {
     "lint": "standard",
     "test": "npm run lint && npm run unit",
@@ -43,6 +48,7 @@
     "bfx-api-node-rest": "^3.0.3",
     "bfx-hf-util": "^1.0.5",
     "chai": "^4.2.0",
+    "husky": "^4.2.3",
     "jsdoc-to-markdown": "^5.0.3",
     "mocha": "^7.1.0",
     "nyc": "^15.0.0",

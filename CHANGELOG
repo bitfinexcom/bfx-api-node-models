@@ -1,5 +1,6 @@
 # 1.2.0
 - meta: bumped dependencies
+- meta: added husky pre-commit test hook
 - feature: add validation support to models
 - refactor: core Model() class method signatures to reduce boilerplate
 - Position feature: orderToClose() method
