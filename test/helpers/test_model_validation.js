@@ -38,15 +38,15 @@ module.exports = ({ model, valid, invalid }) => {
   if (valid) {
     it('validate: true for valid instance(s)', () => {
       if (_isArray(valid)) {
-        assert(model.validate(valid) === null) // test all
+        assert.strictEqual(model.validate(valid), null) // test all
 
         valid.forEach(i => { // test single & array of one
-          assert(model.validate(i) === null)
-          assert(model.validate([i] === null))
+          assert.strictEqual(model.validate(i), null)
+          assert.strictEqual(model.validate([i]), null)
         })
       } else { // test single & array of one
-        assert(model.validate(valid) === null)
-        assert(model.validate([valid]) === null)
+        assert.strictEqual(model.validate(valid), null)
+        assert.strictEqual(model.validate([valid]), null)
       }
     })
   }
