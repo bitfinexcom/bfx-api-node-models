@@ -46,7 +46,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-regenerator": "^6.26.0",
     "bfx-api-node-rest": "^3.0.3",
-    "bfx-hf-util": "^1.0.5",
+    "bfx-hf-util": "^1.0.6",
     "chai": "^4.2.0",
     "husky": "^4.2.3",
     "jsdoc-to-markdown": "^5.0.3",
