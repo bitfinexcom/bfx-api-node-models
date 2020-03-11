@@ -2,6 +2,7 @@
 /* eslint-env mocha */
 
 const assert = require('assert')
+const _isError = require('lodash/isError')
 const _isFinite = require('lodash/isFinite')
 const _isString = require('lodash/isString')
 const _isEmpty = require('lodash/isEmpty')
@@ -48,17 +49,17 @@ describe('base model class', () => {
     })
 
     it('returns error if an item fails the provided validators', () => {
-      assert(Model.validate({
+      assert(_isError(Model.validate({
         data: invalidInstance,
         ...validateArgs
-      }) instanceof Error)
+      })))
     })
 
     it('returns error if a single item in a collection fails the validators', () => {
-      assert(Model.validate({
+      assert(_isError(Model.validate({
         data: [validInstance, validInstance, invalidInstance, validInstance],
         ...validateArgs
-      }) instanceof Error)
+      })))
     })
 
     it('returns null if all items in a collection pass the validators', () => {

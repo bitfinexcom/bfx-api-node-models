@@ -3,7 +3,7 @@
   "version": "1.2.3",
   "description": "Object models for usage with the Bitfinex node API",
   "engines": {
-    "node": ">=7"
+    "node": ">=8.3.0"
   },
   "main": "index.js",
   "husky": {
@@ -12,12 +12,11 @@
     }
   },
   "scripts": {
-    "lint": "standard",
+    "lint": "eslint lib/ examples/ test/ index.js",
     "test": "npm run lint && npm run unit",
     "unit": "NODE_ENV=test nyc --check-coverage --lines 90 --branches 60 --functions 90 --statements 90 --reporter=lcov --reporter=html mocha -b --recursive",
     "build": "babel ./index.js -d ./dist && babel ./lib -d ./dist/lib && copy package.json dist",
-    "docs": "npm run model_docs",
-    "model_docs": "node_modules/jsdoc-to-markdown/bin/cli.js lib/*.js > docs/model_docs.md"
+    "docs": "rm -rf docs && node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
   },
   "repository": {
     "type": "git",
@@ -47,6 +46,16 @@
     "babel-plugin-transform-regenerator": "^6.26.0",
     "bfx-api-node-rest": "^3.0.3",
     "chai": "^4.2.0",
+    "docdash": "^1.2.0",
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jsdoc": "^22.0.0",
+    "eslint-plugin-lodash": "^6.0.0",
+    "eslint-plugin-mocha": "^6.3.0",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
     "husky": "^4.2.3",
     "jsdoc-to-markdown": "^5.0.3",
     "mocha": "^7.1.0",
@@ -58,6 +67,7 @@
     "bfx-hf-util": "^1.0.6",
     "bluebird": "^3.7.2",
     "crc-32": "^1.2.0",
-    "debug": "^4.1.1"
+    "debug": "^4.1.1",
+    "lodash": "^4.17.15"
   }
 }

@@ -5,15 +5,16 @@ const assert = require('assert')
 const _min = require('lodash/min')
 const _sample = require('lodash/sample')
 const _isArray = require('lodash/isArray')
+const _isError = require('lodash/isError')
 const _isFunction = require('lodash/isFunction')
 const _flattenDeep = require('lodash/flattenDeep')
 
 /**
  * Runs basic checks on a model's validate method
  *
- * @param {Object} args
- * @param {Object} args.model - class
- * @param {Object} args.validData - map of arrays for each key containing valid values
+ * @param {object} args - arguments
+ * @param {object} args.model - class
+ * @param {object} args.validData - map of arrays for each key containing valid values
  */
 module.exports = ({ model, validData }) => {
   it('validate: is provided', () => {
@@ -42,15 +43,15 @@ module.exports = ({ model, validData }) => {
 
   it('validate: false for invalid instance(s)', () => {
     if (_isArray(invalid)) {
-      assert(model.validate(invalid) instanceof Error) // test all
+      assert(_isError(model.validate(invalid))) // test all
 
       invalid.forEach(i => { // test single & array of one
-        assert(model.validate(i) instanceof Error)
-        assert(model.validate([i]) instanceof Error)
+        assert(_isError(model.validate(i)))
+        assert(_isError(model.validate([i])))
       })
     } else { // test single & array of one
-      assert(model.validate(invalid) instanceof Error)
-      assert(model.validate([invalid]) instanceof Error)
+      assert(_isError(model.validate(invalid)))
+      assert(_isError(model.validate([invalid])))
     }
   })
 
@@ -69,6 +70,6 @@ module.exports = ({ model, validData }) => {
   })
 
   it('validate: false if one instance out of a set is invalid', () => {
-    assert(model.validate(_flattenDeep([valid, invalid])) instanceof Error)
+    assert(_isError(model.validate(_flattenDeep([valid, invalid]))))
   })
 }

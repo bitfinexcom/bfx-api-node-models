@@ -2,6 +2,7 @@
 'use strict'
 
 const assert = require('assert')
+const _includes = require('lodash/includes')
 const { SYMBOLS } = require('bfx-hf-util')
 const { FundingTrade } = require('../../../lib')
 const testModel = require('../../helpers/test_model')
@@ -43,9 +44,9 @@ describe('FundingTrade model', () => {
 
       const str = ft.toString()
       assert.ok(/BTCUSD/.test(str), 'symbol missing')
-      assert.ok(str.indexOf('42') !== -1, 'amount missing')
-      assert.ok(str.indexOf('0.1') !== -1, 'rate missing')
-      assert.ok(str.indexOf('30') !== -1, 'period missing')
+      assert.ok(_includes(str, '42'), 'amount missing')
+      assert.ok(_includes(str, '0.1'), 'rate missing')
+      assert.ok(_includes(str, '30'), 'period missing')
     })
   })
 })
