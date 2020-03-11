@@ -2,6 +2,8 @@
 'use strict'
 
 const assert = require('assert')
+const _isUndefined = require('lodash/isUndefined')
+const _includes = require('lodash/includes')
 const _isFunction = require('lodash/isFunction')
 const { SYMBOLS } = require('bfx-hf-util')
 const { Order } = require('../../../lib')
@@ -229,14 +231,14 @@ describe('Order model', () => {
     assert.strictEqual(o.price, 43)
     assert.strictEqual(o.amount, 2)
 
-    assert(typeof o.priceAuxLimit === 'undefined')
+    assert(_isUndefined(o.priceAuxLimit))
     o.update({ price_aux_limit: 42 }).catch(done)
-    assert(typeof o.price_aux_limit === 'undefined')
+    assert(_isUndefined(o.price_aux_limit))
     assert.strictEqual(o.priceAuxLimit, 42)
 
-    assert(typeof o.priceTrailing === 'undefined')
+    assert(_isUndefined(o.priceTrailing))
     o.update({ price_trailing: 42 }).catch(done)
-    assert(typeof o.price_trailing === 'undefined')
+    assert(_isUndefined(o.price_trailing))
     assert.strictEqual(o.priceTrailing, 42)
 
     assert(o.gid !== 42)
@@ -360,9 +362,9 @@ describe('Order model', () => {
       assert.ok(/post-only/.test(str), 'post-only flag missing')
       assert.ok(/reduce-only/.test(str), 'reduce-only flag missing')
       assert.ok(/awesome/.test(str), 'status missing')
-      assert.ok(str.indexOf('1') !== -1, 'price missing')
-      assert.ok(str.indexOf('41') !== -1, 'amount missing')
-      assert.ok(str.indexOf('42') !== -1, 'original amount missing')
+      assert.ok(_includes(str, '1'), 'price missing')
+      assert.ok(_includes(str, '41'), 'amount missing')
+      assert.ok(_includes(str, '42'), 'original amount missing')
     })
   })
 

@@ -2,6 +2,7 @@
 'use strict'
 
 const assert = require('assert')
+const _includes = require('lodash/includes')
 const { SYMBOLS, CURRENCIES } = require('bfx-hf-util')
 const { Trade, Order } = require('../../../lib')
 const testModel = require('../../helpers/test_model')
@@ -51,11 +52,11 @@ describe('Trade model', () => {
 
       const str = t.toString()
       assert.ok(/tBTCUSD/.test(str), 'symbol missing')
-      assert.ok(str.indexOf('1') !== -1, 'id missing')
-      assert.ok(str.indexOf('32') !== -1, 'exec price missing')
-      assert.ok(str.indexOf('24') !== -1, 'exec amount missing')
+      assert.ok(_includes(str, '1'), 'id missing')
+      assert.ok(_includes(str, '32'), 'exec price missing')
+      assert.ok(_includes(str, '24'), 'exec amount missing')
       assert.ok(/maker/.test(str), 'maker flag missing')
-      assert.ok(str.indexOf('7') !== -1, 'fee missing')
+      assert.ok(_includes(str, '7'), 'fee missing')
       assert.ok(/ETH/.test(str), 'fee currency missing')
     })
   })

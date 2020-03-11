@@ -2,6 +2,7 @@
 'use strict'
 
 const assert = require('assert')
+const _includes = require('lodash/includes')
 const { RESTv2 } = require('bfx-api-node-rest')
 const { PublicTrade } = require('../../../lib')
 const testModel = require('../../helpers/test_model')
@@ -72,9 +73,9 @@ describe('Public Trade model', () => {
       })
 
       const str = t.toString()
-      assert.ok(str.indexOf('42') !== -1, 'id missing')
-      assert.ok(str.indexOf('3') !== -1, 'amount missing')
-      assert.ok(str.indexOf('7') !== -1, 'price missing')
+      assert.ok(_includes(str, '42'), 'id missing')
+      assert.ok(_includes(str, '3'), 'amount missing')
+      assert.ok(_includes(str, '7'), 'price missing')
     })
   })
 })

@@ -2,6 +2,7 @@
 'use strict'
 
 const assert = require('assert')
+const _includes = require('lodash/includes')
 
 const testModel = ({ values = {}, model, orderedFields, boolFields = [] }) => {
   const Model = model
@@ -14,7 +15,7 @@ const testModel = ({ values = {}, model, orderedFields, boolFields = [] }) => {
       fieldValues[i] = values[fields[i]]
     }
 
-    if (boolFields.indexOf(fields[i]) !== -1) {
+    if (_includes(boolFields, fields[i])) {
       fieldValues[i] = false
     }
   }
@@ -28,7 +29,7 @@ const testModel = ({ values = {}, model, orderedFields, boolFields = [] }) => {
   const checkField = (m, f) => {
     if (f === null) return
 
-    if (boolFields.indexOf(f) !== -1) {
+    if (_includes(boolFields, f)) {
       assert.strictEqual(m[f], false)
     } else if (values[f]) {
       assert.strictEqual(m[f], values[f])
