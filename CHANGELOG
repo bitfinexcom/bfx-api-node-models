@@ -4,6 +4,7 @@
 - feature: add validation support to models
 - refactor: core Model() class method signatures to reduce boilerplate
 - Position feature: orderToClose() method
+- Model fix: toJS() unserialize method invocation parameters
 
 # 1.1.10
 - feature: add ability to specify lev in new Order object
