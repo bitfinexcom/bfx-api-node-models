@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>order_book.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Alert.html">Alert</a><ul class='methods'><li data-type='method'><a href="Alert.html#.unserialize">unserialize</a></li><li data-type='method'><a href="Alert.html#.validate">validate</a></li></ul></li><li><a href="BalanceInfo.html">BalanceInfo</a><ul class='methods'><li data-type='method'><a href="BalanceInfo.html#.unserialize">unserialize</a></li><li data-type='method'><a href="BalanceInfo.html#.validate">validate</a></li></ul></li><li><a href="Candle.html">Candle</a><ul class='methods'><li data-type='method'><a href="Candle.html#.unserialize">unserialize</a></li><li data-type='method'><a href="Candle.html#.validate">validate</a></li></ul></li><li><a href="Currency.html">Currency</a><ul class='methods'><li data-type='method'><a href="Currency.html#.unserialize">unserialize</a></li><li data-type='method'><a href="Currency.html#.validate">validate</a></li></ul></li><li><a href="FundingCredit.html">FundingCredit</a><ul class='methods'><li data-type='method'><a href="FundingCredit.html#.unserialize">unserialize</a></li><li data-type='method'><a href="FundingCredit.html#.validate">validate</a></li></ul></li><li><a href="FundingInfo.html">FundingInfo</a><ul class='methods'><li data-type='method'><a href="FundingInfo.html#.unserialize">unserialize</a></li><li data-type='method'><a href="FundingInfo.html#.validate">validate</a></li><li data-type='method'><a href="FundingInfo.html#serialize">serialize</a></li></ul></li><li><a href="FundingLoan.html">FundingLoan</a><ul class='methods'><li data-type='method'><a href="FundingLoan.html#.unserialize">unserialize</a></li><li data-type='method'><a href="FundingLoan.html#.validate">validate</a></li></ul></li><li><a href="FundingOffer.html">FundingOffer</a><ul class='methods'><li data-type='method'><a href="FundingOffer.html#.unserialize">unserialize</a></li><li data-type='method'><a href="FundingOffer.html#.validate">validate</a></li><li data-type='method'><a href="FundingOffer.html#cancel">cancel</a></li><li data-type='method'><a href="FundingOffer.html#close">close</a></li><li data-type='method'><a href="FundingOffer.html#submit">submit</a></li><li data-type='method'><a href="FundingOffer.html#toNewOfferPacket">toNewOfferPacket</a></li><li data-type='method'><a href="FundingOffer.html#toString">toString</a></li></ul></li><li><a href="FundingTicker.html">FundingTicker</a><ul class='methods'><li data-type='method'><a href="FundingTicker.html#.unserialize">unserialize</a></li><li data-type='method'><a href="FundingTicker.html#.validate">validate</a></li><li data-type='method'><a href="FundingTicker.html#base">base</a></li><li data-type='method'><a href="FundingTicker.html#quote">quote</a></li></ul></li><li><a href="FundingTickerHist.html">FundingTickerHist</a><ul class='methods'><li data-type='method'><a href="FundingTickerHist.html#.unserialize">unserialize</a></li><li data-type='method'><a href="FundingTickerHist.html#.validate">validate</a></li><li data-type='method'><a href="FundingTickerHist.html#base">base</a></li><li data-type='method'><a href="FundingTickerHist.html#quote">quote</a></li></ul></li><li><a href="FundingTrade.html">FundingTrade</a><ul class='methods'><li data-type='method'><a href="FundingTrade.html#.unserialize">unserialize</a></li><li data-type='method'><a href="FundingTrade.html#.validate">validate</a></li><li data-type='method'><a href="FundingTrade.html#toString">toString</a></li></ul></li><li><a href="LedgerEntry.html">LedgerEntry</a><ul class='methods'><li data-type='method'><a href="LedgerEntry.html#.unserialize">unserialize</a></li><li data-type='method'><a href="LedgerEntry.html#.validate">validate</a></li></ul></li><li><a href="Liquidations.html">Liquidations</a><ul class='methods'><li data-type='method'><a href="Liquidations.html#.unserialize">unserialize</a></li><li data-type='method'><a href="Liquidations.html#.validate">validate</a></li><li data-type='method'><a href="Liquidations.html#toString">toString</a></li></ul></li><li><a href="Login.html">Login</a><ul class='methods'><li data-type='method'><a href="Login.html#.unserialize">unserialize</a></li><li data-type='method'><a href="Login.html#.validate">validate</a></li></ul></li><li><a href="MarginInfo.html">MarginInfo</a><ul class='methods'><li data-type='method'><a href="MarginInfo.html#.unserialize">unserialize</a></li><li data-type='method'><a href="MarginInfo.html#.validate">validate</a></li><li data-type='method'><a href="MarginInfo.html#serialize">serialize</a></li></ul></li><li><a href="Model.html">Model</a><ul class='methods'><li data-type='method'><a href="Model.html#.unserialize">unserialize</a></li><li data-type='method'><a href="Model.html#.validate">validate</a></li><li data-type='method'><a href="Model.html#serialize">serialize</a></li><li data-type='method'><a href="Model.html#toJS">toJS</a></li></ul></li><li><a href="Movement.html">Movement</a><ul class='methods'><li data-type='method'><a href="Movement.html#.unserialize">unserialize</a></li><li data-type='method'><a href="Movement.html#.validate">validate</a></li></ul></li><li><a href="Notification.html">Notification</a><ul class='methods'><li data-type='method'><a href="Notification.html#.unserialize">unserialize</a></li><li data-type='method'><a href="Notification.html#.validate">validate</a></li></ul></li><li><a href="Order.html">Order</a><ul class='methods'><li data-type='method'><a href="Order.html#.getBaseCurrency">getBaseCurrency</a></li><li data-type='method'><a href="Order.html#.getQuoteCurrency">getQuoteCurrency</a></li><li data-type='method'><a href="Order.html#.unserialize">unserialize</a></li><li data-type='method'><a href="Order.html#.validate">validate</a></li><li data-type='method'><a href="Order.html#cancel">cancel</a></li><li data-type='method'><a href="Order.html#cbGID">cbGID</a></li><li data-type='method'><a href="Order.html#getBaseCurrency">getBaseCurrency</a></li><li data-type='method'><a href="Order.html#getLastFillAmount">getLastFillAmount</a></li><li data-type='method'><a href="Order.html#getNotionalValue">getNotionalValue</a></li><li data-type='method'><a href="Order.html#getQuoteCurrency">getQuoteCurrency</a></li><li data-type='method'><a href="Order.html#includesVariableRates">includesVariableRates</a></li><li data-type='method'><a href="Order.html#isHidden">isHidden</a></li><li data-type='method'><a href="Order.html#isOCO">isOCO</a></li><li data-type='method'><a href="Order.html#isPartiallyFilled">isPartiallyFilled</a></li><li data-type='method'><a href="Order.html#isPositionClose">isPositionClose</a></li><li data-type='method'><a href="Order.html#isPostOnly">isPostOnly</a></li><li data-type='method'><a href="Order.html#isReduceOnly">isReduceOnly</a></li><li data-type='method'><a href="Order.html#modifyFlag">modifyFlag</a></li><li data-type='method'><a href="Order.html#recreate">recreate</a></li><li data-type='method'><a href="Order.html#registerListeners">registerListeners</a></li><li data-type='method'><a href="Order.html#removeListeners">removeListeners</a></li><li data-type='method'><a href="Order.html#resetFilledAmount">resetFilledAmount</a></li><li data-type='method'><a href="Order.html#setHidden">setHidden</a></li><li data-type='method'><a href="Order.html#setNoVariableRates">setNoVariableRates</a></li><li data-type='method'><a href="Order.html#setOCO">setOCO</a></li><li data-type='method'><a href="Order.html#setPositionClose">setPositionClose</a></li><li data-type='method'><a href="Order.html#setPostOnly">setPostOnly</a></li><li data-type='method'><a href="Order.html#setReduceOnly">setReduceOnly</a></li><li data-type='method'><a href="Order.html#submit">submit</a></li><li data-type='method'><a href="Order.html#toNewOrderPacket">toNewOrderPacket</a></li><li data-type='method'><a href="Order.html#toPreview">toPreview</a></li><li data-type='method'><a href="Order.html#toString">toString</a></li><li data-type='method'><a href="Order.html#update">update</a></li><li data-type='method'><a href="Order.html#updateFrom">updateFrom</a></li></ul></li><li><a href="OrderBook.html">OrderBook</a><ul class='methods'><li data-type='method'><a href="OrderBook.html#.checksumArr">checksumArr</a></li><li data-type='method'><a href="OrderBook.html#.unserialize">unserialize</a></li><li data-type='method'><a href="OrderBook.html#.updateArrayOBWith">updateArrayOBWith</a></li><li data-type='method'><a href="OrderBook.html#askAmount">askAmount</a></li><li data-type='method'><a href="OrderBook.html#bidAmount">bidAmount</a></li><li data-type='method'><a href="OrderBook.html#checksum">checksum</a></li><li data-type='method'><a href="OrderBook.html#getEntry">getEntry</a></li><li data-type='method'><a href="OrderBook.html#midPrice">midPrice</a></li><li data-type='method'><a href="OrderBook.html#spread">spread</a></li><li data-type='method'><a href="OrderBook.html#toJS">toJS</a></li><li data-type='method'><a href="OrderBook.html#topAsk">topAsk</a></li><li data-type='method'><a href="OrderBook.html#topAskLevel">topAskLevel</a></li><li data-type='method'><a href="OrderBook.html#topBid">topBid</a></li><li data-type='method'><a href="OrderBook.html#topBidLevel">topBidLevel</a></li><li data-type='method'><a href="OrderBook.html#updateWith">updateWith</a></li><li data-type='method'><a href="OrderBook.html#volBPSMid">volBPSMid</a></li></ul></li><li><a href="Position.html">Position</a><ul class='methods'><li data-type='method'><a href="Position.html#.unserialize">unserialize</a></li><li data-type='method'><a href="Position.html#.validate">validate</a></li><li data-type='method'><a href="Position.html#claim">claim</a></li><li data-type='method'><a href="Position.html#close">close</a></li><li data-type='method'><a href="Position.html#orderToClose">orderToClose</a></li><li data-type='method'><a href="Position.html#toString">toString</a></li></ul></li><li><a href="PublicTrade.html">PublicTrade</a><ul class='methods'><li data-type='method'><a href="PublicTrade.html#.unserialize">unserialize</a></li><li data-type='method'><a href="PublicTrade.html#.validate">validate</a></li><li data-type='method'><a href="PublicTrade.html#toString">toString</a></li></ul></li><li><a href="StatusMessagesDeriv.html">StatusMessagesDeriv</a><ul class='methods'><li data-type='method'><a href="StatusMessagesDeriv.html#.unserialize">unserialize</a></li><li data-type='method'><a href="StatusMessagesDeriv.html#.validate">validate</a></li></ul></li><li><a href="Trade.html">Trade</a><ul class='methods'><li data-type='method'><a href="Trade.html#.unserialize">unserialize</a></li><li data-type='method'><a href="Trade.html#.validate">validate</a></li><li data-type='method'><a href="Trade.html#toString">toString</a></li></ul></li><li><a href="TradingTicker.html">TradingTicker</a><ul class='methods'><li data-type='method'><a href="TradingTicker.html#.unserialize">unserialize</a></li><li data-type='method'><a href="TradingTicker.html#.validate">validate</a></li><li data-type='method'><a href="TradingTicker.html#base">base</a></li><li data-type='method'><a href="TradingTicker.html#quote">quote</a></li></ul></li><li><a href="TradingTickerHist.html">TradingTickerHist</a><ul class='methods'><li data-type='method'><a href="TradingTickerHist.html#.unserialize">unserialize</a></li><li data-type='method'><a href="TradingTickerHist.html#.validate">validate</a></li><li data-type='method'><a href="TradingTickerHist.html#base">base</a></li><li data-type='method'><a href="TradingTickerHist.html#quote">quote</a></li></ul></li><li><a href="UserInfo.html">UserInfo</a><ul class='methods'><li data-type='method'><a href="UserInfo.html#.unserialize">unserialize</a></li><li data-type='method'><a href="UserInfo.html#.validate">validate</a></li></ul></li><li><a href="Wallet.html">Wallet</a><ul class='methods'><li data-type='method'><a href="Wallet.html#.unserialize">unserialize</a></li><li data-type='method'><a href="Wallet.html#.validate">validate</a></li></ul></li><li><a href="WalletHist.html">WalletHist</a><ul class='methods'><li data-type='method'><a href="WalletHist.html#.unserialize">unserialize</a></li><li data-type='method'><a href="WalletHist.html#.validate">validate</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#assignFromCollectionOrInstance">assignFromCollectionOrInstance</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">order_book.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>'use strict'
+
+const CRC = require('crc-32')
+const { EventEmitter } = require('events')
+const _isEmpty = require('lodash/isEmpty')
+const _isString = require('lodash/isString')
+const { preparePrice } = require('bfx-api-node-util')
+
+/**
+ * High level OB model to automatically integrate WS updates &amp; maintain sort
+ */
+class OrderBook extends EventEmitter {
+  /**
+   * Initializes the order book with an existing snapshot (array form)
+   *
+   * @param {Array[]|OrderBook} snap - order book snapshot
+   * @param {boolean?} raw - true for raw 'R0' order books
+   */
+  constructor (snap = [], raw = false) {
+    super()
+
+    this.raw = raw
+
+    if (snap instanceof OrderBook) {
+      this.bids = snap.bids.slice()
+      this.asks = snap.asks.slice()
+    } else if (snap &amp;&amp; Array.isArray(snap)) {
+      this.updateFromSnapshot(snap)
+    } else if (snap &amp;&amp; Array.isArray(snap.bids) &amp;&amp; Array.isArray(snap.asks)) {
+      this.bids = snap.bids.slice()
+      this.asks = snap.asks.slice()
+    } else {
+      this.bids = []
+      this.asks = []
+    }
+  }
+
+  /**
+   * Returns the total volume at n basis points from the mid price
+   *
+   * @param {number} bps - basis points from mid price
+   * @returns {number} vol - total volume
+   */
+  volBPSMid (bps) {
+    const priceI = this.raw
+      ? (this.bids[0] || this.asks[0]).length === 4 ? 2 : 1
+      : 0
+    const mid = this.midPrice()
+    const askLimit = mid * (1 + (bps / 10000))
+    const bidLimit = mid * (1 - (bps / 10000))
+    let askVol = 0
+    let bidVol = 0
+    let row
+
+    for (let i = 0; i &lt; this.bids.length; i += 1) {
+      row = this.bids[i]
+
+      if (row[priceI] &lt; bidLimit) {
+        break
+      }
+
+      bidVol += row.length === 4 ? row[3] : row[2]
+    }
+
+    for (let i = 0; i &lt; this.asks.length; i += 1) {
+      row = this.asks[i]
+
+      if (row[priceI] > askLimit) {
+        break
+      }
+
+      askVol += Math.abs(row.length === 4 ? row[3] : row[2])
+    }
+
+    return askVol + bidVol
+  }
+
+  /**
+   * Generates a crc-32 checksum of our current state. The checksum'ed string
+   * itself is a concatenated list of the top 25 bids &amp; asks, alternating.
+   *
+   * @see http://blog.bitfinex.com/api/bitfinex-api-order-books-checksums
+   *
+   * @returns {number} cs
+   */
+  checksum () {
+    const { raw } = this
+    const data = []
+
+    for (let i = 0; i &lt; 25; i += 1) {
+      const bid = this.bids[i]
+      const ask = this.asks[i]
+
+      if (bid) {
+        let price = bid[0]
+        const amount = bid.length === 4 ? bid[3] : bid[2]
+        if (!raw &amp;&amp; !_isString(price)) {
+          price = Number(preparePrice(price))
+          price = /e/.test(price + '')
+            ? price.toFixed(Math.abs((price + '').split('e')[1]) + 1) // i.e. 1.7e-7 to fixed
+            : price
+        }
+
+        data.push(price, amount)
+      }
+
+      if (ask) {
+        let price = ask[0]
+        const amount = ask.length === 4 ? ask[3] : ask[2]
+        if (!raw &amp;&amp; !_isString(price)) {
+          price = Number(preparePrice(price))
+          price = /e/.test(price + '')
+            ? price.toFixed(Math.abs((price + '').split('e')[1]) + 1) // i.e. 1.7e-7 to fixed
+            : price
+        }
+
+        data.push(price, amount)
+      }
+    }
+
+    return CRC.str(data.join(':'))
+  }
+
+  /**
+   * Like checksum(), but for raw array-format order books
+   *
+   * @param {Array[]} arr - assumed sorted, [topBid, bid, ..., topAsk, ask, ...]
+   * @param {boolean?} raw - true for raw 'R0' order books
+   * @returns {number} cs
+   */
+  static checksumArr (arr, raw = false) {
+    let topAskI = -1
+
+    // find first ask (book is sorted bids first)
+    for (let i = 0; i &lt; arr.length; i += 1) {
+      if ((arr[i].length === 4 ? Number(-arr[i][3]) : Number(arr[i][2])) &lt; 0) {
+        topAskI = i
+        break
+      }
+    }
+
+    const data = []
+
+    let ask
+    let bid
+
+    // Either bids/asks may be empty, or have differing lengths
+    for (let i = 0; i &lt; 25; i += 1) {
+      bid = topAskI === -1 || i &lt; topAskI // still reading bids
+        ? arr[i]
+        : null // reached asks
+
+      ask = topAskI === -1
+        ? null
+        : arr[topAskI + i]
+
+      if (bid) {
+        let price = bid[0]
+        const amount = bid.length === 4 ? bid[3] : bid[2]
+        if (!raw &amp;&amp; !_isString(price)) {
+          price = Number(preparePrice(price))
+          price = /e/.test(price + '')
+            ? price.toFixed(Math.abs((price + '').split('e')[1]) + 1) // i.e. 1.7e-7 to fixed
+            : price
+        }
+        data.push(price, amount)
+      }
+
+      if (ask) {
+        let price = ask[0]
+        const amount = ask.length === 4 ? ask[3] : ask[2]
+        if (!raw &amp;&amp; !_isString(price)) {
+          price = Number(preparePrice(price))
+          price = /e/.test(price + '')
+            ? price.toFixed(Math.abs((price + '').split('e')[1]) + 1) // i.e. 1.7e-7 to fixed
+            : price
+        }
+        data.push(price, amount)
+      }
+    }
+
+    return CRC.str(data.join(':'))
+  }
+
+  updateFromSnapshot (snapshot) {
+    this.bids = []
+    this.asks = []
+
+    if (_isEmpty(snapshot)) {
+      return
+    }
+
+    for (let i = 0; i &lt; snapshot.length; i++) {
+      if (snapshot[i].length === 4) {
+        if (Number(snapshot[i][3]) &lt; 0) {
+          this.bids.push(snapshot[i])
+        } else {
+          this.asks.push(snapshot[i])
+        }
+      } else {
+        if (Number(snapshot[i][2]) &lt; 0) {
+          this.asks.push(snapshot[i])
+        } else {
+          this.bids.push(snapshot[i])
+        }
+      }
+    }
+  }
+
+  /**
+   * Integrate an update packet (add, update, or remove a price level). Emits an
+   * 'update' event on success
+   *
+   * @param {Array} entry - price level to update with
+   * @returns {boolean} success - false if entry doesn't match OB
+   */
+  updateWith (entry) {
+    const { raw } = this
+    const priceI = raw
+      ? entry.length === 4 ? 2 : 1
+      : 0
+    const numEntry = entry.map((x) => Number(x))
+    const count = raw ? -1 : numEntry.length === 4 ? numEntry[2] : numEntry[1]
+    const price = numEntry[priceI]
+    const oID = numEntry[0] // only for raw books
+    const amount = numEntry.length === 4 ? numEntry[3] : numEntry[2]
+    const dir = numEntry.length === 4
+      ? amount &lt; 0 ? 1 : -1
+      : amount &lt; 0 ? -1 : 1
+    const side = numEntry.length === 4
+      ? amount &lt; 0 ? this.bids : this.asks
+      : amount &lt; 0 ? this.asks : this.bids
+
+    let insertIndex = -1
+    let pl
+
+    // apply insert directly if empty
+    if (side.length === 0 &amp;&amp; (raw || count > 0)) {
+      side.push(entry)
+      this.emit('update', entry)
+      return true
+    }
+
+    // Match by price level, or order ID for raw books
+    for (let i = 0; i &lt; side.length; i++) {
+      if ((!raw &amp;&amp; Number(side[i][priceI]) === price) || (raw &amp;&amp; Number(side[i][0]) === oID)) {
+        if ((!raw &amp;&amp; count === 0) || (raw &amp;&amp; price === 0)) {
+          side.splice(i, 1) // remove
+          this.emit('update', entry)
+          return true
+        } else if (!raw || (raw &amp;&amp; price > 0)) {
+          side.splice(i, 1) // remove, add update as new entry below
+          break
+        }
+      }
+    }
+
+    // remove unkown, can happen if OB is initialized w/o all price levels
+    if ((raw &amp;&amp; price === 0) || (!raw &amp;&amp; count === 0)) {
+      return false
+    }
+
+    for (let i = 0; i &lt; side.length; i++) {
+      pl = side[i].map((x) => Number(x))
+
+      if (insertIndex === -1 &amp;&amp; (
+        (dir === -1 &amp;&amp; price &lt; pl[priceI]) || // by price
+        (dir === -1 &amp;&amp; price === pl[priceI] &amp;&amp; (raw &amp;&amp; entry[0] &lt; pl[0])) || // by order ID
+        (dir === 1 &amp;&amp; price > pl[priceI]) ||
+        (dir === 1 &amp;&amp; price === pl[priceI] &amp;&amp; (raw &amp;&amp; entry[0] &lt; pl[0]))
+      )) {
+        insertIndex = i // insert index to maintain sort
+        break
+      }
+    }
+
+    // add
+    if (insertIndex === -1) {
+      side.push(entry)
+    } else {
+      side.splice(insertIndex, 0, entry)
+    }
+
+    this.emit('update', entry)
+    return true
+  }
+
+  /**
+   * @returns {number} topBid - may be null
+   */
+  topBid () {
+    const priceI = this.raw
+      ? (this.bids[0].length === 4 || this.asks[0].length === 4) ? 2 : 1
+      : 0
+    return (this.topBidLevel() || [])[priceI] || null
+  }
+
+  /**
+   * @returns {number} topBidLevel - may be null
+   */
+  topBidLevel () {
+    return this.bids[0] || null
+  }
+
+  /**
+   * @returns {number} topAsk - may be null
+   */
+  topAsk () {
+    const priceI = this.raw
+      ? (this.bids[0].length === 4 || this.asks[0].length === 4) ? 2 : 1
+      : 0
+    return (this.topAskLevel() || [])[priceI] || null
+  }
+
+  /**
+   * @returns {number} topAskLevel - may be null
+   */
+  topAskLevel () {
+    return this.asks[0] || null
+  }
+
+  /**
+   * @returns {number} price
+   */
+  midPrice () {
+    const priceI = this.raw
+      ? (this.bids[0].length === 4 || this.asks[0].length === 4) ? 2 : 1
+      : 0
+    const topAsk = (this.asks[0] || [])[priceI] || 0
+    const topBid = (this.bids[0] || [])[priceI] || 0
+
+    if (topAsk === 0) return topBid
+    if (topBid === 0) return topAsk
+
+    return (topAsk + topBid) / 2
+  }
+
+  /**
+   * @returns {number} spread - top bid/ask difference
+   */
+  spread () {
+    const priceI = this.raw
+      ? (this.bids[0].length === 4 || this.asks[0].length === 4) ? 2 : 1
+      : 0
+    const topAsk = (this.asks[0] || [])[priceI] || 0
+    const topBid = (this.bids[0] || [])[priceI] || 0
+
+    if (topAsk === 0 || topBid === 0) {
+      return 0
+    }
+
+    return topAsk - topBid
+  }
+
+  /**
+   * @returns {number} amount - total buy-side volume
+   */
+  bidAmount () {
+    let amount = 0
+
+    for (let i = 0; i &lt; this.bids.length; i++) {
+      amount += this.bids[i].length === 4 ? this.bids[i][3] : this.bids[i][2]
+    }
+
+    return Math.abs(amount)
+  }
+
+  /**
+   * @returns {number} amount - total sell-side volume
+   */
+  askAmount () {
+    let amount = 0
+
+    for (let i = 0; i &lt; this.asks.length; i++) {
+      amount += this.asks[i].length === 4 ? this.asks[i][3] : this.asks[i][2]
+    }
+
+    return Math.abs(amount)
+  }
+
+  /**
+   * @param {number} price - price level to fetch
+   * @returns {object} entry - unserialized, null if not found
+   */
+  getEntry (price) {
+    const priceI = this.raw
+      ? (this.bids[0].length === 4 || this.asks[0].length === 4) ? 2 : 1
+      : 0
+    const side = this.asks.length > 0
+      ? price >= this.asks[0][priceI] ? this.asks : this.bids
+      : price &lt;= this.bids[0][priceI] ? this.bids : this.asks
+
+    for (let i = 0; i &lt; side.length; i++) {
+      if (price === side[i][priceI]) {
+        return OrderBook.unserialize(side[i])
+      }
+    }
+
+    return null
+  }
+
+  serialize () {
+    return (this.asks || []).concat(this.bids || [])
+  }
+
+  /**
+   * @returns {object} pojo
+   */
+  toJS () {
+    const arr = this.serialize()
+    return OrderBook.unserialize(arr, this.raw)
+  }
+
+  /**
+   * Modifies an array-format OB in place with an update entry. Maintains sort
+   *
+   * @param {number[][]} ob - array-format order book
+   * @param {number[]} entry - price level to update with
+   * @param {boolean?} raw - true for raw 'R0' order books
+   * @returns {boolean} success - false if entry doesn't match OB
+   */
+  static updateArrayOBWith (ob, entry, raw = false) {
+    if (entry.length === 0) {
+      return false
+    }
+
+    const priceI = raw
+      ? entry.length === 4 ? 2 : 1
+      : 0
+    const price = Number(entry[priceI])
+    const amount = entry.length === 4 ? Number(entry[3]) : Number(entry[2])
+    const dir = entry.length === 4
+      ? amount &lt; 0 ? 1 : -1
+      : amount &lt; 0 ? -1 : 1
+    const count = raw ? -1 : entry.length === 4 ? Number(entry[2]) : Number(entry[1])
+    let insertIndex = -1
+    let pl // price level
+
+    for (let i = 0; i &lt; ob.length; i++) {
+      pl = ob[i].map((x) => Number(x))
+
+      if (
+        (!raw &amp;&amp; pl[priceI] === price) ||
+        (raw &amp;&amp; pl[0] === Number(entry[0]))
+      ) {
+        if ((!raw &amp;&amp; count === 0) || (raw &amp;&amp; price === 0)) {
+          ob.splice(i, 1) // remove existing
+          return true
+        } else {
+          ob.splice(i, 1) // update; remove &amp; re-insert
+          break
+        }
+      }
+    }
+
+    // remove unkown, can happen if OB is initialized w/o all price levels
+    if ((!raw &amp;&amp; count === 0) || (raw &amp;&amp; price === 0)) {
+      return false
+    }
+
+    for (let i = 0; i &lt; ob.length; i++) {
+      pl = ob[i].map((x) => Number(x))
+
+      if (insertIndex === -1) {
+        if (
+          (dir === -1 &amp;&amp; (pl.length === 4 ? -pl[3] : pl[2]) &lt; 0 &amp;&amp; price &lt; pl[priceI]) || // by price
+          (dir === -1 &amp;&amp; (pl.length === 4 ? -pl[3] : pl[2]) &lt; 0 &amp;&amp; price === pl[priceI] &amp;&amp; (raw &amp;&amp; Number(entry[0]) &lt; pl[0])) || // by order ID
+          (dir === 1 &amp;&amp; (pl.length === 4 ? -pl[3] : pl[2]) > 0 &amp;&amp; price > pl[priceI]) ||
+          (dir === 1 &amp;&amp; (pl.length === 4 ? -pl[3] : pl[2]) > 0 &amp;&amp; price === pl[priceI] &amp;&amp; (raw &amp;&amp; Number(entry[0]) &lt; pl[0])) ||
+          (dir === 1 &amp;&amp; (pl.length === 4 ? -pl[3] : pl[2]) &lt; 0)
+        ) {
+          insertIndex = i
+          break
+        }
+      }
+    }
+
+    // add
+    if (insertIndex === -1) {
+      ob.push(entry)
+    } else {
+      ob.splice(insertIndex, 0, entry)
+    }
+
+    return true
+  }
+
+  static arrayOBMidPrice (ob = [], raw = false) {
+    if (ob.length === 0) return null
+
+    const priceI = raw
+      ? ob[0].length === 4 ? 2 : 1
+      : 0
+    let bestBuy = -Infinity
+    let bestAsk = Infinity
+    let entry
+
+    for (let i = 0; i &lt; ob.length; i++) {
+      entry = ob[i]
+
+      if ((entry.length === 4 ? -entry[3] : entry[2]) > 0 &amp;&amp; entry[priceI] > bestBuy) bestBuy = entry[priceI]
+      if ((entry.length === 4 ? -entry[3] : entry[2]) &lt; 0 &amp;&amp; entry[priceI] &lt; bestAsk) bestAsk = entry[priceI]
+    }
+
+    if (bestBuy === -Infinity || bestAsk === Infinity) return null
+
+    return (bestAsk + bestBuy) / 2.0
+  }
+
+  /**
+   * Converts an array order book entry or snapshot to an object, with 'price',
+   * 'count', and 'amount' keys on entries
+   *
+   * @param {number[]|number[][]} arr - array format order book
+   * @param {boolean} [raw] - true for raw 'R0' order books
+   * @returns {object} ob - either a map w/ bids &amp; asks, or single entry object
+   */
+  static unserialize (arr, raw = false) {
+    if (Array.isArray(arr[0])) {
+      const entries = arr.map(e => OrderBook.unserialize(e, raw))
+      const bids = entries.filter(e => (e.rate ? -e.amount : e.amount) > 0)
+      const asks = entries.filter(e => (e.rate ? -e.amount : e.amount) &lt; 0)
+
+      return { bids, asks }
+    }
+
+    return arr.length === 4
+      ? raw ? {
+        orderID: arr[0],
+        period: arr[1],
+        rate: arr[2],
+        amount: arr[3]
+      } : {
+        rate: arr[0],
+        period: arr[1],
+        count: arr[2],
+        amount: arr[3]
+      }
+      : raw ? {
+        orderID: arr[0],
+        price: arr[1],
+        amount: arr[2]
+      } : {
+        price: arr[0],
+        count: arr[1],
+        amount: arr[2]
+      }
+  }
+}
+
+module.exports = OrderBook
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Thu Mar 12 2020 01:57:21 GMT+0700 (Indochina Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
+</body>
+</html>

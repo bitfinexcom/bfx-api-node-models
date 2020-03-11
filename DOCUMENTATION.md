@@ -72,10 +72,6 @@ const o = new Order({
 console.log(o.toNewOrderPacket())
 ```
 
-### Docs
-
-[Refer to `docs/`](/docs) for JSDoc-generated API documentation covering each model class.
-
 ### Examples
 
 The order model provides helper methods for order submission, updates, and cancellation. These methods are compatible with version 2.0.0 of `bitfinex-api-node`, and return promises which resolve upon receival of the relevant success/error notifications.

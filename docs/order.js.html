@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>order.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Alert.html">Alert</a><ul class='methods'><li data-type='method'><a href="Alert.html#.unserialize">unserialize</a></li><li data-type='method'><a href="Alert.html#.validate">validate</a></li></ul></li><li><a href="BalanceInfo.html">BalanceInfo</a><ul class='methods'><li data-type='method'><a href="BalanceInfo.html#.unserialize">unserialize</a></li><li data-type='method'><a href="BalanceInfo.html#.validate">validate</a></li></ul></li><li><a href="Candle.html">Candle</a><ul class='methods'><li data-type='method'><a href="Candle.html#.unserialize">unserialize</a></li><li data-type='method'><a href="Candle.html#.validate">validate</a></li></ul></li><li><a href="Currency.html">Currency</a><ul class='methods'><li data-type='method'><a href="Currency.html#.unserialize">unserialize</a></li><li data-type='method'><a href="Currency.html#.validate">validate</a></li></ul></li><li><a href="FundingCredit.html">FundingCredit</a><ul class='methods'><li data-type='method'><a href="FundingCredit.html#.unserialize">unserialize</a></li><li data-type='method'><a href="FundingCredit.html#.validate">validate</a></li></ul></li><li><a href="FundingInfo.html">FundingInfo</a><ul class='methods'><li data-type='method'><a href="FundingInfo.html#.unserialize">unserialize</a></li><li data-type='method'><a href="FundingInfo.html#.validate">validate</a></li><li data-type='method'><a href="FundingInfo.html#serialize">serialize</a></li></ul></li><li><a href="FundingLoan.html">FundingLoan</a><ul class='methods'><li data-type='method'><a href="FundingLoan.html#.unserialize">unserialize</a></li><li data-type='method'><a href="FundingLoan.html#.validate">validate</a></li></ul></li><li><a href="FundingOffer.html">FundingOffer</a><ul class='methods'><li data-type='method'><a href="FundingOffer.html#.unserialize">unserialize</a></li><li data-type='method'><a href="FundingOffer.html#.validate">validate</a></li><li data-type='method'><a href="FundingOffer.html#cancel">cancel</a></li><li data-type='method'><a href="FundingOffer.html#close">close</a></li><li data-type='method'><a href="FundingOffer.html#submit">submit</a></li><li data-type='method'><a href="FundingOffer.html#toNewOfferPacket">toNewOfferPacket</a></li><li data-type='method'><a href="FundingOffer.html#toString">toString</a></li></ul></li><li><a href="FundingTicker.html">FundingTicker</a><ul class='methods'><li data-type='method'><a href="FundingTicker.html#.unserialize">unserialize</a></li><li data-type='method'><a href="FundingTicker.html#.validate">validate</a></li><li data-type='method'><a href="FundingTicker.html#base">base</a></li><li data-type='method'><a href="FundingTicker.html#quote">quote</a></li></ul></li><li><a href="FundingTickerHist.html">FundingTickerHist</a><ul class='methods'><li data-type='method'><a href="FundingTickerHist.html#.unserialize">unserialize</a></li><li data-type='method'><a href="FundingTickerHist.html#.validate">validate</a></li><li data-type='method'><a href="FundingTickerHist.html#base">base</a></li><li data-type='method'><a href="FundingTickerHist.html#quote">quote</a></li></ul></li><li><a href="FundingTrade.html">FundingTrade</a><ul class='methods'><li data-type='method'><a href="FundingTrade.html#.unserialize">unserialize</a></li><li data-type='method'><a href="FundingTrade.html#.validate">validate</a></li><li data-type='method'><a href="FundingTrade.html#toString">toString</a></li></ul></li><li><a href="LedgerEntry.html">LedgerEntry</a><ul class='methods'><li data-type='method'><a href="LedgerEntry.html#.unserialize">unserialize</a></li><li data-type='method'><a href="LedgerEntry.html#.validate">validate</a></li></ul></li><li><a href="Liquidations.html">Liquidations</a><ul class='methods'><li data-type='method'><a href="Liquidations.html#.unserialize">unserialize</a></li><li data-type='method'><a href="Liquidations.html#.validate">validate</a></li><li data-type='method'><a href="Liquidations.html#toString">toString</a></li></ul></li><li><a href="Login.html">Login</a><ul class='methods'><li data-type='method'><a href="Login.html#.unserialize">unserialize</a></li><li data-type='method'><a href="Login.html#.validate">validate</a></li></ul></li><li><a href="MarginInfo.html">MarginInfo</a><ul class='methods'><li data-type='method'><a href="MarginInfo.html#.unserialize">unserialize</a></li><li data-type='method'><a href="MarginInfo.html#.validate">validate</a></li><li data-type='method'><a href="MarginInfo.html#serialize">serialize</a></li></ul></li><li><a href="Model.html">Model</a><ul class='methods'><li data-type='method'><a href="Model.html#.unserialize">unserialize</a></li><li data-type='method'><a href="Model.html#.validate">validate</a></li><li data-type='method'><a href="Model.html#serialize">serialize</a></li><li data-type='method'><a href="Model.html#toJS">toJS</a></li></ul></li><li><a href="Movement.html">Movement</a><ul class='methods'><li data-type='method'><a href="Movement.html#.unserialize">unserialize</a></li><li data-type='method'><a href="Movement.html#.validate">validate</a></li></ul></li><li><a href="Notification.html">Notification</a><ul class='methods'><li data-type='method'><a href="Notification.html#.unserialize">unserialize</a></li><li data-type='method'><a href="Notification.html#.validate">validate</a></li></ul></li><li><a href="Order.html">Order</a><ul class='methods'><li data-type='method'><a href="Order.html#.getBaseCurrency">getBaseCurrency</a></li><li data-type='method'><a href="Order.html#.getQuoteCurrency">getQuoteCurrency</a></li><li data-type='method'><a href="Order.html#.unserialize">unserialize</a></li><li data-type='method'><a href="Order.html#.validate">validate</a></li><li data-type='method'><a href="Order.html#cancel">cancel</a></li><li data-type='method'><a href="Order.html#cbGID">cbGID</a></li><li data-type='method'><a href="Order.html#getBaseCurrency">getBaseCurrency</a></li><li data-type='method'><a href="Order.html#getLastFillAmount">getLastFillAmount</a></li><li data-type='method'><a href="Order.html#getNotionalValue">getNotionalValue</a></li><li data-type='method'><a href="Order.html#getQuoteCurrency">getQuoteCurrency</a></li><li data-type='method'><a href="Order.html#includesVariableRates">includesVariableRates</a></li><li data-type='method'><a href="Order.html#isHidden">isHidden</a></li><li data-type='method'><a href="Order.html#isOCO">isOCO</a></li><li data-type='method'><a href="Order.html#isPartiallyFilled">isPartiallyFilled</a></li><li data-type='method'><a href="Order.html#isPositionClose">isPositionClose</a></li><li data-type='method'><a href="Order.html#isPostOnly">isPostOnly</a></li><li data-type='method'><a href="Order.html#isReduceOnly">isReduceOnly</a></li><li data-type='method'><a href="Order.html#modifyFlag">modifyFlag</a></li><li data-type='method'><a href="Order.html#recreate">recreate</a></li><li data-type='method'><a href="Order.html#registerListeners">registerListeners</a></li><li data-type='method'><a href="Order.html#removeListeners">removeListeners</a></li><li data-type='method'><a href="Order.html#resetFilledAmount">resetFilledAmount</a></li><li data-type='method'><a href="Order.html#setHidden">setHidden</a></li><li data-type='method'><a href="Order.html#setNoVariableRates">setNoVariableRates</a></li><li data-type='method'><a href="Order.html#setOCO">setOCO</a></li><li data-type='method'><a href="Order.html#setPositionClose">setPositionClose</a></li><li data-type='method'><a href="Order.html#setPostOnly">setPostOnly</a></li><li data-type='method'><a href="Order.html#setReduceOnly">setReduceOnly</a></li><li data-type='method'><a href="Order.html#submit">submit</a></li><li data-type='method'><a href="Order.html#toNewOrderPacket">toNewOrderPacket</a></li><li data-type='method'><a href="Order.html#toPreview">toPreview</a></li><li data-type='method'><a href="Order.html#toString">toString</a></li><li data-type='method'><a href="Order.html#update">update</a></li><li data-type='method'><a href="Order.html#updateFrom">updateFrom</a></li></ul></li><li><a href="OrderBook.html">OrderBook</a><ul class='methods'><li data-type='method'><a href="OrderBook.html#.checksumArr">checksumArr</a></li><li data-type='method'><a href="OrderBook.html#.unserialize">unserialize</a></li><li data-type='method'><a href="OrderBook.html#.updateArrayOBWith">updateArrayOBWith</a></li><li data-type='method'><a href="OrderBook.html#askAmount">askAmount</a></li><li data-type='method'><a href="OrderBook.html#bidAmount">bidAmount</a></li><li data-type='method'><a href="OrderBook.html#checksum">checksum</a></li><li data-type='method'><a href="OrderBook.html#getEntry">getEntry</a></li><li data-type='method'><a href="OrderBook.html#midPrice">midPrice</a></li><li data-type='method'><a href="OrderBook.html#spread">spread</a></li><li data-type='method'><a href="OrderBook.html#toJS">toJS</a></li><li data-type='method'><a href="OrderBook.html#topAsk">topAsk</a></li><li data-type='method'><a href="OrderBook.html#topAskLevel">topAskLevel</a></li><li data-type='method'><a href="OrderBook.html#topBid">topBid</a></li><li data-type='method'><a href="OrderBook.html#topBidLevel">topBidLevel</a></li><li data-type='method'><a href="OrderBook.html#updateWith">updateWith</a></li><li data-type='method'><a href="OrderBook.html#volBPSMid">volBPSMid</a></li></ul></li><li><a href="Position.html">Position</a><ul class='methods'><li data-type='method'><a href="Position.html#.unserialize">unserialize</a></li><li data-type='method'><a href="Position.html#.validate">validate</a></li><li data-type='method'><a href="Position.html#claim">claim</a></li><li data-type='method'><a href="Position.html#close">close</a></li><li data-type='method'><a href="Position.html#orderToClose">orderToClose</a></li><li data-type='method'><a href="Position.html#toString">toString</a></li></ul></li><li><a href="PublicTrade.html">PublicTrade</a><ul class='methods'><li data-type='method'><a href="PublicTrade.html#.unserialize">unserialize</a></li><li data-type='method'><a href="PublicTrade.html#.validate">validate</a></li><li data-type='method'><a href="PublicTrade.html#toString">toString</a></li></ul></li><li><a href="StatusMessagesDeriv.html">StatusMessagesDeriv</a><ul class='methods'><li data-type='method'><a href="StatusMessagesDeriv.html#.unserialize">unserialize</a></li><li data-type='method'><a href="StatusMessagesDeriv.html#.validate">validate</a></li></ul></li><li><a href="Trade.html">Trade</a><ul class='methods'><li data-type='method'><a href="Trade.html#.unserialize">unserialize</a></li><li data-type='method'><a href="Trade.html#.validate">validate</a></li><li data-type='method'><a href="Trade.html#toString">toString</a></li></ul></li><li><a href="TradingTicker.html">TradingTicker</a><ul class='methods'><li data-type='method'><a href="TradingTicker.html#.unserialize">unserialize</a></li><li data-type='method'><a href="TradingTicker.html#.validate">validate</a></li><li data-type='method'><a href="TradingTicker.html#base">base</a></li><li data-type='method'><a href="TradingTicker.html#quote">quote</a></li></ul></li><li><a href="TradingTickerHist.html">TradingTickerHist</a><ul class='methods'><li data-type='method'><a href="TradingTickerHist.html#.unserialize">unserialize</a></li><li data-type='method'><a href="TradingTickerHist.html#.validate">validate</a></li><li data-type='method'><a href="TradingTickerHist.html#base">base</a></li><li data-type='method'><a href="TradingTickerHist.html#quote">quote</a></li></ul></li><li><a href="UserInfo.html">UserInfo</a><ul class='methods'><li data-type='method'><a href="UserInfo.html#.unserialize">unserialize</a></li><li data-type='method'><a href="UserInfo.html#.validate">validate</a></li></ul></li><li><a href="Wallet.html">Wallet</a><ul class='methods'><li data-type='method'><a href="Wallet.html#.unserialize">unserialize</a></li><li data-type='method'><a href="Wallet.html#.validate">validate</a></li></ul></li><li><a href="WalletHist.html">WalletHist</a><ul class='methods'><li data-type='method'><a href="WalletHist.html#.unserialize">unserialize</a></li><li data-type='method'><a href="WalletHist.html#.validate">validate</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#assignFromCollectionOrInstance">assignFromCollectionOrInstance</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">order.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>'use strict'
+
+const Promise = require('bluebird')
+const _keys = require('lodash/keys')
+const _isFinite = require('lodash/isFinite')
+const _isString = require('lodash/isString')
+const _isEmpty = require('lodash/isEmpty')
+const _compact = require('lodash/compact')
+const _flatten = require('lodash/flatten')
+const _includes = require('lodash/includes')
+const _isUndefined = require('lodash/isUndefined')
+const { prepareAmount, preparePrice } = require('bfx-api-node-util')
+
+const numberValidator = require('./validators/number')
+const dateValidator = require('./validators/date')
+const amountValidator = require('./validators/amount')
+const stringValidator = require('./validators/string')
+const boolValidator = require('./validators/bool')
+const priceValidator = require('./validators/price')
+const symbolValidator = require('./validators/symbol')
+const Model = require('./model')
+
+const statuses = ['ACTIVE', 'EXECUTED', 'PARTIALLY FILLED', 'CANCELED']
+const types = [
+  'MARKET', 'EXCHANGE MARKET', 'LIMIT', 'EXCHANGE LIMIT', 'STOP',
+  'EXCHANGE STOP', 'TRAILING STOP', 'EXCHANGE TRAILING STOP', 'FOK',
+  'EXCHANGE FOK', 'STOP LIMIT', 'EXCHANGE STOP LIMIT'
+]
+
+const boolFields = ['notify']
+const fields = {
+  id: 0,
+  gid: 1,
+  cid: 2,
+  symbol: 3,
+  mtsCreate: 4,
+  mtsUpdate: 5,
+  amount: 6,
+  amountOrig: 7,
+  type: 8,
+  typePrev: 9,
+  mtsTIF: 10,
+  // placeholder
+  // placeholder
+  flags: 12,
+  status: 13,
+  // placeholder
+  // placeholder
+  price: 16,
+  priceAvg: 17,
+  priceTrailing: 18,
+  priceAuxLimit: 19,
+  // placeholder
+  // placeholder
+  // placeholder
+  notify: 23,
+  hidden: 24,
+  placedId: 25,
+  // placeholder
+  // placeholder
+  routing: 28,
+  // placeholder
+  // placeholder
+  meta: 31
+}
+
+let lastCID = Date.now()
+
+/**
+ * High level order model; provides methods for execution &amp; can stay updated via
+ * a WSv2 connection or used to execute as a rest payload
+ */
+class Order extends Model {
+  /**
+   * @param {object|Array} data - order data
+   * @param {number} data.id - ID
+   * @param {number} data.gid - group ID
+   * @param {number} data.cid - client ID
+   * @param {string} data.symbol - symbol
+   * @param {number} data.mtsCreate - creation timestamp
+   * @param {number} data.mtsUpdate - last update timestamp
+   * @param {string} data.amount - remaining order amount
+   * @param {string} data.amountOrig - original/initial order amount
+   * @param {string} data.type - order type (i.e. 'EXCHANGE LIMIT')
+   * @param {string} data.typePrev - previous order type, if any
+   * @param {number} [data.mtsTIF] - TIF timestamp, if set
+   * @param {number} data.flags - order flags
+   * @param {string} data.status - current order status
+   * @param {string} data.price - order price
+   * @param {string} data.priceAvg - average execution price
+   * @param {string} [data.priceTrailing] - trailing distance for TRAILING STOP orders
+   * @param {string} [data.priceAuxLimit] - stop price for STOP LIMIT and OCO orders
+   * @param {number|boolean} [data.notify] - notify flag
+   * @param {number} [data.placedId] - placed ID
+   * @param {string} [data.affiliateCode] - affiliate code
+   * @param {object} [apiInterface] - saved for a later call to registerListeners()
+   */
+  constructor (data = {}, apiInterface) {
+    super({ data, fields, boolFields })
+
+    if (!this.flags) this.flags = 0
+    if (!_isUndefined(data.hidden)) this.setHidden(data.hidden)
+    if (!_isUndefined(data.postonly)) this.setPostOnly(data.postonly)
+    if (!_isUndefined(data.reduceonly)) this.setReduceOnly(data.reduceonly)
+    if (!_isUndefined(data.oco)) {
+      this.setOCO(data.oco, data.priceAuxLimit, data.cidOCO)
+    }
+
+    this.affiliateCode = data.affiliateCode
+    this._apiInterface = apiInterface
+
+    this._onWSOrderNew = this._onWSOrderNew.bind(this)
+    this._onWSOrderUpdate = this._onWSOrderUpdate.bind(this)
+    this._onWSOrderClose = this._onWSOrderClose.bind(this)
+
+    if (isNaN(this.amountOrig) &amp;&amp; !isNaN(this.amount)) {
+      this.amountOrig = this.amount
+    }
+
+    this._lastAmount = this.amount
+  }
+
+  /**
+   * @param {object[]|object|Array[]|Array} data - data to convert to POJO
+   * @returns {object} pojo
+   */
+  static unserialize (data) {
+    return super.unserialize({ data, fields, boolFields })
+  }
+
+  /**
+   * Returns a string representation of the order
+   *
+   * TODO: add verbose option to log all order information (TIF, etc)
+   *
+   * @returns {string} str
+   */
+  toString () {
+    const {
+      type = '', symbol = '', amount, price, affiliateCode, priceAuxLimit,
+      amountOrig, status, id, cid
+    } = this
+
+    const market = `${symbol.substring(1, 4)}/${symbol.substring(4)}`
+
+    return _compact(_flatten([
+      id &amp;&amp; `(id: ${id})`,
+      cid &amp;&amp; `(cid: ${cid})`,
+      type.toUpperCase(),
+      'order on',
+      market,
+      !_isEmpty(status) &amp;&amp; `(${status})`,
+      'for',
+      prepareAmount(amount),
+      (amountOrig !== amount) &amp;&amp; `(${prepareAmount(amountOrig)})`,
+      '@',
+      /market/.test(type.toLowerCase()) ? 'MARKET' : preparePrice(price),
+
+      this.isHidden() &amp;&amp; 'hidden',
+      this.isPostOnly() &amp;&amp; 'post-only',
+      this.isReduceOnly() &amp;&amp; 'reduce-only',
+      this.isPositionClose() &amp;&amp; 'pos-close',
+      this.isOCO() &amp;&amp; ['OCO', `(stop: ${priceAuxLimit})`],
+      !this.includesVariableRates() &amp;&amp; 'No VRR',
+      affiliateCode &amp;&amp; `[aff-code: ${affiliateCode}]`
+    ])).join(' ')
+  }
+
+  /**
+   * @returns {boolean} oco
+   */
+  isOCO () {
+    return !!(this.flags &amp; Order.flags.OCO)
+  }
+
+  /**
+   * @returns {boolean} hidden
+   */
+  isHidden () {
+    return !!(this.flags &amp; Order.flags.HIDDEN)
+  }
+
+  /**
+   * @returns {boolean} postonly
+   */
+  isPostOnly () {
+    return !!(this.flags &amp; Order.flags.POSTONLY)
+  }
+
+  /**
+   * @returns {boolean} includesVR
+   */
+  includesVariableRates () {
+    return !(this.flags &amp; Order.flags.NO_VR)
+  }
+
+  /**
+   * @returns {boolean} posclose
+   */
+  isPositionClose () {
+    return !!(this.flags &amp; Order.flags.POS_CLOSE)
+  }
+
+  /**
+   * @returns {boolean} reduceonly
+   */
+  isReduceOnly () {
+    return !!(this.flags &amp; Order.flags.REDUCE_ONLY)
+  }
+
+  /**
+   * Set the OCO flag and optionally update the stop price and OCO client ID.
+   *
+   * @param {boolean} v - flag value
+   * @param {number} [stopPrice] - optional, defaults to current value
+   * @param {number} [cidOCO] - optional, defaults to current value
+   * @returns {number} finalFlags
+   */
+  setOCO (v, stopPrice = this.priceAuxLimit, cidOCO = this.cidOCO) {
+    if (v) {
+      this.priceAuxLimit = stopPrice
+      this.cidOCO = cidOCO
+    }
+
+    return this.modifyFlag(Order.flags.OCO, v)
+  }
+
+  /**
+   * Update the hidden flag value. If hidden and the order is inserted into
+   * the order book, it will not be shown to other users or available via the
+   * API.
+   *
+   * @param {boolean} v - flag value
+   * @returns {number} finalFlags
+   */
+  setHidden (v) {
+    return this.modifyFlag(Order.flags.HIDDEN, v)
+  }
+
+  /**
+   * Update the post-only flag value. If post-only and the order would
+   * immediately fill, the order is automatically cancelled.
+   *
+   * @param {boolean} v - flag value
+   * @returns {number} finalFlags
+   */
+  setPostOnly (v) {
+    return this.modifyFlag(Order.flags.POSTONLY, v)
+  }
+
+  /**
+   * Update the no-variable-rates flag value. Limits orders on margin from
+   * taking funding with variable rates.
+   *
+   * @param {boolean} v - flag value
+   * @returns {number} finalFlags
+   */
+  setNoVariableRates (v) {
+    return this.modifyFlag(Order.flags.NO_VR, v)
+  }
+
+  /**
+   * Update the position-close flag value. If set, the order is cancelled if it
+   * would not close an open position.
+   *
+   * @param {boolean} v - flag value
+   * @returns {number} finalFlags
+   */
+  setPositionClose (v) {
+    return this.modifyFlag(Order.flags.POS_CLOSE, v)
+  }
+
+  /**
+   * Update the reduce-only flag. If set and the order would open a new
+   * position, or increase the size of an existing position, it is
+   * automatically cancelled.
+   *
+   * @param {boolean} v - flag value
+   * @returns {number} finalFlags
+   */
+  setReduceOnly (v) {
+    return this.modifyFlag(Order.flags.REDUCE_ONLY, v)
+  }
+
+  /**
+   * Updates a specific flag
+   *
+   * @param {number} flag - flag value
+   * @param {boolean} active - active status
+   * @returns {number} finalFlags
+   */
+  modifyFlag (flag, active) {
+    if (!!(this.flags &amp; flag) === active) {
+      return
+    }
+
+    this.flags += active ? flag : -flag
+
+    return this.flags
+  }
+
+  /**
+   * Send an order update packet to the WS server, and update local state. This
+   * updates the order atomically without changing its position in the queue for
+   * its price level.
+   *
+   * Rejects with an error if an attempt is made to apply a delta to a missing
+   * amount.
+   *
+   * @param {object} changes - changeset to apply to this order
+   * @param {WSv2|RESTv2} [apiInterface] - optional ws or rest, defaults to internal instance
+   * @returns {Promise} p - resolves on ws2 confirmation or rest response
+   * @example
+   * const ws = new WSv2({ ... })
+   *
+   * await ws.open()
+   * await ws.auth()
+   *
+   * const o = new Order({ ... }, ws)
+   *
+   * await o.submit()
+   * await o.update({ price: '2.0' }) // update price
+   * await o.update({ delta: '18.0' }) // update amount with delta
+   *
+   * console.log(o.toString()))  // inspect order
+   */
+  async update (changes = {}, apiInterface = this._apiInterface) {
+    if (!apiInterface) {
+      throw new Error('no ws client available')
+    }
+
+    const keys = Object.keys(changes)
+
+    // Apply change locally
+    keys.forEach(k => {
+      if (k === 'id') return
+
+      if (_includes(_keys(this._fields), k)) {
+        this[k] = changes[k]
+      } else if (k === 'price_trailing') {
+        this.priceTrailing = Number(changes[k])
+      } else if (k === 'price_oco_stop' || k === 'price_aux_limit') {
+        this.priceAuxLimit = Number(changes[k])
+      } else if (k === 'delta' &amp;&amp; !Number.isNaN(+changes[k])) {
+        if (!Number.isNaN(+this.amount)) {
+          this.amount += Number(changes[k])
+          this._lastAmount = this.amount // update last amount for fill calcs
+        } else {
+          return Promise.reject(new Error('can\'t apply delta to missing amount'))
+        }
+      }
+    })
+
+    changes.id = this.id // tag with ID
+
+    if (changes.price) changes.price = preparePrice(changes.price)
+    if (changes.amount) changes.amount = prepareAmount(changes.amount)
+    if (changes.delta) changes.delta = prepareAmount(changes.delta)
+    if (changes.price_aux_limit) {
+      changes.price_aux_limit = preparePrice(changes.price_aux_limit)
+    }
+
+    if (changes.price_trailing) {
+      changes.price_trailing = preparePrice(changes.price_trailing)
+    }
+
+    return apiInterface.updateOrder(changes)
+  }
+
+  /**
+   * Returns a POJO that can be used as a preview order in Honey Framework
+   * algorithmic orders.
+   *
+   * @returns {object} preview
+   */
+  toPreview () {
+    return {
+      gid: this.gid,
+      cid: this.cid,
+      symbol: this.symbol,
+      amount: this.amount,
+      type: this.type,
+      price: this.price,
+      notify: this.notify,
+      flags: this.flags
+    }
+  }
+
+  /**
+   * Registers for updates/persistence on the specified ws2 instance.
+   *
+   * @param {object} apiInterface - optional, defaults to internal ws
+   */
+  registerListeners (apiInterface = this._apiInterface) {
+    if (!apiInterface || apiInterface.constructor.name !== 'WSv2') return
+
+    const chanData = {
+      symbol: this.symbol,
+      cbGID: this.cbGID()
+    }
+
+    if (_isFinite(+this.id)) chanData.id = +this.id
+    if (_isFinite(+this.gid)) chanData.gid = +this.gid
+    if (_isFinite(+this.cid)) chanData.cid = +this.cid
+
+    apiInterface.onOrderNew(chanData, this._onWSOrderNew)
+    apiInterface.onOrderUpdate(chanData, this._onWSOrderUpdate)
+    apiInterface.onOrderClose(chanData, this._onWSOrderClose)
+
+    this._apiInterface = apiInterface
+  }
+
+  /**
+   * Removes update listeners from the specified ws2 instance.
+   * Will fail if rest interface is provided.
+   *
+   * @param {WSv2|RESTv2} apiInterface - optional ws defaults to internal ws
+   */
+  removeListeners (apiInterface = this._apiInterface) {
+    if (apiInterface) {
+      apiInterface.removeListeners(this.cbGID())
+    }
+  }
+
+  /**
+   * Return the callback group ID for the order, used to bind listeners on
+   * an API interface.
+   *
+   * @returns {string} cbGID
+   */
+  cbGID () {
+    return `${this.gid}.${this.cid}`
+  }
+
+  /**
+   * Submit the order
+   *
+   * @param {WSv2|Rest2} apiInterface - optional ws or rest, defaults to internal ws
+   * @returns {Promise} p
+   */
+  async submit (apiInterface = this._apiInterface) {
+    if (!apiInterface) {
+      throw new Error('no API interface provided')
+    }
+
+    const orderArr = await apiInterface.submitOrder(this)
+    Object.assign(this, Order.unserialize(orderArr))
+    return this
+  }
+
+  /**
+   * Cancel the order if open
+   *
+   * @param {WSv2|Rest2} apiInterface - optional ws or rest, defaults to internal ws
+   * @returns {Promise} p
+   */
+  async cancel (apiInterface = this._apiInterface) {
+    if (!apiInterface) throw new Error('no API interface provided')
+    if (!this.id) throw new Error('order has no ID')
+
+    return apiInterface.cancelOrder(this.id)
+  }
+
+  /**
+   * Equivalent to calling cancel() followed by submit()
+   *
+   * @param {WSv2|RESTv2} apiInterface - optional ws or rest, defaults to internal ws
+   * @returns {Promise} p
+   */
+  async recreate (apiInterface = this._apiInterface) {
+    if (!apiInterface) throw new Error('no API interface provided')
+    if (!this.id) throw new Error('order has no ID')
+
+    await this.cancel(apiInterface)
+
+    this.id = null
+
+    return this.submit(apiInterface)
+  }
+
+  /**
+   * Updates order information from the provided order.
+   *
+   * @param {Order} order - order to update from
+   * @throws Error if the order ID/CID/GID do not match
+   */
+  updateFrom (order = {}) {
+    const { id, gid, cid } = order
+
+    if (
+      (
+        (this.id &amp;&amp; (+id !== +this.id)) &amp;&amp; (this.cid &amp;&amp; (+cid !== +this.cid))
+      ) ||
+      (this.gid &amp;&amp; (+gid !== +this.gid))
+    ) {
+      throw new Error('order IDs do not match, cannot update from order')
+    }
+
+    this.id = order.id
+    this.amount = order.amount
+    this.status = order.status
+    this.mtsUpdate = order.mtsUpdate
+    this.priceAvg = order.priceAvg
+  }
+
+  /**
+   * Query the amount that was filled on the last order update
+   *
+   * @returns {number} amount
+   */
+  getLastFillAmount () {
+    return this._lastAmount - this.amount
+  }
+
+  /**
+   * Resets the last amount, so getLastFillAmount() returns 0
+   *
+   * @see Order~getLastFillAmount
+   * @see Order~isPartiallyFilled
+   */
+  resetFilledAmount () {
+    this._lastAmount = this.amount
+  }
+
+  /**
+   * Returns the base currency of the order.
+   *
+   * @returns {string} currency
+   */
+  getBaseCurrency () {
+    return this.symbol.substring(1, 4)
+  }
+
+  /**
+   * Returns the quote currency of the order.
+   *
+   * @returns {string} currency
+   */
+  getQuoteCurrency () {
+    return this.symbol.substring(4)
+  }
+
+  /**
+   * Returns the notional value of the order
+   *
+   * @returns {number} value
+   */
+  getNotionalValue () {
+    return Math.abs(this.amount * this.price)
+  }
+
+  /**
+   * Indicates if the order is partially filled, based on the original and
+   * current amounts.
+   *
+   * @see Order~resetFilledAmount
+   *
+   * @returns {boolean} isPartiallyFilled
+   */
+  isPartiallyFilled () {
+    const a = Math.abs(this.amount)
+    return a > 0 &amp;&amp; a &lt; Math.abs(this.amountOrig)
+  }
+
+  /**
+   * @param {Array} order - incoming order
+   * @private
+   */
+  _onWSOrderUpdate (order) {
+    Object.assign(this, Order.unserialize(order))
+
+    this.emit('update', order, this)
+  }
+
+  /**
+   * @param {Array} order - incoming order
+   * @private
+   */
+  _onWSOrderClose (order) {
+    Object.assign(this, Order.unserialize(order))
+
+    this.emit('update', order, this)
+    this.emit('close', order, this)
+  }
+
+  /**
+   * @param {Array} order - incoming order
+   * @private
+   */
+  _onWSOrderNew (order) {
+    Object.assign(this, Order.unserialize(order))
+
+    this.emit('update', order, this)
+    this.emit('new', order, this)
+  }
+
+  /**
+   * Creates an order map that can be passed to the `on` command.
+   *
+   * @returns {object} o
+   * @example
+   * const ws = new WSv2({ apiKey: '...', apiSecret: '...' })
+   * await ws.open()
+   * await ws.auth()
+   *
+   * const o = new Order({
+   *   type: 'MARKET'
+   *   symbol: 'tLEOUSD',
+   *   amount: -6,
+   * })
+   *
+   * ws.send([0, 'on', null, o.toNewOrderPacket()])
+   */
+  toNewOrderPacket () {
+    const meta = { ...(this.meta || {}) }
+
+    if (_isString(this.affiliateCode) &amp;&amp; !_isEmpty(this.affiliateCode)) {
+      meta.aff_code = this.affiliateCode // eslint-disable-line
+    }
+
+    const data = {
+      gid: this.gid,
+      cid: _isFinite(+this.cid) ? +this.cid : lastCID++,
+      symbol: this.symbol,
+      type: this.type,
+      amount: prepareAmount(+this.amount),
+      flags: this.flags || 0,
+      meta,
+
+      // optional, populated only for new orders; it is mtsTIF for existing orders
+      tif: this.tif
+    }
+
+    if (!Number.isNaN(+this.price)) {
+      data.price = preparePrice(+this.price)
+    }
+
+    if (this.priceTrailing !== null &amp;&amp; !Number.isNaN(+this.priceTrailing)) {
+      data.price_trailing = preparePrice(+this.priceTrailing)
+    }
+
+    if (this.priceAuxLimit !== null &amp;&amp; !Number.isNaN(+this.priceAuxLimit)) {
+      if (this.flags &amp; Order.flags.OCO) {
+        data.price_oco_stop = preparePrice(+this.priceAuxLimit)
+        data.cid_oco = this.cidOCO
+      } else {
+        data.price_aux_limit = preparePrice(+this.priceAuxLimit)
+      }
+    }
+
+    return data
+  }
+
+  /**
+   * Get the base currency for an order in WSv2 array format.
+   *
+   * @param {Array} arr - order in ws2 array format
+   * @returns {string} currency - base currency from symbol
+   */
+  static getBaseCurrency (arr = []) {
+    return (arr[3] || '').substring(1, 4).toUpperCase()
+  }
+
+  /**
+   * Get the quote currency for an order in WSv2 array format.
+   *
+   * @param {Array} arr - order in ws2 array format
+   * @returns {string} currency - quote currency from symbol
+   */
+  static getQuoteCurrency (arr = []) {
+    return (arr[3] || '').substring(4).toUpperCase()
+  }
+
+  /**
+   * Validates a given order instance
+   *
+   * @param {object[]|object|Order[]|Order|Array} data - instance to validate
+   * @returns {string} error - null if instance is valid
+   */
+  static validate (data) {
+    return super.validate({
+      data,
+      fields,
+      validators: {
+        symbol: symbolValidator,
+        id: numberValidator,
+        gid: numberValidator,
+        cid: dateValidator,
+        mtsCreate: dateValidator,
+        mtsUpdate: dateValidator,
+        amount: amountValidator,
+        amountOrig: amountValidator,
+        type: v => stringValidator(v, Object.values(Order.type)),
+        typePrev: v => stringValidator(v, Object.values(Order.type)),
+        mtsTIF: dateValidator,
+        flags: numberValidator,
+        status: stringValidator,
+        price: priceValidator,
+        priceAvg: priceValidator,
+        priceTrailing: priceValidator,
+        priceAuxLimit: priceValidator,
+        notify: boolValidator,
+        hidden: boolValidator,
+        placedId: numberValidator
+      }
+    })
+  }
+}
+
+Order.type = {}
+Order.status = {}
+
+statuses.forEach((s) => {
+  Order.status[s] = s
+  Order.status[s.split(' ').join('_')] = s
+})
+
+types.forEach((t) => {
+  Order.type[t] = t
+  Order.type[t.split(' ').join('_')] = t
+})
+
+Order.flags = {
+  OCO: 2 ** 14, // 16384
+  POSTONLY: 2 ** 12, // 4096
+  HIDDEN: 2 ** 6, // 64
+  NO_VR: 2 ** 19, // 524288
+  POS_CLOSE: 2 ** 9, // 512
+  REDUCE_ONLY: 2 ** 10 // 1024
+}
+
+module.exports = Order
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Thu Mar 12 2020 01:57:21 GMT+0700 (Indochina Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
+</body>
+</html>
