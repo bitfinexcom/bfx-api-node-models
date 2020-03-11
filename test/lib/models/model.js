@@ -8,6 +8,27 @@ const _isEmpty = require('lodash/isEmpty')
 const Model = require('../../../lib/model')
 
 describe('base model class', () => {
+  describe('toJS', () => {
+    it('returns a pojo version of the model', function() {
+      const fields = { a: 0 }
+
+      class SomeModel extends Model {
+        constructor (data) {
+          super({ data, fields })
+        }
+
+        static unserialize (data) {
+          return super.unserialize({ data, fields })
+        }
+      }
+
+      const m = new SomeModel({ a: 42 })
+      const js = m.toJS()
+
+      assert.deepStrictEqual(js, { a: 42 })
+    })
+  })
+
   describe('validate', () => {
     const fields = { num: 0, str: 1 }
     const validators = {
