@@ -25,11 +25,11 @@
 <dt><a href="#FundingOffer">FundingOffer</a></dt>
 <dd><p>Funding Offer model</p>
 </dd>
-<dt><a href="#FundingTickerHist">FundingTickerHist</a></dt>
-<dd><p>Historical Funding Ticker model</p>
-</dd>
 <dt><a href="#FundingTicker">FundingTicker</a></dt>
 <dd><p>Funding Ticker model</p>
+</dd>
+<dt><a href="#FundingTickerHist">FundingTickerHist</a></dt>
+<dd><p>Historical Funding Ticker model</p>
 </dd>
 <dt><a href="#FundingTrade">FundingTrade</a></dt>
 <dd><p>Funding Trade model</p>
@@ -40,6 +40,9 @@ is provided.</p>
 </dd>
 <dt><a href="#Liquidations">Liquidations</a></dt>
 <dd><p>Liquidation Info model</p>
+</dd>
+<dt><a href="#Login">Login</a></dt>
+<dd><p>OHLCV Candle model</p>
 </dd>
 <dt><a href="#MarginInfo">MarginInfo</a></dt>
 <dd><p>Margin Info model</p>
@@ -53,12 +56,12 @@ is provided.</p>
 <dt><a href="#Notification">Notification</a></dt>
 <dd><p>Notification model</p>
 </dd>
-<dt><a href="#OrderBook">OrderBook</a></dt>
-<dd><p>High level OB model to automatically integrate WS updates &amp; maintain sort</p>
-</dd>
 <dt><a href="#Order">Order</a></dt>
 <dd><p>High level order model; provides methods for execution &amp; can stay updated via
 a WSv2 connection or used to execute as a rest payload</p>
+</dd>
+<dt><a href="#OrderBook">OrderBook</a></dt>
+<dd><p>High level OB model to automatically integrate WS updates &amp; maintain sort</p>
 </dd>
 <dt><a href="#Position">Position</a></dt>
 <dd><p>Position model</p>
@@ -72,23 +75,20 @@ a WSv2 connection or used to execute as a rest payload</p>
 <dt><a href="#Trade">Trade</a></dt>
 <dd><p>Private Trade model</p>
 </dd>
-<dt><a href="#TradingTickerHist">TradingTickerHist</a></dt>
-<dd><p>Historical Trading Ticker model</p>
-</dd>
 <dt><a href="#TradingTicker">TradingTicker</a></dt>
 <dd><p>Trading Ticker model</p>
+</dd>
+<dt><a href="#TradingTickerHist">TradingTickerHist</a></dt>
+<dd><p>Historical Trading Ticker model</p>
 </dd>
 <dt><a href="#UserInfo">UserInfo</a></dt>
 <dd><p>User Info model</p>
 </dd>
-<dt><a href="#WalletHist">WalletHist</a></dt>
-<dd><p>Historical Wallet Update model</p>
-</dd>
 <dt><a href="#Wallet">Wallet</a></dt>
 <dd><p>Wallet model</p>
 </dd>
-<dt><a href="#Login">Login</a></dt>
-<dd><p>Login model</p>
+<dt><a href="#WalletHist">WalletHist</a></dt>
+<dd><p>Historical Wallet Update model</p>
 </dd>
 </dl>
 
@@ -109,11 +109,11 @@ Price alert model
 
 | Param | Type |
 | --- | --- |
-| data | <code>Object</code> \| <code>Array</code> |
-| data.key | <code>string</code> |
-| data.type | <code>string</code> |
-| data.symbol | <code>string</code> |
-| data.price | <code>string</code> |
+| data | <code>Object</code> \| <code>Array</code> | 
+| data.key | <code>string</code> | 
+| data.type | <code>string</code> | 
+| data.symbol | <code>string</code> | 
+| data.price | <code>string</code> | 
 
 <a name="Alert.unserialize"></a>
 
@@ -123,7 +123,7 @@ Price alert model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> |
+| arr | <code>Object</code> \| <code>Array</code> | 
 
 <a name="BalanceInfo"></a>
 
@@ -142,9 +142,9 @@ Wallet balance information model
 
 | Param | Type |
 | --- | --- |
-| data | <code>Object</code> \| <code>Array</code> |
-| data.amount | <code>number</code> |
-| data.amountNet | <code>number</code> |
+| data | <code>Object</code> \| <code>Array</code> | 
+| data.amount | <code>number</code> | 
+| data.amountNet | <code>number</code> | 
 
 <a name="BalanceInfo.unserialize"></a>
 
@@ -154,7 +154,7 @@ Wallet balance information model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> |
+| arr | <code>Object</code> \| <code>Array</code> | 
 
 <a name="Candle"></a>
 
@@ -173,13 +173,13 @@ OHLCV Candle model
 
 | Param | Type |
 | --- | --- |
-| data | <code>Object</code> \| <code>Array</code> |
-| data.mts | <code>number</code> |
-| data.open | <code>number</code> |
-| data.close | <code>number</code> |
-| data.high | <code>number</code> |
-| data.low | <code>number</code> |
-| data.volume | <code>number</code> |
+| data | <code>Object</code> \| <code>Array</code> | 
+| data.mts | <code>number</code> | 
+| data.open | <code>number</code> | 
+| data.close | <code>number</code> | 
+| data.high | <code>number</code> | 
+| data.low | <code>number</code> | 
+| data.volume | <code>number</code> | 
 
 <a name="Candle.unserialize"></a>
 
@@ -189,7 +189,7 @@ OHLCV Candle model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> |
+| arr | <code>Object</code> \| <code>Array</code> | 
 
 <a name="Currency"></a>
 
@@ -208,12 +208,12 @@ Currency model
 
 | Param | Type |
 | --- | --- |
-| data | <code>Object</code> \| <code>Array</code> |
-| data.id | <code>string</code> |
-| data.name | <code>string</code> |
-| data.pool | <code>string</code> |
-| data.exporer | <code>string</code> |
-| data.symbol | <code>string</code> |
+| data | <code>Object</code> \| <code>Array</code> | 
+| data.id | <code>string</code> | 
+| data.name | <code>string</code> | 
+| data.pool | <code>string</code> | 
+| data.exporer | <code>string</code> | 
+| data.symbol | <code>string</code> | 
 
 <a name="Currency.unserialize"></a>
 
@@ -223,7 +223,7 @@ Currency model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> |
+| arr | <code>Object</code> \| <code>Array</code> | 
 
 <a name="FundingCredit"></a>
 
@@ -242,26 +242,25 @@ Funding Credit model
 
 | Param | Type |
 | --- | --- |
-| data | <code>Object</code> \| <code>Array</code> |
-| data.id | <code>number</code> |
-| data.symbol | <code>string</code> |
-| data.side | <code>number</code> |
-| data.mtsCreate | <code>number</code> |
-| data.mtsUpdate | <code>number</code> |
-| data.mtsOpening | <code>number</code> |
-| data.mtsLastPayout | <code>number</code> |
-| data.amount | <code>number</code> |
-| data.flags | <code>number</code> |
-| data.status | <code>number</code> |
-| data.type | <code>string</code> |
-| data.rate | <code>number</code> |
-| data.rateReal | <code>number</code> |
-| data.period | <code>number</code> |
-| data.positionPair | <code>string</code> |
-| data.notify | <code>number</code> \| <code>boolean</code> |
-| data.hidden | <code>number</code> \| <code>boolean</code> |
-| data.renew | <code>number</code> \| <code>boolean</code> |
-| data.noClose | <code>number</code> \| <code>boolean</code> |
+| data | <code>Object</code> \| <code>Array</code> | 
+| data.id | <code>number</code> | 
+| data.symbol | <code>string</code> | 
+| data.side | <code>number</code> | 
+| data.mtsCreate | <code>number</code> | 
+| data.mtsUpdate | <code>number</code> | 
+| data.mtsOpening | <code>number</code> | 
+| data.mtsLastPayout | <code>number</code> | 
+| data.amount | <code>number</code> | 
+| data.flags | <code>number</code> | 
+| data.status | <code>number</code> | 
+| data.rate | <code>number</code> | 
+| data.rateReal | <code>number</code> | 
+| data.period | <code>number</code> | 
+| data.positionPair | <code>string</code> | 
+| data.notify | <code>number</code> \| <code>boolean</code> | 
+| data.hidden | <code>number</code> \| <code>boolean</code> | 
+| data.renew | <code>number</code> \| <code>boolean</code> | 
+| data.noClose | <code>number</code> \| <code>boolean</code> | 
 
 <a name="FundingCredit.unserialize"></a>
 
@@ -271,7 +270,7 @@ Funding Credit model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> |
+| arr | <code>Object</code> \| <code>Array</code> | 
 
 <a name="FundingInfo"></a>
 
@@ -301,7 +300,7 @@ Return an array representation of this model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> |
+| arr | <code>Object</code> \| <code>Array</code> | 
 
 <a name="FundingLoan"></a>
 
@@ -320,25 +319,24 @@ Funding Loan model
 
 | Param | Type |
 | --- | --- |
-| data | <code>Object</code> \| <code>Array</code> |
-| data.id | <code>number</code> |
-| data.symbol | <code>string</code> |
-| data.side | <code>number</code> |
-| data.mtsCreate | <code>number</code> |
-| data.mtsUpdate | <code>number</code> |
-| data.mtsOpening | <code>number</code> |
-| data.mtsLastPayout | <code>number</code> |
-| data.amount | <code>number</code> |
-| data.flags | <code>number</code> |
-| data.status | <code>number</code> |
-| data.type | <code>string</code> |
-| data.rate | <code>number</code> |
-| data.rateReal | <code>number</code> |
-| data.period | <code>number</code> |
-| data.notify | <code>number</code> \| <code>boolean</code> |
-| data.hidden | <code>number</code> \| <code>boolean</code> |
-| data.renew | <code>number</code> \| <code>boolean</code> |
-| data.noClose | <code>number</code> \| <code>boolean</code> |
+| data | <code>Object</code> \| <code>Array</code> | 
+| data.id | <code>number</code> | 
+| data.symbol | <code>string</code> | 
+| data.side | <code>number</code> | 
+| data.mtsCreate | <code>number</code> | 
+| data.mtsUpdate | <code>number</code> | 
+| data.mtsOpening | <code>number</code> | 
+| data.mtsLastPayout | <code>number</code> | 
+| data.amount | <code>number</code> | 
+| data.flags | <code>number</code> | 
+| data.status | <code>number</code> | 
+| data.rate | <code>number</code> | 
+| data.rateReal | <code>number</code> | 
+| data.period | <code>number</code> | 
+| data.notify | <code>number</code> \| <code>boolean</code> | 
+| data.hidden | <code>number</code> \| <code>boolean</code> | 
+| data.renew | <code>number</code> \| <code>boolean</code> | 
+| data.noClose | <code>number</code> \| <code>boolean</code> | 
 
 <a name="FundingLoan.unserialize"></a>
 
@@ -348,7 +346,7 @@ Funding Loan model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> |
+| arr | <code>Object</code> \| <code>Array</code> | 
 
 <a name="FundingOffer"></a>
 
@@ -437,55 +435,7 @@ command or a rest request body
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> |
-
-<a name="FundingTickerHist"></a>
-
-## FundingTickerHist
-Historical Funding Ticker model
-
-**Kind**: global class  
-
-* [FundingTickerHist](#FundingTickerHist)
-    * [new FundingTickerHist(data)](#new_FundingTickerHist_new)
-    * _instance_
-        * [.quote()](#FundingTickerHist+quote) ⇒ <code>string</code>
-        * [.base()](#FundingTickerHist+base) ⇒ <code>string</code>
-    * _static_
-        * [.unserialize(arr)](#FundingTickerHist.unserialize) ⇒ <code>Object</code>
-
-<a name="new_FundingTickerHist_new"></a>
-
-### new FundingTickerHist(data)
-
-| Param | Type |
-| --- | --- |
-| data | <code>Object</code> \| <code>Array</code> |
-| data.symbol | <code>string</code> |
-| data.bid | <code>number</code> |
-| data.bidPeriod | <code>number</code> |
-| data.ask | <code>number</code> |
-| data.mtsUpdate | <code>number</code> |
-
-<a name="FundingTickerHist+quote"></a>
-
-### fundingTickerHist.quote() ⇒ <code>string</code>
-**Kind**: instance method of [<code>FundingTickerHist</code>](#FundingTickerHist)  
-**Returns**: <code>string</code> - quoteCurrency  
-<a name="FundingTickerHist+base"></a>
-
-### fundingTickerHist.base() ⇒ <code>string</code>
-**Kind**: instance method of [<code>FundingTickerHist</code>](#FundingTickerHist)  
-**Returns**: <code>string</code> - baseCurrency  
-<a name="FundingTickerHist.unserialize"></a>
-
-### FundingTickerHist.unserialize(arr) ⇒ <code>Object</code>
-**Kind**: static method of [<code>FundingTickerHist</code>](#FundingTickerHist)  
-**Returns**: <code>Object</code> - pojo  
-
-| Param | Type |
-| --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> |
+| arr | <code>Object</code> \| <code>Array</code> | 
 
 <a name="FundingTicker"></a>
 
@@ -508,21 +458,21 @@ Funding Ticker model
 
 | Param | Type |
 | --- | --- |
-| data | <code>Object</code> \| <code>Array</code> |
-| data.symbol | <code>string</code> |
-| data.frr | <code>number</code> \| <code>boolean</code> |
-| data.bid | <code>number</code> |
-| data.bidSize | <code>number</code> |
-| data.bidPeriod | <code>number</code> |
-| data.ask | <code>number</code> |
-| data.askSize | <code>number</code> |
-| data.askPeriod | <code>number</code> |
-| data.dailyChange | <code>number</code> |
-| data.dailyChangePerc | <code>number</code> |
-| data.lastPrice | <code>number</code> |
-| data.volume | <code>number</code> |
-| data.high | <code>number</code> |
-| data.low | <code>number</code> |
+| data | <code>Object</code> \| <code>Array</code> | 
+| data.symbol | <code>string</code> | 
+| data.frr | <code>number</code> \| <code>boolean</code> | 
+| data.bid | <code>number</code> | 
+| data.bidSize | <code>number</code> | 
+| data.bidPeriod | <code>number</code> | 
+| data.ask | <code>number</code> | 
+| data.askSize | <code>number</code> | 
+| data.askPeriod | <code>number</code> | 
+| data.dailyChange | <code>number</code> | 
+| data.dailyChangePerc | <code>number</code> | 
+| data.lastPrice | <code>number</code> | 
+| data.volume | <code>number</code> | 
+| data.high | <code>number</code> | 
+| data.low | <code>number</code> | 
 
 <a name="FundingTicker+quote"></a>
 
@@ -542,7 +492,55 @@ Funding Ticker model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> |
+| arr | <code>Object</code> \| <code>Array</code> | 
+
+<a name="FundingTickerHist"></a>
+
+## FundingTickerHist
+Historical Funding Ticker model
+
+**Kind**: global class  
+
+* [FundingTickerHist](#FundingTickerHist)
+    * [new FundingTickerHist(data)](#new_FundingTickerHist_new)
+    * _instance_
+        * [.quote()](#FundingTickerHist+quote) ⇒ <code>string</code>
+        * [.base()](#FundingTickerHist+base) ⇒ <code>string</code>
+    * _static_
+        * [.unserialize(arr)](#FundingTickerHist.unserialize) ⇒ <code>Object</code>
+
+<a name="new_FundingTickerHist_new"></a>
+
+### new FundingTickerHist(data)
+
+| Param | Type |
+| --- | --- |
+| data | <code>Object</code> \| <code>Array</code> | 
+| data.symbol | <code>string</code> | 
+| data.bid | <code>number</code> | 
+| data.bidPeriod | <code>number</code> | 
+| data.ask | <code>number</code> | 
+| data.mtsUpdate | <code>number</code> | 
+
+<a name="FundingTickerHist+quote"></a>
+
+### fundingTickerHist.quote() ⇒ <code>string</code>
+**Kind**: instance method of [<code>FundingTickerHist</code>](#FundingTickerHist)  
+**Returns**: <code>string</code> - quoteCurrency  
+<a name="FundingTickerHist+base"></a>
+
+### fundingTickerHist.base() ⇒ <code>string</code>
+**Kind**: instance method of [<code>FundingTickerHist</code>](#FundingTickerHist)  
+**Returns**: <code>string</code> - baseCurrency  
+<a name="FundingTickerHist.unserialize"></a>
+
+### FundingTickerHist.unserialize(arr) ⇒ <code>Object</code>
+**Kind**: static method of [<code>FundingTickerHist</code>](#FundingTickerHist)  
+**Returns**: <code>Object</code> - pojo  
+
+| Param | Type |
+| --- | --- |
+| arr | <code>Object</code> \| <code>Array</code> | 
 
 <a name="FundingTrade"></a>
 
@@ -561,15 +559,15 @@ Funding Trade model
 
 | Param | Type |
 | --- | --- |
-| data | <code>Object</code> \| <code>Array</code> |
-| data.id | <code>number</code> |
-| data.symbol | <code>string</code> |
-| data.mtsCreate | <code>number</code> |
-| data.offerID | <code>number</code> |
-| data.amount | <code>number</code> |
-| data.rate | <code>number</code> |
-| data.period | <code>number</code> |
-| data.maker | <code>number</code> \| <code>boolean</code> |
+| data | <code>Object</code> \| <code>Array</code> | 
+| data.id | <code>number</code> | 
+| data.symbol | <code>string</code> | 
+| data.mtsCreate | <code>number</code> | 
+| data.offerID | <code>number</code> | 
+| data.amount | <code>number</code> | 
+| data.rate | <code>number</code> | 
+| data.period | <code>number</code> | 
+| data.maker | <code>number</code> \| <code>boolean</code> | 
 
 <a name="FundingTrade.unserialize"></a>
 
@@ -579,7 +577,7 @@ Funding Trade model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> |
+| arr | <code>Object</code> \| <code>Array</code> | 
 
 <a name="LedgerEntry"></a>
 
@@ -599,13 +597,13 @@ is provided.
 
 | Param | Type |
 | --- | --- |
-| data | <code>Object</code> \| <code>Array</code> |
-| data.id | <code>number</code> |
-| data.currency | <code>string</code> |
-| data.mts | <code>number</code> |
-| data.amount | <code>number</code> |
-| data.balance | <code>number</code> |
-| data.description | <code>string</code> |
+| data | <code>Object</code> \| <code>Array</code> | 
+| data.id | <code>number</code> | 
+| data.currency | <code>string</code> | 
+| data.mts | <code>number</code> | 
+| data.amount | <code>number</code> | 
+| data.balance | <code>number</code> | 
+| data.description | <code>string</code> | 
 
 <a name="LedgerEntry.unserialize"></a>
 
@@ -615,7 +613,7 @@ is provided.
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> |
+| arr | <code>Object</code> \| <code>Array</code> | 
 
 <a name="Liquidations"></a>
 
@@ -634,14 +632,14 @@ Liquidation Info model
 
 | Param | Type |
 | --- | --- |
-| data | <code>Object</code> \| <code>Array</code> |
-| data.posId | <code>number</code> |
-| data.mtsUpdated | <code>number</code> |
-| data.symbol | <code>string</code> |
-| data.amount | <code>number</code> |
-| data.basePrice | <code>number</code> |
-| data.isMatch | <code>number</code> \| <code>boolean</code> |
-| data.isMarketSold | <code>number</code> \| <code>boolean</code> |
+| data | <code>Object</code> \| <code>Array</code> | 
+| data.posId | <code>number</code> | 
+| data.mtsUpdated | <code>number</code> | 
+| data.symbol | <code>string</code> | 
+| data.amount | <code>number</code> | 
+| data.basePrice | <code>number</code> | 
+| data.isMatch | <code>number</code> \| <code>boolean</code> | 
+| data.isMarketSold | <code>number</code> \| <code>boolean</code> | 
 
 <a name="Liquidations.unserialize"></a>
 
@@ -651,7 +649,40 @@ Liquidation Info model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> |
+| arr | <code>Object</code> \| <code>Array</code> | 
+
+<a name="Login"></a>
+
+## Login
+OHLCV Candle model
+
+**Kind**: global class  
+
+* [Login](#Login)
+    * [new Login(data)](#new_Login_new)
+    * [.unserialize(arr)](#Login.unserialize) ⇒ <code>Object</code>
+
+<a name="new_Login_new"></a>
+
+### new Login(data)
+
+| Param | Type |
+| --- | --- |
+| data | <code>Object</code> \| <code>Array</code> | 
+| data.id | <code>number</code> | 
+| data.time | <code>number</code> | 
+| data.ip | <code>string</code> | 
+| data.extraData | <code>object</code> | 
+
+<a name="Login.unserialize"></a>
+
+### Login.unserialize(arr) ⇒ <code>Object</code>
+**Kind**: static method of [<code>Login</code>](#Login)  
+**Returns**: <code>Object</code> - pojo  
+
+| Param | Type |
+| --- | --- |
+| arr | <code>Object</code> \| <code>Array</code> | 
 
 <a name="MarginInfo"></a>
 
@@ -681,7 +712,7 @@ Return an array representation of this model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Array</code> |
+| arr | <code>Array</code> | 
 
 <a name="Model"></a>
 
@@ -756,17 +787,17 @@ Currency Movement model
 
 | Param | Type |
 | --- | --- |
-| data | <code>Object</code> \| <code>Array</code> |
-| data.id | <code>number</code> |
-| data.currency | <code>string</code> |
-| data.currencyName | <code>string</code> |
-| data.mtsStarted | <code>number</code> |
-| data.mtsUpdated | <code>number</code> |
-| data.status | <code>string</code> |
-| data.amount | <code>number</code> |
-| data.fees | <code>number</code> |
-| data.destinationAddress | <code>string</code> |
-| data.transactionId | <code>number</code> |
+| data | <code>Object</code> \| <code>Array</code> | 
+| data.id | <code>number</code> | 
+| data.currency | <code>string</code> | 
+| data.currencyName | <code>string</code> | 
+| data.mtsStarted | <code>number</code> | 
+| data.mtsUpdated | <code>number</code> | 
+| data.status | <code>string</code> | 
+| data.amount | <code>number</code> | 
+| data.fees | <code>number</code> | 
+| data.destinationAddress | <code>string</code> | 
+| data.transactionId | <code>number</code> | 
 
 <a name="Movement.unserialize"></a>
 
@@ -776,7 +807,7 @@ Currency Movement model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> |
+| arr | <code>Object</code> \| <code>Array</code> | 
 
 <a name="Notification"></a>
 
@@ -795,14 +826,14 @@ Notification model
 
 | Param | Type |
 | --- | --- |
-| data | <code>Object</code> \| <code>Array</code> |
-| data.mts | <code>number</code> |
-| data.type | <code>string</code> |
-| data.messageID | <code>number</code> |
-| data.notifyInfo | <code>Object</code> |
-| data.code | <code>number</code> |
-| data.status | <code>string</code> |
-| data.text | <code>string</code> |
+| data | <code>Object</code> \| <code>Array</code> | 
+| data.mts | <code>number</code> | 
+| data.type | <code>string</code> | 
+| data.messageID | <code>number</code> | 
+| data.notifyInfo | <code>Object</code> | 
+| data.code | <code>number</code> | 
+| data.status | <code>string</code> | 
+| data.text | <code>string</code> | 
 
 <a name="Notification.unserialize"></a>
 
@@ -812,208 +843,7 @@ Notification model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> |
-
-<a name="OrderBook"></a>
-
-## OrderBook
-High level OB model to automatically integrate WS updates & maintain sort
-
-**Kind**: global class  
-
-* [OrderBook](#OrderBook)
-    * [new OrderBook(snapshot, raw)](#new_OrderBook_new)
-    * _instance_
-        * [.volBPSMid(bps)](#OrderBook+volBPSMid) ⇒ <code>number</code>
-        * [.checksum()](#OrderBook+checksum) ⇒ <code>number</code>
-        * [.updateFromSnapshot(snapshot)](#OrderBook+updateFromSnapshot)
-        * [.updateWith(entry)](#OrderBook+updateWith) ⇒ <code>boolean</code>
-        * [.topBid()](#OrderBook+topBid) ⇒ <code>number</code>
-        * [.topBidLevel()](#OrderBook+topBidLevel) ⇒ <code>number</code>
-        * [.topAsk()](#OrderBook+topAsk) ⇒ <code>number</code>
-        * [.topAskLevel()](#OrderBook+topAskLevel) ⇒ <code>number</code>
-        * [.midPrice()](#OrderBook+midPrice) ⇒ <code>number</code>
-        * [.spread()](#OrderBook+spread) ⇒ <code>number</code>
-        * [.bidAmount()](#OrderBook+bidAmount) ⇒ <code>number</code>
-        * [.askAmount()](#OrderBook+askAmount) ⇒ <code>number</code>
-        * [.getEntry(price)](#OrderBook+getEntry) ⇒ <code>Object</code>
-        * [.serialize()](#OrderBook+serialize) ⇒ <code>Array.&lt;Array&gt;</code>
-        * [.toJS()](#OrderBook+toJS) ⇒ <code>Object</code>
-    * _static_
-        * [.checksumArr(arr, raw)](#OrderBook.checksumArr) ⇒ <code>number</code>
-        * [.updateArrayOBWith(ob, entry, raw)](#OrderBook.updateArrayOBWith) ⇒ <code>boolean</code>
-        * [.arrayOBMidPrice(ob, raw)](#OrderBook.arrayOBMidPrice)
-        * [.unserialize(arr, raw)](#OrderBook.unserialize) ⇒ <code>Object</code>
-
-<a name="new_OrderBook_new"></a>
-
-### new OrderBook(snapshot, raw)
-Initializes the order book with an existing snapshot (array form)
-
-
-| Param | Type | Description |
-| --- | --- | --- |
-| snapshot | <code>Array.&lt;Array&gt;</code> \| [<code>OrderBook</code>](#OrderBook) |  |
-| raw | <code>boolean</code> | true for raw 'R0' order books |
-
-<a name="OrderBook+volBPSMid"></a>
-
-### orderBook.volBPSMid(bps) ⇒ <code>number</code>
-Returns the total volume at n basis points from the mid price
-
-**Kind**: instance method of [<code>OrderBook</code>](#OrderBook)  
-**Returns**: <code>number</code> - vol - total volume  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| bps | <code>number</code> | basis points from mid price |
-
-<a name="OrderBook+checksum"></a>
-
-### orderBook.checksum() ⇒ <code>number</code>
-Generates a crc-32 checksum of our current state. The checksum'ed string
-itself is a concatenated list of the top 25 bids & asks, alternating.
-
-**Kind**: instance method of [<code>OrderBook</code>](#OrderBook)  
-**Returns**: <code>number</code> - cs  
-**See**: http://blog.bitfinex.com/api/bitfinex-api-order-books-checksums  
-<a name="OrderBook+updateFromSnapshot"></a>
-
-### orderBook.updateFromSnapshot(snapshot)
-Resets the internal bid/ask arrays and re-populates them with the provided
-snapshot.
-
-**Kind**: instance method of [<code>OrderBook</code>](#OrderBook)  
-
-| Param | Type |
-| --- | --- |
-| snapshot | <code>Array.&lt;Array&gt;</code> |
-
-<a name="OrderBook+updateWith"></a>
-
-### orderBook.updateWith(entry) ⇒ <code>boolean</code>
-Integrate an update packet (add, update, or remove a price level). Emits an
-'update' event on success
-
-**Kind**: instance method of [<code>OrderBook</code>](#OrderBook)  
-**Returns**: <code>boolean</code> - success - false if entry doesn't match OB  
-
-| Param | Type |
-| --- | --- |
-| entry | <code>Array</code> |
-
-<a name="OrderBook+topBid"></a>
-
-### orderBook.topBid() ⇒ <code>number</code>
-**Kind**: instance method of [<code>OrderBook</code>](#OrderBook)  
-**Returns**: <code>number</code> - topBid - may be null  
-<a name="OrderBook+topBidLevel"></a>
-
-### orderBook.topBidLevel() ⇒ <code>number</code>
-**Kind**: instance method of [<code>OrderBook</code>](#OrderBook)  
-**Returns**: <code>number</code> - topBidLevel - may be null  
-<a name="OrderBook+topAsk"></a>
-
-### orderBook.topAsk() ⇒ <code>number</code>
-**Kind**: instance method of [<code>OrderBook</code>](#OrderBook)  
-**Returns**: <code>number</code> - topAsk - may be null  
-<a name="OrderBook+topAskLevel"></a>
-
-### orderBook.topAskLevel() ⇒ <code>number</code>
-**Kind**: instance method of [<code>OrderBook</code>](#OrderBook)  
-**Returns**: <code>number</code> - topAskLevel - may be null  
-<a name="OrderBook+midPrice"></a>
-
-### orderBook.midPrice() ⇒ <code>number</code>
-**Kind**: instance method of [<code>OrderBook</code>](#OrderBook)  
-**Returns**: <code>number</code> - price  
-<a name="OrderBook+spread"></a>
-
-### orderBook.spread() ⇒ <code>number</code>
-**Kind**: instance method of [<code>OrderBook</code>](#OrderBook)  
-**Returns**: <code>number</code> - spread - top bid/ask difference  
-<a name="OrderBook+bidAmount"></a>
-
-### orderBook.bidAmount() ⇒ <code>number</code>
-**Kind**: instance method of [<code>OrderBook</code>](#OrderBook)  
-**Returns**: <code>number</code> - amount - total buy-side volume  
-<a name="OrderBook+askAmount"></a>
-
-### orderBook.askAmount() ⇒ <code>number</code>
-**Kind**: instance method of [<code>OrderBook</code>](#OrderBook)  
-**Returns**: <code>number</code> - amount - total sell-side volume  
-<a name="OrderBook+getEntry"></a>
-
-### orderBook.getEntry(price) ⇒ <code>Object</code>
-**Kind**: instance method of [<code>OrderBook</code>](#OrderBook)  
-**Returns**: <code>Object</code> - entry - unserialized, null if not found  
-
-| Param | Type |
-| --- | --- |
-| price | <code>number</code> |
-
-<a name="OrderBook+serialize"></a>
-
-### orderBook.serialize() ⇒ <code>Array.&lt;Array&gt;</code>
-**Kind**: instance method of [<code>OrderBook</code>](#OrderBook)  
-**Returns**: <code>Array.&lt;Array&gt;</code> - - arr  
-<a name="OrderBook+toJS"></a>
-
-### orderBook.toJS() ⇒ <code>Object</code>
-**Kind**: instance method of [<code>OrderBook</code>](#OrderBook)  
-**Returns**: <code>Object</code> - pojo  
-<a name="OrderBook.checksumArr"></a>
-
-### OrderBook.checksumArr(arr, raw) ⇒ <code>number</code>
-Like checksum(), but for raw array-format order books
-
-**Kind**: static method of [<code>OrderBook</code>](#OrderBook)  
-**Returns**: <code>number</code> - cs  
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| arr | <code>Array.&lt;Array&gt;</code> |  | assumed sorted, [topBid, bid, ..., topAsk, ask, ...] |
-| raw | <code>boolean</code> | <code>false</code> | true for raw 'R0' order books |
-
-<a name="OrderBook.updateArrayOBWith"></a>
-
-### OrderBook.updateArrayOBWith(ob, entry, raw) ⇒ <code>boolean</code>
-Modifies an array-format OB in place with an update entry. Maintains sort
-
-**Kind**: static method of [<code>OrderBook</code>](#OrderBook)  
-**Returns**: <code>boolean</code> - success - false if entry doesn't match OB  
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| ob | <code>Array.&lt;Array.&lt;number&gt;&gt;</code> |  |  |
-| entry | <code>Array.&lt;number&gt;</code> |  |  |
-| raw | <code>boolean</code> | <code>false</code> | true for raw 'R0' order books |
-
-<a name="OrderBook.arrayOBMidPrice"></a>
-
-### OrderBook.arrayOBMidPrice(ob, raw)
-Resolves the mid-price of an array-format OB
-
-**Kind**: static method of [<code>OrderBook</code>](#OrderBook)  
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| ob | <code>Array.&lt;Array&gt;</code> |  |  |
-| raw | <code>boolean</code> | <code>false</code> | default false |
-
-<a name="OrderBook.unserialize"></a>
-
-### OrderBook.unserialize(arr, raw) ⇒ <code>Object</code>
-Converts an array order book entry or snapshot to an object, with 'price',
-'count', and 'amount' keys on entries
-
-**Kind**: static method of [<code>OrderBook</code>](#OrderBook)  
-**Returns**: <code>Object</code> - ob - either a map w/ bids & asks, or single entry object  
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| arr | <code>Array.&lt;number&gt;</code> \| <code>Array.&lt;Array.&lt;number&gt;&gt;</code> |  |  |
-| raw | <code>boolean</code> | <code>false</code> | true for raw 'R0' order books |
+| arr | <code>Object</code> \| <code>Array</code> | 
 
 <a name="Order"></a>
 
@@ -1026,6 +856,7 @@ a WSv2 connection or used to execute as a rest payload
 * [Order](#Order)
     * [new Order(data, apiInterface)](#new_Order_new)
     * _instance_
+        * [.toString()](#Order+toString) ⇒ <code>string</code>
         * [.isOCO()](#Order+isOCO) ⇒ <code>boolean</code>
         * [.isHidden()](#Order+isHidden) ⇒ <code>boolean</code>
         * [.isPostOnly()](#Order+isPostOnly) ⇒ <code>boolean</code>
@@ -1085,8 +916,18 @@ a WSv2 connection or used to execute as a rest payload
 | data.priceAuxLimit | <code>string</code> |  |
 | data.notify | <code>number</code> \| <code>boolean</code> |  |
 | data.placedId | <code>number</code> |  |
+| data.affiliateCode | <code>string</code> |  |
+| data.lev | <code>number</code> |  |
 | apiInterface | <code>Object</code> | saved for a later call to registerListeners() |
 
+<a name="Order+toString"></a>
+
+### order.toString() ⇒ <code>string</code>
+Returns a string representation of the order
+TODO: add verbose option to log all order information (TIF, etc)
+
+**Kind**: instance method of [<code>Order</code>](#Order)  
+**Returns**: <code>string</code> - desc  
 <a name="Order+isOCO"></a>
 
 ### order.isOCO() ⇒ <code>boolean</code>
@@ -1134,7 +975,7 @@ a WSv2 connection or used to execute as a rest payload
 
 | Param | Type |
 | --- | --- |
-| v | <code>boolean</code> |
+| v | <code>boolean</code> | 
 
 <a name="Order+setPostOnly"></a>
 
@@ -1143,7 +984,7 @@ a WSv2 connection or used to execute as a rest payload
 
 | Param | Type |
 | --- | --- |
-| v | <code>boolean</code> |
+| v | <code>boolean</code> | 
 
 <a name="Order+setNoVariableRates"></a>
 
@@ -1152,7 +993,7 @@ a WSv2 connection or used to execute as a rest payload
 
 | Param | Type |
 | --- | --- |
-| v | <code>boolean</code> |
+| v | <code>boolean</code> | 
 
 <a name="Order+setPositionClose"></a>
 
@@ -1161,7 +1002,7 @@ a WSv2 connection or used to execute as a rest payload
 
 | Param | Type |
 | --- | --- |
-| v | <code>boolean</code> |
+| v | <code>boolean</code> | 
 
 <a name="Order+setReduceOnly"></a>
 
@@ -1170,7 +1011,7 @@ a WSv2 connection or used to execute as a rest payload
 
 | Param | Type |
 | --- | --- |
-| v | <code>boolean</code> |
+| v | <code>boolean</code> | 
 
 <a name="Order+update"></a>
 
@@ -1265,7 +1106,7 @@ order ID/CID/GID do not match
 
 | Param | Type |
 | --- | --- |
-| order | [<code>Order</code>](#Order) |
+| order | [<code>Order</code>](#Order) | 
 
 <a name="Order+getLastFillAmount"></a>
 
@@ -1315,7 +1156,7 @@ Creates an order map that can be passed to the `on` command.
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> |
+| arr | <code>Object</code> \| <code>Array</code> | 
 
 <a name="Order.getBaseCurrency"></a>
 
@@ -1336,6 +1177,175 @@ Creates an order map that can be passed to the `on` command.
 | Param | Type | Description |
 | --- | --- | --- |
 | arr | <code>Array</code> | order in ws2 array format |
+
+<a name="OrderBook"></a>
+
+## OrderBook
+High level OB model to automatically integrate WS updates & maintain sort
+
+**Kind**: global class  
+
+* [OrderBook](#OrderBook)
+    * [new OrderBook(snapshot, raw)](#new_OrderBook_new)
+    * _instance_
+        * [.volBPSMid(bps)](#OrderBook+volBPSMid) ⇒ <code>number</code>
+        * [.checksum()](#OrderBook+checksum) ⇒ <code>number</code>
+        * [.updateWith(entry)](#OrderBook+updateWith) ⇒ <code>boolean</code>
+        * [.topBid()](#OrderBook+topBid) ⇒ <code>number</code>
+        * [.topBidLevel()](#OrderBook+topBidLevel) ⇒ <code>number</code>
+        * [.topAsk()](#OrderBook+topAsk) ⇒ <code>number</code>
+        * [.topAskLevel()](#OrderBook+topAskLevel) ⇒ <code>number</code>
+        * [.midPrice()](#OrderBook+midPrice) ⇒ <code>number</code>
+        * [.spread()](#OrderBook+spread) ⇒ <code>number</code>
+        * [.bidAmount()](#OrderBook+bidAmount) ⇒ <code>number</code>
+        * [.askAmount()](#OrderBook+askAmount) ⇒ <code>number</code>
+        * [.getEntry(price)](#OrderBook+getEntry) ⇒ <code>Object</code>
+        * [.toJS()](#OrderBook+toJS) ⇒ <code>Object</code>
+    * _static_
+        * [.checksumArr(arr, raw)](#OrderBook.checksumArr) ⇒ <code>number</code>
+        * [.updateArrayOBWith(ob, entry, raw)](#OrderBook.updateArrayOBWith) ⇒ <code>boolean</code>
+        * [.unserialize(arr, raw)](#OrderBook.unserialize) ⇒ <code>Object</code>
+
+<a name="new_OrderBook_new"></a>
+
+### new OrderBook(snapshot, raw)
+Initializes the order book with an existing snapshot (array form)
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| snapshot | <code>Array.&lt;Array&gt;</code> \| [<code>OrderBook</code>](#OrderBook) |  |
+| raw | <code>boolean</code> | true for raw 'R0' order books |
+
+<a name="OrderBook+volBPSMid"></a>
+
+### orderBook.volBPSMid(bps) ⇒ <code>number</code>
+Returns the total volume at n basis points from the mid price
+
+**Kind**: instance method of [<code>OrderBook</code>](#OrderBook)  
+**Returns**: <code>number</code> - vol - total volume  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| bps | <code>number</code> | basis points from mid price |
+
+<a name="OrderBook+checksum"></a>
+
+### orderBook.checksum() ⇒ <code>number</code>
+Generates a crc-32 checksum of our current state. The checksum'ed string
+itself is a concatenated list of the top 25 bids & asks, alternating.
+
+**Kind**: instance method of [<code>OrderBook</code>](#OrderBook)  
+**Returns**: <code>number</code> - cs  
+**See**: http://blog.bitfinex.com/api/bitfinex-api-order-books-checksums  
+<a name="OrderBook+updateWith"></a>
+
+### orderBook.updateWith(entry) ⇒ <code>boolean</code>
+Integrate an update packet (add, update, or remove a price level). Emits an
+'update' event on success
+
+**Kind**: instance method of [<code>OrderBook</code>](#OrderBook)  
+**Returns**: <code>boolean</code> - success - false if entry doesn't match OB  
+
+| Param | Type |
+| --- | --- |
+| entry | <code>Array</code> | 
+
+<a name="OrderBook+topBid"></a>
+
+### orderBook.topBid() ⇒ <code>number</code>
+**Kind**: instance method of [<code>OrderBook</code>](#OrderBook)  
+**Returns**: <code>number</code> - topBid - may be null  
+<a name="OrderBook+topBidLevel"></a>
+
+### orderBook.topBidLevel() ⇒ <code>number</code>
+**Kind**: instance method of [<code>OrderBook</code>](#OrderBook)  
+**Returns**: <code>number</code> - topBidLevel - may be null  
+<a name="OrderBook+topAsk"></a>
+
+### orderBook.topAsk() ⇒ <code>number</code>
+**Kind**: instance method of [<code>OrderBook</code>](#OrderBook)  
+**Returns**: <code>number</code> - topAsk - may be null  
+<a name="OrderBook+topAskLevel"></a>
+
+### orderBook.topAskLevel() ⇒ <code>number</code>
+**Kind**: instance method of [<code>OrderBook</code>](#OrderBook)  
+**Returns**: <code>number</code> - topAskLevel - may be null  
+<a name="OrderBook+midPrice"></a>
+
+### orderBook.midPrice() ⇒ <code>number</code>
+**Kind**: instance method of [<code>OrderBook</code>](#OrderBook)  
+**Returns**: <code>number</code> - price  
+<a name="OrderBook+spread"></a>
+
+### orderBook.spread() ⇒ <code>number</code>
+**Kind**: instance method of [<code>OrderBook</code>](#OrderBook)  
+**Returns**: <code>number</code> - spread - top bid/ask difference  
+<a name="OrderBook+bidAmount"></a>
+
+### orderBook.bidAmount() ⇒ <code>number</code>
+**Kind**: instance method of [<code>OrderBook</code>](#OrderBook)  
+**Returns**: <code>number</code> - amount - total buy-side volume  
+<a name="OrderBook+askAmount"></a>
+
+### orderBook.askAmount() ⇒ <code>number</code>
+**Kind**: instance method of [<code>OrderBook</code>](#OrderBook)  
+**Returns**: <code>number</code> - amount - total sell-side volume  
+<a name="OrderBook+getEntry"></a>
+
+### orderBook.getEntry(price) ⇒ <code>Object</code>
+**Kind**: instance method of [<code>OrderBook</code>](#OrderBook)  
+**Returns**: <code>Object</code> - entry - unserialized, null if not found  
+
+| Param | Type |
+| --- | --- |
+| price | <code>number</code> | 
+
+<a name="OrderBook+toJS"></a>
+
+### orderBook.toJS() ⇒ <code>Object</code>
+**Kind**: instance method of [<code>OrderBook</code>](#OrderBook)  
+**Returns**: <code>Object</code> - pojo  
+<a name="OrderBook.checksumArr"></a>
+
+### OrderBook.checksumArr(arr, raw) ⇒ <code>number</code>
+Like checksum(), but for raw array-format order books
+
+**Kind**: static method of [<code>OrderBook</code>](#OrderBook)  
+**Returns**: <code>number</code> - cs  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| arr | <code>Array.&lt;Array&gt;</code> |  | assumed sorted, [topBid, bid, ..., topAsk, ask, ...] |
+| raw | <code>boolean</code> | <code>false</code> | true for raw 'R0' order books |
+
+<a name="OrderBook.updateArrayOBWith"></a>
+
+### OrderBook.updateArrayOBWith(ob, entry, raw) ⇒ <code>boolean</code>
+Modifies an array-format OB in place with an update entry. Maintains sort
+
+**Kind**: static method of [<code>OrderBook</code>](#OrderBook)  
+**Returns**: <code>boolean</code> - success - false if entry doesn't match OB  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| ob | <code>Array.&lt;Array.&lt;number&gt;&gt;</code> |  |  |
+| entry | <code>Array.&lt;number&gt;</code> |  |  |
+| raw | <code>boolean</code> | <code>false</code> | true for raw 'R0' order books |
+
+<a name="OrderBook.unserialize"></a>
+
+### OrderBook.unserialize(arr, raw) ⇒ <code>Object</code>
+Converts an array order book entry or snapshot to an object, with 'price',
+'count', and 'amount' keys on entries
+
+**Kind**: static method of [<code>OrderBook</code>](#OrderBook)  
+**Returns**: <code>Object</code> - ob - either a map w/ bids & asks, or single entry object  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| arr | <code>Array.&lt;number&gt;</code> \| <code>Array.&lt;Array.&lt;number&gt;&gt;</code> |  |  |
+| raw | <code>boolean</code> | <code>false</code> | true for raw 'R0' order books |
 
 <a name="Position"></a>
 
@@ -1396,7 +1406,7 @@ Position model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> |
+| arr | <code>Object</code> \| <code>Array</code> | 
 
 <a name="PublicTrade"></a>
 
@@ -1415,7 +1425,7 @@ Public Trade model, supporting both funding & ordinary trades
 
 | Param | Type |
 | --- | --- |
-| data | <code>Object</code> \| <code>Array</code> |
+| data | <code>Object</code> \| <code>Array</code> | 
 
 <a name="PublicTrade.unserialize"></a>
 
@@ -1425,7 +1435,7 @@ Public Trade model, supporting both funding & ordinary trades
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> |
+| arr | <code>Object</code> \| <code>Array</code> | 
 
 <a name="StatusMessagesDeriv"></a>
 
@@ -1444,14 +1454,14 @@ Derivatives Status Message model
 
 | Param | Type |
 | --- | --- |
-| data | <code>Object</code> \| <code>Array</code> |
-| data.key | <code>string</code> |
-| data.timestamp | <code>number</code> |
-| data.price | <code>string</code> |
-| data.priceSpot | <code>string</code> |
-| data.fundBal | <code>string</code> |
-| data.fundingAccrued | <code>string</code> |
-| data.fundingStep | <code>string</code> |
+| data | <code>Object</code> \| <code>Array</code> | 
+| data.key | <code>string</code> | 
+| data.timestamp | <code>number</code> | 
+| data.price | <code>string</code> | 
+| data.priceSpot | <code>string</code> | 
+| data.fundBal | <code>string</code> | 
+| data.fundingAccrued | <code>string</code> | 
+| data.fundingStep | <code>string</code> | 
 
 <a name="StatusMessagesDeriv.unserialize"></a>
 
@@ -1461,7 +1471,7 @@ Derivatives Status Message model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> |
+| arr | <code>Object</code> \| <code>Array</code> | 
 
 <a name="Trade"></a>
 
@@ -1480,18 +1490,18 @@ Private Trade model
 
 | Param | Type |
 | --- | --- |
-| data | <code>Object</code> \| <code>Array</code> |
-| data.id | <code>number</code> |
-| data.symbol | <code>string</code> |
-| data.mtsCreate | <code>number</code> |
-| data.orderID | <code>number</code> |
-| data.execAmount | <code>string</code> |
-| data.execPrice | <code>string</code> |
-| data.orderType | <code>string</code> |
-| data.orderPrice | <code>string</code> |
-| data.maker | <code>number</code> \| <code>boolean</code> |
-| data.fee | <code>string</code> |
-| data.feeCurrency | <code>string</code> |
+| data | <code>Object</code> \| <code>Array</code> | 
+| data.id | <code>number</code> | 
+| data.symbol | <code>string</code> | 
+| data.mtsCreate | <code>number</code> | 
+| data.orderID | <code>number</code> | 
+| data.execAmount | <code>string</code> | 
+| data.execPrice | <code>string</code> | 
+| data.orderType | <code>string</code> | 
+| data.orderPrice | <code>string</code> | 
+| data.maker | <code>number</code> \| <code>boolean</code> | 
+| data.fee | <code>string</code> | 
+| data.feeCurrency | <code>string</code> | 
 
 <a name="Trade.unserialize"></a>
 
@@ -1501,54 +1511,7 @@ Private Trade model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> |
-
-<a name="TradingTickerHist"></a>
-
-## TradingTickerHist
-Historical Trading Ticker model
-
-**Kind**: global class  
-
-* [TradingTickerHist](#TradingTickerHist)
-    * [new TradingTickerHist(data)](#new_TradingTickerHist_new)
-    * _instance_
-        * [.quote()](#TradingTickerHist+quote) ⇒ <code>string</code>
-        * [.base()](#TradingTickerHist+base) ⇒ <code>string</code>
-    * _static_
-        * [.unserialize(arr)](#TradingTickerHist.unserialize) ⇒ <code>Object</code>
-
-<a name="new_TradingTickerHist_new"></a>
-
-### new TradingTickerHist(data)
-
-| Param | Type |
-| --- | --- |
-| data | <code>Object</code> \| <code>Array</code> |
-| data.symbol | <code>string</code> |
-| data.bid | <code>string</code> |
-| data.ask | <code>string</code> |
-| data.mtsUpdate | <code>number</code> |
-
-<a name="TradingTickerHist+quote"></a>
-
-### tradingTickerHist.quote() ⇒ <code>string</code>
-**Kind**: instance method of [<code>TradingTickerHist</code>](#TradingTickerHist)  
-**Returns**: <code>string</code> - quoteCurrency  
-<a name="TradingTickerHist+base"></a>
-
-### tradingTickerHist.base() ⇒ <code>string</code>
-**Kind**: instance method of [<code>TradingTickerHist</code>](#TradingTickerHist)  
-**Returns**: <code>string</code> - baseCurrency  
-<a name="TradingTickerHist.unserialize"></a>
-
-### TradingTickerHist.unserialize(arr) ⇒ <code>Object</code>
-**Kind**: static method of [<code>TradingTickerHist</code>](#TradingTickerHist)  
-**Returns**: <code>Object</code> - pojo  
-
-| Param | Type |
-| --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> |
+| arr | <code>Object</code> \| <code>Array</code> | 
 
 <a name="TradingTicker"></a>
 
@@ -1571,18 +1534,18 @@ Trading Ticker model
 
 | Param | Type |
 | --- | --- |
-| data | <code>Object</code> \| <code>Array</code> |
-| data.symbol | <code>string</code> |
-| data.bid | <code>number</code> |
-| data.bidSize | <code>number</code> |
-| data.ask | <code>number</code> |
-| data.askSize | <code>number</code> |
-| data.dailyChange | <code>number</code> |
-| data.dailyChangePerc | <code>number</code> |
-| data.lastPrice | <code>number</code> |
-| data.volume | <code>number</code> |
-| data.high | <code>number</code> |
-| data.low | <code>number</code> |
+| data | <code>Object</code> \| <code>Array</code> | 
+| data.symbol | <code>string</code> | 
+| data.bid | <code>number</code> | 
+| data.bidSize | <code>number</code> | 
+| data.ask | <code>number</code> | 
+| data.askSize | <code>number</code> | 
+| data.dailyChange | <code>number</code> | 
+| data.dailyChangePerc | <code>number</code> | 
+| data.lastPrice | <code>number</code> | 
+| data.volume | <code>number</code> | 
+| data.high | <code>number</code> | 
+| data.low | <code>number</code> | 
 
 <a name="TradingTicker+quote"></a>
 
@@ -1602,7 +1565,54 @@ Trading Ticker model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> |
+| arr | <code>Object</code> \| <code>Array</code> | 
+
+<a name="TradingTickerHist"></a>
+
+## TradingTickerHist
+Historical Trading Ticker model
+
+**Kind**: global class  
+
+* [TradingTickerHist](#TradingTickerHist)
+    * [new TradingTickerHist(data)](#new_TradingTickerHist_new)
+    * _instance_
+        * [.quote()](#TradingTickerHist+quote) ⇒ <code>string</code>
+        * [.base()](#TradingTickerHist+base) ⇒ <code>string</code>
+    * _static_
+        * [.unserialize(arr)](#TradingTickerHist.unserialize) ⇒ <code>Object</code>
+
+<a name="new_TradingTickerHist_new"></a>
+
+### new TradingTickerHist(data)
+
+| Param | Type |
+| --- | --- |
+| data | <code>Object</code> \| <code>Array</code> | 
+| data.symbol | <code>string</code> | 
+| data.bid | <code>string</code> | 
+| data.ask | <code>string</code> | 
+| data.mtsUpdate | <code>number</code> | 
+
+<a name="TradingTickerHist+quote"></a>
+
+### tradingTickerHist.quote() ⇒ <code>string</code>
+**Kind**: instance method of [<code>TradingTickerHist</code>](#TradingTickerHist)  
+**Returns**: <code>string</code> - quoteCurrency  
+<a name="TradingTickerHist+base"></a>
+
+### tradingTickerHist.base() ⇒ <code>string</code>
+**Kind**: instance method of [<code>TradingTickerHist</code>](#TradingTickerHist)  
+**Returns**: <code>string</code> - baseCurrency  
+<a name="TradingTickerHist.unserialize"></a>
+
+### TradingTickerHist.unserialize(arr) ⇒ <code>Object</code>
+**Kind**: static method of [<code>TradingTickerHist</code>](#TradingTickerHist)  
+**Returns**: <code>Object</code> - pojo  
+
+| Param | Type |
+| --- | --- |
+| arr | <code>Object</code> \| <code>Array</code> | 
 
 <a name="UserInfo"></a>
 
@@ -1621,11 +1631,11 @@ User Info model
 
 | Param | Type |
 | --- | --- |
-| data | <code>Object</code> \| <code>Array</code> |
-| data.id | <code>number</code> |
-| data.email | <code>string</code> |
-| data.username | <code>string</code> |
-| data.timezone | <code>number</code> |
+| data | <code>Object</code> \| <code>Array</code> | 
+| data.id | <code>number</code> | 
+| data.email | <code>string</code> | 
+| data.username | <code>string</code> | 
+| data.timezone | <code>number</code> | 
 
 <a name="UserInfo.unserialize"></a>
 
@@ -1635,42 +1645,7 @@ User Info model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> |
-
-<a name="WalletHist"></a>
-
-## WalletHist
-Historical Wallet Update model
-
-**Kind**: global class  
-
-* [WalletHist](#WalletHist)
-    * [new WalletHist(data)](#new_WalletHist_new)
-    * [.unserialize(arr)](#WalletHist.unserialize) ⇒ <code>Object</code>
-
-<a name="new_WalletHist_new"></a>
-
-### new WalletHist(data)
-
-| Param | Type |
-| --- | --- |
-| data | <code>Object</code> \| <code>Array</code> |
-| data.type | <code>string</code> |
-| data.currency | <code>string</code> |
-| data.balance | <code>number</code> |
-| data.unsettledInterest | <code>number</code> |
-| data.balanceAvailable | <code>number</code> |
-| data.mtsUpdate | <code>number</code> |
-
-<a name="WalletHist.unserialize"></a>
-
-### WalletHist.unserialize(arr) ⇒ <code>Object</code>
-**Kind**: static method of [<code>WalletHist</code>](#WalletHist)  
-**Returns**: <code>Object</code> - pojo  
-
-| Param | Type |
-| --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> |
+| arr | <code>Object</code> \| <code>Array</code> | 
 
 <a name="Wallet"></a>
 
@@ -1689,12 +1664,12 @@ Wallet model
 
 | Param | Type |
 | --- | --- |
-| data | <code>Object</code> \| <code>Array</code> |
-| data.type | <code>string</code> |
-| data.currency | <code>string</code> |
-| data.balance | <code>number</code> |
-| data.unsettledInterest | <code>number</code> |
-| data.balanceAvailable | <code>number</code> |
+| data | <code>Object</code> \| <code>Array</code> | 
+| data.type | <code>string</code> | 
+| data.currency | <code>string</code> | 
+| data.balance | <code>number</code> | 
+| data.unsettledInterest | <code>number</code> | 
+| data.balanceAvailable | <code>number</code> | 
 
 <a name="Wallet.unserialize"></a>
 
@@ -1704,37 +1679,40 @@ Wallet model
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> |
+| arr | <code>Object</code> \| <code>Array</code> | 
 
-<a name="Login"></a>
+<a name="WalletHist"></a>
 
-## Login
-Historical Users Login model
+## WalletHist
+Historical Wallet Update model
 
 **Kind**: global class  
 
-* [Login](#Login)
-    * [new Login(data)](#new_Login_new)
-    * [.unserialize(arr)](#Login.unserialize) ⇒ <code>Object</code>
+* [WalletHist](#WalletHist)
+    * [new WalletHist(data)](#new_WalletHist_new)
+    * [.unserialize(arr)](#WalletHist.unserialize) ⇒ <code>Object</code>
 
 <a name="new_WalletHist_new"></a>
 
-### new Login(data)
+### new WalletHist(data)
 
 | Param | Type |
 | --- | --- |
-| data | <code>Object</code> \| <code>Array</code> |
-| data.id | <code>number</code> |
-| data.time | <code>number</code> |
-| data.ip | <code>string</code> |
-| data.extraData | <code>Object</code> |
+| data | <code>Object</code> \| <code>Array</code> | 
+| data.type | <code>string</code> | 
+| data.currency | <code>string</code> | 
+| data.balance | <code>number</code> | 
+| data.unsettledInterest | <code>number</code> | 
+| data.balanceAvailable | <code>number</code> | 
+| data.mtsUpdate | <code>number</code> | 
 
-<a name="Login.unserialize"></a>
+<a name="WalletHist.unserialize"></a>
 
-### Login.unserialize(arr) ⇒ <code>Object</code>
-**Kind**: static method of [<code>Login</code>](#Login)  
+### WalletHist.unserialize(arr) ⇒ <code>Object</code>
+**Kind**: static method of [<code>WalletHist</code>](#WalletHist)  
 **Returns**: <code>Object</code> - pojo  
 
 | Param | Type |
 | --- | --- |
-| arr | <code>Object</code> \| <code>Array</code> |
+| arr | <code>Object</code> \| <code>Array</code> | 
+
