@@ -295,4 +295,13 @@ describe('Order model', () => {
     assert(!new Order({ amount: 0, amountOrig: 25 }).isPartiallyFilled())
     assert(!new Order({ amount: 25, amountOrig: 25 }).isPartiallyFilled())
   })
+
+  it('lev: field is passed into newOrderPacket', () => {
+    const o = new Order({
+      price: 42,
+      amount: 1,
+      lev: 100
+    })
+    assert(o.toNewOrderPacket().lev, 100)
+  })
 })
