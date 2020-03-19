@@ -1,3 +1,7 @@
+# 1.1.10
+
+- feature: add ability to specify lev in new Order object
+
 # 1.1.9
 - feature: Add type to FundingCredit and FundingLoan
 
