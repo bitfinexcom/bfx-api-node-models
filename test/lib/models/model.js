@@ -9,7 +9,7 @@ const Model = require('../../../lib/model')
 
 describe('base model class', () => {
   describe('toJS', () => {
-    it('returns a pojo version of the model', function() {
+    it('returns a pojo version of the model', function () {
       const fields = { a: 0 }
 
       class SomeModel extends Model {
