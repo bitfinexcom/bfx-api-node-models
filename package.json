@@ -45,8 +45,6 @@
     "babel-eslint": "^10.1.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-regenerator": "^6.26.0",
-    "bfx-api-node-rest": "^3.0.3",
-    "bfx-hf-util": "^1.0.6",
     "chai": "^4.2.0",
     "husky": "^4.2.3",
     "jsdoc-to-markdown": "^5.0.3",
@@ -56,6 +54,8 @@
   },
   "dependencies": {
     "bfx-api-node-util": "^1.0.8",
+    "bfx-api-node-rest": "^3.0.3",
+    "bfx-hf-util": "^1.0.6",
     "bluebird": "^3.7.2",
     "crc-32": "^1.2.0",
     "debug": "^4.1.1"
