@@ -1,3 +1,6 @@
+# 1.2.1
+- fix: move bfx-hf-util and bfx-api-node-rest to deps from dev deps
+
 # 1.2.0
 - meta: bumped dependencies
 - meta: added husky pre-commit test hook
