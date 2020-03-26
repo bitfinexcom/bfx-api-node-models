@@ -1,3 +1,7 @@
+# 1.2.4
+- meta: added JSDoc-generated HTML docs
+- meta: standardized linter config
+
 # 1.2.3
 - fix: index lookup in validation of array-format models
 
