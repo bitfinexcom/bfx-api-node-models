@@ -1,3 +1,6 @@
+# 1.2.3
+- fix: index lookup in validation of array-format models
+
 # 1.2.2
 - fix: make bfx-api-node-rest dev-dep to break circular dependency
 
