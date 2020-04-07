@@ -8,7 +8,7 @@ source/images
 todo
 package-lock.json
 .env
-/dist
+/lib
 coverage
 .nyc_output
 tags
