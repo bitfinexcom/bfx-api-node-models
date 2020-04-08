@@ -7,15 +7,6 @@ const { WALLET_TYPES } = require('bfx-hf-util')
 const Model = require('./model')
 
 const VALID_TYPES = Object.values(WALLET_TYPES)
-const fields = {
-  type: 0,
-  currency: 1,
-  balance: 2,
-  unsettledInterest: 3,
-  balanceAvailable: 4,
-  description: 5,
-  meta: 6
-}
 
 /**
  * Plain wallet object used to instantiate model
@@ -26,6 +17,7 @@ const fields = {
  * @property {number} balance - total balance
  * @property {number} unsettledInterest - unsettled interest
  * @property {number} balanceAvailable - available balance
+ * @property {object} [meta] - meta
  */
 
 /**
@@ -34,13 +26,50 @@ const fields = {
  * @extends Model
  */
 class Wallet extends Model {
+  static FIELD_INDEX_MAPPING = {
+    type: 0,
+    currency: 1,
+    balance: 2,
+    unsettledInterest: 3,
+    balanceAvailable: 4,
+    description: 5,
+    meta: 6
+  }
+
+  /** @type {string} */
+  type;
+
+  /** @type {string} */
+  currency;
+
+  /** @type {number} */
+  balance;
+
+  /** @type {number} */
+  unsettledInterest;
+
+  /** @type {number} */
+  balanceAvailable;
+
+  /** @type {number} */
+  description;
+
+  /** @type {object} */
+  meta;
+
   /**
    * @param {WalletData[]|WalletData|Array[]|Array} data - wallet data, one
    *   or multiple in object or array format
    */
   constructor (data) {
     const parsedData = {}
-    super({ data, fields, parsedData })
+
+    super({
+      fields: Wallet.FIELD_INDEX_MAPPING,
+      parsedData,
+      data
+    })
+
     Model.setParsedProperties(this, parsedData)
   }
 
@@ -49,7 +78,10 @@ class Wallet extends Model {
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserializeWithDataDefinition({ data, fields })
+    return super.unserializeWithDataDefinition({
+      fields: Wallet.FIELD_INDEX_MAPPING,
+      data
+    })
   }
 
   /**
@@ -61,8 +93,7 @@ class Wallet extends Model {
   static validate (data) {
     return super.validateWithDataDefinition({
       data,
-      fields,
-
+      fields: Wallet.FIELD_INDEX_MAPPING,
       validators: {
         type: v => stringValidator(v, VALID_TYPES),
         currency: currencyValidator,

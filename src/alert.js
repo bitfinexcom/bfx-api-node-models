@@ -3,12 +3,6 @@
 const priceValidator = require('./validators/price')
 const symbolValidator = require('./validators/symbol')
 const Model = require('./model')
-const fields = {
-  key: 0,
-  type: 1,
-  symbol: 2,
-  price: 3
-}
 
 /**
  * Plain alert object used to instantiate model
@@ -26,6 +20,25 @@ const fields = {
  * @extends Model
  */
 class Alert extends Model {
+  static FIELD_INDEX_MAPPING = {
+    key: 0,
+    type: 1,
+    symbol: 2,
+    price: 3
+  };
+
+  /** @type {string} */
+  key;
+
+  /** @type {string} */
+  type;
+
+  /** @type {string} */
+  symbol;
+
+  /** @type {string} */
+  price;
+
   constructor (data) {
     const parsedData = {}
     super({ data, parsedData })
@@ -37,7 +50,10 @@ class Alert extends Model {
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserializeWithDataDefinition({ data, fields })
+    return super.unserializeWithDataDefinition({
+      fields: Alert.FIELD_INDEX_MAPPING,
+      data
+    })
   }
 
   /**
@@ -52,7 +68,7 @@ class Alert extends Model {
   static validate (data) {
     return super.validateWithDataDefinition({
       data,
-      fields,
+      fields: Alert.FIELD_INDEX_MAPPING,
       validators: {
         price: priceValidator,
         symbol: symbolValidator

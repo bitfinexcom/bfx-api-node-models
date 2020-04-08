@@ -513,7 +513,7 @@ describe('Order model', () => {
     it('throws an error if the order lacks an ID', (done) => {
       const o = new Order()
       o.recreate({
-        cancelOrder: async () => {}
+        cancel: async () => {}
       }).catch(() => done())
     })
 
@@ -522,7 +522,10 @@ describe('Order model', () => {
 
       o.cancel = async () => { done() }
       o.submit = async () => {}
-      o.recreate({})
+      o.recreate({
+        cancel: async () => {},
+        submit: async () => {}
+      })
     })
 
     it('clears its ID', async () => {
@@ -531,7 +534,11 @@ describe('Order model', () => {
       o.cancel = async () => {}
       o.submit = async () => {}
 
-      await o.recreate({})
+      await o.recreate({
+        cancel: async () => {},
+        submit: async () => {}
+      })
+
       assert.ok(!o.id, 'ID not cleared')
     })
 
@@ -544,7 +551,10 @@ describe('Order model', () => {
         done()
       }
 
-      o.recreate({})
+      o.recreate({
+        cancel: async () => {},
+        submit: async () => {}
+      })
     })
   })
 

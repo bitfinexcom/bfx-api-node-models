@@ -427,7 +427,7 @@ class Order extends Model {
    * amount.
    *
    * @param {object} changes - changeset to apply to this order
-   * @param {WSv2|RESTv2} [apiInterface] - optional ws or rest, defaults to internal instance
+   * @param {object} [apiInterface] - optional ws or rest, defaults to internal instance
    * @returns {Promise} p - resolves on ws2 confirmation or rest response
    * @example
    * const ws = new WSv2({ ... })
@@ -441,10 +441,10 @@ class Order extends Model {
    * await o.update({ price: '2.0' }) // update price
    * await o.update({ delta: '18.0' }) // update amount with delta
    *
-   * console.log(o.toString()))  // inspect order
+   * console.log(o.toString())  // inspect order
    */
   async update (changes = {}, apiInterface = this._apiInterface) {
-    if (!apiInterface) {
+    if (!apiInterface || !apiInterface.updateOrder) {
       throw new Error('no ws client available')
     }
 
@@ -537,10 +537,10 @@ class Order extends Model {
    * Removes update listeners from the specified ws2 instance.
    * Will fail if rest interface is provided.
    *
-   * @param {WSv2|RESTv2} apiInterface - optional ws defaults to internal ws
+   * @param {object} apiInterface - optional ws defaults to internal ws
    */
   removeListeners (apiInterface = this._apiInterface) {
-    if (apiInterface) {
+    if (apiInterface && apiInterface.removeListeners) {
       apiInterface.removeListeners(this.cbGID())
     }
   }
@@ -558,11 +558,11 @@ class Order extends Model {
   /**
    * Submit the order
    *
-   * @param {WSv2|RESTv2} apiInterface - optional ws or rest, defaults to internal ws
+   * @param {object} apiInterface - optional ws or rest, defaults to internal ws
    * @returns {Promise} p
    */
   async submit (apiInterface = this._apiInterface) {
-    if (!apiInterface) {
+    if (!apiInterface || !apiInterface.submitOrder) {
       throw new Error('no API interface provided')
     }
 
@@ -574,12 +574,15 @@ class Order extends Model {
   /**
    * Cancel the order if open
    *
-   * @param {WSv2|RESTv2} apiInterface - optional ws or rest, defaults to
+   * @param {object} apiInterface - optional ws or rest, defaults to
    *   internal ws
    * @returns {Promise} p
    */
   async cancel (apiInterface = this._apiInterface) {
-    if (!apiInterface) throw new Error('no API interface provided')
+    if (!apiInterface || !apiInterface.cancelOrder) {
+      throw new Error('no API interface provided')
+    }
+
     if (!this.id) throw new Error('order has no ID')
 
     return apiInterface.cancelOrder(this.id)
@@ -588,12 +591,15 @@ class Order extends Model {
   /**
    * Equivalent to calling cancel() followed by submit()
    *
-   * @param {WSv2|RESTv2} apiInterface - optional ws or rest, defaults to
+   * @param {object} apiInterface - optional ws or rest, defaults to
    *   internal ws
    * @returns {Promise} p
    */
   async recreate (apiInterface = this._apiInterface) {
-    if (!apiInterface) throw new Error('no API interface provided')
+    if (!apiInterface || (!apiInterface.submit || !apiInterface.cancel)) {
+      throw new Error('no API interface provided')
+    }
+
     if (!this.id) throw new Error('order has no ID')
 
     await this.cancel(apiInterface)

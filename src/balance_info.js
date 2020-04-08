@@ -2,10 +2,6 @@
 
 const amountValidator = require('./validators/amount')
 const Model = require('./model')
-const fields = {
-  amount: 0,
-  amountNet: 1
-}
 
 /**
  * Plain balance info object used to instantiate model
@@ -21,13 +17,30 @@ const fields = {
  * @extends Model
  */
 class BalanceInfo extends Model {
+  static FIELD_INDEX_MAPPING = {
+    amount: 0,
+    amountNet: 1
+  };
+
+  /** @type {number} */
+  amount;
+
+  /** @type {number} */
+  amountNet;
+
   /**
    * @param {BalanceInfoData|BalanceInfoData[]|Array|Array[]} data - balance
    *   info data, one or multiple in object or array format
    */
   constructor (data) {
     const parsedData = {}
-    super({ data, fields, parsedData })
+
+    super({
+      fields: BalanceInfo.FIELD_INDEX_MAPPING,
+      parsedData,
+      data
+    })
+
     Model.setParsedProperties(this, parsedData)
   }
 
@@ -36,7 +49,10 @@ class BalanceInfo extends Model {
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserializeWithDataDefinition({ data, fields })
+    return super.unserializeWithDataDefinition({
+      fields: BalanceInfo.FIELD_INDEX_MAPPING,
+      data
+    })
   }
 
   /**
@@ -49,7 +65,7 @@ class BalanceInfo extends Model {
   static validate (data) {
     return super.validateWithDataDefinition({
       data,
-      fields,
+      fields: BalanceInfo.FIELD_INDEX_MAPPING,
       validators: {
         amount: amountValidator,
         amountNet: amountValidator

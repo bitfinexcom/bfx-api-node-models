@@ -9,5 +9,6 @@
  * @property {Function} submitFundingOffer - handler to submit a funding offer
  * @property {Function} cancelFundingOffer - handler to cancel a funding offer
  * @property {Function} closeFunding - handler to close a funding offer
+ * @property {Function} cancelOrder - handler to cancel an order
  */
 module.exports = {}

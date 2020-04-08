@@ -159,7 +159,7 @@ class Position extends Model {
   /**
    * Claim the position
    *
-   * @param {RESTv2} [apiInterface] - defaults to internal interface
+   * @param {object} [apiInterface] - defaults to internal interface
    * @returns {Promise} p
    */
   async claim (apiInterface = this._apiInterface) {
@@ -176,7 +176,7 @@ class Position extends Model {
   /**
    * Close the position
    *
-   * @param {RESTv2} [apiInterface] - defaults to internal interface
+   * @param {object} [apiInterface] - defaults to internal interface
    * @returns {Promise} p
    */
   async close (apiInterface = this._apiInterface) {

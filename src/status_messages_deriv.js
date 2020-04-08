@@ -4,16 +4,6 @@ const stringValidator = require('./validators/string')
 const priceValidator = require('./validators/price')
 const Model = require('./model')
 
-const fields = {
-  key: 0,
-  timestamp: 1,
-  price: 3,
-  priceSpot: 4,
-  fundBal: 6,
-  fundingAccrued: 9,
-  fundingStep: 10
-}
-
 /**
  * Plain derivatives status message object used to instantiate model
  *
@@ -33,6 +23,37 @@ const fields = {
  * @extends Model
  */
 class StatusMessagesDeriv extends Model {
+  static FIELD_INDEX_MAPPING = {
+    key: 0,
+    timestamp: 1,
+    price: 3,
+    priceSpot: 4,
+    fundBal: 6,
+    fundingAccrued: 9,
+    fundingStep: 10
+  };
+
+  /** @type {string} */
+  key;
+
+  /** @type {number} */
+  timestamp;
+
+  /** @type {string} */
+  price;
+
+  /** @type {string} */
+  priceSpot;
+
+  /** @type {string} */
+  fundBal;
+
+  /** @type {string} */
+  fundingAccrued;
+
+  /** @type {string} */
+  fundingStep;
+
   /**
    * @param {StatusMessagesDerivData[]|StatusMessagesDerivData|Array[]|Array} data -
    *   derivatives status message data, one or multiple in object or array
@@ -40,7 +61,13 @@ class StatusMessagesDeriv extends Model {
    */
   constructor (data) {
     const parsedData = {}
-    super({ data, fields, parsedData })
+
+    super({
+      fields: StatusMessagesDeriv.FIELD_INDEX_MAPPING,
+      parsedData,
+      data
+    })
+
     Model.setParsedProperties(this, parsedData)
   }
 
@@ -49,7 +76,10 @@ class StatusMessagesDeriv extends Model {
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserializeWithDataDefinition({ data, fields })
+    return super.unserializeWithDataDefinition({
+      fields: StatusMessagesDeriv.FIELD_INDEX_MAPPING,
+      data
+    })
   }
 
   /**
@@ -62,7 +92,7 @@ class StatusMessagesDeriv extends Model {
   static validate (data) {
     return super.validateWithDataDefinition({
       data,
-      fields,
+      fields: StatusMessagesDeriv.FIELD_INDEX_MAPPING,
       validators: {
         key: stringValidator,
         timestamp: stringValidator,

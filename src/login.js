@@ -4,12 +4,6 @@ const numberValidator = require('./validators/number')
 const dateValidator = require('./validators/date')
 const stringValidator = require('./validators/string')
 const Model = require('./model')
-const fields = {
-  id: 0,
-  time: 2,
-  ip: 4,
-  extraData: 7
-}
 
 /**
  * Plain login event object used to instantiate model
@@ -27,13 +21,38 @@ const fields = {
  * @extends Model
  */
 class Login extends Model {
+  static FIELD_INDEX_MAPPING = {
+    id: 0,
+    time: 2,
+    ip: 4,
+    extraData: 7
+  };
+
+  /** @type {number} */
+  id;
+
+  /** @type {number} */
+  time;
+
+  /** @type {string} */
+  ip;
+
+  /** @type {object} */
+  extraData;
+
   /**
    * @param {LoginEventData[]|LoginEventData|Array[]|Array} data - login event
    *   data, one or multiple in object or array format
    */
   constructor (data) {
     const parsedData = {}
-    super({ data, fields, parsedData })
+
+    super({
+      fields: Login.FIELD_INDEX_MAPPING,
+      parsedData,
+      data
+    })
+
     Model.setParsedProperties(this, parsedData)
   }
 
@@ -42,7 +61,10 @@ class Login extends Model {
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserializeWithDataDefinition({ data, fields })
+    return super.unserializeWithDataDefinition({
+      fields: Login.FIELD_INDEX_MAPPING,
+      data
+    })
   }
 
   /**
@@ -55,7 +77,7 @@ class Login extends Model {
   static validate (data) {
     return super.validateWithDataDefinition({
       data,
-      fields,
+      fields: Login.FIELD_INDEX_MAPPING,
       validators: {
         id: numberValidator,
         time: dateValidator,

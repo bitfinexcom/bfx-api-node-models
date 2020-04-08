@@ -5,6 +5,8 @@
 - FundingInfo fix: static validate() now returns error (was string)
 - MarginInfo fix: static validate() now returns error (was string)
 - FundingOffer fix: static validate() was not using boolFields
+- FundingCredit fix: static validate() was not using boolFields
+- FundingLoan fix: static validate() was not using boolFields
 - Order fix: static validate() was not using boolFields
 - meta: fixed incorrect types on static model validate() methods in several
   places

@@ -8,30 +8,6 @@ const dateValidator = require('./validators/date')
 const boolValidator = require('./validators/bool')
 const Model = require('./model')
 
-const statuses = ['ACTIVE', 'EXECUTED', 'PARTIALLY FILLED', 'CANCELED']
-const boolFields = ['notify', 'hidden', 'renew', 'noClose']
-const fields = {
-  id: 0,
-  symbol: 1,
-  side: 2,
-  mtsCreate: 3,
-  mtsUpdate: 4,
-  amount: 5,
-  flags: 6,
-  status: 7,
-  type: 8,
-  rate: 11,
-  period: 12,
-  mtsOpening: 13,
-  mtsLastPayout: 14,
-  notify: 15,
-  hidden: 16,
-  renew: 18,
-  rateReal: 19,
-  noClose: 20,
-  positionPair: 21
-}
-
 /**
  * Plain funding credit object used to instantiate model
  *
@@ -45,7 +21,7 @@ const fields = {
  * @property {number} mtsLastPayout - last payout timestamp
  * @property {number} amount - remaining amount
  * @property {number} flags - flags
- * @property {number} status - current status
+ * @property {string} status - current status
  * @property {number} rate - rate
  * @property {number} rateReal - rate
  * @property {number} period - period
@@ -62,13 +38,101 @@ const fields = {
  * @extends Model
  */
 class FundingCredit extends Model {
+  static statuses = ['ACTIVE', 'EXECUTED', 'PARTIALLY FILLED', 'CANCELED'];
+  static BOOL_FIELDS = ['notify', 'hidden', 'renew', 'noClose'];
+  static FIELD_INDEX_MAPPING = {
+    id: 0,
+    symbol: 1,
+    side: 2,
+    mtsCreate: 3,
+    mtsUpdate: 4,
+    amount: 5,
+    flags: 6,
+    status: 7,
+    type: 8,
+    rate: 11,
+    period: 12,
+    mtsOpening: 13,
+    mtsLastPayout: 14,
+    notify: 15,
+    hidden: 16,
+    renew: 18,
+    rateReal: 19,
+    noClose: 20,
+    positionPair: 21
+  };
+
+  /** @type {number} */
+  id;
+
+  /** @type {string} */
+  symbol;
+
+  /** @type {number} */
+  side;
+
+  /** @type {number} */
+  mtsCreate;
+
+  /** @type {number} */
+  mtsUpdate;
+
+  /** @type {number} */
+  amount;
+
+  /** @type {number} */
+  flags;
+
+  /** @type {string} */
+  status;
+
+  /** @type {number} */
+  type;
+
+  /** @type {number} */
+  rate;
+
+  /** @type {number} */
+  period;
+
+  /** @type {number} */
+  mtsOpening;
+
+  /** @type {number} */
+  mtsLastPayout;
+
+  /** @type {number} */
+  notify;
+
+  /** @type {number} */
+  hidden;
+
+  /** @type {number} */
+  renew;
+
+  /** @type {number} */
+  rateReal;
+
+  /** @type {number} */
+  noClose;
+
+  /** @type {string} */
+  positionPair;
+
   /**
    * @param {FundingCreditData|FundingCreditData[]|Array|Array[]} data - funding
    *   credit data, one or multiple in object or array format
    */
   constructor (data) {
     const parsedData = {}
-    super({ data, fields, boolFields, parsedData })
+
+    super({
+      fields: FundingCredit.FIELD_INDEX_MAPPING,
+      boolFields: FundingCredit.BOOL_FIELDS,
+      parsedData,
+      data
+    })
+
     Model.setParsedProperties(this, parsedData)
   }
 
@@ -77,7 +141,11 @@ class FundingCredit extends Model {
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserializeWithDataDefinition({ data, fields, boolFields })
+    return super.unserializeWithDataDefinition({
+      fields: FundingCredit.FIELD_INDEX_MAPPING,
+      boolFields: FundingCredit.BOOL_FIELDS,
+      data
+    })
   }
 
   /**
@@ -90,7 +158,8 @@ class FundingCredit extends Model {
   static validate (data) {
     return super.validateWithDataDefinition({
       data,
-      fields,
+      boolFields: FundingCredit.BOOL_FIELDS,
+      fields: FundingCredit.FIELD_INDEX_MAPPING,
       validators: {
         mtsCreate: dateValidator,
         mtsUpdate: dateValidator,
@@ -114,6 +183,8 @@ class FundingCredit extends Model {
 }
 
 FundingCredit.status = {}
-statuses.forEach(s => (FundingCredit.status[s.split(' ').join('_')] = s))
+FundingCredit.statuses.forEach(s => (
+  FundingCredit.status[s.split(' ').join('_')] = s
+))
 
 module.exports = FundingCredit

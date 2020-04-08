@@ -8,14 +8,6 @@ const { WALLET_TYPES } = require('bfx-hf-util')
 const Model = require('./model')
 
 const types = Object.values(WALLET_TYPES)
-const fields = {
-  type: 0,
-  currency: 1,
-  balance: 2,
-  unsettledInterest: 3,
-  balanceAvailable: 4,
-  mtsUpdate: 6
-}
 
 /**
  * Plain historical wallet object used to instantiate model
@@ -35,13 +27,46 @@ const fields = {
  * @extends Model
  */
 class WalletHist extends Model {
+  static FIELD_INDEX_MAPPING = {
+    type: 0,
+    currency: 1,
+    balance: 2,
+    unsettledInterest: 3,
+    balanceAvailable: 4,
+    mtsUpdate: 6
+  };
+
+  /** @type {string} */
+  type;
+
+  /** @type {string} */
+  currency;
+
+  /** @type {number} */
+  balance;
+
+  /** @type {number} */
+  unsettledInterest;
+
+  /** @type {number} */
+  balanceAvailable;
+
+  /** @type {number} */
+  mtsUpdate;
+
   /**
    * @param {WalletHistData[]|WalletHistData|Array[]|Array} data - historical
    *   wallet update data, one or multiple in object or array format
    */
   constructor (data) {
     const parsedData = {}
-    super({ data, fields, parsedData })
+
+    super({
+      fields: WalletHist.FIELD_INDEX_MAPPING,
+      parsedData,
+      data
+    })
+
     Model.setParsedProperties(this, parsedData)
   }
 
@@ -50,7 +75,10 @@ class WalletHist extends Model {
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserializeWithDataDefinition({ data, fields })
+    return super.unserializeWithDataDefinition({
+      fields: WalletHist.FIELD_INDEX_MAPPING,
+      data
+    })
   }
 
   /**
@@ -63,8 +91,7 @@ class WalletHist extends Model {
   static validate (data) {
     return super.validateWithDataDefinition({
       data,
-      fields,
-
+      fields: WalletHist.FIELD_INDEX_MAPPING,
       validators: {
         type: v => stringValidator(v, types),
         currency: currencyValidator,

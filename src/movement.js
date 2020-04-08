@@ -6,18 +6,6 @@ const amountValidator = require('./validators/amount')
 const currencyValidator = require('./validators/currency')
 const stringValidator = require('./validators/string')
 const Model = require('./model')
-const fields = {
-  id: 0,
-  currency: 1,
-  currencyName: 2,
-  mtsStarted: 5,
-  mtsUpdated: 6,
-  status: 9,
-  amount: 12,
-  fees: 13,
-  destinationAddress: 16,
-  transactionId: 20
-}
 
 /**
  * Plain movement object used to instantiate model
@@ -41,13 +29,62 @@ const fields = {
  * @extends Model
  */
 class Movement extends Model {
+  static FIELD_INDEX_MAPPING = {
+    id: 0,
+    currency: 1,
+    currencyName: 2,
+    mtsStarted: 5,
+    mtsUpdated: 6,
+    status: 9,
+    amount: 12,
+    fees: 13,
+    destinationAddress: 16,
+    transactionId: 20
+  };
+
+  /** @type {number} */
+  id;
+
+  /** @type {string} */
+  currency;
+
+  /** @type {string} */
+  currencyName;
+
+  /** @type {number} */
+  mtsStarted;
+
+  /** @type {number} */
+  mtsUpdated;
+
+  /** @type {string} */
+  status;
+
+  /** @type {number} */
+  amount;
+
+  /** @type {number} */
+  fees;
+
+  /** @type {string} */
+  destinationAddress;
+
+  /** @type {number} */
+  transactionId;
+
   /**
    * @param {MovementData[]|MovementData|Array[]|Array} data - movement data,
    *   one or multiple in object or array format
    */
   constructor (data) {
     const parsedData = {}
-    super({ data, fields, parsedData })
+
+    super({
+      fields: Movement.FIELD_INDEX_MAPPING,
+      parsedData,
+      data
+    })
+
     Model.setParsedProperties(this, parsedData)
   }
 
@@ -56,7 +93,10 @@ class Movement extends Model {
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserializeWithDataDefinition({ data, fields })
+    return super.unserializeWithDataDefinition({
+      fields: Movement.FIELD_INDEX_MAPPING,
+      data
+    })
   }
 
   /**
@@ -69,7 +109,7 @@ class Movement extends Model {
   static validate (data) {
     return super.validateWithDataDefinition({
       data,
-      fields,
+      fields: Movement.FIELD_INDEX_MAPPING,
       validators: {
         id: numberValidator,
         currency: currencyValidator,

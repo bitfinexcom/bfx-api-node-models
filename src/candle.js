@@ -3,14 +3,6 @@
 const numberValidator = require('./validators/number')
 const dateValidator = require('./validators/date')
 const Model = require('./model')
-const fields = {
-  mts: 0,
-  open: 1,
-  close: 2,
-  high: 3,
-  low: 4,
-  volume: 5
-}
 
 /**
  * Plain candle object used to instantiate model
@@ -30,13 +22,46 @@ const fields = {
  * @extends Model
  */
 class Candle extends Model {
+  static FIELD_INDEX_MAPPING = {
+    mts: 0,
+    open: 1,
+    close: 2,
+    high: 3,
+    low: 4,
+    volume: 5
+  };
+
+  /** @type {number} */
+  mts;
+
+  /** @type {number} */
+  open;
+
+  /** @type {number} */
+  close;
+
+  /** @type {number} */
+  high;
+
+  /** @type {number} */
+  low;
+
+  /** @type {number} */
+  volume;
+
   /**
    * @param {CandleData|CandleData[]|Array|Array[]} data - candle ata, one or
    *   multiple in object or array format
    */
   constructor (data) {
     const parsedData = {}
-    super({ data, fields, parsedData })
+
+    super({
+      fields: Candle.FIELD_INDEX_MAPPING,
+      parsedData,
+      data
+    })
+
     Model.setParsedProperties(this, parsedData)
   }
 
@@ -45,7 +70,10 @@ class Candle extends Model {
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserializeWithDataDefinition({ data, fields })
+    return super.unserializeWithDataDefinition({
+      fields: Candle.FIELD_INDEX_MAPPING,
+      data
+    })
   }
 
   /**
@@ -58,7 +86,7 @@ class Candle extends Model {
   static validate (data) {
     return super.validateWithDataDefinition({
       data,
-      fields,
+      fields: Candle.FIELD_INDEX_MAPPING,
       validators: {
         mts: dateValidator,
         open: numberValidator,

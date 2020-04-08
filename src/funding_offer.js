@@ -14,7 +14,6 @@ const symbolValidator = require('./validators/symbol')
 const Model = require('./model')
 
 /** @typedef { import("./types/jsdoc/rest2").RESTv2 } RESTv2 */
-/** @typedef { import("./types/jsdoc/ws2").WSv2 } WSv2 */
 
 /**
  * Plain funding offer object used to instantiate model
@@ -116,7 +115,7 @@ class FundingOffer extends Model {
   /**
    * @param {FundingOfferData|FundingOfferData[]|Array|Array[]} data - funding
    *   offer data, one or multiple in object or array format
-   * @param {WSv2|RESTv2} [apiInterface] - rest or websocket object capable of
+   * @param {RESTv2} [apiInterface] - rest or websocket object capable of
    *   submitting funding offers
    */
   constructor (data, apiInterface) {

@@ -3,12 +3,6 @@
 const numberValidator = require('./validators/number')
 const stringValidator = require('./validators/string')
 const Model = require('./model')
-const fields = {
-  id: 0,
-  email: 1,
-  username: 2,
-  timezone: 7
-}
 
 /**
  * Plain user info object used to instantiate model
@@ -26,13 +20,38 @@ const fields = {
  * @extends Model
  */
 class UserInfo extends Model {
+  static FIELD_INDEX_MAPPING = {
+    id: 0,
+    email: 1,
+    username: 2,
+    timezone: 7
+  };
+
+  /** @type {number} */
+  id;
+
+  /** @type {string} */
+  email;
+
+  /** @type {string} */
+  username;
+
+  /** @type {number} */
+  timezone;
+
   /**
    * @param {UserInfoData[]|UserInfoData|Array[]|Array} data - user info data,
    *   one or multiple in object or array format
    */
   constructor (data) {
     const parsedData = {}
-    super({ data, fields, parsedData })
+
+    super({
+      fields: UserInfo.FIELD_INDEX_MAPPING,
+      parsedData,
+      data
+    })
+
     Model.setParsedProperties(this, parsedData)
   }
 
@@ -41,7 +60,10 @@ class UserInfo extends Model {
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserializeWithDataDefinition({ data, fields })
+    return super.unserializeWithDataDefinition({
+      fields: UserInfo.FIELD_INDEX_MAPPING,
+      data
+    })
   }
 
   /**
@@ -54,7 +76,7 @@ class UserInfo extends Model {
   static validate (data) {
     return super.validateWithDataDefinition({
       data,
-      fields,
+      fields: UserInfo.FIELD_INDEX_MAPPING,
       validators: {
         id: numberValidator,
         email: stringValidator,

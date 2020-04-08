@@ -1,11 +1,12 @@
 {
   "name": "bfx-api-node-models",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "Object models for usage with the Bitfinex node API",
   "engines": {
     "node": ">=8.3.0"
   },
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "husky": {
     "hooks": {
       "pre-commit": "npm test"

@@ -5,14 +5,6 @@ const stringValidator = require('./validators/string')
 const currencyValidator = require('./validators/currency')
 const Model = require('./model')
 
-const fields = {
-  id: 0,
-  name: 1,
-  pool: 2,
-  explorer: 3,
-  symbol: 4
-}
-
 /**
  * Plain currency object used to instantiate model
  *
@@ -30,13 +22,42 @@ const fields = {
  * @extends Model
  */
 class Currency extends Model {
+  static FIELD_INDEX_MAPPING = {
+    id: 0,
+    name: 1,
+    pool: 2,
+    explorer: 3,
+    symbol: 4
+  };
+
+  /** @type {number} */
+  id;
+
+  /** @type {string} */
+  name;
+
+  /** @type {string} */
+  pool;
+
+  /** @type {string} */
+  explorer;
+
+  /** @type {string} */
+  symbol;
+
   /**
    * @param {CurrencyData|CurrencyData[]|Array|Array[]} data - currency data,
    *   one or multiple in object or array format
    */
   constructor (data) {
     const parsedData = {}
-    super({ data, fields, parsedData })
+
+    super({
+      fields: Currency.FIELD_INDEX_MAPPING,
+      parsedData,
+      data
+    })
+
     Model.setParsedProperties(this, parsedData)
   }
 
@@ -45,7 +66,10 @@ class Currency extends Model {
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserializeWithDataDefinition({ data, fields })
+    return super.unserializeWithDataDefinition({
+      fields: Currency.FIELD_INDEX_MAPPING,
+      data
+    })
   }
 
   /**
@@ -58,8 +82,7 @@ class Currency extends Model {
   static validate (data) {
     return super.validateWithDataDefinition({
       data,
-      fields,
-
+      fields: Currency.FIELD_INDEX_MAPPING,
       validators: {
         id: numberValidator,
         name: stringValidator,
