@@ -12,9 +12,13 @@ const _isObject = require('lodash/isObject')
  * @param {object[]|object|Array[]|Array} args.data - data
  * @param {object} [args.fields] - index map in the form { [fieldName]: index }
  * @param {Array} [args.boolFields] - array of boolean field names
- * @param {object} args.target - model class
+ * @param {object} args.instance - model instance to providing serialization
+ *   logic
+ * @param {object} args.target - object to receive data
  */
-const assignFromCollectionOrInstance = ({ data, fields, boolFields, target }) => {
+const assignFromCollectionOrInstance = ({
+  data, fields, boolFields, target, instance
+}) => {
   // Use/assign passed in data
   if (!_isArray(data) && _isObject(data)) {
     Object.assign(target, data)
@@ -28,13 +32,14 @@ const assignFromCollectionOrInstance = ({ data, fields, boolFields, target }) =>
     }
 
     if (_isArray(toParse[0]) || _isObject(toParse[0])) {
-      const collection = target.constructor.unserialize(toParse)
+      const collection = instance.constructor.unserialize(toParse)
       target._collection = collection
 
       Object.assign(target, collection) // needed for [] access
       target.length = collection.length
 
-      target[Symbol.iterator] = function () {
+      // Up to the caller to assign onto Symbol.iterator key
+      target._iterator = function () {
         return {
           _i: -1,
           next: function () {
@@ -47,7 +52,7 @@ const assignFromCollectionOrInstance = ({ data, fields, boolFields, target }) =>
         }
       }
     } else {
-      Object.assign(target, target.constructor.unserialize(toParse))
+      Object.assign(target, instance.constructor.unserialize(toParse))
     }
   }
 }

@@ -39,7 +39,9 @@ class Wallet extends Model {
    *   or multiple in object or array format
    */
   constructor (data) {
-    super({ data, fields })
+    const parsedData = {}
+    super({ data, fields, parsedData })
+    Model.setParsedProperties(this, parsedData)
   }
 
   /**

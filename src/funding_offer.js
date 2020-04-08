@@ -13,25 +13,8 @@ const stringValidator = require('./validators/string')
 const symbolValidator = require('./validators/symbol')
 const Model = require('./model')
 
-const statuses = ['ACTIVE', 'EXECUTED', 'PARTIALLY FILLED', 'CANCELED']
-const boolFields = ['notify', 'hidden', 'renew']
-const fields = {
-  id: 0,
-  symbol: 1,
-  mtsCreate: 2,
-  mtsUpdate: 3,
-  amount: 4,
-  amountOrig: 5,
-  type: 6,
-  flags: 9,
-  status: 10,
-  rate: 14,
-  period: 15,
-  notify: 16,
-  hidden: 17,
-  renew: 19,
-  rateReal: 20
-}
+/** @typedef { import("./types/jsdoc/rest2").RESTv2 } RESTv2 */
+/** @typedef { import("./types/jsdoc/ws2").WSv2 } WSv2 */
 
 /**
  * Plain funding offer object used to instantiate model
@@ -60,14 +43,94 @@ const fields = {
  * @extends Model
  */
 class FundingOffer extends Model {
+  static type = {
+    LEND: 'lend',
+    LOAN: 'loan'
+  }
+
+  static statuses = ['ACTIVE', 'EXECUTED', 'PARTIALLY FILLED', 'CANCELED'];
+  static BOOL_FIELDS = ['notify', 'hidden', 'renew'];
+  static FIELD_INDEX_MAPPING = {
+    id: 0,
+    symbol: 1,
+    mtsCreate: 2,
+    mtsUpdate: 3,
+    amount: 4,
+    amountOrig: 5,
+    type: 6,
+    flags: 9,
+    status: 10,
+    rate: 14,
+    period: 15,
+    notify: 16,
+    hidden: 17,
+    renew: 19,
+    rateReal: 20
+  }
+
+  /** @type {number} */
+  id;
+
+  /** @type {string} */
+  symbol;
+
+  /** @type {number} */
+  mtsCreate;
+
+  /** @type {number} */
+  mtsUpdate;
+
+  /** @type {number} */
+  amount;
+
+  /** @type {number} */
+  amountOrig;
+
+  /** @type {string} */
+  type;
+
+  /** @type {number} */
+  flags;
+
+  /** @type {string} */
+  status;
+
+  /** @type {number} */
+  rate;
+
+  /** @type {number} */
+  period;
+
+  /** @type {number|boolean} */
+  notify;
+
+  /** @type {number|boolean} */
+  hidden;
+
+  /** @type {number|boolean} */
+  renew;
+
+  /** @type {number} */
+  rateReal;
+
   /**
    * @param {FundingOfferData|FundingOfferData[]|Array|Array[]} data - funding
    *   offer data, one or multiple in object or array format
-   * @param {object} [apiInterface] - rest or websocket object capable of
+   * @param {WSv2|RESTv2} [apiInterface] - rest or websocket object capable of
    *   submitting funding offers
    */
-  constructor (data = {}, apiInterface) {
-    super({ data, fields, boolFields })
+  constructor (data, apiInterface) {
+    const parsedData = {}
+
+    super({
+      fields: FundingOffer.FIELD_INDEX_MAPPING,
+      boolFields: FundingOffer.BOOL_FIELDS,
+      parsedData,
+      data
+    })
+
+    Model.setParsedProperties(this, parsedData)
+
     this._apiInterface = apiInterface
   }
 
@@ -76,7 +139,11 @@ class FundingOffer extends Model {
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserializeWithDataDefinition({ data, fields, boolFields })
+    return super.unserializeWithDataDefinition({
+      fields: FundingOffer.FIELD_INDEX_MAPPING,
+      boolFields: FundingOffer.BOOL_FIELDS,
+      data
+    })
   }
 
   /**
@@ -185,7 +252,8 @@ class FundingOffer extends Model {
   static validate (data) {
     return super.validateWithDataDefinition({
       data,
-      fields,
+      boolFields: FundingOffer.BOOL_FIELDS,
+      fields: FundingOffer.FIELD_INDEX_MAPPING,
       validators: {
         mtsCreate: dateValidator,
         mtsUpdate: dateValidator,
@@ -211,11 +279,8 @@ class FundingOffer extends Model {
 }
 
 FundingOffer.status = {}
-FundingOffer.type = {
-  LEND: 'lend',
-  LOAN: 'loan'
-}
-
-statuses.forEach(s => (FundingOffer.status[s.split(' ').join('_')] = s))
+FundingOffer.statuses.forEach(s => (
+  FundingOffer.status[s.split(' ').join('_')] = s
+))
 
 module.exports = FundingOffer

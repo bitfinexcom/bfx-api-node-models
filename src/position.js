@@ -1,5 +1,6 @@
 'use strict'
 
+const _keys = require('lodash/keys')
 const _compact = require('lodash/compact')
 const _flatten = require('lodash/flatten')
 const _isEmpty = require('lodash/isEmpty')
@@ -14,34 +15,8 @@ const dateValidator = require('./validators/date')
 const Model = require('./model')
 const Order = require('./order')
 
-/**
- * @typedef { import("./types/rest2").RESTv2 } RESTv2
- */
-
-/**
- * @typedef { import("./types/ws2").WSv2 } WSv2
- */
-
-const statuses = ['ACTIVE', 'CLOSED']
-const fields = {
-  symbol: 0,
-  status: 1,
-  amount: 2,
-  basePrice: 3,
-  marginFunding: 4,
-  marginFundingType: 5,
-  pl: 6,
-  plPerc: 7,
-  liquidationPrice: 8,
-  leverage: 9,
-  id: 11,
-  mtsCreate: 12,
-  mtsUpdate: 13,
-  type: 15,
-  collateral: 17,
-  collateralMin: 18,
-  meta: 19
-}
+/** @typedef { import("./types/jsdoc/rest2").RESTv2 } RESTv2 */
+/** @typedef { import("./types/jsdoc/ws2").WSv2 } WSv2 */
 
 /**
  * Plain position object used to instantiate model
@@ -72,6 +47,84 @@ const fields = {
  * @extends Model
  */
 class Position extends Model {
+  static status = {
+    CLOSED: 0,
+    ACTIVE: 1
+  };
+
+  static statuses = _keys(Position.status);
+
+  static FIELD_INDEX_MAPPING = {
+    symbol: 0,
+    status: 1,
+    amount: 2,
+    basePrice: 3,
+    marginFunding: 4,
+    marginFundingType: 5,
+    pl: 6,
+    plPerc: 7,
+    liquidationPrice: 8,
+    leverage: 9,
+    id: 11,
+    mtsCreate: 12,
+    mtsUpdate: 13,
+    type: 15,
+    collateral: 17,
+    collateralMin: 18,
+    meta: 19
+  };
+
+  /** @type {string} */
+  symbol;
+
+  /** @type {string} */
+  status;
+
+  /** @type {number} */
+  amount;
+
+  /** @type {number} */
+  basePrice;
+
+  /** @type {number} */
+  marginFunding;
+
+  /** @type {string} */
+  marginFundingType;
+
+  /** @type {number|null} */
+  pl;
+
+  /** @type {number|null} */
+  plPerc;
+
+  /** @type {number} */
+  liquidationPrice;
+
+  /** @type {number|null} */
+  leverage;
+
+  /** @type {number} */
+  id;
+
+  /** @type {number} */
+  mtsCreate;
+
+  /** @type {number} */
+  mtsUpdate;
+
+  /** @type {string} */
+  type;
+
+  /** @type {number} */
+  collateral;
+
+  /** @type {number} */
+  collateralMin;
+
+  /** @type {object} */
+  meta;
+
   /**
    * @param {PositionData[]|PositionData|Array[]|Array} data - position data,
    *   one or multiple in object or array format
@@ -79,7 +132,16 @@ class Position extends Model {
    *   capable of submitting position changes
    */
   constructor (data, apiInterface) {
-    super({ data, fields })
+    const parsedData = {}
+
+    super({
+      fields: Position.FIELD_INDEX_MAPPING,
+      parsedData,
+      data
+    })
+
+    Model.setParsedProperties(this, parsedData)
+
     this._apiInterface = apiInterface
   }
 
@@ -88,7 +150,10 @@ class Position extends Model {
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserializeWithDataDefinition({ data, fields })
+    return super.unserializeWithDataDefinition({
+      fields: Position.FIELD_INDEX_MAPPING,
+      data
+    })
   }
 
   /**
@@ -148,7 +213,7 @@ class Position extends Model {
    */
   toString () {
     const {
-      symbol = '', amount, price, status, id, basePrice, marginFunding, pl,
+      symbol = '', amount, status, id, basePrice, marginFunding, pl,
       liquidationPrice
     } = this
 
@@ -162,7 +227,6 @@ class Position extends Model {
       'for',
       prepareAmount(amount),
       '@',
-      preparePrice(price),
       `(base price ${preparePrice(basePrice)})`,
       'pl',
       prepareAmount(pl),
@@ -182,7 +246,7 @@ class Position extends Model {
   static validate (data) {
     return super.validateWithDataDefinition({
       data,
-      fields,
+      fields: Position.FIELD_INDEX_MAPPING,
       validators: {
         symbol: symbolValidator,
         status: stringValidator,
@@ -204,8 +268,5 @@ class Position extends Model {
     })
   }
 }
-
-Position.status = {}
-statuses.forEach(s => (Position.status[s] = s))
 
 module.exports = Position

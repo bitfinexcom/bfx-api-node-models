@@ -10,16 +10,6 @@ const _isUndefined = require('lodash/isUndefined')
 const _flatten = require('lodash/flatten')
 const _compact = require('lodash/compact')
 const Model = require('./model')
-const fields = {
-  id: 0,
-  symbol: 1,
-  mtsCreate: 2,
-  offerID: 3,
-  amount: 4,
-  rate: 5,
-  period: 6,
-  maker: 7
-}
 
 /**
  * Plain funding trade object used to instantiate model
@@ -41,12 +31,55 @@ const fields = {
  * @extends Model
  */
 class FundingTrade extends Model {
+  static FIELD_INDEX_MAPPING = {
+    id: 0,
+    symbol: 1,
+    mtsCreate: 2,
+    offerID: 3,
+    amount: 4,
+    rate: 5,
+    period: 6,
+    maker: 7
+  };
+
+  /** @type {number} */
+  id;
+
+  /** @type {string} */
+  symbol;
+
+  /** @type {number} */
+  mtsCreate;
+
+  /** @type {number} */
+  offerID;
+
+  /** @type {number} */
+  amount;
+
+  /** @type {number} */
+  rate;
+
+  /** @type {number} */
+  period;
+
+  /** @type {number} */
+  maker;
+
   /**
    * @param {FundingTradeData[]|FundingTradeData|Array[]|Array} data - funding
    *   trade data, one or multiple in object or array format
    */
   constructor (data) {
-    super({ data, fields })
+    const parsedData = {}
+
+    super({
+      fields: FundingTrade.FIELD_INDEX_MAPPING,
+      parsedData,
+      data
+    })
+
+    Model.setParsedProperties(this, parsedData)
   }
 
   /**
@@ -54,7 +87,10 @@ class FundingTrade extends Model {
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserializeWithDataDefinition({ data, fields })
+    return super.unserializeWithDataDefinition({
+      fields: FundingTrade.FIELD_INDEX_MAPPING,
+      data
+    })
   }
 
   /**
@@ -68,14 +104,16 @@ class FundingTrade extends Model {
       id, symbol, mtsCreate, amount, rate, period, maker
     } = this
 
-    return _compact(_flatten([
+    const tokens = [
       `(${id})`,
       symbol,
       new Date(mtsCreate).toLocaleString(),
       [amount, '@', rate],
       ['period', period],
       !_isUndefined(maker) && maker ? 'maker' : 'taker'
-    ])).join(' ')
+    ]
+
+    return _compact(_flatten(tokens)).join(' ')
   }
 
   /**
@@ -88,7 +126,7 @@ class FundingTrade extends Model {
   static validate (data) {
     return super.validateWithDataDefinition({
       data,
-      fields,
+      fields: FundingTrade.FIELD_INDEX_MAPPING,
       validators: {
         id: numberValidator,
         symbol: symbolValidator,

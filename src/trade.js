@@ -16,21 +16,6 @@ const symbolValidator = require('./validators/symbol')
 const Order = require('./order')
 const Model = require('./model')
 
-const boolFields = ['maker']
-const fields = {
-  id: 0,
-  symbol: 1,
-  mtsCreate: 2,
-  orderID: 3,
-  execAmount: 4,
-  execPrice: 5,
-  orderType: 6,
-  orderPrice: 7,
-  maker: 8,
-  fee: 9,
-  feeCurrency: 10
-}
-
 /**
  * Plain account trade object used to instantiate model
  *
@@ -54,12 +39,69 @@ const fields = {
  * @extends Model
  */
 class Trade extends Model {
+  static BOOL_FIELDS = ['maker']
+  static FIELD_INDEX_MAPPING = {
+    id: 0,
+    symbol: 1,
+    mtsCreate: 2,
+    orderID: 3,
+    execAmount: 4,
+    execPrice: 5,
+    orderType: 6,
+    orderPrice: 7,
+    maker: 8,
+    fee: 9,
+    feeCurrency: 10
+  };
+
+  /** @type {number} */
+  id;
+
+  /** @type {string} */
+  symbol;
+
+  /** @type {number} */
+  mtsCreate;
+
+  /** @type {number} */
+  orderID;
+
+  /** @type {string} */
+  execAmount;
+
+  /** @type {string} */
+  execPrice;
+
+  /** @type {string} */
+  orderType;
+
+  /** @type {string} */
+  orderPrice;
+
+  /** @type {number|boolean} */
+  maker;
+
+  /** @type {string} */
+  fee;
+
+  /** @type {string} */
+  feeCurrency;
+
   /**
    * @param {TradeData[]|TradeData|Array[]|Array} data - trade data, one or
    *   multiple in object or array format
    */
   constructor (data) {
-    super({ data, fields, boolFields })
+    const parsedData = {}
+
+    super({
+      fields: Trade.FIELD_INDEX_MAPPING,
+      boolFields: Trade.BOOL_FIELDS,
+      parsedData,
+      data
+    })
+
+    Model.setParsedProperties(this, parsedData)
   }
 
   /**
@@ -67,7 +109,11 @@ class Trade extends Model {
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserializeWithDataDefinition({ data, fields, boolFields })
+    return super.unserializeWithDataDefinition({
+      fields: Trade.FIELD_INDEX_MAPPING,
+      boolFields: Trade.BOOL_FIELDS,
+      data
+    })
   }
 
   /**
@@ -98,7 +144,8 @@ class Trade extends Model {
   static validate (data) {
     return super.validateWithDataDefinition({
       data,
-      fields,
+      boolFields: Trade.BOOL_FIELDS,
+      fields: Trade.FIELD_INDEX_MAPPING,
       validators: {
         id: numberValidator,
         symbol: symbolValidator,

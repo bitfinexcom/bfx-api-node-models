@@ -1,14 +1,24 @@
 'use strict'
 
 const { EventEmitter } = require('events')
-const isCollection = require('./util/is_collection')
-const assignFromCollectionOrInstance = require('./util/assign_from_collection_or_instance')
-const _isArray = require('lodash/isArray')
+const _isFunction = require('lodash/isFunction')
 const _isObject = require('lodash/isObject')
 const _isString = require('lodash/isString')
 const _includes = require('lodash/includes')
+const _isArray = require('lodash/isArray')
 const _isError = require('lodash/isError')
-const _isFunction = require('lodash/isFunction')
+const _keys = require('lodash/keys')
+
+const isCollection = require('./util/is_collection')
+const assignFromCollectionOrInstance = require('./util/assign_from_collection_or_instance')
+
+/**
+ * @typedef {object} AbstractModelInstance
+ * @property {Function} unserialize - must return POJO version of model or
+ *   array of POJOs if model is a collection
+ * @property {Function} serialize - must convert one or more object/class
+ *   models to array format
+ */
 
 /**
  * Base model class, providing format-conversion methods
@@ -19,10 +29,12 @@ class Model extends EventEmitter {
   /**
    * @param {object} params - model parameters
    * @param {object[]|object|Array} [params.data] - model data
+   * @param {object} [params.parsedData] - object to receive initialized model
+   *   data; needs to be merged onto child class instance
    * @param {object} [params.fields] - field definitions, { [index]: key }
    * @param {string[]} [params.boolFields] - array of boolean field keys, default empty
    */
-  constructor ({ data, fields = {}, boolFields = [] } = {}) {
+  constructor ({ data, parsedData = {}, fields = {}, boolFields = [] } = {}) {
     super()
 
     this._fields = fields
@@ -33,7 +45,8 @@ class Model extends EventEmitter {
         data,
         fields,
         boolFields,
-        target: this
+        instance: this,
+        target: parsedData
       })
     }
   }
@@ -67,7 +80,11 @@ class Model extends EventEmitter {
    * @returns {object} pojo
    */
   toJS () {
-    return this.constructor.unserialize(this.serialize())
+    const m = /** @type {AbstractModelInstance} */ (
+      /** @type {unknown} */ (this.constructor)
+    )
+
+    return m.unserialize(m.serialize())
   }
 
   /**
@@ -155,6 +172,27 @@ class Model extends EventEmitter {
     }
 
     return null
+  }
+
+  /**
+   * Helper to apply parsed data from {@link Model#constructor} to class
+   * instance
+   *
+   * @param {object} model - model instance
+   * @param {object} parsedData - parsed data
+   */
+  static setParsedProperties (model, parsedData) {
+    _keys(parsedData).forEach(k => { model[k] = parsedData[k] })
+
+    // Typescript does not allow symbols as keys, due to no issue w/ index
+    // signature, hence cast symbol -> unknown -> string
+    if (parsedData._iterator) {
+      const key = (/** @type {string} */ (/** @type {unknown} */ (
+        Symbol.iterator
+      )))
+
+      model[key] = parsedData._iterator
+    }
   }
 }
 

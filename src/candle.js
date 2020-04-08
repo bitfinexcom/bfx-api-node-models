@@ -35,7 +35,9 @@ class Candle extends Model {
    *   multiple in object or array format
    */
   constructor (data) {
-    super({ data, fields })
+    const parsedData = {}
+    super({ data, fields, parsedData })
+    Model.setParsedProperties(this, parsedData)
   }
 
   /**

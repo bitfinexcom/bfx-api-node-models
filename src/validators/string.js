@@ -7,7 +7,7 @@ const _isString = require('lodash/isString')
  * Validates a string
  *
  * @param {*} v - value
- * @param {string[]} validOptions - optional
+ * @param {string[]} [validOptions] - optional
  * @returns {string} error - null if valid
  */
 module.exports = (v, validOptions) => (

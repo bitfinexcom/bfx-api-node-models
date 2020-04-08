@@ -1,0 +1,19 @@
+{
+  "extends": "@istanbuljs/nyc-config-babel",
+  "all": true,
+  "check-coverage": true,
+  "reporter": [
+    "html",
+    "lcov"
+  ],
+
+  "lines": 90,
+  "branches": 60,
+  "functions": 90,
+  "statements": 90,
+
+  "exclude": [
+    "**/test/**",
+    "**/lib/**"
+  ]
+}

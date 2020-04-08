@@ -65,7 +65,9 @@ class FundingLoan extends Model {
    *   loan data, one or multiple in object or array format
    */
   constructor (data) {
-    super({ data, fields, boolFields })
+    const parsedData = {}
+    super({ data, fields, boolFields, parsedData })
+    Model.setParsedProperties(this, parsedData)
   }
 
   /**

@@ -26,12 +26,10 @@ const fields = {
  * @extends Model
  */
 class Alert extends Model {
-  /**
-   * @param {AlertData|AlertData[]|Array|Array[]} data - alert data, one or
-   *   multiple in object or array format
-   */
   constructor (data) {
-    super({ data, fields })
+    const parsedData = {}
+    super({ data, parsedData })
+    Model.setParsedProperties(this, parsedData)
   }
 
   /**

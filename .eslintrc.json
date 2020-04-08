@@ -1,14 +1,39 @@
 {
-  "plugins": [
-    "jsdoc",
-    "mocha"
-  ],
-
   "env": {
     "es6": true,
     "node": true,
     "es2020": true
   },
+
+  "parser": "babel-eslint",
+
+  "parserOptions": {
+    "ecmaVersion": 2020
+  },
+
+  "plugins": [
+    "@typescript-eslint",
+    "jsdoc",
+    "mocha"
+  ],
+
+  "overrides": [{
+    "files": ["**/*.ts"],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "project": "./tsconfig.json"
+    },
+
+    "extends": [
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:@typescript-eslint/recommended-requiring-type-checking"
+    ],
+
+    "rules": {
+      "@typescript-eslint/no-var-requires": 0
+    }
+  }],
 
   "extends": [
     "standard",
@@ -21,10 +46,6 @@
     "plugin:mocha/recommended",
     "plugin:jsdoc/recommended"
   ],
-
-  "parserOptions": {
-    "ecmaVersion": 2020
-  },
 
   "rules": {
     "jsdoc/check-tag-names": 0,

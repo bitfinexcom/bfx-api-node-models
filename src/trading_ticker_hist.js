@@ -4,12 +4,6 @@ const symbolValidator = require('./validators/symbol')
 const priceValidator = require('./validators/price')
 const dateValidator = require('./validators/date')
 const Model = require('./model')
-const fields = {
-  symbol: 0,
-  bid: 1,
-  ask: 3,
-  mtsUpdate: 12
-}
 
 /**
  * Plain historical trading ticker object used to instantiate model
@@ -27,13 +21,40 @@ const fields = {
  * @extends Model
  */
 class TradingTickerHist extends Model {
+  /** @type {string} */
+  symbol;
+
+  /** @type {string} */
+  bid;
+
+  /** @type {string} */
+  ask;
+
+  /** @type {number} */
+  mtsUpdate;
+
+  static FIELD_INDEX_MAPPING = {
+    symbol: 0,
+    bid: 1,
+    ask: 3,
+    mtsUpdate: 12
+  };
+
   /**
    * @param {TradingTickerHistData[]|TradingTickerHistData|Array[]|Array} data -
    *   historical trading ticker data, one or multiple in object or array
    *   format
    */
   constructor (data) {
-    super({ data, fields })
+    const parsedData = {}
+
+    super({
+      fields: TradingTickerHist.FIELD_INDEX_MAPPING,
+      parsedData,
+      data
+    })
+
+    Model.setParsedProperties(this, parsedData)
   }
 
   /**
@@ -41,7 +62,10 @@ class TradingTickerHist extends Model {
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserializeWithDataDefinition({ data, fields })
+    return super.unserializeWithDataDefinition({
+      fields: TradingTickerHist.FIELD_INDEX_MAPPING,
+      data
+    })
   }
 
   /**
@@ -72,7 +96,7 @@ class TradingTickerHist extends Model {
   static validate (data) {
     return super.validateWithDataDefinition({
       data,
-      fields,
+      fields: TradingTickerHist.FIELD_INDEX_MAPPING,
       validators: {
         symbol: symbolValidator,
         bid: priceValidator,

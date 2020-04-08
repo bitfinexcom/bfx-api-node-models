@@ -5,19 +5,6 @@ const amountValidator = require('./validators/amount')
 const priceValidator = require('./validators/price')
 const symbolValidator = require('./validators/symbol')
 const Model = require('./model')
-const fields = {
-  symbol: 0,
-  bid: 1,
-  bidSize: 2,
-  ask: 3,
-  askSize: 4,
-  dailyChange: 5,
-  dailyChangePerc: 6,
-  lastPrice: 7,
-  volume: 8,
-  high: 9,
-  low: 10
-}
 
 /**
  * Plain trading ticker object used to instantiate model
@@ -42,12 +29,67 @@ const fields = {
  * @extends Model
  */
 class TradingTicker extends Model {
+  static FIELD_INDEX_MAPPING = {
+    symbol: 0,
+    bid: 1,
+    bidSize: 2,
+    ask: 3,
+    askSize: 4,
+    dailyChange: 5,
+    dailyChangePerc: 6,
+    lastPrice: 7,
+    volume: 8,
+    high: 9,
+    low: 10
+  };
+
+  /** @type {string} */
+  symbol;
+
+  /** @type {number} */
+  bid;
+
+  /** @type {number} */
+  bidSize;
+
+  /** @type {number} */
+  ask;
+
+  /** @type {number} */
+  askSize;
+
+  /** @type {number} */
+  dailyChange;
+
+  /** @type {number} */
+  dailyChangePerc;
+
+  /** @type {number} */
+  lastPrice;
+
+  /** @type {number} */
+  volume;
+
+  /** @type {number} */
+  high;
+
+  /** @type {number} */
+  low;
+
   /**
    * @param {TradingTickerData[]|TradingTickerData|Array[]|Array} data - trading
    *   ticker data, one or multiple in object or array format
    */
   constructor (data) {
-    super({ data, fields })
+    const parsedData = {}
+
+    super({
+      fields: TradingTicker.FIELD_INDEX_MAPPING,
+      parsedData,
+      data
+    })
+
+    Model.setParsedProperties(this, parsedData)
   }
 
   /**
@@ -55,7 +97,10 @@ class TradingTicker extends Model {
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserializeWithDataDefinition({ data, fields })
+    return super.unserializeWithDataDefinition({
+      fields: TradingTicker.FIELD_INDEX_MAPPING,
+      data
+    })
   }
 
   /**
@@ -86,7 +131,7 @@ class TradingTicker extends Model {
   static validate (data) {
     return super.validateWithDataDefinition({
       data,
-      fields,
+      fields: TradingTicker.FIELD_INDEX_MAPPING,
       validators: {
         symbol: symbolValidator,
         bid: priceValidator,

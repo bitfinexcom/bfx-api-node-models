@@ -6,22 +6,6 @@ const symbolValidator = require('./validators/symbol')
 const priceValidator = require('./validators/price')
 const boolValidator = require('./validators/bool')
 const Model = require('./model')
-const fields = {
-  symbol: 0,
-  frr: 1,
-  bid: 2,
-  bidSize: 3,
-  bidPeriod: 4,
-  ask: 5,
-  askSize: 6,
-  askPeriod: 7,
-  dailyChange: 8,
-  dailyChangePerc: 9,
-  lastPrice: 10,
-  volume: 11,
-  high: 12,
-  low: 13
-}
 
 /**
  * Plain funding ticker object used to instantiate model
@@ -47,12 +31,79 @@ const fields = {
  * Funding Ticker model
  */
 class FundingTicker extends Model {
+  static FIELD_INDEX_MAPPING = {
+    symbol: 0,
+    frr: 1,
+    bid: 2,
+    bidSize: 3,
+    bidPeriod: 4,
+    ask: 5,
+    askSize: 6,
+    askPeriod: 7,
+    dailyChange: 8,
+    dailyChangePerc: 9,
+    lastPrice: 10,
+    volume: 11,
+    high: 12,
+    low: 13
+  }
+
+  /** @type {string} */
+  symbol;
+
+  /** @type {number} */
+  frr;
+
+  /** @type {number} */
+  bid;
+
+  /** @type {number} */
+  bidSize;
+
+  /** @type {number} */
+  bidPeriod;
+
+  /** @type {number} */
+  ask;
+
+  /** @type {number} */
+  askSize;
+
+  /** @type {number} */
+  askPeriod;
+
+  /** @type {number} */
+  dailyChange;
+
+  /** @type {number} */
+  dailyChangePerc;
+
+  /** @type {number} */
+  lastPrice;
+
+  /** @type {number} */
+  volume;
+
+  /** @type {number} */
+  high;
+
+  /** @type {number} */
+  low;
+
   /**
    * @param {FundingTickerData[]|FundingTickerData|Array[]|Array} data - funding
    *   ticker data, one or multiple in object or array format
    */
   constructor (data) {
-    super({ data, fields })
+    const parsedData = {}
+
+    super({
+      fields: FundingTicker.FIELD_INDEX_MAPPING,
+      parsedData,
+      data
+    })
+
+    Model.setParsedProperties(this, parsedData)
   }
 
   /**
@@ -60,7 +111,10 @@ class FundingTicker extends Model {
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserializeWithDataDefinition({ data, fields })
+    return super.unserializeWithDataDefinition({
+      fields: FundingTicker.FIELD_INDEX_MAPPING,
+      data
+    })
   }
 
   /**
@@ -91,7 +145,7 @@ class FundingTicker extends Model {
   static validate (data) {
     return super.validateWithDataDefinition({
       data,
-      fields,
+      fields: FundingTicker.FIELD_INDEX_MAPPING,
       validators: {
         symbol: symbolValidator,
         frr: boolValidator,

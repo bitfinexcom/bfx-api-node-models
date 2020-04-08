@@ -15,11 +15,37 @@ const { preparePrice } = require('bfx-api-node-util')
  */
 
 /**
+ * Transformed order book price level
+ *
+ * @typedef {object} TransformedOrderBookPriceLevel
+ * @property {number} amount - total amount at level
+ * @property {number} [period] - period for funding entries
+ * @property {number} [rate] - demanded rate for funding entries
+ * @property {number} [price] - price of level for trading entries
+ * @property {number} [count] - number of orders at level if not raw
+ * @property {number} [orderID] - ID of order if a raw level
+ */
+
+/**
+ * Raw array-format order book, as received via the API
+ *
+ * @typedef {Array<OrderBookPriceLevel>} OrderBookAsArray
+ */
+
+/**
+ * Transformed order book data
+ *
+ * @typedef {object} TransformedOrderBookData
+ * @property {Array<TransformedOrderBookPriceLevel>} bids - bid levels
+ * @property {Array<TransformedOrderBookPriceLevel>} asks - ask levels
+ */
+
+/**
  * Order book data for model instantiation
  *
  * @typedef {object} OrderBookData
- * @property {Array<OrderBookPriceLevel>} bids - bid levels
- * @property {Array<OrderBookPriceLevel>} asks - ask levels
+ * @property {OrderBookAsArray} bids - bid levels
+ * @property {OrderBookAsArray} asks - ask levels
  */
 
 /**
@@ -31,7 +57,7 @@ class OrderBook extends EventEmitter {
   /**
    * Initializes the order book with an existing snapshot (array form)
    *
-   * @param {Array<Array<number>>|OrderBookData|OrderBook} snap - order book snapshot
+   * @param {OrderBookAsArray|OrderBookData|OrderBook} snap - order book snapshot
    * @param {boolean} [raw] - true for raw 'R0' order books
    */
   constructor (snap = [], raw = false) {
@@ -39,17 +65,27 @@ class OrderBook extends EventEmitter {
 
     this.raw = raw
 
+    /** @type {OrderBookAsArray} */
+    this.bids = []
+
+    /** @type {OrderBookAsArray} */
+    this.asks = []
+
     if (snap instanceof OrderBook) {
       this.bids = snap.bids.slice()
       this.asks = snap.asks.slice()
     } else if (_isArray(snap)) {
       this.updateFromSnapshot(snap)
-    } else if (_isObject(snap) && _isArray(snap.bids) && _isArray(snap.asks)) {
-      this.bids = snap.bids.slice()
-      this.asks = snap.asks.slice()
-    } else {
-      this.bids = []
-      this.asks = []
+    } else if (_isObject(snap)) {
+      const bookData = /** @type {OrderBookData} */ (snap)
+
+      if (_isArray(bookData.bids)) {
+        this.bids = bookData.bids.slice()
+      }
+
+      if (_isArray(bookData.asks)) {
+        this.asks = bookData.asks.slice()
+      }
     }
   }
 
@@ -110,29 +146,37 @@ class OrderBook extends EventEmitter {
       const ask = this.asks[i]
 
       if (bid) {
-        let price = bid[0]
         const amount = bid.length === 4 ? bid[3] : bid[2]
+        const price = bid[0]
+        let parsedPrice = `${price}`
+
+        // i.e. 1.7e-7 to fixed
         if (!raw && !_isString(price)) {
-          price = Number(preparePrice(price))
-          price = /e/.test(price + '')
-            ? price.toFixed(Math.abs(+(price + '').split('e')[1]) + 1) // i.e. 1.7e-7 to fixed
-            : price
+          if (/e/.test(`${price}`)) {
+            parsedPrice = price.toFixed(Math.abs(+(`${price}`).split('e')[1]) + 1)
+          } else {
+            parsedPrice = preparePrice(price)
+          }
         }
 
-        data.push(price, amount)
+        data.push(parsedPrice, amount)
       }
 
       if (ask) {
-        let price = ask[0]
         const amount = ask.length === 4 ? ask[3] : ask[2]
+        const price = ask[0]
+        let parsedPrice = `${price}`
+
+        // i.e. 1.7e-7 to fixed
         if (!raw && !_isString(price)) {
-          price = Number(preparePrice(price))
-          price = /e/.test(price + '')
-            ? price.toFixed(Math.abs(+(price + '').split('e')[1]) + 1) // i.e. 1.7e-7 to fixed
-            : price
+          if (/e/.test(`${price}`)) {
+            parsedPrice = price.toFixed(Math.abs(+(`${price}`).split('e')[1]) + 1)
+          } else {
+            parsedPrice = preparePrice(price)
+          }
         }
 
-        data.push(price, amount)
+        data.push(parsedPrice, amount)
       }
     }
 
@@ -142,7 +186,7 @@ class OrderBook extends EventEmitter {
   /**
    * Like checksum(), but for raw array-format order books
    *
-   * @param {Array[]} arr - assumed sorted, [topBid, bid, ..., topAsk, ask, ...]
+   * @param {OrderBookAsArray} arr - assumed sorted, [topBid, bid, ..., topAsk, ask, ...]
    * @param {boolean} [raw] - true for raw 'R0' order books
    * @returns {number} cs
    */
@@ -173,33 +217,48 @@ class OrderBook extends EventEmitter {
         : arr[topAskI + i]
 
       if (bid) {
-        let price = bid[0]
         const amount = bid.length === 4 ? bid[3] : bid[2]
+        const price = bid[0]
+        let parsedPrice = `${price}`
+
+        // i.e. 1.7e-7 to fixed
         if (!raw && !_isString(price)) {
-          price = Number(preparePrice(price))
-          price = /e/.test(price + '')
-            ? price.toFixed(Math.abs(+(price + '').split('e')[1]) + 1) // i.e. 1.7e-7 to fixed
-            : price
+          if (/e/.test(`${price}`)) {
+            parsedPrice = price.toFixed(Math.abs(+(`${price}`).split('e')[1]) + 1)
+          } else {
+            parsedPrice = preparePrice(price)
+          }
         }
-        data.push(price, amount)
+
+        data.push(parsedPrice, amount)
       }
 
       if (ask) {
-        let price = ask[0]
         const amount = ask.length === 4 ? ask[3] : ask[2]
+        const price = ask[0]
+        let parsedPrice = `${price}`
+
+        // i.e. 1.7e-7 to fixed
         if (!raw && !_isString(price)) {
-          price = Number(preparePrice(price))
-          price = /e/.test(price + '')
-            ? price.toFixed(Math.abs(+(price + '').split('e')[1]) + 1) // i.e. 1.7e-7 to fixed
-            : price
+          if (/e/.test(`${price}`)) {
+            parsedPrice = price.toFixed(Math.abs(+(`${price}`).split('e')[1]) + 1)
+          } else {
+            parsedPrice = preparePrice(price)
+          }
         }
-        data.push(price, amount)
+
+        data.push(parsedPrice, amount)
       }
     }
 
     return CRC.str(data.join(':'))
   }
 
+  /**
+   * Performs a full update from a snapshot
+   *
+   * @param {OrderBookAsArray} snapshot - snapshot
+   */
   updateFromSnapshot (snapshot) {
     this.bids = []
     this.asks = []
@@ -229,7 +288,7 @@ class OrderBook extends EventEmitter {
    * Integrate an update packet (add, update, or remove a price level). Emits an
    * 'update' event on success
    *
-   * @param {Array} entry - price level to update with
+   * @param {OrderBookPriceLevel} entry - price level to update with
    * @returns {boolean} success - false if entry doesn't match OB
    */
   updateWith (entry) {
@@ -503,6 +562,13 @@ class OrderBook extends EventEmitter {
     return true
   }
 
+  /**
+   * Get the mid price of an array-format order book
+   *
+   * @param {OrderBookAsArray} ob - array-format book
+   * @param {boolean} [raw] - indicates raw book
+   * @returns {number|null} midPrice
+   */
   static arrayOBMidPrice (ob = [], raw = false) {
     if (ob.length === 0) return null
 
@@ -529,39 +595,45 @@ class OrderBook extends EventEmitter {
    * Converts an array order book entry or snapshot to an object, with 'price',
    * 'count', and 'amount' keys on entries
    *
-   * @param {number[]|number[][]} arr - array format order book
+   * @param {OrderBookPriceLevel|OrderBookAsArray} arr - array format order book
    * @param {boolean} [raw] - true for raw 'R0' order books
-   * @returns {object} ob - either a map w/ bids & asks, or single entry object
+   * @returns {TransformedOrderBookData|TransformedOrderBookPriceLevel} ob
    */
   static unserialize (arr, raw = false) {
-    if (Array.isArray(arr[0])) {
-      const entries = (/** @type {number[][]} */ (arr)).map(e => OrderBook.unserialize(e, raw))
+    if (_isArray(arr[0])) {
+      const snapshot = /** @type {OrderBookAsArray} */ (arr)
+      const entries = /** @type {Array<TransformedOrderBookPriceLevel>} */ (
+        snapshot.map(e => OrderBook.unserialize(e, raw))
+      )
+
       const bids = entries.filter(e => (e.rate ? -e.amount : e.amount) > 0)
       const asks = entries.filter(e => (e.rate ? -e.amount : e.amount) < 0)
 
       return { bids, asks }
     }
 
-    return arr.length === 4
+    const level = /** @type {OrderBookPriceLevel} */ (arr)
+
+    return level.length === 4
       ? raw ? {
-        orderID: arr[0],
-        period: arr[1],
-        rate: arr[2],
-        amount: arr[3]
+        orderID: level[0],
+        period: level[1],
+        rate: level[2],
+        amount: level[3]
       } : {
-        rate: arr[0],
-        period: arr[1],
-        count: arr[2],
-        amount: arr[3]
+        rate: level[0],
+        period: level[1],
+        count: level[2],
+        amount: level[3]
       }
       : raw ? {
-        orderID: arr[0],
-        price: arr[1],
-        amount: arr[2]
+        orderID: level[0],
+        price: level[1],
+        amount: level[2]
       } : {
-        price: arr[0],
-        count: arr[1],
-        amount: arr[2]
+        price: level[0],
+        count: level[1],
+        amount: level[2]
       }
   }
 }

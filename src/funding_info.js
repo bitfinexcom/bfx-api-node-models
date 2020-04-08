@@ -1,5 +1,6 @@
 'use strict'
 
+const _isEmpty = require('lodash/isEmpty')
 const _isArray = require('lodash/isArray')
 
 const numberValidator = require('./validators/number')
@@ -9,18 +10,54 @@ const isCollection = require('./util/is_collection')
 const Model = require('./model')
 
 /**
+ * Funding info data
+ *
+ * @typedef {object} FundingInfoData
+ * @property {string} [symbol] - symbol
+ * @property {number} yieldLoan - yield loan
+ * @property {number} yieldLend - yield lend
+ * @property {number} durationLoan - duration loan
+ * @property {number} durationLend - duration lend
+ */
+
+/**
+ * Data packet containing funding info data for a symbol
+ *
+ * @typedef {object} FundingInfoEventPacket
+ * @property {string} symbol - symbol
+ * @property {Array<number>} payload - packet data
+ */
+
+/**
  * Account Funding Info model
  *
  * @extends Model
  */
 class FundingInfo extends Model {
+  /** @type {string} */
+  symbol;
+
+  /** @type {number} */
+  yieldLoan;
+
+  /** @type {number} */
+  yieldLend;
+
+  /** @type {number} */
+  durationLoan;
+
+  /** @type {number} */
+  durationLend;
+
   /**
    * Create a new instance from a data payload
    *
    * @param {object[]|object|Array[]|Array} data - funding info data
    */
   constructor (data) {
-    super({ data })
+    const parsedData = {}
+    super({ data, parsedData })
+    Model.setParsedProperties(this, parsedData)
   }
 
   /**
@@ -47,16 +84,30 @@ class FundingInfo extends Model {
    * TODO: Figure out a better object key for 'payload', as we need to support
    *       both arrays and POJOs
    *
-   * @param {Array[]|Array} data - data to convert to POJO
-   * @returns {object} pojo
+   * @param {FundingInfoEventPacket[]|FundingInfoEventPacket} data - data
+   * @returns {FundingInfoData|FundingInfoData[]} pojo
    */
   static unserialize (data) {
     if (isCollection(data)) {
-      return data.map(FundingInfo.unserialize)
+      const collection = /** @type {FundingInfoEventPacket[]} */ (data)
+
+      return (/** @type {FundingInfoData[]} */ (
+        collection.map(FundingInfo.unserialize)
+      ))
     }
 
-    const symbol = _isArray(data) ? data[1] : data.symbol
-    const payload = (_isArray(data) ? data[2] : data.payload) || []
+    let symbol
+    let payload = []
+
+    if (_isArray(data)) {
+      const serializedPacket = /** @type {Array} */ (data)
+      symbol = serializedPacket[1]
+      payload = /** @type {Array<number>} */ (serializedPacket[2])
+    } else {
+      symbol = data.symbol
+      payload = data.payload
+    }
+
     const [yieldLoan, yieldLend, durationLoan, durationLend] = payload
 
     return {
@@ -75,15 +126,18 @@ class FundingInfo extends Model {
    * @returns {Error|null} error - null if instance is valid
    */
   static validate (data) {
-    const { symbol, yieldLoan, yieldLend, durationLoan, durationLend } = this
-
-    return (
+    const { symbol, yieldLoan, yieldLend, durationLoan, durationLend } = data
+    const errorMessage = (
       symbolValidator(symbol) ||
       amountValidator(yieldLoan) ||
       amountValidator(yieldLend) ||
       numberValidator(durationLoan) ||
       numberValidator(durationLend)
     )
+
+    return !_isEmpty(errorMessage)
+      ? new Error(errorMessage)
+      : null
   }
 }
 

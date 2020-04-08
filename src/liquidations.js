@@ -9,15 +9,6 @@ const boolValidator = require('./validators/bool')
 const _flatten = require('lodash/flatten')
 const _compact = require('lodash/compact')
 const Model = require('./model')
-const fields = {
-  posId: 1,
-  mtsUpdated: 2,
-  symbol: 4,
-  amount: 5,
-  basePrice: 6,
-  isMatch: 8,
-  isMarketSold: 9
-}
 
 /**
  * Plain liquidation object used to instantiate model
@@ -38,12 +29,51 @@ const fields = {
  * @extends Model
  */
 class Liquidations extends Model {
+  static FIELD_INDEX_MAPPING = {
+    posId: 1,
+    mtsUpdated: 2,
+    symbol: 4,
+    amount: 5,
+    basePrice: 6,
+    isMatch: 8,
+    isMarketSold: 9
+  };
+
+  /** @type {number} */
+  posId;
+
+  /** @type {number} */
+  mtsUpdated;
+
+  /** @type {string} */
+  symbol;
+
+  /** @type {number} */
+  amount;
+
+  /** @type {number} */
+  basePrice;
+
+  /** @type {number} */
+  isMatch;
+
+  /** @type {number} */
+  isMarketSold;
+
   /**
    * @param {LiquidationData[]|LiquidationData|Array[]|Array} data - liquidation
    *   data, one or multiple in object or array format
    */
   constructor (data) {
-    super({ data, fields })
+    const parsedData = {}
+
+    super({
+      fields: Liquidations.FIELD_INDEX_MAPPING,
+      parsedData,
+      data
+    })
+
+    Model.setParsedProperties(this, parsedData)
   }
 
   /**
@@ -51,7 +81,10 @@ class Liquidations extends Model {
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserializeWithDataDefinition({ data, fields })
+    return super.unserializeWithDataDefinition({
+      fields: Liquidations.FIELD_INDEX_MAPPING,
+      data
+    })
   }
 
   /**
@@ -62,13 +95,15 @@ class Liquidations extends Model {
       mtsUpdated, symbol, amount, basePrice, isMatch, isMarketSold
     } = this
 
-    return _compact(_flatten([
+    const tokens = [
       new Date(mtsUpdated).toLocaleString(),
       symbol,
       [amount, '@', basePrice],
       isMatch && 'matched',
       isMarketSold && 'sold'
-    ])).join(' ')
+    ]
+
+    return _compact(_flatten(tokens)).join(' ')
   }
 
   /**
@@ -81,7 +116,7 @@ class Liquidations extends Model {
   static validate (data) {
     return super.validateWithDataDefinition({
       data,
-      fields,
+      fields: Liquidations.FIELD_INDEX_MAPPING,
       validators: {
         posId: numberValidator,
         mtsUpdated: dateValidator,

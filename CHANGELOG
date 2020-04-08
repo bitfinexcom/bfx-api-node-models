@@ -1,3 +1,17 @@
+# 1.2.5
+- Position fix: non-existent 'price' was included in toString() output, replaced
+  w/ basePrice
+- FundingInfo fix: 'this' instead of argument 'data' access in static validate()
+- FundingInfo fix: static validate() now returns error (was string)
+- MarginInfo fix: static validate() now returns error (was string)
+- FundingOffer fix: static validate() was not using boolFields
+- Order fix: static validate() was not using boolFields
+- meta: fixed incorrect types on static model validate() methods in several
+  places
+- meta: moved model field metadata and enums onto static class members
+- meta: added JSDoc type information for typescript
+- meta: added typescript module definition
+
 # 1.2.4
 - meta: added JSDoc-generated HTML docs
 - meta: standardized linter config

@@ -1,9 +1,11 @@
 'use strict'
 
-const Promise = require('bluebird')
+const Bluebird = require('bluebird') // eslint-disable-line
+
 const _keys = require('lodash/keys')
 const _isFinite = require('lodash/isFinite')
 const _isString = require('lodash/isString')
+const _isObject = require('lodash/isObject')
 const _isEmpty = require('lodash/isEmpty')
 const _compact = require('lodash/compact')
 const _flatten = require('lodash/flatten')
@@ -27,44 +29,10 @@ const types = [
   'EXCHANGE FOK', 'STOP LIMIT', 'EXCHANGE STOP LIMIT'
 ]
 
-const boolFields = ['notify']
-const fields = {
-  id: 0,
-  gid: 1,
-  cid: 2,
-  symbol: 3,
-  mtsCreate: 4,
-  mtsUpdate: 5,
-  amount: 6,
-  amountOrig: 7,
-  type: 8,
-  typePrev: 9,
-  mtsTIF: 10,
-  // placeholder
-  // placeholder
-  flags: 12,
-  status: 13,
-  // placeholder
-  // placeholder
-  price: 16,
-  priceAvg: 17,
-  priceTrailing: 18,
-  priceAuxLimit: 19,
-  // placeholder
-  // placeholder
-  // placeholder
-  notify: 23,
-  hidden: 24,
-  placedId: 25,
-  // placeholder
-  // placeholder
-  routing: 28,
-  // placeholder
-  // placeholder
-  meta: 31
-}
-
 let lastCID = Date.now()
+
+/** @typedef { import("./types/jsdoc/rest2").RESTv2 } RESTv2 */
+/** @typedef { import("./types/jsdoc/ws2").WSv2 } WSv2 */
 
 /**
  * Plain order object used to instantiate model
@@ -100,24 +68,160 @@ let lastCID = Date.now()
  * @extends Model
  */
 class Order extends Model {
+  static BOOL_FIELDS = ['notify'];
+  static FIELD_INDEX_MAPPING = {
+    id: 0,
+    gid: 1,
+    cid: 2,
+    symbol: 3,
+    mtsCreate: 4,
+    mtsUpdate: 5,
+    amount: 6,
+    amountOrig: 7,
+    type: 8,
+    typePrev: 9,
+    mtsTIF: 10,
+    // placeholder
+    // placeholder
+    flags: 12,
+    status: 13,
+    // placeholder
+    // placeholder
+    price: 16,
+    priceAvg: 17,
+    priceTrailing: 18,
+    priceAuxLimit: 19,
+    // placeholder
+    // placeholder
+    // placeholder
+    notify: 23,
+    hidden: 24,
+    placedId: 25,
+    // placeholder
+    // placeholder
+    routing: 28,
+    // placeholder
+    // placeholder
+    meta: 31
+  };
+
+  /** @type {number} */
+  id;
+
+  /** @type {number} */
+  gid;
+
+  /** @type {number} */
+  cid;
+
+  /** @type {string} */
+  symbol;
+
+  /** @type {number} */
+  mtsCreate;
+
+  /** @type {number} */
+  mtsUpdate;
+
+  /** @type {number} */
+  amount;
+
+  /** @type {number} */
+  amountOrig;
+
+  /** @type {string} */
+  type;
+
+  /** @type {string} */
+  typePrev;
+
+  /** @type {number} */
+  mtsTIF;
+
+  /**
+   * Same as Order#mtsTIF, used as shorthand to set it on constructor as tif:
+   *
+   * @type {number}
+   */
+  tif;
+
+  /** @type {number} */
+  flags;
+
+  /** @type {string} */
+  status;
+
+  /** @type {number} */
+  price;
+
+  /** @type {number} */
+  priceAvg;
+
+  /** @type {number} */
+  priceTrailing;
+
+  /** @type {number} */
+  priceAuxLimit;
+
+  /** @type {number|boolean} */
+  notify;
+
+  /** @type {number|boolean} */
+  hidden;
+
+  /** @type {number} */
+  placedId;
+
+  /** @type {string} */
+  routing;
+
+  /** @type {object|null} */
+  meta;
+
   /**
    * @param {OrderData[]|OrderData|Array[]|Array} data - order data, one or
    *   multiple in object or array format
-   * @param {object} [apiInterface] - saved for a later call to registerListeners()
+   * @param {WSv2|RESTv2} [apiInterface] - saved for a later call to registerListeners()
    */
-  constructor (data = {}, apiInterface) {
-    super({ data, fields, boolFields })
+  constructor (data, apiInterface) {
+    const parsedData = {}
 
-    if (!this.flags) this.flags = 0
-    if (!_isUndefined(data.hidden)) this.setHidden(data.hidden)
-    if (!_isUndefined(data.postonly)) this.setPostOnly(data.postonly)
-    if (!_isUndefined(data.reduceonly)) this.setReduceOnly(data.reduceonly)
-    if (!_isUndefined(data.oco)) {
-      this.setOCO(data.oco, data.priceAuxLimit, data.cidOCO)
+    super({
+      fields: Order.FIELD_INDEX_MAPPING,
+      boolFields: Order.BOOL_FIELDS,
+      parsedData,
+      data
+    })
+
+    Model.setParsedProperties(this, parsedData)
+
+    if (!_isFinite(this.flags)) {
+      this.flags = 0
     }
 
-    this.lev = data.lev
-    this.affiliateCode = data.affiliateCode
+    if (_isObject(data)) {
+      const orderData = /** @type {object} */ (data)
+
+      if (!_isUndefined(orderData.hidden)) {
+        this.setHidden(orderData.hidden)
+      }
+
+      if (!_isUndefined(orderData.postonly)) {
+        this.setPostOnly(orderData.postonly)
+      }
+
+      if (!_isUndefined(orderData.reduceonly)) {
+        this.setReduceOnly(orderData.reduceonly)
+      }
+
+      if (!_isUndefined(orderData.oco)) {
+        this.setOCO(orderData.oco, orderData.priceAuxLimit, orderData.cidOCO)
+      }
+
+      this.lev = orderData.lev
+      this.affiliateCode = orderData.affiliateCode
+    }
+
     this._apiInterface = apiInterface
 
     this._onWSOrderNew = this._onWSOrderNew.bind(this)
@@ -133,10 +237,14 @@ class Order extends Model {
 
   /**
    * @param {Array[]|Array} data - data to convert to POJO
-   * @returns {object} pojo
+   * @returns {OrderData|OrderData[]} pojo
    */
   static unserialize (data) {
-    return super.unserializeWithDataDefinition({ data, fields, boolFields })
+    return super.unserializeWithDataDefinition({
+      fields: Order.FIELD_INDEX_MAPPING,
+      boolFields: Order.BOOL_FIELDS,
+      data
+    })
   }
 
   /**
@@ -357,7 +465,7 @@ class Order extends Model {
           this.amount += Number(changes[k])
           this._lastAmount = this.amount // update last amount for fill calcs
         } else {
-          return Promise.reject(new Error('can\'t apply delta to missing amount'))
+          return Bluebird.reject(new Error('can\'t apply delta to missing amount'))
         }
       }
     })
@@ -450,7 +558,7 @@ class Order extends Model {
   /**
    * Submit the order
    *
-   * @param {WSv2|Rest2} apiInterface - optional ws or rest, defaults to internal ws
+   * @param {WSv2|RESTv2} apiInterface - optional ws or rest, defaults to internal ws
    * @returns {Promise} p
    */
   async submit (apiInterface = this._apiInterface) {
@@ -466,7 +574,8 @@ class Order extends Model {
   /**
    * Cancel the order if open
    *
-   * @param {WSv2|Rest2} apiInterface - optional ws or rest, defaults to internal ws
+   * @param {WSv2|RESTv2} apiInterface - optional ws or rest, defaults to
+   *   internal ws
    * @returns {Promise} p
    */
   async cancel (apiInterface = this._apiInterface) {
@@ -479,7 +588,8 @@ class Order extends Model {
   /**
    * Equivalent to calling cancel() followed by submit()
    *
-   * @param {WSv2|RESTv2} apiInterface - optional ws or rest, defaults to internal ws
+   * @param {WSv2|RESTv2} apiInterface - optional ws or rest, defaults to
+   *   internal ws
    * @returns {Promise} p
    */
   async recreate (apiInterface = this._apiInterface) {
@@ -496,10 +606,10 @@ class Order extends Model {
   /**
    * Updates order information from the provided order.
    *
-   * @param {Order} order - order to update from
+   * @param {Order|OrderData} order - order to update from
    * @throws Error if the order ID/CID/GID do not match
    */
-  updateFrom (order = {}) {
+  updateFrom (order) {
     const { id, gid, cid } = order
 
     if (
@@ -512,10 +622,10 @@ class Order extends Model {
     }
 
     this.id = order.id
-    this.amount = order.amount
+    this.amount = +order.amount
     this.status = order.status
     this.mtsUpdate = order.mtsUpdate
-    this.priceAvg = order.priceAvg
+    this.priceAvg = +order.priceAvg
   }
 
   /**
@@ -700,7 +810,8 @@ class Order extends Model {
   static validate (data) {
     return super.validateWithDataDefinition({
       data,
-      fields,
+      boolFields: Order.BOOL_FIELDS,
+      fields: Order.FIELD_INDEX_MAPPING,
       validators: {
         symbol: symbolValidator,
         id: numberValidator,

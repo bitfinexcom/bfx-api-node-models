@@ -40,7 +40,9 @@ class WalletHist extends Model {
    *   wallet update data, one or multiple in object or array format
    */
   constructor (data) {
-    super({ data, fields })
+    const parsedData = {}
+    super({ data, fields, parsedData })
+    Model.setParsedProperties(this, parsedData)
   }
 
   /**
