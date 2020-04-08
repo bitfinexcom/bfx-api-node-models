@@ -7,10 +7,10 @@
     "lcov"
   ],
 
-  "lines": 90,
-  "branches": 60,
-  "functions": 90,
-  "statements": 90,
+  "lines": 70,
+  "branches": 28,
+  "functions": 56,
+  "statements": 34,
 
   "exclude": [
     "**/test/**",

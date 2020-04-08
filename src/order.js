@@ -195,7 +195,7 @@ class Order extends Model {
 
     Model.setParsedProperties(this, parsedData)
 
-    if (!_isFinite(this.flags)) {
+    if (!this.flags) {
       this.flags = 0
     }
 

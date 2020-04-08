@@ -147,36 +147,12 @@ class OrderBook extends EventEmitter {
 
       if (bid) {
         const amount = bid.length === 4 ? bid[3] : bid[2]
-        const price = bid[0]
-        let parsedPrice = `${price}`
-
-        // i.e. 1.7e-7 to fixed
-        if (!raw && !_isString(price)) {
-          if (/e/.test(`${price}`)) {
-            parsedPrice = price.toFixed(Math.abs(+(`${price}`).split('e')[1]) + 1)
-          } else {
-            parsedPrice = preparePrice(price)
-          }
-        }
-
-        data.push(parsedPrice, amount)
+        data.push(OrderBook.priceForChecksum(bid[0], raw), amount)
       }
 
       if (ask) {
         const amount = ask.length === 4 ? ask[3] : ask[2]
-        const price = ask[0]
-        let parsedPrice = `${price}`
-
-        // i.e. 1.7e-7 to fixed
-        if (!raw && !_isString(price)) {
-          if (/e/.test(`${price}`)) {
-            parsedPrice = price.toFixed(Math.abs(+(`${price}`).split('e')[1]) + 1)
-          } else {
-            parsedPrice = preparePrice(price)
-          }
-        }
-
-        data.push(parsedPrice, amount)
+        data.push(OrderBook.priceForChecksum(ask[0], raw), amount)
       }
     }
 
@@ -186,7 +162,7 @@ class OrderBook extends EventEmitter {
   /**
    * Like checksum(), but for raw array-format order books
    *
-   * @param {OrderBookAsArray} arr - assumed sorted, [topBid, bid, ..., topAsk, ask, ...]
+   * @param {Array[]} arr - assumed sorted, [topBid, bid, ..., topAsk, ask, ...]
    * @param {boolean} [raw] - true for raw 'R0' order books
    * @returns {number} cs
    */
@@ -218,36 +194,12 @@ class OrderBook extends EventEmitter {
 
       if (bid) {
         const amount = bid.length === 4 ? bid[3] : bid[2]
-        const price = bid[0]
-        let parsedPrice = `${price}`
-
-        // i.e. 1.7e-7 to fixed
-        if (!raw && !_isString(price)) {
-          if (/e/.test(`${price}`)) {
-            parsedPrice = price.toFixed(Math.abs(+(`${price}`).split('e')[1]) + 1)
-          } else {
-            parsedPrice = preparePrice(price)
-          }
-        }
-
-        data.push(parsedPrice, amount)
+        data.push(OrderBook.priceForChecksum(bid[0], raw), amount)
       }
 
       if (ask) {
         const amount = ask.length === 4 ? ask[3] : ask[2]
-        const price = ask[0]
-        let parsedPrice = `${price}`
-
-        // i.e. 1.7e-7 to fixed
-        if (!raw && !_isString(price)) {
-          if (/e/.test(`${price}`)) {
-            parsedPrice = price.toFixed(Math.abs(+(`${price}`).split('e')[1]) + 1)
-          } else {
-            parsedPrice = preparePrice(price)
-          }
-        }
-
-        data.push(parsedPrice, amount)
+        data.push(OrderBook.priceForChecksum(ask[0], raw), amount)
       }
     }
 
@@ -635,6 +587,25 @@ class OrderBook extends EventEmitter {
         count: level[1],
         amount: level[2]
       }
+  }
+
+  /**
+   * Safely converts price to string avoiding exponential notiation.
+   *
+   * @param {number|string} price - price value
+   * @param {boolean} raw - indicates raw book
+   * @returns {string|number} parsedPrice
+   */
+  static priceForChecksum (price, raw) {
+    if (!raw && !_isString(price)) {
+      const p = +preparePrice(price)
+
+      return /e/.test(p + '')
+        ? p.toFixed(Math.abs(+((p + '').split('e')[1])) + 1)
+        : p
+    }
+
+    return price
   }
 }
 

@@ -16,7 +16,6 @@ const assignFromCollectionOrInstance = require('./util/assign_from_collection_or
  * @typedef {object} AbstractModelInstance
  * @property {Function} unserialize - must return POJO version of model or
  *   array of POJOs if model is a collection
- * @property {Function} serialize - must convert one or more object/class
  *   models to array format
  */
 
@@ -84,7 +83,7 @@ class Model extends EventEmitter {
       /** @type {unknown} */ (this.constructor)
     )
 
-    return m.unserialize(m.serialize())
+    return m.unserialize(this.serialize())
   }
 
   /**

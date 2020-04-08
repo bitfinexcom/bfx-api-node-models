@@ -19,7 +19,7 @@ describe('Wallet', () => {
     validData: {
       type: Object.values(WALLET_TYPES),
       currency: Object.values(CURRENCIES),
-      description: [null, ...Object.values(CURRENCIES)],
+      description: Object.values(CURRENCIES),
       meta: [null, ...Object.values(CURRENCIES).map(reason => ({ reason: 'TRADE' }))], // need a data source
       balance: new Array(...(new Array(5))).map(() => Math.random()),
       balanceAvailable: new Array(...(new Array(5))).map(() => Math.random()),

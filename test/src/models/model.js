@@ -15,7 +15,9 @@ describe('base model class', () => {
 
       class SomeModel extends Model {
         constructor (data) {
-          super({ data, fields })
+          const parsedData = {}
+          super({ data, fields, parsedData })
+          Model.setParsedProperties(this, parsedData)
         }
 
         static unserialize (data) {

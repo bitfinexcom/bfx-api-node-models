@@ -141,7 +141,7 @@ class MarginInfo extends Model {
 
     if (type === 'base') {
       const payload = (_isArray(data)
-        ? (/** @type {Array} */ (data))
+        ? (/** @type {Array} */ (data))[1]
         : (/** @type {MarginInfoEventPacket} */ (data)).payload
       ) || []
 
