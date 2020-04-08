@@ -13,11 +13,12 @@
   },
   "scripts": {
     "lint": "eslint src/ examples/ test/",
-    "test": "npm run lint && npm run build && npm run unit",
+    "test": "npm run lint && npm run build && npm run unit && npm run types",
     "unit": "NODE_ENV=test nyc --check-coverage --lines 90 --branches 60 --functions 90 --statements 90 --reporter=lcov --reporter=html mocha -b --recursive",
     "build": "./node_modules/.bin/babel src/ -d lib/",
     "docs": "rm -rf docs && node_modules/.bin/jsdoc --configure .jsdoc.json --verbose",
-    "prepublish": "npm run build"
+    "types": "./node_modules/.bin/tsc -p .",
+    "prepublish": "npm test"
   },
   "repository": {
     "type": "git",
@@ -62,7 +63,8 @@
     "jsdoc-to-markdown": "^5.0.3",
     "mocha": "^7.1.0",
     "nyc": "^15.0.0",
-    "standard": "^14.1.0"
+    "standard": "^14.1.0",
+    "typescript": "^3.8.3"
   },
   "dependencies": {
     "bfx-api-node-util": "^1.0.8",
