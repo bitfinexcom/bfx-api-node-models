@@ -12,3 +12,5 @@ package-lock.json
 coverage
 .nyc_output
 tags
+Session.vim
+.undodir
