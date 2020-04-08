@@ -19,6 +19,7 @@
     "build": "./node_modules/.bin/babel src/ -d lib/",
     "docs": "rm -rf docs && node_modules/.bin/jsdoc --configure .jsdoc.json --verbose",
     "types": "./node_modules/.bin/tsc -p .",
+    "postinstall": "npm run build",
     "prepublish": "npm test"
   },
   "repository": {
