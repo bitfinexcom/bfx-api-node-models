@@ -20,20 +20,29 @@ const fields = {
 }
 
 /**
+ * Plain ledger entry object used to instantiate model
+ *
+ * @typedef {object} LedgerEntryData
+ * @property {number} id - id
+ * @property {string} currency - currency
+ * @property {number} mts - transaction timestamp
+ * @property {number} amount - transaction amount
+ * @property {number} balance - balance at time of transaction
+ * @property {string} description - transaction description
+ */
+
+/**
  * Ledger Entry model; wallet field is automatically populated if a description
  * is provided.
+ *
+ * @extends Model
  */
 class LedgerEntry extends Model {
   /**
-   * @param {object|Array} data - ledger entry data
-   * @param {number} data.id - id
-   * @param {string} data.currency - currency
-   * @param {number} data.mts - transaction timestamp
-   * @param {number} data.amount - transaction amount
-   * @param {number} data.balance - balance at time of transaction
-   * @param {string} data.description - transaction description
+   * @param {LedgerEntryData[]|LedgerEntryData|Array[]|Array} data - ledger
+   *   entry data, one or multiple in object or array format
    */
-  constructor (data = {}) {
+  constructor (data) {
     super({ data, fields })
 
     this.wallet = null
@@ -45,21 +54,22 @@ class LedgerEntry extends Model {
   }
 
   /**
-   * @param {object[]|object|Array[]|Array} data - data to convert to POJO
+   * @param {Array[]|Array} data - data to convert to POJO
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserialize({ data, fields })
+    return super.unserializeWithDataDefinition({ data, fields })
   }
 
   /**
    * Validates a given ledger entry instance
    *
-   * @param {object[]|object|LedgerEntry[]|LedgerEntry|Array} data - instance to validate
-   * @returns {string} error - null if instance is valid
+   * @param {object[]|object|LedgerEntry[]|LedgerEntry|Array[]|Array} data -
+   *   instance to validate
+   * @returns {Error|null} error - null if instance is valid
    */
   static validate (data) {
-    return super.validate({
+    return super.validateWithDataDefinition({
       data,
       fields,
       validators: {

@@ -28,12 +28,15 @@ const FUNDING_FIELDS = {
 
 /**
  * Public Trade model, supporting both funding & ordinary trades
+ *
+ * @extends Model
  */
 class PublicTrade extends Model {
   /**
-   * @param {object|Array} data - public trade data
+   * @param {object|object[]|Array[]|Array} data - public trade data, one or multiple
+   *   in object or array format
    */
-  constructor (data = {}) {
+  constructor (data) {
     if (_isArray(data)) {
       if (data.length === 5) {
         super({ data, fields: FUNDING_FIELDS })
@@ -57,9 +60,9 @@ class PublicTrade extends Model {
    */
   static unserialize (data) {
     if ((_isArray(data[0]) && data[0].length === 5) || (data.length === 5)) {
-      return super.unserialize({ data, fields: FUNDING_FIELDS })
+      return super.unserializeWithDataDefinition({ data, fields: FUNDING_FIELDS })
     } else {
-      return super.unserialize({ data, fields: TRADING_FIELDS })
+      return super.unserializeWithDataDefinition({ data, fields: TRADING_FIELDS })
     }
   }
 
@@ -79,13 +82,14 @@ class PublicTrade extends Model {
   /**
    * Validates a given public trade instance
    *
-   * @param {object[]|object|PublicTrade[]|PublicTrade|Array} data - instance to validate
-   * @returns {string} error - null if instance is valid
+   * @param {object[]|object|PublicTrade[]|PublicTrade|Array[]|Array} data -
+   *   instance to validate
+   * @returns {Error|null} error - null if instance is valid
    */
   static validate (data) {
     const { rate } = data
 
-    return super.validate({
+    return super.validateWithDataDefinition({
       data,
       fields: _isFinite(rate) ? FUNDING_FIELDS : TRADING_FIELDS,
       validators: _isFinite(rate) ? {

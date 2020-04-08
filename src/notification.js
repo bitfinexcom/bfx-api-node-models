@@ -15,39 +15,49 @@ const fields = {
 }
 
 /**
+ * Plain notification object used to instantiate model
+ *
+ * @typedef {object} NotificationData
+ * @property {number} mts - timestamp
+ * @property {string} type - type (i.e. 'ucm-*' for broadcasts)
+ * @property {number} messageID - message ID
+ * @property {object} notifyInfo - metadata, set by client for broadcasts
+ * @property {number} code - code
+ * @property {string} status - status (i.e. 'error')
+ * @property {string} text - notification text to display to user
+ */
+
+/**
  * Notification model
+ *
+ * @extends Model
  */
 class Notification extends Model {
   /**
-   * @param {object|Array} data - notification data
-   * @param {number} data.mts - timestamp
-   * @param {string} data.type - type (i.e. 'ucm-*' for broadcasts)
-   * @param {number} data.messageID - message ID
-   * @param {object} data.notifyInfo - metadata, set by client for broadcasts
-   * @param {number} data.code - code
-   * @param {string} data.status - status (i.e. 'error')
-   * @param {string} data.text - notification text to display to user
+   * @param {NotificationData[]|NotificationData|Array[]|Array} data -
+   *   notification data, one or multiple in object or array format
    */
-  constructor (data = {}) {
+  constructor (data) {
     super({ data, fields })
   }
 
   /**
-   * @param {object[]|object|Array[]|Array} data - data to convert to POJO
+   * @param {Array[]|Array} data - data to convert to POJO
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserialize({ data, fields })
+    return super.unserializeWithDataDefinition({ data, fields })
   }
 
   /**
    * Validates a given notification instance
    *
-   * @param {object[]|object|Notification[]|Notification|Array} data - instance to validate
-   * @returns {string} error - null if instance is valid
+   * @param {object[]|object|Notification[]|Notification|Array[]|Array} data -
+   *   instance to validate
+   * @returns {Error|null} error - null if instance is valid
    */
   static validate (data) {
-    return super.validate({
+    return super.validateWithDataDefinition({
       data,
       fields,
       validators: {

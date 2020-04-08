@@ -12,6 +12,8 @@ const _isFunction = require('lodash/isFunction')
 
 /**
  * Base model class, providing format-conversion methods
+ *
+ * @extends EventEmitter
  */
 class Model extends EventEmitter {
   /**
@@ -78,9 +80,9 @@ class Model extends EventEmitter {
    * @param {string[]} [args.boolFields] - array of boolean field keys, default empty
    * @returns {object} pojo
    */
-  static unserialize ({ data, fields, boolFields = [] }) {
+  static unserializeWithDataDefinition ({ data, fields, boolFields = [] }) {
     if (isCollection(data)) {
-      return data.map(m => Model.unserialize({
+      return data.map(m => Model.unserializeWithDataDefinition({
         data: m,
         boolFields,
         fields
@@ -120,9 +122,11 @@ class Model extends EventEmitter {
    * @param {string[]} [args.boolFields] - array of boolean field keys, default empty
    * @returns {Error|null} error - null if instance is valid
    */
-  static validate ({ data, fields, boolFields = [], validators }) {
+  static validateWithDataDefinition ({
+    data, fields, boolFields = [], validators
+  }) {
     if (isCollection(data)) {
-      return data.map(i => Model.validate({
+      return data.map(i => Model.validateWithDataDefinition({
         data: i,
         fields,
         boolFields,

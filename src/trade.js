@@ -32,33 +32,42 @@ const fields = {
 }
 
 /**
+ * Plain account trade object used to instantiate model
+ *
+ * @typedef {object} TradeData
+ * @property {number} id - id
+ * @property {string} symbol - symbol
+ * @property {number} mtsCreate - creation timestamp
+ * @property {number} orderID - order ID
+ * @property {string} execAmount - executed amount
+ * @property {string} execPrice - execution price
+ * @property {string} orderType - order type
+ * @property {string} orderPrice - order price
+ * @property {number|boolean} maker - maker flag
+ * @property {string} fee - fee amount
+ * @property {string} feeCurrency - fee currency
+ */
+
+/**
  * Private Trade model
+ *
+ * @extends Model
  */
 class Trade extends Model {
   /**
-   * @param {object|Array} data - trade data
-   * @param {number} data.id - id
-   * @param {string} data.symbol - symbol
-   * @param {number} data.mtsCreate - creation timestamp
-   * @param {number} data.orderID - order ID
-   * @param {string} data.execAmount - executed amount
-   * @param {string} data.execPrice - execution price
-   * @param {string} data.orderType - order type
-   * @param {string} data.orderPrice - order price
-   * @param {number|boolean} data.maker - maker flag
-   * @param {string} data.fee - fee amount
-   * @param {string} data.feeCurrency - fee currency
+   * @param {TradeData[]|TradeData|Array[]|Array} data - trade data, one or
+   *   multiple in object or array format
    */
-  constructor (data = {}) {
+  constructor (data) {
     super({ data, fields, boolFields })
   }
 
   /**
-   * @param {object[]|object|Array[]|Array} data - data to convert to POJO
+   * @param {Array[]|Array} data - data to convert to POJO
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserialize({ data, fields, boolFields })
+    return super.unserializeWithDataDefinition({ data, fields, boolFields })
   }
 
   /**
@@ -82,11 +91,12 @@ class Trade extends Model {
   /**
    * Validates a given trade instance
    *
-   * @param {object[]|object|PublicTrade[]|PublicTrade|Array} data - instance to validate
-   * @returns {string} error - null if instance is valid
+   * @param {object[]|object|Trade[]|Trade|Array[]|Array} data -
+   *   instance to validate
+   * @returns {Error|null} error - null if instance is valid
    */
   static validate (data) {
-    return super.validate({
+    return super.validateWithDataDefinition({
       data,
       fields,
       validators: {

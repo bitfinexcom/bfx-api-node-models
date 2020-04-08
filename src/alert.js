@@ -11,26 +11,35 @@ const fields = {
 }
 
 /**
+ * Plain alert object used to instantiate model
+ *
+ * @typedef {object} AlertData
+ * @property {string} key - alert key
+ * @property {string} type - alert type
+ * @property {string} symbol - configured symbol
+ * @property {string} price - configured price
+ */
+
+/**
  * Price alert model
+ *
+ * @extends Model
  */
 class Alert extends Model {
   /**
-   * @param {object|Array} data - alert data
-   * @param {string} data.key - alert key
-   * @param {string} data.type - alert type
-   * @param {string} data.symbol - configured symbol
-   * @param {string} data.price - configured price
+   * @param {AlertData|AlertData[]|Array|Array[]} data - alert data, one or
+   *   multiple in object or array format
    */
-  constructor (data = {}) {
+  constructor (data) {
     super({ data, fields })
   }
 
   /**
-   * @param {object[]|object|Array[]|Array} data - data to convert to POJO
+   * @param {Array|Array[]} data - data to convert to POJO
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserialize({ data, fields })
+    return super.unserializeWithDataDefinition({ data, fields })
   }
 
   /**
@@ -38,11 +47,12 @@ class Alert extends Model {
    *
    * TODO: validate type (get a list)
    *
-   * @param {object[]|object|Alert[]|Alert|Array} data - instance to validate
-   * @returns {string} error - null if instance is valid
+   * @param {object[]|object|Alert[]|Alert|Array[]|Array} data - instance to
+   *   validate
+   * @returns {Error|null} error - null if instance is valid
    */
   static validate (data) {
-    return super.validate({
+    return super.validateWithDataDefinition({
       data,
       fields,
       validators: {

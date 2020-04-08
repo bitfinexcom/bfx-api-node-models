@@ -18,37 +18,46 @@ const fields = {
 }
 
 /**
+ * Plain wallet object used to instantiate model
+ *
+ * @typedef {object} WalletData
+ * @property {string} type - wallet type (i.e. deposit)
+ * @property {string} currency - wallet currency
+ * @property {number} balance - total balance
+ * @property {number} unsettledInterest - unsettled interest
+ * @property {number} balanceAvailable - available balance
+ */
+
+/**
  * Wallet model
+ *
+ * @extends Model
  */
 class Wallet extends Model {
   /**
-   * @param {object|Array} data - wallet data
-   * @param {string} data.type - wallet type (i.e. deposit)
-   * @param {string} data.currency - wallet currency
-   * @param {number} data.balance - total balance
-   * @param {number} data.unsettledInterest - unsettled interest
-   * @param {number} data.balanceAvailable - available balance
+   * @param {WalletData[]|WalletData|Array[]|Array} data - wallet data, one
+   *   or multiple in object or array format
    */
-  constructor (data = {}) {
+  constructor (data) {
     super({ data, fields })
   }
 
   /**
-   * @param {object[]|object|Array[]|Array} data - data to convert to POJO
+   * @param {Array[]|Array} data - data to convert to POJO
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserialize({ data, fields })
+    return super.unserializeWithDataDefinition({ data, fields })
   }
 
   /**
    * Validates a given wallet instance
    *
-   * @param {object[]|object|Wallet[]|Wallet|Array} data - instance to validate
-   * @returns {string} error - null if instance is valid
+   * @param {object[]|object|Wallet[]|Wallet|Array[]|Array} data - instance to validate
+   * @returns {Error|null} error - null if instance is valid
    */
   static validate (data) {
-    return super.validate({
+    return super.validateWithDataDefinition({
       data,
       fields,
 

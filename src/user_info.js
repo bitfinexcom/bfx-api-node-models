@@ -11,36 +11,46 @@ const fields = {
 }
 
 /**
+ * Plain user info object used to instantiate model
+ *
+ * @typedef {object} UserInfoData
+ * @property {number} id - id
+ * @property {string} email - email
+ * @property {string} username - username
+ * @property {number} timezone - timezone as UTC offset
+ */
+
+/**
  * User Info model
+ *
+ * @extends Model
  */
 class UserInfo extends Model {
   /**
-   * @param {object|Array} data - user info data
-   * @param {number} data.id - id
-   * @param {string} data.email - email
-   * @param {string} data.username - username
-   * @param {number} data.timezone - timezone as UTC offset
+   * @param {UserInfoData[]|UserInfoData|Array[]|Array} data - user info data,
+   *   one or multiple in object or array format
    */
-  constructor (data = {}) {
+  constructor (data) {
     super({ data, fields })
   }
 
   /**
-   * @param {object[]|object|Array[]|Array} data - data to convert to POJO
+   * @param {Array[]|Array} data - data to convert to POJO
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserialize({ data, fields })
+    return super.unserializeWithDataDefinition({ data, fields })
   }
 
   /**
    * Validates a given historical trading ticker instance
    *
-   * @param {object[]|object|TradingTickerHist[]|TradingTickerHist|Array} data - instance to validate
-   * @returns {string} error - null if instance is valid
+   * @param {object[]|object|UserInfo[]|UserInfo|Array[]|Array} data -
+   *   instance to validate
+   * @returns {Error|null} error - null if instance is valid
    */
   static validate (data) {
-    return super.validate({
+    return super.validateWithDataDefinition({
       data,
       fields,
       validators: {

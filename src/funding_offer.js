@@ -34,26 +34,35 @@ const fields = {
 }
 
 /**
+ * Plain funding offer object used to instantiate model
+ *
+ * @typedef {object} FundingOfferData
+ * @property {number} id - id
+ * @property {string} symbol - symbol
+ * @property {number} mtsCreate - creation timestamp
+ * @property {number} mtsUpdate - last update timestamp
+ * @property {string} amount - remaining amount
+ * @property {string} amountOrig - original amount
+ * @property {string} type - funding offer type
+ * @property {number} flags - flags
+ * @property {string} status - current status
+ * @property {number} rate - rate
+ * @property {number} rateReal - rate real
+ * @property {number} period - period for the offer
+ * @property {number|boolean} notify - notify flag
+ * @property {number|boolean} hidden - hidden flag
+ * @property {number|boolean} renew - renew flag
+ */
+
+/**
  * Funding Offer model
+ *
+ * @extends Model
  */
 class FundingOffer extends Model {
   /**
-   * @param {object|Array} data - funding offer data
-   * @param {number} data.id - id
-   * @param {string} data.symbol - symbol
-   * @param {number} data.mtsCreate - creation timestamp
-   * @param {number} data.mtsUpdate - last update timestamp
-   * @param {string} data.amount - remaining amount
-   * @param {string} data.amountOrig - original amount
-   * @param {string} data.type - funding offer type
-   * @param {number} data.flags - flags
-   * @param {string} data.status - current status
-   * @param {number} data.rate - rate
-   * @param {number} data.rateReal - rate real
-   * @param {number} data.period - period for the offer
-   * @param {number|boolean} data.notify - notify flag
-   * @param {number|boolean} data.hidden - hidden flag
-   * @param {number|boolean} data.renew - renew flag
+   * @param {FundingOfferData|FundingOfferData[]|Array|Array[]} data - funding
+   *   offer data, one or multiple in object or array format
    * @param {object} [apiInterface] - rest or websocket object capable of
    *   submitting funding offers
    */
@@ -63,11 +72,11 @@ class FundingOffer extends Model {
   }
 
   /**
-   * @param {object[]|object|Array[]|Array} data - data to convert to POJO
+   * @param {Array|Array[]} data - data to convert to POJO
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserialize({ data, fields, boolFields })
+    return super.unserializeWithDataDefinition({ data, fields, boolFields })
   }
 
   /**
@@ -169,11 +178,12 @@ class FundingOffer extends Model {
   /**
    * Validates a given funding offer instance
    *
-   * @param {object[]|object|FundingOffer[]|FundingOffer|Array} data - instance to validate
-   * @returns {string} error - null if instance is valid
+   * @param {object[]|object|FundingOffer[]|FundingOffer|Array[]|Array} data -
+   *   instance to validate
+   * @returns {Error|null} error - null if instance is valid
    */
   static validate (data) {
-    return super.validate({
+    return super.validateWithDataDefinition({
       data,
       fields,
       validators: {

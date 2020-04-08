@@ -32,49 +32,59 @@ const fields = {
 }
 
 /**
+ * Plain funding loan object used to instantiate model
+ *
+ * @typedef {object} FundingLoanData
+ * @property {number} id - id
+ * @property {string} symbol - symbol
+ * @property {number} side - side
+ * @property {number} mtsCreate - creation timestamp
+ * @property {number} mtsUpdate - last update timestamp
+ * @property {number} mtsOpening - open timestamp
+ * @property {number} mtsLastPayout - last payout timestamp
+ * @property {number} amount - amount
+ * @property {number} flags - flags
+ * @property {number} status - status
+ * @property {number} rate - rate
+ * @property {number} rateReal - rate real
+ * @property {number} period - period flag
+ * @property {number|boolean} notify - notify flag
+ * @property {number|boolean} hidden - hidden flag
+ * @property {number|boolean} renew - renew flag
+ * @property {number|boolean} noClose - no-close flag
+ */
+
+/**
  * Funding Loan model
+ *
+ * @extends Model
  */
 class FundingLoan extends Model {
   /**
-   * @param {object|Array} data - funding loan data
-   * @param {number} data.id - id
-   * @param {string} data.symbol - symbol
-   * @param {number} data.side - side
-   * @param {number} data.mtsCreate - creation timestamp
-   * @param {number} data.mtsUpdate - last update timestamp
-   * @param {number} data.mtsOpening - open timestamp
-   * @param {number} data.mtsLastPayout - last payout timestamp
-   * @param {number} data.amount - amount
-   * @param {number} data.flags - flags
-   * @param {number} data.status - status
-   * @param {number} data.rate - rate
-   * @param {number} data.rateReal - rate real
-   * @param {number} data.period - period flag
-   * @param {number|boolean} data.notify - notify flag
-   * @param {number|boolean} data.hidden - hidden flag
-   * @param {number|boolean} data.renew - renew flag
-   * @param {number|boolean} data.noClose - no-close flag
+   * @param {FundingLoanData|FundingLoanData[]|Array|Array[]} data - funding
+   *   loan data, one or multiple in object or array format
    */
-  constructor (data = {}) {
+  constructor (data) {
     super({ data, fields, boolFields })
   }
 
   /**
-   * @param {object[]|object|Array[]|Array} data - data to convert to POJO
+   * @param {Array|Array[]} data - data to convert to POJO
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserialize({ data, fields, boolFields })
+    return super.unserializeWithDataDefinition({ data, fields, boolFields })
   }
 
   /**
    * Validates a given funding loan instance
    *
-   * @param {object[]|object|FundingLoan[]|FundingLoan|Array} data - instance to validate
-   * @returns {string} error - null if instance is valid
+   * @param {object[]|object|FundingLoan[]|FundingLoan|Array[]|Array} data -
+   *   instance to validate
+   * @returns {Error|null} error - null if instance is valid
    */
   static validate (data) {
-    return super.validate({
+    return super.validateWithDataDefinition({
       data,
       fields,
       validators: {

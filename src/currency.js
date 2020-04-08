@@ -14,37 +14,47 @@ const fields = {
 }
 
 /**
+ * Plain currency object used to instantiate model
+ *
+ * @typedef {object} CurrencyData
+ * @property {string} id - id
+ * @property {string} name - currency name ('Ethereum')
+ * @property {string} pool - pool
+ * @property {string} exporer - explorer URL
+ * @property {string} symbol - symbol ('ETH')
+ */
+
+/**
  * Currency model
+ *
+ * @extends Model
  */
 class Currency extends Model {
   /**
-   * @param {object|Array} data - currency data
-   * @param {string} data.id - id
-   * @param {string} data.name - currency name ('Ethereum')
-   * @param {string} data.pool - pool
-   * @param {string} data.exporer - explorer URL
-   * @param {string} data.symbol - symbol ('ETH')
+   * @param {CurrencyData|CurrencyData[]|Array|Array[]} data - currency data,
+   *   one or multiple in object or array format
    */
-  constructor (data = {}) {
+  constructor (data) {
     super({ data, fields })
   }
 
   /**
-   * @param {object[]|object|Array[]|Array} data - data to convert to POJO
+   * @param {Array|Array[]} data - data to convert to POJO
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserialize({ data, fields })
+    return super.unserializeWithDataDefinition({ data, fields })
   }
 
   /**
    * Validates a given currency instance
    *
-   * @param {object[]|object|Currency[]|Currency|Array} data - instance to validate
-   * @returns {string} error - null if instance is valid
+   * @param {object[]|object|Currency[]|Currency|Array[]|Array} data - instance
+   *   to validate
+   * @returns {Error|null} error - null if instance is valid
    */
   static validate (data) {
-    return super.validate({
+    return super.validateWithDataDefinition({
       data,
       fields,
 

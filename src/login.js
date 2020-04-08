@@ -12,36 +12,46 @@ const fields = {
 }
 
 /**
+ * Plain login event object used to instantiate model
+ *
+ * @typedef {object} LoginEventData
+ * @property {number} id - id
+ * @property {number} time - timestamp
+ * @property {string} ip - client IP address
+ * @property {object} extraData - metadata
+ */
+
+/**
  * Login event model
+ *
+ * @extends Model
  */
 class Login extends Model {
   /**
-   * @param {object|Array} data - login event data
-   * @param {number} data.id - id
-   * @param {number} data.time - timestamp
-   * @param {string} data.ip - client IP address
-   * @param {object} data.extraData - metadata
+   * @param {LoginEventData[]|LoginEventData|Array[]|Array} data - login event
+   *   data, one or multiple in object or array format
    */
-  constructor (data = {}) {
+  constructor (data) {
     super({ data, fields })
   }
 
   /**
-   * @param {object[]|object|Array[]|Array} data - data to convert to POJO
+   * @param {Array[]|Array} data - data to convert to POJO
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserialize({ data, fields })
+    return super.unserializeWithDataDefinition({ data, fields })
   }
 
   /**
    * Validates a given login instance
    *
-   * @param {object[]|object|Login[]|Login|Array} data - instance to validate
-   * @returns {string} error - null if instance is valid
+   * @param {object[]|object|Login[]|Login|Array[]|Array} data - instance to
+   *   validate
+   * @returns {Error|null} error - null if instance is valid
    */
   static validate (data) {
-    return super.validate({
+    return super.validateWithDataDefinition({
       data,
       fields,
       validators: {

@@ -20,42 +20,52 @@ const fields = {
 }
 
 /**
+ * Plain movement object used to instantiate model
+ *
+ * @typedef {object} MovementData
+ * @property {number} id - id
+ * @property {string} currency - currency
+ * @property {string} currencyName - currency name
+ * @property {number} mtsStarted - movement start timestamp
+ * @property {number} mtsUpdated - last update timestamp
+ * @property {string} status - status
+ * @property {number} amount - moved amount
+ * @property {number} fees - paid fees
+ * @property {string} destinationAddress - destination address
+ * @property {number} transactionId - transaction ID
+ */
+
+/**
  * Currency Movement model
+ *
+ * @extends Model
  */
 class Movement extends Model {
   /**
-   * @param {object|Array} data - movement data
-   * @param {number} data.id - id
-   * @param {string} data.currency - currency
-   * @param {string} data.currencyName - currency name
-   * @param {number} data.mtsStarted - movement start timestamp
-   * @param {number} data.mtsUpdated - last update timestamp
-   * @param {string} data.status - status
-   * @param {number} data.amount - moved amount
-   * @param {number} data.fees - paid fees
-   * @param {string} data.destinationAddress - destination address
-   * @param {number} data.transactionId - transaction ID
+   * @param {MovementData[]|MovementData|Array[]|Array} data - movement data,
+   *   one or multiple in object or array format
    */
-  constructor (data = {}) {
+  constructor (data) {
     super({ data, fields })
   }
 
   /**
-   * @param {object[]|object|Array[]|Array} data - data to convert to POJO
+   * @param {Array[]|Array} data - data to convert to POJO
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserialize({ data, fields })
+    return super.unserializeWithDataDefinition({ data, fields })
   }
 
   /**
    * Validates a given movement instance
    *
-   * @param {object[]|object|Movement[]|Movement|Array} data - instance to validate
-   * @returns {string} error - null if instance is valid
+   * @param {object[]|object|Movement[]|Movement|Array[]|Array} data - instance
+   *   to validate
+   * @returns {Error|null} error - null if instance is valid
    */
   static validate (data) {
-    return super.validate({
+    return super.validateWithDataDefinition({
       data,
       fields,
       validators: {

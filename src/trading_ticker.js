@@ -20,33 +20,42 @@ const fields = {
 }
 
 /**
+ * Plain trading ticker object used to instantiate model
+ *
+ * @typedef {object} TradingTickerData
+ * @property {string} symbol - symbol
+ * @property {number} bid - best bid
+ * @property {number} bidSize - total bid size
+ * @property {number} ask - best ask
+ * @property {number} askSize - total ask size
+ * @property {number} dailyChange - change in last 24h period
+ * @property {number} dailyChangePerc - change in last 24h period as percent
+ * @property {number} lastPrice - last price
+ * @property {number} volume - volume in last 24h period
+ * @property {number} high - highest price in last 24h period
+ * @property {number} low - lowest price in last 24h period
+ */
+
+/**
  * Trading Ticker model
+ *
+ * @extends Model
  */
 class TradingTicker extends Model {
   /**
-   * @param {object|Array} data - trading ticker data
-   * @param {string} data.symbol - symbol
-   * @param {number} data.bid - best bid
-   * @param {number} data.bidSize - total bid size
-   * @param {number} data.ask - best ask
-   * @param {number} data.askSize - total ask size
-   * @param {number} data.dailyChange - change in last 24h period
-   * @param {number} data.dailyChangePerc - change in last 24h period as percent
-   * @param {number} data.lastPrice - last price
-   * @param {number} data.volume - volume in last 24h period
-   * @param {number} data.high - highest price in last 24h period
-   * @param {number} data.low - lowest price in last 24h period
+   * @param {TradingTickerData[]|TradingTickerData|Array[]|Array} data - trading
+   *   ticker data, one or multiple in object or array format
    */
-  constructor (data = {}) {
+  constructor (data) {
     super({ data, fields })
   }
 
   /**
-   * @param {object[]|object|Array[]|Array} data - data to convert to POJO
+   * @param {Array[]|Array} data - data to convert to POJO
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserialize({ data, fields })
+    return super.unserializeWithDataDefinition({ data, fields })
   }
 
   /**
@@ -70,11 +79,12 @@ class TradingTicker extends Model {
   /**
    * Validates a given trading ticker instance
    *
-   * @param {object[]|object|PublicTrade[]|PublicTrade|Array} data - instance to validate
-   * @returns {string} error - null if instance is valid
+   * @param {object[]|object|TradingTicker[]|TradingTicker|Array[]|Array} data -
+   *   instance to validate
+   * @returns {Error|null} error - null if instance is valid
    */
   static validate (data) {
-    return super.validate({
+    return super.validateWithDataDefinition({
       data,
       fields,
       validators: {

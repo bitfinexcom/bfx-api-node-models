@@ -33,50 +33,60 @@ const fields = {
 }
 
 /**
+ * Plain funding credit object used to instantiate model
+ *
+ * @typedef {object} FundingCreditData
+ * @property {number} id - id
+ * @property {string} symbol - symbol
+ * @property {number} side - side
+ * @property {number} mtsCreate - creation timestamp
+ * @property {number} mtsUpdate - last update timestamp
+ * @property {number} mtsOpening - open timestamp
+ * @property {number} mtsLastPayout - last payout timestamp
+ * @property {number} amount - remaining amount
+ * @property {number} flags - flags
+ * @property {number} status - current status
+ * @property {number} rate - rate
+ * @property {number} rateReal - rate
+ * @property {number} period - period
+ * @property {string} positionPair - position pair
+ * @property {number|boolean} notify - notify flag
+ * @property {number|boolean} hidden - hidden flag
+ * @property {number|boolean} renew - renew flag
+ * @property {number|boolean} noClose - no-close flag
+ */
+
+/**
  * Funding Credit model
+ *
+ * @extends Model
  */
 class FundingCredit extends Model {
   /**
-   * @param {object|Array} data - funding credit data
-   * @param {number} data.id - id
-   * @param {string} data.symbol - symbol
-   * @param {number} data.side - side
-   * @param {number} data.mtsCreate - creation timestamp
-   * @param {number} data.mtsUpdate - last update timestamp
-   * @param {number} data.mtsOpening - open timestamp
-   * @param {number} data.mtsLastPayout - last payout timestamp
-   * @param {number} data.amount - remaining amount
-   * @param {number} data.flags - flags
-   * @param {number} data.status - current status
-   * @param {number} data.rate - rate
-   * @param {number} data.rateReal - rate
-   * @param {number} data.period - period
-   * @param {string} data.positionPair - position pair
-   * @param {number|boolean} data.notify - notify flag
-   * @param {number|boolean} data.hidden - hidden flag
-   * @param {number|boolean} data.renew - renew flag
-   * @param {number|boolean} data.noClose - no-close flag
+   * @param {FundingCreditData|FundingCreditData[]|Array|Array[]} data - funding
+   *   credit data, one or multiple in object or array format
    */
-  constructor (data = {}) {
+  constructor (data) {
     super({ data, fields, boolFields })
   }
 
   /**
-   * @param {object[]|object|Array[]|Array} data - data to convert to POJO
+   * @param {Array|Array[]} data - data to convert to POJO
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserialize({ data, fields, boolFields })
+    return super.unserializeWithDataDefinition({ data, fields, boolFields })
   }
 
   /**
    * Validates a given fuding credit instance
    *
-   * @param {object[]|object|FundingCredit[]|FundingCredit|Array} data - instance to validate
-   * @returns {string} error - null if instance is valid
+   * @param {object[]|object|FundingCredit[]|FundingCredit|Array[]|Array} data
+   *   - instance to validate
+   * @returns {Error|null} error - null if instance is valid
    */
   static validate (data) {
-    return super.validate({
+    return super.validateWithDataDefinition({
       data,
       fields,
       validators: {

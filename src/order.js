@@ -67,33 +67,42 @@ const fields = {
 let lastCID = Date.now()
 
 /**
+ * Plain order object used to instantiate model
+ *
+ * @typedef {object} OrderData
+ * @property {number} [id] - ID
+ * @property {number} [gid] - group ID
+ * @property {number} [cid] - client ID
+ * @property {string} symbol - symbol
+ * @property {number} [mtsCreate] - creation timestamp
+ * @property {number} [mtsUpdate] - last update timestamp
+ * @property {string} amount - remaining order amount
+ * @property {string} [amountOrig] - original/initial order amount
+ * @property {string} type - order type (i.e. 'EXCHANGE LIMIT')
+ * @property {string} [typePrev] - previous order type, if any
+ * @property {number} [mtsTIF] - TIF timestamp, if set
+ * @property {number} [flags] - order flags
+ * @property {string} [status] - current order status
+ * @property {string} [price] - order price
+ * @property {string} [priceAvg] - average execution price
+ * @property {string} [priceTrailing] - trailing distance for TRAILING STOP orders
+ * @property {string} [priceAuxLimit] - stop price for STOP LIMIT and OCO orders
+ * @property {number|boolean} [notify] - notify flag
+ * @property {number} [placedId] - placed ID
+ * @property {string} [affiliateCode] - affiliate code
+ * @property {number} [lev] - leverage
+ */
+
+/**
  * High level order model; provides methods for execution & can stay updated via
  * a WSv2 connection or used to execute as a rest payload
+ *
+ * @extends Model
  */
 class Order extends Model {
   /**
-   * @param {object|Array} data - order data
-   * @param {number} data.id - ID
-   * @param {number} data.gid - group ID
-   * @param {number} data.cid - client ID
-   * @param {string} data.symbol - symbol
-   * @param {number} data.mtsCreate - creation timestamp
-   * @param {number} data.mtsUpdate - last update timestamp
-   * @param {string} data.amount - remaining order amount
-   * @param {string} data.amountOrig - original/initial order amount
-   * @param {string} data.type - order type (i.e. 'EXCHANGE LIMIT')
-   * @param {string} data.typePrev - previous order type, if any
-   * @param {number} [data.mtsTIF] - TIF timestamp, if set
-   * @param {number} data.flags - order flags
-   * @param {string} data.status - current order status
-   * @param {string} data.price - order price
-   * @param {string} data.priceAvg - average execution price
-   * @param {string} [data.priceTrailing] - trailing distance for TRAILING STOP orders
-   * @param {string} [data.priceAuxLimit] - stop price for STOP LIMIT and OCO orders
-   * @param {number|boolean} [data.notify] - notify flag
-   * @param {number} [data.placedId] - placed ID
-   * @param {string} [data.affiliateCode] - affiliate code
-   * @param {number} [data.lev] - leverage
+   * @param {OrderData[]|OrderData|Array[]|Array} data - order data, one or
+   *   multiple in object or array format
    * @param {object} [apiInterface] - saved for a later call to registerListeners()
    */
   constructor (data = {}, apiInterface) {
@@ -123,11 +132,11 @@ class Order extends Model {
   }
 
   /**
-   * @param {object[]|object|Array[]|Array} data - data to convert to POJO
+   * @param {Array[]|Array} data - data to convert to POJO
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserialize({ data, fields, boolFields })
+    return super.unserializeWithDataDefinition({ data, fields, boolFields })
   }
 
   /**
@@ -684,11 +693,12 @@ class Order extends Model {
   /**
    * Validates a given order instance
    *
-   * @param {object[]|object|Order[]|Order|Array} data - instance to validate
-   * @returns {string} error - null if instance is valid
+   * @param {object[]|object|Order[]|Order|Array[]|Array} data - instance to
+   *   validate
+   * @returns {Error|null} error - null if instance is valid
    */
   static validate (data) {
-    return super.validate({
+    return super.validateWithDataDefinition({
       data,
       fields,
       validators: {

@@ -14,6 +14,14 @@ const dateValidator = require('./validators/date')
 const Model = require('./model')
 const Order = require('./order')
 
+/**
+ * @typedef { import("./types/rest2").RESTv2 } RESTv2
+ */
+
+/**
+ * @typedef { import("./types/ws2").WSv2 } WSv2
+ */
+
 const statuses = ['ACTIVE', 'CLOSED']
 const fields = {
   symbol: 0,
@@ -36,42 +44,51 @@ const fields = {
 }
 
 /**
+ * Plain position object used to instantiate model
+ *
+ * @typedef {object} PositionData
+ * @property {number} id - id
+ * @property {number} mtsCreate - creation timestamp
+ * @property {number} mtsUpdate - last update timestamp
+ * @property {string} symbol - symbol
+ * @property {string} status - status
+ * @property {string} type - type
+ * @property {string} amount - amount
+ * @property {string} basePrice - base price
+ * @property {string} marginFunding - margin funding
+ * @property {string} marginFundingType - margin funding type
+ * @property {string} pl - profit/loss
+ * @property {string} plPerc - profit/loss as percentage
+ * @property {string} liquidationPrice - liquidation price
+ * @property {number} leverage - leverage
+ * @property {number} collateral - collateral
+ * @property {number} collateralMin - minimum collateral to maintain position
+ * @property {object} meta - metadata
+ */
+
+/**
  * Position model
+ *
+ * @extends Model
  */
 class Position extends Model {
   /**
-   * @param {object|Array} data - position data
-   * @param {number} data.id - id
-   * @param {number} data.mtsCreate - creation timestamp
-   * @param {number} data.mtsUpdate - last update timestamp
-   * @param {string} data.symbol - symbol
-   * @param {string} data.status - status
-   * @param {string} data.type - type
-   * @param {string} data.amount - amount
-   * @param {string} data.basePrice - base price
-   * @param {string} data.marginFunding - margin funding
-   * @param {string} data.marginFundingType - margin funding type
-   * @param {string} data.pl - profit/loss
-   * @param {string} data.plPerc - profit/loss as percentage
-   * @param {string} data.liquidationPrice - liquidation price
-   * @param {number} data.leverage - leverage
-   * @param {number} data.collateral - collateral
-   * @param {number} data.collateralMin - minimum collateral to maintain position
-   * @param {object} data.meta - metadata
+   * @param {PositionData[]|PositionData|Array[]|Array} data - position data,
+   *   one or multiple in object or array format
    * @param {WSv2|RESTv2} [apiInterface] - rest or websocket object thats
    *   capable of submitting position changes
    */
-  constructor (data = {}, apiInterface) {
+  constructor (data, apiInterface) {
     super({ data, fields })
     this._apiInterface = apiInterface
   }
 
   /**
-   * @param {object[]|object|Array[]|Array} data - data to convert to POJO
+   * @param {Array[]|Array} data - data to convert to POJO
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserialize({ data, fields })
+    return super.unserializeWithDataDefinition({ data, fields })
   }
 
   /**
@@ -111,7 +128,7 @@ class Position extends Model {
    * Generate an order that can be used to close the position.
    *
    * @param {WSv2|RESTv2} [apiInterface] - defaults to internal interface
-   * @returns {Promise} p
+   * @returns {Order} order
    */
   orderToClose (apiInterface = this._apiInterface) {
     const { symbol, amount } = this
@@ -119,7 +136,7 @@ class Position extends Model {
     return new Order({
       symbol,
       type: Order.type.MARKET,
-      amount: +amount * -1,
+      amount: `${+amount * -1}`,
       flags: Order.flags.REDUCE_ONLY | Order.flags.POS_CLOSE
     }, apiInterface)
   }
@@ -158,11 +175,12 @@ class Position extends Model {
   /**
    * Validates a given position instance
    *
-   * @param {object[]|object|Position[]|Position|Array} data - instance to validate
-   * @returns {string} error - null if instance is valid
+   * @param {object[]|object|Position[]|Position|Array[]|Array} data - instance
+   *   to validate
+   * @returns {Error|null} error - null if instance is valid
    */
   static validate (data) {
-    return super.validate({
+    return super.validateWithDataDefinition({
       data,
       fields,
       validators: {

@@ -12,26 +12,36 @@ const fields = {
 }
 
 /**
+ * Plain historical trading ticker object used to instantiate model
+ *
+ * @typedef {object} TradingTickerHistData
+ * @property {string} symbol - symbol
+ * @property {string} bid - best bid
+ * @property {string} ask - best ask
+ * @property {number} mtsUpdate - timestamp
+ */
+
+/**
  * Historical Trading Ticker model
+ *
+ * @extends Model
  */
 class TradingTickerHist extends Model {
   /**
-   * @param {object|Array} data - historical trading ticker data
-   * @param {string} data.symbol - symbol
-   * @param {string} data.bid - best bid
-   * @param {string} data.ask - best ask
-   * @param {number} data.mtsUpdate - timestamp
+   * @param {TradingTickerHistData[]|TradingTickerHistData|Array[]|Array} data -
+   *   historical trading ticker data, one or multiple in object or array
+   *   format
    */
-  constructor (data = {}) {
+  constructor (data) {
     super({ data, fields })
   }
 
   /**
-   * @param {object[]|object|Array[]|Array} data - data to convert to POJO
+   * @param {Array[]|Array} data - data to convert to POJO
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserialize({ data, fields })
+    return super.unserializeWithDataDefinition({ data, fields })
   }
 
   /**
@@ -55,11 +65,12 @@ class TradingTickerHist extends Model {
   /**
    * Validates a given historical trading ticker instance
    *
-   * @param {object[]|object|TradingTickerHist[]|TradingTickerHist|Array} data - instance to validate
-   * @returns {string} error - null if instance is valid
+   * @param {object[]|object|TradingTickerHist[]|TradingTickerHist|Array[]|Array} data -
+   *   instance to validate
+   * @returns {Error|null} error - null if instance is valid
    */
   static validate (data) {
-    return super.validate({
+    return super.validateWithDataDefinition({
       data,
       fields,
       validators: {

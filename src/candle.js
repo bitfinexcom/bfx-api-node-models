@@ -13,38 +13,48 @@ const fields = {
 }
 
 /**
+ * Plain candle object used to instantiate model
+ *
+ * @typedef {object} CandleData
+ * @property {number} mts - timestamp
+ * @property {number} open - open price
+ * @property {number} close - close price
+ * @property {number} high - highest price in the period
+ * @property {number} low - lowest price in the period
+ * @property {number} volume - total volume for the period
+ */
+
+/**
  * OHLCV Candle model
+ *
+ * @extends Model
  */
 class Candle extends Model {
   /**
-   * @param {object|Array} data - source payloud
-   * @param {number} data.mts - timestamp
-   * @param {number} data.open - open price
-   * @param {number} data.close - close price
-   * @param {number} data.high - highest price in the period
-   * @param {number} data.low - lowest price in the period
-   * @param {number} data.volume - total volume for the period
+   * @param {CandleData|CandleData[]|Array|Array[]} data - candle ata, one or
+   *   multiple in object or array format
    */
-  constructor (data = {}) {
+  constructor (data) {
     super({ data, fields })
   }
 
   /**
-   * @param {object[]|object|Array[]|Array} data - data to convert to POJO
+   * @param {Array|Array[]} data - data to convert to POJO
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserialize({ data, fields })
+    return super.unserializeWithDataDefinition({ data, fields })
   }
 
   /**
    * Validates a given Candle instance
    *
-   * @param {object[]|object|Candle[]|Candle|Array} data - instance to validate
-   * @returns {string} error - null if instance is valid
+   * @param {object[]|object|Candle[]|Candle|Array[]|Array} data - instance to
+   *   validate
+   * @returns {Error|null} error - null if instance is valid
    */
   static validate (data) {
-    return super.validate({
+    return super.validateWithDataDefinition({
       data,
       fields,
       validators: {

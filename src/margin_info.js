@@ -11,6 +11,8 @@ const Model = require('./model')
 
 /**
  * Margin Info model
+ *
+ * @extends Model
  */
 class MarginInfo extends Model {
   /**
@@ -62,7 +64,7 @@ class MarginInfo extends Model {
    * TODO: Figure out a better object key for 'payload', as we need to support
    *       both arrays and POJOs
    *
-   * @param {object[]|object|Array[]|Array} data - data to convert to POJO
+   * @param {Array[]|Array} data - data to convert to POJO
    * @returns {object} pojo
    */
   static unserialize (data) {
@@ -102,8 +104,9 @@ class MarginInfo extends Model {
   /**
    * Validates a given margin info instance
    *
-   * @param {object[]|object|MarginInfo[]|MarginInfo|Array} data - instance to validate
-   * @returns {string} error - null if instance is valid
+   * @param {object[]|object|MarginInfo[]|MarginInfo|Arrayp[]|Array} data -
+   *   instance to validate
+   * @returns {Error|null} error - null if instance is valid
    */
   static validate (data) {
     const { type, symbol, tradableBalance, grossBalance, buy, sell } = this

@@ -19,7 +19,7 @@ describe('base model class', () => {
         }
 
         static unserialize (data) {
-          return super.unserialize({ data, fields })
+          return super.unserializeWithDataDefinition({ data, fields })
         }
       }
 
@@ -42,28 +42,28 @@ describe('base model class', () => {
     const invalidInstance = { num: null, str: null }
 
     it('returns null if an item passes the provided validators', () => {
-      assert(Model.validate({
+      assert(Model.validateWithDataDefinition({
         data: validInstance,
         ...validateArgs
       }) === null)
     })
 
     it('returns error if an item fails the provided validators', () => {
-      assert(_isError(Model.validate({
+      assert(_isError(Model.validateWithDataDefinition({
         data: invalidInstance,
         ...validateArgs
       })))
     })
 
     it('returns error if a single item in a collection fails the validators', () => {
-      assert(_isError(Model.validate({
+      assert(_isError(Model.validateWithDataDefinition({
         data: [validInstance, validInstance, invalidInstance, validInstance],
         ...validateArgs
       })))
     })
 
     it('returns null if all items in a collection pass the validators', () => {
-      assert(Model.validate({
+      assert(Model.validateWithDataDefinition({
         data: [validInstance, validInstance, validInstance, validInstance],
         ...validateArgs
       }) === null)

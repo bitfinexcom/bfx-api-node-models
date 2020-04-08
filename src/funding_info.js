@@ -10,6 +10,8 @@ const Model = require('./model')
 
 /**
  * Account Funding Info model
+ *
+ * @extends Model
  */
 class FundingInfo extends Model {
   /**
@@ -45,7 +47,7 @@ class FundingInfo extends Model {
    * TODO: Figure out a better object key for 'payload', as we need to support
    *       both arrays and POJOs
    *
-   * @param {object[]|object|Array[]|Array} data - data to convert to POJO
+   * @param {Array[]|Array} data - data to convert to POJO
    * @returns {object} pojo
    */
   static unserialize (data) {
@@ -70,7 +72,7 @@ class FundingInfo extends Model {
    * Validates a given funding info instance
    *
    * @param {object[]|object|FundingInfo[]|FundingInfo|Array} data - instance to validate
-   * @returns {string} error - null if instance is valid
+   * @returns {Error|null} error - null if instance is valid
    */
   static validate (data) {
     const { symbol, yieldLoan, yieldLend, durationLoan, durationLend } = this

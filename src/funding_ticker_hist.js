@@ -14,27 +14,37 @@ const fields = {
 }
 
 /**
+ * Plain historical funcing ticker object used to instantiate model
+ *
+ * @typedef {object} FundingTickerHistData
+ * @property {string} symbol - symbol
+ * @property {number} bid - bid
+ * @property {number} bidPeriod - bid period
+ * @property {number} ask - ask
+ * @property {number} mtsUpdate - timestamp
+ */
+
+/**
  * Historical Funding Ticker model
+ *
+ * @extends Model
  */
 class FundingTickerHist extends Model {
   /**
-   * @param {object|Array} data - historical funding ticker data
-   * @param {string} data.symbol - symbol
-   * @param {number} data.bid - bid
-   * @param {number} data.bidPeriod - bid period
-   * @param {number} data.ask - ask
-   * @param {number} data.mtsUpdate - timestamp
+   * @param {FundingTickerHistData[]|FundingTickerHistData|Array|Array[]} data
+   *  - historical funding ticker data, one or multiple in object or array
+   *    format
    */
-  constructor (data = {}) {
+  constructor (data) {
     super({ data, fields })
   }
 
   /**
-   * @param {object[]|object|Array[]|Array} data - data to convert to POJO
+   * @param {Array[]|Array} data - data to convert to POJO
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserialize({ data, fields })
+    return super.unserializeWithDataDefinition({ data, fields })
   }
 
   /**
@@ -58,11 +68,12 @@ class FundingTickerHist extends Model {
   /**
    * Validates a given historical funding ticker instance.
    *
-   * @param {object[]|object|FundingTickerHist[]|FundingTickerHist|Array} data - instance to validate
-   * @returns {string} error - null if instance is valid
+   * @param {object[]|object|FundingTickerHist[]|FundingTickerHist|Array[]|Array} data -
+   *   instance to validate
+   * @returns {Error|null} error - null if instance is valid
    */
   static validate (data) {
-    return super.validate({
+    return super.validateWithDataDefinition({
       data,
       fields,
       validators: {

@@ -15,39 +15,50 @@ const fields = {
 }
 
 /**
+ * Plain derivatives status message object used to instantiate model
+ *
+ * @typedef {object} StatusMessagesDerivData
+ * @property {string} key - key
+ * @property {number} timestamp - timestamp
+ * @property {string} price - price
+ * @property {string} priceSpot - spot price
+ * @property {string} fundBal - funding balance
+ * @property {string} fundingAccrued - accrued funding
+ * @property {string} fundingStep - funding step
+ */
+
+/**
  * Derivatives Status Message model
+ *
+ * @extends Model
  */
 class StatusMessagesDeriv extends Model {
   /**
-   * @param {object|Array} data - derivatives status message data
-   * @param {string} data.key - key
-   * @param {number} data.timestamp - timestamp
-   * @param {string} data.price - price
-   * @param {string} data.priceSpot - spot price
-   * @param {string} data.fundBal - funding balance
-   * @param {string} data.fundingAccrued - accrued funding
-   * @param {string} data.fundingStep - funding step
+   * @param {StatusMessagesDerivData[]|StatusMessagesDerivData|Array[]|Array} data -
+   *   derivatives status message data, one or multiple in object or array
+   *   format
    */
-  constructor (data = {}) {
+  constructor (data) {
     super({ data, fields })
   }
 
   /**
-   * @param {object[]|object|Array[]|Array} data - data to convert to POJO
+   * @param {Array[]|Array} data - data to convert to POJO
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserialize({ data, fields })
+    return super.unserializeWithDataDefinition({ data, fields })
   }
 
   /**
    * Validates a given public trade instance
    *
-   * @param {object[]|object|PublicTrade[]|PublicTrade|Array} data - instance to validate
-   * @returns {string} error - null if instance is valid
+   * @param {object[]|object|StatusMessagesDeriv[]|StatusMessagesDeriv|Array[]|Array} data -
+   *   instance to validate
+   * @returns {Error|null} error - null if instance is valid
    */
   static validate (data) {
-    return super.validate({
+    return super.validateWithDataDefinition({
       data,
       fields,
       validators: {

@@ -24,36 +24,43 @@ const fields = {
 }
 
 /**
+ * Plain funding ticker object used to instantiate model
+ *
+ * @typedef {object} FundingTickerData
+ * @property {string} symbol - symbol
+ * @property {number|boolean} frr - current FRR
+ * @property {number} bid - best bid
+ * @property {number} bidSize - total bid amount
+ * @property {number} bidPeriod - bid period
+ * @property {number} ask - best ask
+ * @property {number} askSize - total ask amount
+ * @property {number} askPeriod - ask period
+ * @property {number} dailyChange - net 24h period change
+ * @property {number} dailyChangePerc - net 24h period change as percent
+ * @property {number} lastPrice - last price
+ * @property {number} volume - total volume in last 24h period
+ * @property {number} high - highest rate in last 24h period
+ * @property {number} low - lowest rate in last 24h period
+ */
+
+/**
  * Funding Ticker model
  */
 class FundingTicker extends Model {
   /**
-   * @param {object|Array} data - funding ticker data
-   * @param {string} data.symbol - symbol
-   * @param {number|boolean} data.frr - current FRR
-   * @param {number} data.bid - best bid
-   * @param {number} data.bidSize - total bid amount
-   * @param {number} data.bidPeriod - bid period
-   * @param {number} data.ask - best ask
-   * @param {number} data.askSize - total ask amount
-   * @param {number} data.askPeriod - ask period
-   * @param {number} data.dailyChange - net 24h period change
-   * @param {number} data.dailyChangePerc - net 24h period change as percent
-   * @param {number} data.lastPrice - last price
-   * @param {number} data.volume - total volume in last 24h period
-   * @param {number} data.high - highest rate in last 24h period
-   * @param {number} data.low - lowest rate in last 24h period
+   * @param {FundingTickerData[]|FundingTickerData|Array[]|Array} data - funding
+   *   ticker data, one or multiple in object or array format
    */
-  constructor (data = {}) {
+  constructor (data) {
     super({ data, fields })
   }
 
   /**
-   * @param {object[]|object|Array[]|Array} data - data to convert to POJO
+   * @param {Array[]|Array} data - data to convert to POJO
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserialize({ data, fields })
+    return super.unserializeWithDataDefinition({ data, fields })
   }
 
   /**
@@ -77,11 +84,12 @@ class FundingTicker extends Model {
   /**
    * Validates a given funding ticker instance
    *
-   * @param {object[]|object|FundingTicker[]|FundingTicker|Array} data - instance to validate
-   * @returns {string} error - null if instance is valid
+   * @param {object[]|object|FundingTicker[]|FundingTicker|Array[]|Array} data -
+   *   instance to validate
+   * @returns {Error|null} error - null if instance is valid
    */
   static validate (data) {
-    return super.validate({
+    return super.validateWithDataDefinition({
       data,
       fields,
       validators: {

@@ -22,30 +22,39 @@ const fields = {
 }
 
 /**
+ * Plain funding trade object used to instantiate model
+ *
+ * @typedef {object} FundingTradeData
+ * @property {number} id - id
+ * @property {string} symbol - symbol
+ * @property {number} mtsCreate - creation timestamp
+ * @property {number} offerID - taken offer ID
+ * @property {number} amount - amount
+ * @property {number} rate - rate
+ * @property {number} period - period
+ * @property {number|boolean} maker - maker flag
+ */
+
+/**
  * Funding Trade model
+ *
+ * @extends Model
  */
 class FundingTrade extends Model {
   /**
-   * @param {object|Array} data - funding trade data
-   * @param {number} data.id - id
-   * @param {string} data.symbol - symbol
-   * @param {number} data.mtsCreate - creation timestamp
-   * @param {number} data.offerID - taken offer ID
-   * @param {number} data.amount - amount
-   * @param {number} data.rate - rate
-   * @param {number} data.period - period
-   * @param {number|boolean} data.maker - maker flag
+   * @param {FundingTradeData[]|FundingTradeData|Array[]|Array} data - funding
+   *   trade data, one or multiple in object or array format
    */
-  constructor (data = {}) {
+  constructor (data) {
     super({ data, fields })
   }
 
   /**
-   * @param {object[]|object|Array[]|Array} data - data to convert to POJO
+   * @param {Array[]|Array} data - data to convert to POJO
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserialize({ data, fields })
+    return super.unserializeWithDataDefinition({ data, fields })
   }
 
   /**
@@ -72,11 +81,12 @@ class FundingTrade extends Model {
   /**
    * Validates a given funding trade instance
    *
-   * @param {object[]|object|FundingTrade[]|FundingTrade|Array} data - instance to validate
-   * @returns {string} error - null if instance is valid
+   * @param {object[]|object|FundingTrade[]|FundingTrade|Array[]|Array} data -
+   *   instance to validate
+   * @returns {Error|null} error - null if instance is valid
    */
   static validate (data) {
-    return super.validate({
+    return super.validateWithDataDefinition({
       data,
       fields,
       validators: {
