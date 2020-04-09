@@ -20,8 +20,7 @@
     "build": "npm run babel && npm run types",
     "docs": "rm -rf docs && node_modules/.bin/jsdoc --configure .jsdoc.json --verbose",
     "types": "./node_modules/.bin/tsc -p .",
-    "postinstall": "npm run build",
-    "prepublish": "npm test"
+    "prepare": "npm run build"
   },
   "repository": {
     "type": "git",
