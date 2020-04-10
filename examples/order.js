@@ -3,7 +3,7 @@
 process.env.DEBUG = '*'
 
 const debug = require('debug')('bfx:api:models:examples:order')
-const { Order } = require('../lib')
+const { Order } = require('../src')
 const o = new Order({
   type: Order.type.EXCHANGE_LIMIT,
   symbol: 'tBTCUSD',
