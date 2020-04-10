@@ -16,7 +16,6 @@ const assignFromCollectionOrInstance = require('./util/assign_from_collection_or
  * @typedef {object} AbstractModelInstance
  * @property {Function} unserialize - must return POJO version of model or
  *   array of POJOs if model is a collection
- *   models to array format
  */
 
 /**
