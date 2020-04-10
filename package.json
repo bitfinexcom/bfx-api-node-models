@@ -18,7 +18,8 @@
     "build": "./node_modules/.bin/babel src/ -d lib/",
     "docs": "rm -rf docs && node_modules/.bin/jsdoc --configure .jsdoc.json --verbose",
     "serve-docs": "./node_modules/.bin/http-server docs",
-    "types": "./node_modules/.bin/tsc -p ."
+    "types": "./node_modules/.bin/tsc -p .",
+    "prepare": "npm run build"
   },
   "repository": {
     "type": "git",
