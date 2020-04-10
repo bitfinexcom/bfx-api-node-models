@@ -12,7 +12,7 @@
     "alwaysStrict": true,
     "noImplicitThis": true,
     "noImplicitAny": false,
-    "outDir": "lib",
+    "noEmit": true,
     "baseUrl": ".",
     "paths": {
       "*": [
@@ -20,13 +20,7 @@
         "src/types/ts/modules/*",
         "src/types/ts/*"
       ]
-    },
-
-    "experimentalDecorators": true,
-
-    "noEmit": false,
-    "declaration": true,
-    "emitDeclarationOnly": true
+    }
   },
 
   "include": [

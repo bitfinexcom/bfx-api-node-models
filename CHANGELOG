@@ -12,7 +12,6 @@
   places
 - meta: moved model field metadata and enums onto static class members
 - meta: added JSDoc type information for typescript
-- meta: added typescript module definition
 
 # 1.2.4
 - meta: added JSDoc-generated HTML docs
