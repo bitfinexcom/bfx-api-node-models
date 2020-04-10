@@ -33,7 +33,12 @@ class Model extends EventEmitter {
    * @param {object} [params.fields] - field definitions, { [index]: key }
    * @param {string[]} [params.boolFields] - array of boolean field keys, default empty
    */
-  constructor ({ data, parsedData = {}, fields = {}, boolFields = [] } = {}) {
+  constructor ({
+    data = {},
+    parsedData = {},
+    fields = {},
+    boolFields = []
+  } = {}) {
     super()
 
     this._fields = fields
@@ -79,8 +84,9 @@ class Model extends EventEmitter {
    * @returns {object} pojo
    */
   toJS () {
+    const { constructor } = this
     const m = /** @type {AbstractModelInstance} */ (
-      /** @type {unknown} */ (this.constructor)
+      /** @type {unknown} */ (constructor)
     )
 
     return m.unserialize(this.serialize())
