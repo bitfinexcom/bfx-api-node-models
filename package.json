@@ -6,7 +6,6 @@
     "node": ">=8.3.0"
   },
   "main": "lib/index.js",
-  "types": "lib/index.d.ts",
   "husky": {
     "hooks": {
       "pre-commit": "npm test"
