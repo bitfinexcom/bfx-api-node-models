@@ -15,12 +15,10 @@
     "lint": "eslint --ext .js,.ts src/ examples/ test/",
     "test": "npm run lint && npm run types && npm run unit",
     "unit": "NODE_ENV=test nyc mocha --recursive",
-    "babel": "./node_modules/.bin/babel src/ -d lib/",
-    "build": "npm run babel && npm run types",
+    "build": "./node_modules/.bin/babel src/ -d lib/",
     "docs": "rm -rf docs && node_modules/.bin/jsdoc --configure .jsdoc.json --verbose",
     "serve-docs": "./node_modules/.bin/http-server docs",
-    "types": "./node_modules/.bin/tsc -p .",
-    "prepare": "npm run build"
+    "types": "./node_modules/.bin/tsc -p ."
   },
   "repository": {
     "type": "git",
