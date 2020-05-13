@@ -28,7 +28,7 @@ describe('Public Pulse Profile model', () => {
   testModelValidation({
     model: PublicPulseProfile,
     validData: {
-      id: new Array(...(new Array(5))).map(() => Math.random()),
+      id: 'foo',
       mtsCreate: new Array(...(new Array(5))).map(() => Math.random()),
       nickname: ['foo', 'bar', 'baz', 'qux'],
       picture: ['foo', 'bar', 'baz', 'qux'],
@@ -39,7 +39,7 @@ describe('Public Pulse Profile model', () => {
 
   it('initializes correctly', () => {
     const ppp = new PublicPulseProfile([
-      123,
+      'foo',
       12345,
       null,
       'foo',
@@ -51,7 +51,7 @@ describe('Public Pulse Profile model', () => {
       'qux'
     ])
 
-    assert.strictEqual(ppp.id, 123)
+    assert.strictEqual(ppp.id, 'foo')
     assert.strictEqual(ppp.mtsCreate, 12345)
     assert.strictEqual(ppp.nickname, 'foo')
     assert.strictEqual(ppp.picture, 'bar.jpg')
@@ -61,7 +61,7 @@ describe('Public Pulse Profile model', () => {
 
   it('serializes correctly', () => {
     const ppp = new PublicPulseProfile([
-      123,
+      'foo',
       12345,
       null,
       'foo',
@@ -75,7 +75,7 @@ describe('Public Pulse Profile model', () => {
 
     const arr = _compact(ppp.serialize())
     assert.deepStrictEqual(arr, [
-      123,
+      'foo',
       12345,
       'foo',
       'bar.jpg',
@@ -86,7 +86,7 @@ describe('Public Pulse Profile model', () => {
 
   it('unserializes correctly', () => {
     const obj = PublicPulseProfile.unserialize([
-      123,
+      'foo',
       12345,
       null,
       'foo',
@@ -98,7 +98,7 @@ describe('Public Pulse Profile model', () => {
       'qux'
     ])
 
-    assert.strictEqual(obj.id, 123)
+    assert.strictEqual(obj.id, 'foo')
     assert.strictEqual(obj.mtsCreate, 12345)
     assert.strictEqual(obj.nickname, 'foo')
     assert.strictEqual(obj.picture, 'bar.jpg')
@@ -109,7 +109,7 @@ describe('Public Pulse Profile model', () => {
   describe('toString', () => {
     it('includes pertinent information', () => {
       const ppp = new PublicPulseProfile({
-        id: 777,
+        id: 'foo777',
         mtsCreate: 12345,
         nickname: 'foo',
         picture: 'bar.jpg',
@@ -118,7 +118,7 @@ describe('Public Pulse Profile model', () => {
       })
 
       const str = ppp.toString()
-      assert.ok(_includes(str, '777'), 'id missing')
+      assert.ok(_includes(str, 'foo777'), 'id missing')
       assert.ok(_includes(str, 'foo'), 'nickname missing')
       assert.ok(_includes(str, 'bar.jpg'), 'picture missing')
       assert.ok(_includes(str, 'baz'), 'text missing')
