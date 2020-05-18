@@ -1,3 +1,6 @@
+# 1.2.8
+- feature: enriched pulse message model to include pulse profile
+
 # 1.2.7
 - feature: add pulse model
 
