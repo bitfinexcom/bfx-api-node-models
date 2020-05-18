@@ -29,7 +29,8 @@ describe('Pulse Message model', () => {
       null,
       'likes',
       'userLiked',
-      null
+      null,
+      'pulseProfile'
     ]
   })
 
@@ -69,7 +70,19 @@ describe('Pulse Message model', () => {
       null,
       1,
       2,
-      null
+      null,
+      [
+        'foo',
+        12345,
+        null,
+        'foo',
+        null,
+        'bar.jpg',
+        'baz',
+        null,
+        null,
+        'qux'
+      ]
     ])
 
     assert.strictEqual(pm.id, 'foo')
@@ -83,6 +96,18 @@ describe('Pulse Message model', () => {
     assert.deepEqual(pm.attachments, ['foo', 'bar'])
     assert.strictEqual(pm.likes, 1)
     assert.strictEqual(pm.userLiked, 2)
+    assert.deepEqual(pm.pulseProfile, [
+      'foo',
+      12345,
+      null,
+      'foo',
+      null,
+      'bar.jpg',
+      'baz',
+      null,
+      null,
+      'qux'
+    ])
   })
 
   it('serializes correctly', () => {
@@ -104,11 +129,25 @@ describe('Pulse Message model', () => {
       null,
       1,
       2,
-      null
+      null,
+      [
+        'foo',
+        12345,
+        null,
+        'foo',
+        null,
+        'bar.jpg',
+        'baz',
+        null,
+        null,
+        'qux'
+      ]
     ])
 
-    const arr = _compact(pm.serialize())
-    assert.deepStrictEqual(arr, [
+    const arr = pm.serialize()
+    arr[pm._fields.pulseProfile] = _compact(arr[pm._fields.pulseProfile])
+
+    assert.deepStrictEqual(_compact(arr), [
       'foo',
       12345,
       'bar',
@@ -119,7 +158,15 @@ describe('Pulse Message model', () => {
       ['#hash', '#tag'],
       ['foo', 'bar'],
       1,
-      2
+      2,
+      [
+        'foo',
+        12345,
+        'foo',
+        'bar.jpg',
+        'baz',
+        'qux'
+      ]
     ])
   })
 
@@ -142,7 +189,19 @@ describe('Pulse Message model', () => {
       null,
       1,
       2,
-      null
+      null,
+      [
+        'foo',
+        12345,
+        null,
+        'foo',
+        null,
+        'bar.jpg',
+        'baz',
+        null,
+        null,
+        'qux'
+      ]
     ])
 
     assert.strictEqual(obj.id, 'foo')
@@ -156,6 +215,14 @@ describe('Pulse Message model', () => {
     assert.deepEqual(obj.attachments, ['foo', 'bar'])
     assert.strictEqual(obj.likes, 1)
     assert.strictEqual(obj.userLiked, 2)
+    assert.deepEqual(obj.pulseProfile, {
+      id: 'foo',
+      mtsCreate: 12345,
+      nickname: 'foo',
+      picture: 'bar.jpg',
+      text: 'baz',
+      twitterHandle: 'qux'
+    })
   })
 
   describe('toString', () => {
