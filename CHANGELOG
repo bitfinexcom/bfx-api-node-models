@@ -1,3 +1,9 @@
+# 1.2.9
+- feature: add Invoice model
+- feature: add TradingAvgPrice model
+- feature: add FundingAvgRate model
+- feature: add FundKeeper model
+
 # 1.2.8
 - feature: enriched pulse message model to include pulse profile
 
