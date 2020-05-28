@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>liquidations.js - Documentation</title>
+    <title>funding_avg_rate.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -34,7 +34,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">liquidations.js</h1>
+    <h1 class="page-title">funding_avg_rate.js</h1>
     
 
     
@@ -47,37 +47,21 @@
             <pre class="prettyprint source linenums"><code>'use strict'
 
 const numberValidator = require('./validators/number')
-const dateValidator = require('./validators/date')
-const amountValidator = require('./validators/amount')
-const symbolValidator = require('./validators/symbol')
-const priceValidator = require('./validators/price')
-const boolValidator = require('./validators/bool')
-const _flatten = require('lodash/flatten')
-const _compact = require('lodash/compact')
 const Model = require('./model')
+
 const fields = {
-  posId: 1,
-  mtsUpdated: 2,
-  symbol: 4,
-  amount: 5,
-  basePrice: 6,
-  isMatch: 8,
-  isMarketSold: 9
+  rateAvg: 0,
+  amount: 1
 }
 
 /**
- * Liquidation Info model
+ * Funding Average Rate model
  */
-class Liquidations extends Model {
+class FundingAvgRate extends Model {
   /**
-   * @param {object|Array} data - liquidation data
-   * @param {number} data.posId - position ID
-   * @param {number} data.mtsUpdated - timestamp
-   * @param {string} data.symbol - symbol
-   * @param {number} data.amount - amount
-   * @param {number} data.basePrice - base price
-   * @param {number|boolean} data.isMatch - matched flag
-   * @param {number|boolean} data.isMarketSold - sold flag
+   * @param {object|Array} data   - funding average rate data
+   * @param {number} data.rateAvg - pulse User ID
+   * @param {number} data.amount  - creation timestamp
    */
   constructor (data = {}) {
     super({ data, fields })
@@ -95,23 +79,19 @@ class Liquidations extends Model {
    * @returns {string} str
    */
   toString () {
-    const {
-      mtsUpdated, symbol, amount, basePrice, isMatch, isMarketSold
-    } = this
+    const { rateAvg, amount } = this
 
-    return _compact(_flatten([
-      new Date(mtsUpdated).toLocaleString(),
-      symbol,
-      [amount, '@', basePrice],
-      isMatch &amp;&amp; 'matched',
-      isMarketSold &amp;&amp; 'sold'
-    ])).join(' ')
+    return [
+      amount,
+      '@',
+      rateAvg
+    ].join(' ')
   }
 
   /**
-   * Validates a given liquidation instance
+   * Validates a given funding average rate instance
    *
-   * @param {object[]|object|Liquidations[]|Liquidations|Array} data - instance to validate
+   * @param {object[]|object|FundingAvgRate[]|FundingAvgRate|Array} data - instance to validate
    * @returns {string} error - null if instance is valid
    */
   static validate (data) {
@@ -119,19 +99,14 @@ class Liquidations extends Model {
       data,
       fields,
       validators: {
-        posId: numberValidator,
-        mtsUpdated: dateValidator,
-        symbol: symbolValidator,
-        amount: amountValidator,
-        basePrice: priceValidator,
-        isMatch: boolValidator,
-        isMarketSold: boolValidator
+        rateAvg: numberValidator,
+        amount: numberValidator
       }
     })
   }
 }
 
-module.exports = Liquidations
+module.exports = FundingAvgRate
 </code></pre>
         </article>
     </section>
