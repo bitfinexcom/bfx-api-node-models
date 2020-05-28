@@ -6,7 +6,6 @@ const _compact = require('lodash/compact')
 const _includes = require('lodash/includes')
 const { Invoice } = require('../../../lib')
 const testModel = require('../../helpers/test_model')
-// const testModelValidation = require('../../helpers/test_model_validation')
 
 describe('Invoice model', () => {
   testModel({
@@ -19,15 +18,6 @@ describe('Invoice model', () => {
       'amount'
     ]
   })
-
-  // testModelValidation({
-  //   model: Invoice,
-  //   validData: {
-  //     invoiceHash: ['foo', 'bar', 'baz', 'qux'],
-  //     invoice: ['foo1', 'bar2', 'baz3', 'qux4'],
-  //     amount: ['0.001', '0.002', '0.003', '0.004']
-  //   }
-  // })
 
   it('initializes correctly', () => {
     const invc = new Invoice([
