@@ -12,7 +12,7 @@ const VALID_STRINGS = Object.values(WALLET_TYPES)
 describe('Currency model', () => {
   testModel({
     model: Currency,
-    orderedFields: ['id', 'name', 'pool', 'explorer', 'symbol']
+    orderedFields: ['id', 'name', 'pool', 'explorer', 'symbol', 'walletFx']
   })
 
   testModelValidation({
@@ -22,7 +22,8 @@ describe('Currency model', () => {
       id: new Array(...(new Array(5))).map(() => Math.random()),
       name: VALID_STRINGS,
       pool: VALID_STRINGS,
-      explorer: VALID_STRINGS
+      explorer: new Array(...(new Array(5))).map(() => []),
+      walletFx: new Array(...(new Array(5))).map(() => [])
     }
   })
 })
