@@ -2,11 +2,19 @@
 
 [![Build Status](https://travis-ci.org/bitfinexcom/bfx-api-node-models.svg?branch=master)](https://travis-ci.org/bitfinexcom/bfx-api-node-models)
 
-This repo contains model classes for working with the data structures returned by the Bitfinex REST & WebSocket APIs. The models can all be initialized with an array-format payload as returned by an API call, and can be unserialized back to the array format when needed.
+This repo contains model classes for working with the data structures returned
+by the Bitfinex REST & WebSocket APIs. The models can all be initialized with
+an array-format payload as returned by an API call, and can be unserialized
+back to the array format when needed.
 
-Some models, such as `Order` and `OrderBook` provide higher level methods which operate on the underlying data sets.
+Some models, such as `Order` and `OrderBook` provide higher level methods which
+operate on the underlying data sets.
 
-All models provide `serialize()` and `unserialize()` methods, which convert to/from array-format payloads respectively. All model constructors can take either array-format payloads, or objects/other model instances. A helper `toJS()` method is also provided for converting models to plain JS objects (POJOs).
+All models provide `serialize()` and `unserialize()` methods, which convert
+to/from array-format payloads respectively. All model constructors can take
+either array-format payloads, or objects/other model instances. A helper
+`toJS()` method is also provided for converting models to plain JS objects
+(POJOs).
 
 ### Features
 
@@ -68,12 +76,15 @@ console.log(o.toNewOrderPacket())
 
 ### Docs
 
-Refer to the [docs/](https://cdn.statically.io/gh/bitfinexcom/bfx-api-node-models/master/docs/index.html)
-folder for JSDoc-generated API documentation covering each model class.
+Refer to [docs/reference.md](docs/reference.md) for JSDoc-generated API
+documentation.
 
 ### Examples
 
-The order model provides helper methods for order submission, updates, and cancellation. These methods are compatible with version 2.0.0 of `bitfinex-api-node`, and return promises which resolve upon receival of the relevant success/error notifications.
+The order model provides helper methods for order submission, updates, and
+cancellation. These methods are compatible with version 2.0.0 of
+`bitfinex-api-node`, and return promises which resolve upon receival of the
+relevant success/error notifications.
 
 Orders are matched with their API packets by one/all of `id`, `gid`, and `cid`.
 
@@ -114,13 +125,21 @@ o.submit().then(() => {
 })
 ```
 
-The order book model constructor takes either entire book snapshots as returned by the WSv2 API, or individual update packets with single bids/asks. Once constructed, order books may be updated either with complete snapshots via `updateFromSnapshot(snapshot)` or individual update packets via `updateWidth(entry)`.
+The order book model constructor takes either entire book snapshots as returned
+by the WSv2 API, or individual update packets with single bids/asks. Once
+constructed, order books may be updated either with complete snapshots via
+`updateFromSnapshot(snapshot)` or individual update packets via
+`updateWidth(entry)`.
 
-Static helpers are also provided for working with array-format order books, in the form of `updateArrayOBWith(ob, entry, raw)`, `arrayOBMidPrice(ob, raw)`, and `checksumArr(ob, raw)`.
+Static helpers are also provided for working with array-format order books, in
+the form of `updateArrayOBWith(ob, entry, raw)`, `arrayOBMidPrice(ob, raw)`,
+and `checksumArr(ob, raw)`.
 
-Checksums may be calculated for normal books via `checksum()`, for comparison with the checksums reported by the WSv2 API.
+Checksums may be calculated for normal books via `checksum()`, for comparison
+with the checksums reported by the WSv2 API.
 
 Example usage:
+
 ```js
 const ob = new OrderBook([
   [140, 1, 10],
