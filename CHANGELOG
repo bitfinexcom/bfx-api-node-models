@@ -1,3 +1,8 @@
+# 1.2.10
+- meta: bump deps
+- meta: normalize eslint config
+- refactor: improve doclets
+
 # 1.2.9
 - feature: add Invoice model
 
