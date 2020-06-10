@@ -22,8 +22,8 @@ describe('Currency model', () => {
       id: new Array(...(new Array(5))).map(() => Math.random()),
       name: VALID_STRINGS,
       pool: VALID_STRINGS,
-      explorer: new Array(...(new Array(5))).map(() => []),
-      walletFx: new Array(...(new Array(5))).map(() => [])
+      explorer: new Array(5).fill([]),
+      walletFx: new Array(5).fill([])
     }
   })
 })
