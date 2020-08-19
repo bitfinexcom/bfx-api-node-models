@@ -1,3 +1,7 @@
+# 1.2.11
+- feature: add clampMin to StatusMessagesDeriv model
+- feature: add clampMax to StatusMessagesDeriv model
+
 # 1.2.10
 - feature: add walletFx to currency model
 - fix: currencies explorer is an array not a string
