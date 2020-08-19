@@ -13,7 +13,8 @@ describe('Derivatives Status Message model', () => {
     model: StatusMessagesDeriv,
     orderedFields: [
       'key', 'timestamp', null, 'price', 'priceSpot', null, 'fundBal', null,
-      null, 'fundingAccrued', 'fundingStep'
+      null, 'fundingAccrued', 'fundingStep', null, null, null, null, null,
+      null, null, null, null, null, null, 'clampMin', 'clampMax'
     ]
   })
 
@@ -22,11 +23,13 @@ describe('Derivatives Status Message model', () => {
     validData: {
       key: VALID_STRINGS, // pull data from somewhere
       timestamp: VALID_STRINGS, // pull data from somewhere
-      price: new Array(...(new Array(5))).map(() => Math.random()),
-      priceSpot: new Array(...(new Array(5))).map(() => Math.random()),
-      fundBal: new Array(...(new Array(5))).map(() => Math.random()),
-      fundingAccrued: new Array(...(new Array(5))).map(() => Math.random()),
-      fundingStep: new Array(...(new Array(5))).map(() => Math.random())
+      price: new Array(5).fill().map(Math.random),
+      priceSpot: new Array(5).fill().map(Math.random),
+      fundBal: new Array(5).fill().map(Math.random),
+      fundingAccrued: new Array(5).fill().map(Math.random),
+      fundingStep: new Array(5).fill().map(Math.random),
+      clampMin: new Array(5).fill().map(Math.random),
+      clampMax: new Array(5).fill().map(Math.random)
     }
   })
 })
