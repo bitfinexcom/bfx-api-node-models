@@ -1,3 +1,9 @@
+# 1.2.12
+- feature: add fundingEventTimestamp to StatusMessagesDeriv model
+- feature: add currentFunding to StatusMessagesDeriv model
+- feature: add markprice to StatusMessagesDeriv model
+- feature: add openInterest to StatusMessagesDeriv model
+
 # 1.2.11
 - feature: add clampMin to StatusMessagesDeriv model
 - feature: add clampMax to StatusMessagesDeriv model
