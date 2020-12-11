@@ -14,25 +14,21 @@ describe('Symbol Details model', () => {
     model: SymbolDetails,
     validData: {
       pair: VALID_SYMBOLS,
-      pricePrecision: [5],
       initialMargin: new Array(...(new Array(5))).map(() => Math.random()),
       minimumMargin: new Array(...(new Array(5))).map(() => Math.random()),
       maximumOrderSize: new Array(...(new Array(5))).map(() => Math.random().toString()),
       minimumOrderSize: new Array(...(new Array(5))).map(() => Math.random().toString()),
-      expiration: ['N/A'],
-      margin: [true]
+      margin: [true, false]
     }
   })
 
   it('initializes correctly', () => {
     const details = new SymbolDetails(DATA)
     assert.strictEqual(details.pair, 'BTCEUR')
-    assert.strictEqual(details.pricePrecision, 5)
     assert.strictEqual(details.initialMargin, 0.2)
     assert.strictEqual(details.minimumMargin, 0.1)
     assert.strictEqual(details.maximumOrderSize, '2000.0')
     assert.strictEqual(details.minimumOrderSize, '0.0002')
-    assert.strictEqual(details.expiration, 'N/A')
     assert.strictEqual(details.margin, true)
   })
 
@@ -46,12 +42,10 @@ describe('Symbol Details model', () => {
   it('unserializes correctly', () => {
     const details = SymbolDetails.unserialize(DATA)
     assert.strictEqual(details.pair, 'BTCEUR')
-    assert.strictEqual(details.pricePrecision, 5)
     assert.strictEqual(details.initialMargin, 0.2)
     assert.strictEqual(details.minimumMargin, 0.1)
     assert.strictEqual(details.maximumOrderSize, '2000.0')
     assert.strictEqual(details.minimumOrderSize, '0.0002')
-    assert.strictEqual(details.expiration, 'N/A')
     assert.strictEqual(details.margin, true)
   })
 })
