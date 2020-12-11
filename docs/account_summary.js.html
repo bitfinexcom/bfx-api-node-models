@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>validators/string.js - Documentation</title>
+    <title>account_summary.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -34,7 +34,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">validators/string.js</h1>
+    <h1 class="page-title">account_summary.js</h1>
     
 
     
@@ -46,21 +46,80 @@
         <article>
             <pre class="prettyprint source linenums"><code>'use strict'
 
-const _includes = require('lodash/includes')
-const _isString = require('lodash/isString')
+const numberValidator = require('./validators/number')
+const Model = require('./model')
+const fields = {
+  makerFee: [4, 0, 0],
+  derivMakerRebate: [4, 0, 5],
+  takerFeeToCrypto: [4, 1, 0],
+  takerFeeToStable: [4, 1, 1],
+  takerFeeToFiat: [4, 1, 2],
+  derivTakerFee: [4, 1, 5],
+  leoLev: [9, 'leo_lev'],
+  leoAmountAvg: [9, 'leo_amount_avg']
+}
 
 /**
- * Validates a string
- *
- * @param {*} v - value
- * @param {string[]} validOptions - optional
- * @returns {string} error - null if valid
+ * Account Summary model
  */
-module.exports = (v, validOptions) => (
-  !_isString(v) || (validOptions &amp;&amp; !_includes(validOptions, v))
-    ? 'must be a string'
-    : null
-)
+class AccountSummary extends Model {
+  /**
+   * @param {object|Array} data - account summary data
+   * @param {number} data.makerFee - maker fee rate for the account
+   * @param {number} data.derivMakerRebate - maker rebate for derivative trades on the account
+   * @param {number} data.takerFeeToCrypto - taker fee rate for crypto to crypto trades on the account
+   * @param {number} data.takerFeeToStable - taker fee rate for crypto to stable coin trades on the account
+   * @param {number} data.takerFeeToFiat - taker fee rate for crypto to stable coin trades on the account
+   * @param {number} data.derivTakerFee - taker fee rate for derivative trades on the account
+   * @param {number} data.leoLev - current LEO discount level of the account
+   * @param {number} data.leoAmountAvg - average amount of LEO held in the account over the past 30 days.
+   */
+  constructor (data = {}) {
+    super({ data, fields })
+  }
+
+  /**
+   * @param {object[]|object|Array[]|Array} data - data to convert to POJO
+   * @returns {object} pojo
+   */
+  static unserialize (data) {
+    return super.unserialize({ data, fields })
+  }
+
+  serialize () {
+    const arr = super.serialize()
+
+    arr[4][0][1] = this.makerFee
+    arr[4][0][2] = this.makerFee
+
+    return arr
+  }
+
+  /**
+   * Validates a given historical trading ticker instance
+   *
+   * @param {object[]|object|TradingTickerHist[]|TradingTickerHist|Array} data - instance to validate
+   * @returns {string} error - null if instance is valid
+   */
+  static validate (data) {
+    return super.validate({
+      data,
+      fields,
+      validators: {
+        makerFee: numberValidator,
+        derivMakerRebate: numberValidator,
+        takerFeeToCrypto: numberValidator,
+        takerFeeToStable: numberValidator,
+        takerFeeToFiat: numberValidator,
+        derivTakerFee: numberValidator,
+        leoLev: numberValidator,
+        leoAmountAvg: numberValidator
+      }
+    })
+  }
+}
+
+module.exports = AccountSummary
 </code></pre>
         </article>
     </section>

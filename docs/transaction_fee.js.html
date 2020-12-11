@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>validators/string.js - Documentation</title>
+    <title>transaction_fee.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -34,7 +34,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">validators/string.js</h1>
+    <h1 class="page-title">transaction_fee.js</h1>
     
 
     
@@ -46,21 +46,56 @@
         <article>
             <pre class="prettyprint source linenums"><code>'use strict'
 
-const _includes = require('lodash/includes')
-const _isString = require('lodash/isString')
+const numberValidator = require('./validators/number')
+const stringValidator = require('./validators/string')
+const Model = require('./model')
+const fields = {
+  symbol: 0,
+  fee: [1, 1]
+}
 
 /**
- * Validates a string
- *
- * @param {*} v - value
- * @param {string[]} validOptions - optional
- * @returns {string} error - null if valid
+ * Transaction Fee model
  */
-module.exports = (v, validOptions) => (
-  !_isString(v) || (validOptions &amp;&amp; !_includes(validOptions, v))
-    ? 'must be a string'
-    : null
-)
+class TransactionFee extends Model {
+  /**
+   * @param {object|Array} data - transaction fee data
+   * @param {string} data.symbol - currency symbol
+   * @param {number} data.fee - withdrawal fee
+   */
+  constructor (data = {}) {
+    super({ data, fields })
+
+    this.emptyFill = 0
+  }
+
+  /**
+   * @param {object[]|object|Array[]|Array} data - data to convert to POJO
+   * @returns {object} pojo
+   */
+  static unserialize (data) {
+    return super.unserialize({ data, fields })
+  }
+
+  /**
+   * Validates a given historical trading ticker instance
+   *
+   * @param {object[]|object|TradingTickerHist[]|TradingTickerHist|Array} data - instance to validate
+   * @returns {string} error - null if instance is valid
+   */
+  static validate (data) {
+    return super.validate({
+      data,
+      fields,
+      validators: {
+        symbol: stringValidator,
+        fee: numberValidator
+      }
+    })
+  }
+}
+
+module.exports = TransactionFee
 </code></pre>
         </article>
     </section>

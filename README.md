@@ -42,6 +42,9 @@ Classes for the following Bitfinex API data types:
 * Wallet
 * WalletHist
 * Currency
+* SymbolDetails
+* TransactionFee
+* AccountSummary
 
 ### Installation
 
