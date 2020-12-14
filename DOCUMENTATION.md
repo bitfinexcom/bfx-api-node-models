@@ -51,6 +51,7 @@ Classes for the following Bitfinex API data types:
 * {@link SymbolDetails}
 * {@link TransactionFee}
 * {@link AccountSummary}
+* {@link AuthPermission}
 
 ### Installation
 
