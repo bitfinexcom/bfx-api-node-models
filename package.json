@@ -1,6 +1,6 @@
 {
   "name": "bfx-api-node-models",
-  "version": "1.2.11",
+  "version": "1.3.0",
   "description": "Object models for usage with the Bitfinex node API",
   "engines": {
     "node": ">=8.3.0"
@@ -32,7 +32,8 @@
     "Jacob Plaster <jacob.plaster@bitfinex.com> (https://www.bitfinex.com)",
     "Ezequiel Wernicke <ezequiel.wernicke@bitfinex.com> (https://www.bitfinex.com)",
     "Cris Mihalache <cris.m@bitfinex.com> (https://www.bitfinex.com)",
-    "Paolo Ardoino <paolo@bitfinex.com> (https://www.bitfinex.com)"
+    "Paolo Ardoino <paolo@bitfinex.com> (https://www.bitfinex.com)",
+    "Vigan Abdurrahmani <vigan.abdurrahmani@bitfinex.com> (https://www.bitfinex.com)"
   ],
   "license": "MIT",
   "bugs": {
