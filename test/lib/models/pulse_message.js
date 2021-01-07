@@ -14,7 +14,7 @@ describe('Pulse Message model', () => {
     orderedFields: [
       'id',
       'mts',
-      null,
+      'parent',
       'userID',
       null,
       'title',
@@ -39,6 +39,7 @@ describe('Pulse Message model', () => {
     validData: {
       id: 'foo',
       mts: new Array(...(new Array(5))).map(() => Math.random()),
+      parent: 'parent',
       userID: ['foo', 'bar', 'baz', 'qux'],
       title: ['foo', 'bar', 'baz', 'qux'],
       content: ['foo', 'bar', 'baz', 'qux'],
@@ -84,9 +85,9 @@ describe('Pulse Message model', () => {
         'qux'
       ]
     ])
-
     assert.strictEqual(pm.id, 'foo')
     assert.strictEqual(pm.mts, 12345)
+    assert.strictEqual(pm.parent, null)
     assert.strictEqual(pm.userID, 'bar')
     assert.strictEqual(pm.title, 'title')
     assert.strictEqual(pm.content, 'content')
