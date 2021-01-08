@@ -14,7 +14,7 @@ describe('Pulse Message model', () => {
     orderedFields: [
       'id',
       'mts',
-      'parent',
+      null,
       'userID',
       null,
       'title',
@@ -30,7 +30,8 @@ describe('Pulse Message model', () => {
       'likes',
       'userLiked',
       null,
-      'pulseProfile'
+      'pulseProfile',
+      'comments'
     ]
   })
 
@@ -39,7 +40,6 @@ describe('Pulse Message model', () => {
     validData: {
       id: 'foo',
       mts: new Array(...(new Array(5))).map(() => Math.random()),
-      parent: 'parent',
       userID: ['foo', 'bar', 'baz', 'qux'],
       title: ['foo', 'bar', 'baz', 'qux'],
       content: ['foo', 'bar', 'baz', 'qux'],
@@ -48,7 +48,8 @@ describe('Pulse Message model', () => {
       tags: ['hash', 'tag'],
       attachments: ['foo', 'bar', 'baz', 'qux'],
       likes: new Array(...(new Array(5))).map(() => Math.random()),
-      userLiked: new Array(...(new Array(5))).map(() => Math.random())
+      userLiked: new Array(...(new Array(5))).map(() => Math.random()),
+      comments: new Array(...(new Array(5))).map(() => Math.random())
     }
   })
 
@@ -83,11 +84,11 @@ describe('Pulse Message model', () => {
         null,
         null,
         'qux'
-      ]
+      ],
+      3
     ])
     assert.strictEqual(pm.id, 'foo')
     assert.strictEqual(pm.mts, 12345)
-    assert.strictEqual(pm.parent, null)
     assert.strictEqual(pm.userID, 'bar')
     assert.strictEqual(pm.title, 'title')
     assert.strictEqual(pm.content, 'content')
@@ -109,6 +110,7 @@ describe('Pulse Message model', () => {
       null,
       'qux'
     ])
+    assert.strictEqual(pm.comments, 3)
   })
 
   it('serializes correctly', () => {
@@ -142,7 +144,8 @@ describe('Pulse Message model', () => {
         null,
         null,
         'qux'
-      ]
+      ],
+      3
     ])
 
     const arr = pm.serialize()
@@ -167,7 +170,8 @@ describe('Pulse Message model', () => {
         'bar.jpg',
         'baz',
         'qux'
-      ]
+      ],
+      3
     ])
   })
 
@@ -202,7 +206,8 @@ describe('Pulse Message model', () => {
         null,
         null,
         'qux'
-      ]
+      ],
+      3
     ])
 
     assert.strictEqual(obj.id, 'foo')
@@ -224,6 +229,7 @@ describe('Pulse Message model', () => {
       text: 'baz',
       twitterHandle: 'qux'
     })
+    assert.strictEqual(obj.comments, 3)
   })
 
   describe('toString', () => {
@@ -239,7 +245,8 @@ describe('Pulse Message model', () => {
         tags: ['#hash', '#tag'],
         attachments: ['foo', 'bar'],
         likes: 1,
-        userLiked: 1
+        userLiked: 1,
+        comments: 3
       })
 
       const str = pm.toString()
@@ -252,6 +259,7 @@ describe('Pulse Message model', () => {
       assert.ok(_includes(str, '#hash #tag'), 'hash tags missing')
       assert.ok(_includes(str, 'foo bar'), 'attachments missing')
       assert.ok(_includes(str, 'likes(1)'), 'likes missing')
+      assert.ok(_includes(str, 'comments(3)'), 'comments missing')
     })
   })
 })
