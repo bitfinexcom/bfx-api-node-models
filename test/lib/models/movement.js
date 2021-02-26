@@ -14,7 +14,7 @@ describe('Movement model', () => {
     orderedFields: [
       'id', 'currency', 'currencyName', null, null, 'mtsStarted', 'mtsUpdated',
       null, null, 'status', null, null, 'amount', 'fees', null, null,
-      'destinationAddress', null, null, null, 'transactionId'
+      'destinationAddress', null, null, null, 'transactionId', 'note'
     ]
   })
 
@@ -30,7 +30,8 @@ describe('Movement model', () => {
       mtsStarted: new Array(...(new Array(5))).map(() => Math.random()),
       mtsUpdated: new Array(...(new Array(5))).map(() => Math.random()),
       amount: new Array(...(new Array(5))).map(() => Math.random()),
-      fees: new Array(...(new Array(5))).map(() => Math.random())
+      fees: new Array(...(new Array(5))).map(() => Math.random()),
+      note: VALID_CURRENCIES // pull data from somewhere
     }
   })
 })
