@@ -27,6 +27,7 @@ const tradingVol30d = [
     vol_BFX_maker: 6673.18852682
   }
 ]
+const OBJ = { USD: 3.14966754, ETH: 0.10302856 }
 const DATA = [
   null,
   null,
@@ -51,14 +52,14 @@ const DATA = [
   { leo_lev: 0, leo_amount_avg: 0.002 }
 ]
 
-describe('Symbol Details model', () => {
+describe('Account Summary model', () => {
   testModelValidation({
     model: AccountSummary,
     validData: {
       trade_vol_30d: new Array(...(new Array(5))).map(() => tradingVol30d),
-      fees_trading_30d: new Array(...(new Array(5))).map(() => {}),
+      fees_trading_30d: new Array(...(new Array(5))).map(() => OBJ),
       fees_trading_total_30d: new Array(...(new Array(5))).map(() => Math.random()),
-      fees_funding_30d: new Array(...(new Array(5))).map(() => {}),
+      fees_funding_30d: new Array(...(new Array(5))).map(() => OBJ),
       fees_funding_total_30d: new Array(...(new Array(5))).map(() => Math.random()),
       makerFee: new Array(...(new Array(5))).map(() => Math.random()),
       derivMakerRebate: new Array(...(new Array(5))).map(() => Math.random()),
