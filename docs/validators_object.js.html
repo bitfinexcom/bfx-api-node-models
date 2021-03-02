@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>validators/currency.js - Documentation</title>
+    <title>validators/object.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -34,7 +34,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">validators/currency.js</h1>
+    <h1 class="page-title">validators/object.js</h1>
     
 
     
@@ -46,18 +46,16 @@
         <article>
             <pre class="prettyprint source linenums"><code>'use strict'
 
-const _includes = require('lodash/includes')
-const { CURRENCIES } = require('bfx-hf-util')
-const VALID_CURRENCIES = Object.values(CURRENCIES)
+const _isObject = require('lodash/isObject')
 
 /**
- * Validates a currency
+ * Validates a object
  *
  * @param {*} v - value
  * @returns {string} error - null if valid
  */
-module.exports = (v) => (!_includes(VALID_CURRENCIES, v)
-  ? 'must be a currency currently tradable on Bitfinex'
+module.exports = (v) => (!_isObject(v)
+  ? 'must be an object'
   : null
 )
 </code></pre>
