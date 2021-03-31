@@ -23,7 +23,10 @@ const DATA = [
   0.00009041,
   255643282.81674618,
   0.000163,
-  2.7e-7
+  2.7e-7,
+  null,
+  null,
+  122688757.18729109
 ]
 
 describe('FundingTicker model', () => {
@@ -32,7 +35,7 @@ describe('FundingTicker model', () => {
     orderedFields: [
       'symbol', 'frr', 'bid', 'bidSize', 'bidPeriod', 'ask', 'askSize',
       'askPeriod', 'dailyChange', 'dailyChangePerc', 'lastPrice', 'volume',
-      'high', 'low'
+      'high', 'low', null, null, 'frrAmountAvailable'
     ]
   })
 
@@ -52,7 +55,8 @@ describe('FundingTicker model', () => {
       volume: new Array(...(new Array(5))).map(() => Math.random()),
       high: new Array(...(new Array(5))).map(() => Math.random()),
       low: new Array(...(new Array(5))).map(() => Math.random()),
-      frr: new Array(...(new Array(5))).map(() => Math.random() > 0.5)
+      frr: new Array(...(new Array(5))).map(() => Math.random() > 0.5),
+      frrAmountAvailable: new Array(...(new Array(5))).map(() => Math.random())
     }
   })
 
@@ -72,6 +76,7 @@ describe('FundingTicker model', () => {
     assert.strictEqual(ticker.volume, 255643282.81674618)
     assert.strictEqual(ticker.high, 0.000163)
     assert.strictEqual(ticker.low, 2.7e-7)
+    assert.strictEqual(ticker.frrAmountAvailable, 122688757.18729109)
   })
 
   it('serializes correctly', () => {
@@ -97,6 +102,7 @@ describe('FundingTicker model', () => {
     assert.strictEqual(obj.volume, 255643282.81674618)
     assert.strictEqual(obj.high, 0.000163)
     assert.strictEqual(obj.low, 2.7e-7)
+    assert.strictEqual(obj.frrAmountAvailable, 122688757.18729109)
   })
 
   it('unserializes live data correctly', async () => {
@@ -118,6 +124,7 @@ describe('FundingTicker model', () => {
     assert.strictEqual(obj.volume, arr[11])
     assert.strictEqual(obj.high, arr[12])
     assert.strictEqual(obj.low, arr[13])
+    assert.strictEqual(obj.frrAmountAvailable, arr[16])
   }).timeout(60000)
 
   describe('quote', () => {
