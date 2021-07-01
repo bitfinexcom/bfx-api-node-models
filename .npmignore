@@ -1,0 +1,8 @@
+test
+docs
+coverage
+examples
+.github
+.nyc_output
+.travis.yml
+.jsdoc.json
