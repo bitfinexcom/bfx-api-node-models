@@ -9,7 +9,9 @@ describe('User info model', () => {
   testModel({
     model: UserInfo,
     orderedFields: [
-      'id', 'email', 'username', null, null, null, null, 'timezone'
+      'id', 'email', 'username', null, null, null, null, 'timezone',
+      null, null, null, null, null, null, null, null, null, null, null,
+      null, null, 'isPaperTradeEnabled'
     ]
   })
 
@@ -19,7 +21,8 @@ describe('User info model', () => {
       id: new Array(...(new Array(5))).map(() => Math.random()),
       email: ['test@test.com', 'what@testing.com', 'really@nope.com'],
       username: ['not', 'today', 'man', 'but', 'maybe', 'tomorrow'],
-      timezone: ['all', 'over', 'the', 'world', 'vim', 'and', 'all']
+      timezone: ['all', 'over', 'the', 'world', 'vim', 'and', 'all'],
+      isPaperTradeEnabled: [true, false]
     }
   })
 })
