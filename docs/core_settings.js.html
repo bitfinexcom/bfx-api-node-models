@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>funding_ticker_hist.js - Documentation</title>
+    <title>core_settings.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -34,7 +34,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">funding_ticker_hist.js</h1>
+    <h1 class="page-title">core_settings.js</h1>
     
 
     
@@ -46,30 +46,23 @@
         <article>
             <pre class="prettyprint source linenums"><code>'use strict'
 
-const numberValidator = require('./validators/number')
-const dateValidator = require('./validators/date')
-const symbolValidator = require('./validators/symbol')
-const priceValidator = require('./validators/price')
 const Model = require('./model')
+const stringValidator = require('./validators/string')
+
 const fields = {
-  symbol: 0,
-  bid: 2,
-  bidPeriod: 4,
-  ask: 5,
-  mtsUpdate: 15
+  key: 0,
+  value: 1
 }
 
 /**
- * Historical Funding Ticker model
+ * Core Settings model
  */
-class FundingTickerHist extends Model {
+
+class CoreSettings extends Model {
   /**
-   * @param {object|Array} data - historical funding ticker data
-   * @param {string} data.symbol - symbol
-   * @param {number} data.bid - bid
-   * @param {number} data.bidPeriod - bid period
-   * @param {number} data.ask - ask
-   * @param {number} data.mtsUpdate - timestamp
+   * @param {object|Array} data - core settings data
+   * @param {string} data.key - settings key
+   * @param {string | Array} [data.value] - settings value
    */
   constructor (data = {}) {
     super({ data, fields })
@@ -84,27 +77,9 @@ class FundingTickerHist extends Model {
   }
 
   /**
-   * Get the quote currency for the historical ticker.
+   * Validates a given core settings instance
    *
-   * @returns {string} quoteCurrency
-   */
-  quote () {
-    return this.symbol.substring(4)
-  }
-
-  /**
-   * Get the base currency for the historical ticker.
-   *
-   * @returns {string} baseCurrency
-   */
-  base () {
-    return this.symbol.substring(1, 4)
-  }
-
-  /**
-   * Validates a given historical funding ticker instance.
-   *
-   * @param {object[]|object|FundingTickerHist[]|FundingTickerHist|Array} data - instance to validate
+   * @param {object[]|object|CoreSettings[]|CoreSettings|Array} data - instance to validate
    * @returns {string} error - null if instance is valid
    */
   static validate (data) {
@@ -112,17 +87,13 @@ class FundingTickerHist extends Model {
       data,
       fields,
       validators: {
-        symbol: symbolValidator,
-        bid: priceValidator,
-        bidPeriod: numberValidator,
-        ask: priceValidator,
-        mtsUpdate: dateValidator
+        key: stringValidator
       }
     })
   }
 }
 
-module.exports = FundingTickerHist
+module.exports = CoreSettings
 </code></pre>
         </article>
     </section>
