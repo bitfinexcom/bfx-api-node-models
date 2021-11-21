@@ -51,11 +51,11 @@
     "standard": "^16.0.3"
   },
   "dependencies": {
-    "bfx-api-node-util": "^1.0.8",
-    "bfx-hf-util": "^1.0.6",
-    "bluebird": "^3.7.2",
-    "crc-32": "^1.2.0",
-    "debug": "^4.1.1",
+    "bfx-api-node-util": "^1.0.10",
+    "bfx-hf-util": "git+https://github.com/bitfinexcom/bfx-hf-util.git#v1.0.12",
+    "bluebird": "3.7.2",
+    "crc-32": "1.2.0",
+    "debug": "4.1.1",
     "lodash": "^4.17.15"
   },
   "standard": {
