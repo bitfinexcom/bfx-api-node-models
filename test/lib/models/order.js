@@ -169,6 +169,23 @@ describe('Order model', () => {
     assert(o.isHidden())
   })
 
+  it('isVisibleOnHit, setVisibleOnHit: updates/reads if the hidden orders are visible on hit or not', () => {
+    const o = new Order()
+    assert(!o.isHidden())
+    assert(!o.isVisibleOnHit())
+
+    o.setVisibleOnHit(true)
+    assert(!o.isVisibleOnHit())
+
+    o.setHidden(true)
+    o.setVisibleOnHit(true)
+    assert(o.isVisibleOnHit())
+
+    o.setHidden(false)
+    assert(!o.isHidden())
+    assert(!o.isVisibleOnHit())
+  })
+
   it('isPostOnly, setPostOnly: updates/reads postonly flag', () => {
     const o = new Order()
     assert(!o.isPostOnly())
