@@ -14,7 +14,7 @@ describe('Liquidations entry model', () => {
   testModel({
     model: Liquidations,
     orderedFields: [
-      null, 'posId', 'mtsUpdated', null, 'symbol', 'amount', 'basePrice', null, 'isMatch', 'isMarketSold'
+      null, 'posId', 'mtsUpdated', null, 'symbol', 'amount', 'basePrice', null, 'isMatch', 'isMarketSold', null, 'liquidationPrice'
     ]
   })
 
@@ -27,7 +27,8 @@ describe('Liquidations entry model', () => {
       amount: new Array(...(new Array(5))).map(() => Math.random()),
       basePrice: new Array(...(new Array(5))).map(() => Math.random()),
       isMatch: new Array(...(new Array(5))).map(() => Math.random() > 0.5),
-      isMarketSold: new Array(...(new Array(5))).map(() => Math.random() > 0.5)
+      isMarketSold: new Array(...(new Array(5))).map(() => Math.random() > 0.5),
+      liquidationPrice: new Array(...(new Array(5))).map(() => Math.random()) 
     }
   })
 
@@ -36,13 +37,15 @@ describe('Liquidations entry model', () => {
       const l = new Liquidations({
         symbol: 'tBTCUSD',
         amount: 42,
-        basePrice: 0.1
+        basePrice: 0.1,
+        liquidationPrice: 33
       })
 
       const str = l.toString()
       assert.ok(/BTCUSD/.test(str), 'symbol missing')
       assert.ok(_includes(str, '42'), 'amount missing')
       assert.ok(_includes(str, '0.1'), 'rate missing')
+      assert.ok(_includes(str, '33'), 'liquidationPrice missing')
     })
   })
 })
