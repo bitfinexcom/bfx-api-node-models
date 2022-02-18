@@ -8,6 +8,11 @@ const { PublicTrade } = require('../../../lib')
 const testModel = require('../../helpers/test_model')
 const testModelValidation = require('../../helpers/test_model_validation')
 
+const snapshot = [
+  [267951933, 1645117845846, -5862.1, 0.002, 2],
+  [267947377, 1645115432454, -83763.1, 0.003, 3]
+]
+
 describe('Public Trade model', () => {
   testModel({
     model: PublicTrade,
@@ -62,6 +67,40 @@ describe('Public Trade model', () => {
         assert.strictEqual(obj[field], trade[PublicTrade.FUNDING_FIELDS[field]])
       })
     })
+  }).timeout(60000)
+
+  it('unserializes snapshot', async () => {
+    const serialized = PublicTrade.unserialize(snapshot)
+
+    serialized.forEach((item, i) => {
+      Object.keys(PublicTrade.FUNDING_FIELDS).forEach(field => {
+        assert.strictEqual(item[field], snapshot[i][PublicTrade.FUNDING_FIELDS[field]])
+      })
+    })
+  }).timeout(60000)
+
+  it('creates instance from unserialized snapshot ', async () => {
+    const trades = new PublicTrade(PublicTrade.unserialize(snapshot))
+
+    for (let i = 0; i < trades.length; i++) {
+      const item = trades[i]
+
+      Object.keys(PublicTrade.FUNDING_FIELDS).forEach(field => {
+        assert.strictEqual(item[field], snapshot[i][PublicTrade.FUNDING_FIELDS[field]])
+      })
+    }
+  }).timeout(60000)
+
+  it('creates instance from snapshot', async () => {
+    const trades = new PublicTrade(snapshot)
+
+    for (let i = 0; i < trades.length; i++) {
+      const item = trades[i]
+
+      Object.keys(PublicTrade.FUNDING_FIELDS).forEach(field => {
+        assert.strictEqual(item[field], snapshot[i][PublicTrade.FUNDING_FIELDS[field]])
+      })
+    }
   }).timeout(60000)
 
   describe('toString', () => {
