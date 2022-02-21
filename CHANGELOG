@@ -1,3 +1,6 @@
+#1.6.3
+- fix: public trade unserializing from snapshot
+
 #1.6.2
 - feature: visible on hit option supported for hidden orders
 
