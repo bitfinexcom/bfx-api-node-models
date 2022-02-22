@@ -1,6 +1,6 @@
 {
   "name": "bfx-api-node-models",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "description": "Object models for usage with the Bitfinex node API",
   "engines": {
     "node": ">=8.3.0"
