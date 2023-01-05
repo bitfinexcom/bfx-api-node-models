@@ -1,3 +1,6 @@
+#1.6.4
+- fix: added missing aff_code in updateOrder
+
 #1.6.3
 - fix: public trade unserializing from snapshot
 
