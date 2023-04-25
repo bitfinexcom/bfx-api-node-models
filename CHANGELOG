@@ -1,3 +1,6 @@
+#1.7.0
+- feature: Currency Movement Info model
+
 #1.6.3
 - fix: public trade unserializing from snapshot
 
