@@ -1,3 +1,6 @@
+# 1.8.0
+- feature: Weighted Averages model
+
 # 1.7.1
 - fix: Change FundingOffer, Order, Position model to support new rest api signature
 - fix: Test coverage to support new rest api signature

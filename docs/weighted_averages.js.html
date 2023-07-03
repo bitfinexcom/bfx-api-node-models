@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>funding_loan.js - Documentation</title>
+    <title>weighted_averages.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -34,7 +34,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">funding_loan.js</h1>
+    <h1 class="page-title">weighted_averages.js</h1>
     
 
     
@@ -47,62 +47,33 @@
             <pre class="prettyprint source linenums"><code>'use strict'
 
 const numberValidator = require('./validators/number')
-const dateValidator = require('./validators/date')
-const amountValidator = require('./validators/amount')
-const boolValidator = require('./validators/bool')
-const stringValidator = require('./validators/string')
-const symbolValidator = require('./validators/symbol')
 const Model = require('./model')
-
-const statuses = ['ACTIVE', 'EXECUTED', 'PARTIALLY FILLED', 'CANCELED']
-const boolFields = ['notify', 'hidden', 'renew', 'noClose']
 const fields = {
-  id: 0,
-  symbol: 1,
-  side: 2,
-  mtsCreate: 3,
-  mtsUpdate: 4,
-  amount: 5,
-  flags: 6,
-  status: 7,
-  type: 8,
-  rate: 11,
-  period: 12,
-  mtsOpening: 13,
-  mtsLastPayout: 14,
-  notify: 15,
-  hidden: 16,
-  renew: 18,
-  rateReal: 19,
-  noClose: 20
+  tradeCount: 0,
+  sumBuyingSpent: 1,
+  sumBuyingAmount: 2,
+  sumSellingSpent: 4,
+  sumSellingAmount: 5,
+  buyingWeightedPrice: 7,
+  sellingWeightedPrice: 8
 }
 
 /**
- * Funding Loan model
+ * Weighted Averages model
  */
-class FundingLoan extends Model {
+class WeightedAverages extends Model {
   /**
-   * @param {object|Array} data - funding loan data
-   * @param {number} data.id - id
-   * @param {string} data.symbol - symbol
-   * @param {number} data.side - side
-   * @param {number} data.mtsCreate - creation timestamp
-   * @param {number} data.mtsUpdate - last update timestamp
-   * @param {number} data.mtsOpening - open timestamp
-   * @param {number} data.mtsLastPayout - last payout timestamp
-   * @param {number} data.amount - amount
-   * @param {number} data.flags - flags
-   * @param {number} data.status - status
-   * @param {number} data.rate - rate
-   * @param {number} data.rateReal - rate real
-   * @param {number} data.period - period flag
-   * @param {number|boolean} data.notify - notify flag
-   * @param {number|boolean} data.hidden - hidden flag
-   * @param {number|boolean} data.renew - renew flag
-   * @param {number|boolean} data.noClose - no-close flag
+   * @param {object|Array} data - weighted averages data
+   * @param {number} data.tradeCount - trade count
+   * @param {number} data.sumBuyingSpent - sum buying spent
+   * @param {number} data.sumBuyingAmount - sum buying amount
+   * @param {number} data.sumSellingSpent - sum selling spent
+   * @param {number} data.sumSellingAmount - sum selling amount
+   * @param {number} data.buyingWeightedPrice - buying weighted price
+   * @param {number} data.sellingWeightedPrice - selling weighted price
    */
   constructor (data = {}) {
-    super({ data, fields, boolFields })
+    super({ data, fields })
   }
 
   /**
@@ -110,13 +81,13 @@ class FundingLoan extends Model {
    * @returns {object} pojo
    */
   static unserialize (data) {
-    return super.unserialize({ data, fields, boolFields })
+    return super.unserialize({ data, fields })
   }
 
   /**
-   * Validates a given funding loan instance
+   * Validates a given WeightedAverages instance
    *
-   * @param {object[]|object|FundingLoan[]|FundingLoan|Array} data - instance to validate
+   * @param {object[]|object|WeightedAverages[]|WeightedAverages|Array} data - instance to validate
    * @returns {string} error - null if instance is valid
    */
   static validate (data) {
@@ -124,36 +95,19 @@ class FundingLoan extends Model {
       data,
       fields,
       validators: {
-        mtsCreate: dateValidator,
-        mtsUpdate: dateValidator,
-        mtsOpening: dateValidator,
-        mtsLastPayout: dateValidator,
-        amount: amountValidator,
-        flags: numberValidator,
-        rate: numberValidator,
-        period: numberValidator,
-        rateReal: numberValidator,
-        notify: boolValidator,
-        hidden: boolValidator,
-        renew: boolValidator,
-        noClose: boolValidator,
-        status: stringValidator,
-        symbol: symbolValidator,
-        id: numberValidator
+        tradeCount: numberValidator,
+        sumBuyingSpent: numberValidator,
+        sumBuyingAmount: numberValidator,
+        sumSellingSpent: numberValidator,
+        sumSellingAmount: numberValidator,
+        buyingWeightedPrice: numberValidator,
+        sellingWeightedPrice: numberValidator
       }
     })
   }
 }
 
-FundingLoan.status = {}
-FundingLoan.side = {
-  LEND: 'Lend',
-  LOAN: 'Loan'
-}
-
-statuses.forEach(s => (FundingLoan.status[s.split(' ').join('_')] = s))
-
-module.exports = FundingLoan
+module.exports = WeightedAverages
 </code></pre>
         </article>
     </section>
