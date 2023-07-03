@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>funding_loan.js - Documentation</title>
+    <title>WeightedAverages - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -34,129 +34,717 @@
 
 <div id="main">
     
-    <h1 class="page-title">funding_loan.js</h1>
+    <h1 class="page-title">WeightedAverages</h1>
     
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>'use strict'
+        <h2>
+        WeightedAverages
+        </h2>
+        
+            <div class="class-description usertext"><p>Weighted Averages model</p></div>
+        
+    
+</header>
 
-const numberValidator = require('./validators/number')
-const dateValidator = require('./validators/date')
-const amountValidator = require('./validators/amount')
-const boolValidator = require('./validators/bool')
-const stringValidator = require('./validators/string')
-const symbolValidator = require('./validators/symbol')
-const Model = require('./model')
+<article>
+    
+        <div class="container-overview">
+        
+            
 
-const statuses = ['ACTIVE', 'EXECUTED', 'PARTIALLY FILLED', 'CANCELED']
-const boolFields = ['notify', 'hidden', 'renew', 'noClose']
-const fields = {
-  id: 0,
-  symbol: 1,
-  side: 2,
-  mtsCreate: 3,
-  mtsUpdate: 4,
-  amount: 5,
-  flags: 6,
-  status: 7,
-  type: 8,
-  rate: 11,
-  period: 12,
-  mtsOpening: 13,
-  mtsLastPayout: 14,
-  notify: 15,
-  hidden: 16,
-  renew: 18,
-  rateReal: 19,
-  noClose: 20
-}
+    
+    <h2>Constructor</h2>
+    
 
-/**
- * Funding Loan model
- */
-class FundingLoan extends Model {
-  /**
-   * @param {object|Array} data - funding loan data
-   * @param {number} data.id - id
-   * @param {string} data.symbol - symbol
-   * @param {number} data.side - side
-   * @param {number} data.mtsCreate - creation timestamp
-   * @param {number} data.mtsUpdate - last update timestamp
-   * @param {number} data.mtsOpening - open timestamp
-   * @param {number} data.mtsLastPayout - last payout timestamp
-   * @param {number} data.amount - amount
-   * @param {number} data.flags - flags
-   * @param {number} data.status - status
-   * @param {number} data.rate - rate
-   * @param {number} data.rateReal - rate real
-   * @param {number} data.period - period flag
-   * @param {number|boolean} data.notify - notify flag
-   * @param {number|boolean} data.hidden - hidden flag
-   * @param {number|boolean} data.renew - renew flag
-   * @param {number|boolean} data.noClose - no-close flag
-   */
-  constructor (data = {}) {
-    super({ data, fields, boolFields })
-  }
+    <h4 class="name" id="WeightedAverages"><span class="type-signature"></span>new WeightedAverages<span class="signature">(data)</span><span class="type-signature"></span></h4>
 
-  /**
-   * @param {object[]|object|Array[]|Array} data - data to convert to POJO
-   * @returns {object} pojo
-   */
-  static unserialize (data) {
-    return super.unserialize({ data, fields, boolFields })
-  }
+    
 
-  /**
-   * Validates a given funding loan instance
-   *
-   * @param {object[]|object|FundingLoan[]|FundingLoan|Array} data - instance to validate
-   * @returns {string} error - null if instance is valid
-   */
-  static validate (data) {
-    return super.validate({
-      data,
-      fields,
-      validators: {
-        mtsCreate: dateValidator,
-        mtsUpdate: dateValidator,
-        mtsOpening: dateValidator,
-        mtsLastPayout: dateValidator,
-        amount: amountValidator,
-        flags: numberValidator,
-        rate: numberValidator,
-        period: numberValidator,
-        rateReal: numberValidator,
-        notify: boolValidator,
-        hidden: boolValidator,
-        renew: boolValidator,
-        noClose: boolValidator,
-        status: stringValidator,
-        symbol: symbolValidator,
-        id: numberValidator
-      }
-    })
-  }
-}
 
-FundingLoan.status = {}
-FundingLoan.side = {
-  LEND: 'Lend',
-  LOAN: 'Loan'
-}
 
-statuses.forEach(s => (FundingLoan.status[s.split(' ').join('_')] = s))
 
-module.exports = FundingLoan
-</code></pre>
-        </article>
-    </section>
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="weighted_averages.js.html">weighted_averages.js</a>, <a href="weighted_averages.js.html#line18">line 18</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+|
+
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>weighted averages data</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>tradeCount</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>trade count</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>sumBuyingSpent</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>sum buying spent</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>sumBuyingAmount</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>sum buying amount</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>sumSellingSpent</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>sum selling spent</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>sumSellingAmount</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>sum selling amount</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>buyingWeightedPrice</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>buying weighted price</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>sellingWeightedPrice</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>selling weighted price</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        </div>
+    
+
+    
+
+    
+
+    
+    
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id=".unserialize"><span class="type-signature">(static) </span>unserialize<span class="signature">(data)</span><span class="type-signature"> &rarr; {object}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="weighted_averages.js.html">weighted_averages.js</a>, <a href="weighted_averages.js.html#line37">line 37</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;object></span>
+|
+
+<span class="param-type">object</span>
+|
+
+<span class="param-type">Array.&lt;Array></span>
+|
+
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>data to convert to POJO</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>pojo</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".validate"><span class="type-signature">(static) </span>validate<span class="signature">(data)</span><span class="type-signature"> &rarr; {string}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="weighted_averages.js.html">weighted_averages.js</a>, <a href="weighted_averages.js.html#line47">line 47</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Validates a given WeightedAverages instance</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;object></span>
+|
+
+<span class="param-type">object</span>
+|
+
+<span class="param-type">Array.&lt;<a href="WeightedAverages.html">WeightedAverages</a>></span>
+|
+
+<span class="param-type"><a href="WeightedAverages.html">WeightedAverages</a></span>
+|
+
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>instance to validate</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>error - null if instance is valid</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 
@@ -168,7 +756,7 @@ module.exports = FundingLoan
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.11</a> on Mon Jul 03 2023 12:08:33 GMT+0300 (Eastern European Summer Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.11</a> on Mon Jul 03 2023 12:08:34 GMT+0300 (Eastern European Summer Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
