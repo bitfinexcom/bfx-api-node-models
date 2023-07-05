@@ -11,7 +11,8 @@ describe('WeightedAverages model', () => {
     orderedFields: [
       'tradeCount', 'sumBuyingSpent', 'sumBuyingAmount', null,
       'sumSellingSpent', 'sumSellingAmount', null,
-      'buyingWeightedPrice', 'sellingWeightedPrice'
+      'buyingWeightedPrice', 'sellingWeightedPrice', null,
+      'firstTradeMts', 'lastTradeMts'
     ]
   })
 
@@ -24,7 +25,9 @@ describe('WeightedAverages model', () => {
       sumSellingSpent: new Array(...(new Array(5))).map(() => Math.random()),
       sumSellingAmount: new Array(...(new Array(5))).map(() => Math.random()),
       buyingWeightedPrice: new Array(...(new Array(5))).map(() => Math.random()),
-      sellingWeightedPrice: new Array(...(new Array(5))).map(() => Math.random())
+      sellingWeightedPrice: new Array(...(new Array(5))).map(() => Math.random()),
+      firstTradeMts: new Array(...(new Array(5))).map(() => Math.random()),
+      lastTradeMts: new Array(...(new Array(5))).map(() => Math.random())
     }
   })
 })
