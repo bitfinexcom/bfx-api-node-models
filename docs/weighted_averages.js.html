@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>wallet_hist.js - Documentation</title>
+    <title>weighted_averages.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -34,7 +34,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">wallet_hist.js</h1>
+    <h1 class="page-title">weighted_averages.js</h1>
     
 
     
@@ -46,35 +46,35 @@
         <article>
             <pre class="prettyprint source linenums"><code>'use strict'
 
-const amountValidator = require('./validators/amount')
-const currencyValidator = require('./validators/currency')
-const stringValidator = require('./validators/string')
-const dateValidator = require('./validators/date')
-const { WALLET_TYPES } = require('bfx-hf-util')
+const numberValidator = require('./validators/number')
 const Model = require('./model')
-
-const types = Object.values(WALLET_TYPES)
 const fields = {
-  type: 0,
-  currency: 1,
-  balance: 2,
-  unsettledInterest: 3,
-  balanceAvailable: 4,
-  mtsUpdate: 6
+  tradeCount: 0,
+  sumBuyingSpent: 1,
+  sumBuyingAmount: 2,
+  sumSellingSpent: 4,
+  sumSellingAmount: 5,
+  buyingWeightedPrice: 7,
+  sellingWeightedPrice: 8,
+  firstTradeMts: 10,
+  lastTradeMts: 11
 }
 
 /**
- * Historical Wallet Update model
+ * Weighted Averages model
  */
-class WalletHist extends Model {
+class WeightedAverages extends Model {
   /**
-   * @param {object|Array} data - historical wallet update data
-   * @param {string} data.type - type (i.e. deposit)
-   * @param {string} data.currency - currency
-   * @param {number} data.balance - balance
-   * @param {number} data.unsettledInterest - unsettled interest
-   * @param {number} data.balanceAvailable - available balance
-   * @param {number} data.mtsUpdate - timestamp
+   * @param {object|Array} data - weighted averages data
+   * @param {number} data.tradeCount - trade count
+   * @param {number} data.sumBuyingSpent - sum buying spent
+   * @param {number} data.sumBuyingAmount - sum buying amount
+   * @param {number} data.sumSellingSpent - sum selling spent
+   * @param {number} data.sumSellingAmount - sum selling amount
+   * @param {number} data.buyingWeightedPrice - buying weighted price
+   * @param {number} data.sellingWeightedPrice - selling weighted price
+   * @param {number} data.firstTradeMts - first trade ms timestamp
+   * @param {number} data.lastTradeMts - last trade ms timestamp
    */
   constructor (data = {}) {
     super({ data, fields })
@@ -89,33 +89,31 @@ class WalletHist extends Model {
   }
 
   /**
-   * Validates a given historical wallet instance
+   * Validates a given WeightedAverages instance
    *
-   * @param {object[]|object|WalletHist[]|WalletHist|Array} data - instance to validate
+   * @param {object[]|object|WeightedAverages[]|WeightedAverages|Array} data - instance to validate
    * @returns {string} error - null if instance is valid
    */
   static validate (data) {
     return super.validate({
       data,
       fields,
-
       validators: {
-        type: v => stringValidator(v, types),
-        currency: currencyValidator,
-        balance: amountValidator,
-        unsettledInterest: amountValidator,
-        balanceAvailable: amountValidator,
-        mtsUpdate: dateValidator
+        tradeCount: numberValidator,
+        sumBuyingSpent: numberValidator,
+        sumBuyingAmount: numberValidator,
+        sumSellingSpent: numberValidator,
+        sumSellingAmount: numberValidator,
+        buyingWeightedPrice: numberValidator,
+        sellingWeightedPrice: numberValidator,
+        firstTradeMts: numberValidator,
+        lastTradeMts: numberValidator
       }
     })
   }
 }
 
-WalletHist.type = {}
-
-types.forEach(t => (WalletHist.type[t.toUpperCase()] = t))
-
-module.exports = WalletHist
+module.exports = WeightedAverages
 </code></pre>
         </article>
     </section>

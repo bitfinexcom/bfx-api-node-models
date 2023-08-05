@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>FundingOffer - Documentation</title>
+    <title>MovementInfo - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -34,7 +34,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">FundingOffer</h1>
+    <h1 class="page-title">MovementInfo</h1>
     
 
     
@@ -47,10 +47,10 @@
 <header>
     
         <h2>
-        FundingOffer
+        MovementInfo
         </h2>
         
-            <div class="class-description usertext"><p>Funding Offer model</p></div>
+            <div class="class-description usertext"><p>Currency Movement Info model</p></div>
         
     
 </header>
@@ -65,7 +65,7 @@
     <h2>Constructor</h2>
     
 
-    <h4 class="name" id="FundingOffer"><span class="type-signature"></span>new FundingOffer<span class="signature">(data, apiInterface<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="MovementInfo"><span class="type-signature"></span>new MovementInfo<span class="signature">(data)</span><span class="type-signature"></span></h4>
 
     
 
@@ -77,7 +77,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="funding_offer.js.html">funding_offer.js</a>, <a href="funding_offer.js.html#line39">line 39</a>
+        <a href="movement_info.js.html">movement_info.js</a>, <a href="movement_info.js.html#line35">line 35</a>
     </li></ul></dd>
     
 
@@ -139,8 +139,6 @@
         <th>Type</th>
 
         
-        <th>Attributes</th>
-        
 
         
 
@@ -169,18 +167,10 @@
             </td>
 
             
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
 
             
 
-            <td class="description last"><p>funding offer data</p>
+            <td class="description last"><p>movement data</p>
                 <h6>Properties</h6>
                 
 
@@ -229,7 +219,7 @@
 
         <tr>
             
-                <td class="name"><code>symbol</code></td>
+                <td class="name"><code>currency</code></td>
             
 
             <td class="type">
@@ -245,14 +235,60 @@
 
             
 
-            <td class="description last"><p>symbol</p></td>
+            <td class="description last"><p>currency</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>mtsCreate</code></td>
+                <td class="name"><code>currencyName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>currency name</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>remark</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>remarks related to movement</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mtsStarted</code></td>
             
 
             <td class="type">
@@ -268,14 +304,14 @@
 
             
 
-            <td class="description last"><p>creation timestamp</p></td>
+            <td class="description last"><p>movement start timestamp</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>mtsUpdate</code></td>
+                <td class="name"><code>mtsUpdated</code></td>
             
 
             <td class="type">
@@ -298,98 +334,6 @@
 
         <tr>
             
-                <td class="name"><code>amount</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>remaining amount</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>amountOrig</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>original amount</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>type</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>funding offer type</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>flags</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>flags</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
                 <td class="name"><code>status</code></td>
             
 
@@ -406,14 +350,14 @@
 
             
 
-            <td class="description last"><p>current status</p></td>
+            <td class="description last"><p>status</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>rate</code></td>
+                <td class="name"><code>amount</code></td>
             
 
             <td class="type">
@@ -429,14 +373,14 @@
 
             
 
-            <td class="description last"><p>rate</p></td>
+            <td class="description last"><p>moved amount</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>rateReal</code></td>
+                <td class="name"><code>fees</code></td>
             
 
             <td class="type">
@@ -452,14 +396,106 @@
 
             
 
-            <td class="description last"><p>rate real</p></td>
+            <td class="description last"><p>paid fees</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>period</code></td>
+                <td class="name"><code>destinationAddress</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>destination address</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>memo</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>memo/tag related to transaction</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>transactionId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>transaction ID</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>note</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>transaction note</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>bankFees</code></td>
             
 
             <td class="type">
@@ -475,23 +511,20 @@
 
             
 
-            <td class="description last"><p>period for the offer</p></td>
+            <td class="description last"><p>wire bank fees</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>notify</code></td>
+                <td class="name"><code>bankRouterId</code></td>
             
 
             <td class="type">
             
                 
 <span class="param-type">number</span>
-|
-
-<span class="param-type">boolean</span>
 
 
             
@@ -501,23 +534,20 @@
 
             
 
-            <td class="description last"><p>notify flag</p></td>
+            <td class="description last"><p>identifier of bank router</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>hidden</code></td>
+                <td class="name"><code>externalBankMovId</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">number</span>
-|
-
-<span class="param-type">boolean</span>
+<span class="param-type">string</span>
 
 
             
@@ -527,23 +557,20 @@
 
             
 
-            <td class="description last"><p>hidden flag</p></td>
+            <td class="description last"><p>external provider movement id</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>renew</code></td>
+                <td class="name"><code>externalBankMovStatus</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">number</span>
-|
-
-<span class="param-type">boolean</span>
+<span class="param-type">string</span>
 
 
             
@@ -553,21 +580,37 @@
 
             
 
-            <td class="description last"><p>renew flag</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
+            <td class="description last"><p>external provider movement status</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>apiInterface</code></td>
+                <td class="name"><code>externalBankMovDescription</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>external provider movement info</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>externalBankAccInfo</code></td>
             
 
             <td class="type">
@@ -580,21 +623,17 @@
             </td>
 
             
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
 
             
 
-            <td class="description last"><p>rest or websocket object capable of
-submitting funding offers</p></td>
+            <td class="description last"><p>external provider bank account information for user</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
         </tr>
 
     
@@ -657,7 +696,7 @@ submitting funding offers</p></td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="funding_offer.js.html">funding_offer.js</a>, <a href="funding_offer.js.html#line69">line 69</a>
+        <a href="movement_info.js.html">movement_info.js</a>, <a href="movement_info.js.html#line66">line 66</a>
     </li></ul></dd>
     
 
@@ -820,7 +859,7 @@ submitting funding offers</p></td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="funding_offer.js.html">funding_offer.js</a>, <a href="funding_offer.js.html#line175">line 175</a>
+        <a href="movement_info.js.html">movement_info.js</a>, <a href="movement_info.js.html#line76">line 76</a>
     </li></ul></dd>
     
 
@@ -860,7 +899,7 @@ submitting funding offers</p></td>
 
 
 <div class="description usertext">
-    <p>Validates a given funding offer instance</p>
+    <p>Validates a given MovementInfo instance</p>
 </div>
 
 
@@ -910,10 +949,10 @@ submitting funding offers</p></td>
 <span class="param-type">object</span>
 |
 
-<span class="param-type">Array.&lt;<a href="FundingOffer.html">FundingOffer</a>></span>
+<span class="param-type">Array.&lt;<a href="MovementInfo.html">MovementInfo</a>></span>
 |
 
-<span class="param-type"><a href="FundingOffer.html">FundingOffer</a></span>
+<span class="param-type"><a href="MovementInfo.html">MovementInfo</a></span>
 |
 
 <span class="param-type">Array</span>
@@ -953,699 +992,6 @@ submitting funding offers</p></td>
         
 <div class="param-desc">
     <p>error - null if instance is valid</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="cancel"><span class="type-signature">(async) </span>cancel<span class="signature">(apiInterface)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="funding_offer.js.html">funding_offer.js</a>, <a href="funding_offer.js.html#line113">line 113</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Cancel the funding offer</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>apiInterface</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">RESTv2</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>optional rest instance</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>p</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="close"><span class="type-signature">(async) </span>close<span class="signature">(apiInterface)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="funding_offer.js.html">funding_offer.js</a>, <a href="funding_offer.js.html#line130">line 130</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Close the funding offer</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>apiInterface</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">RESTv2</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>optional rest instance</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>p</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="submit"><span class="type-signature">(async) </span>submit<span class="signature">(apiInterface)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="funding_offer.js.html">funding_offer.js</a>, <a href="funding_offer.js.html#line96">line 96</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Submit the funding offer</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>apiInterface</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">RESTv2</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>optional rest instance</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>p</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="toNewOfferPacket"><span class="type-signature"></span>toNewOfferPacket<span class="signature">()</span><span class="type-signature"> &rarr; {object}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="funding_offer.js.html">funding_offer.js</a>, <a href="funding_offer.js.html#line79">line 79</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Creates an order map that can be used in either the websocket <code>on</code>
-command or a rest request body</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>on</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">object</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="toString"><span class="type-signature"></span>toString<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="funding_offer.js.html">funding_offer.js</a>, <a href="funding_offer.js.html#line149">line 149</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>Returns a string representation of the position</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>desc</p>
 </div>
 
 

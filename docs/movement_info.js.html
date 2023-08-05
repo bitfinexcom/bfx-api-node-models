@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>wallet_hist.js - Documentation</title>
+    <title>movement_info.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -34,7 +34,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">wallet_hist.js</h1>
+    <h1 class="page-title">movement_info.js</h1>
     
 
     
@@ -46,35 +46,60 @@
         <article>
             <pre class="prettyprint source linenums"><code>'use strict'
 
+const numberValidator = require('./validators/number')
+const dateValidator = require('./validators/date')
 const amountValidator = require('./validators/amount')
 const currencyValidator = require('./validators/currency')
 const stringValidator = require('./validators/string')
-const dateValidator = require('./validators/date')
-const { WALLET_TYPES } = require('bfx-hf-util')
+const objectValidator = require('./validators/object')
 const Model = require('./model')
-
-const types = Object.values(WALLET_TYPES)
 const fields = {
-  type: 0,
+  id: 0,
   currency: 1,
-  balance: 2,
-  unsettledInterest: 3,
-  balanceAvailable: 4,
-  mtsUpdate: 6
+  currencyName: 2,
+  remark: 4,
+  mtsStarted: 5,
+  mtsUpdated: 6,
+  status: 9,
+  amount: 12,
+  fees: 13,
+  destinationAddress: 16,
+  memo: 17,
+  transactionId: 20,
+  note: 21,
+  bankFees: 24,
+  bankRouterId: 25,
+  externalBankMovId: 28,
+  externalBankMovStatus: 29,
+  externalBankMovDescription: 30,
+  externalBankAccInfo: 31
 }
 
 /**
- * Historical Wallet Update model
+ * Currency Movement Info model
  */
-class WalletHist extends Model {
+class MovementInfo extends Model {
   /**
-   * @param {object|Array} data - historical wallet update data
-   * @param {string} data.type - type (i.e. deposit)
+   * @param {object|Array} data - movement data
+   * @param {number} data.id - id
    * @param {string} data.currency - currency
-   * @param {number} data.balance - balance
-   * @param {number} data.unsettledInterest - unsettled interest
-   * @param {number} data.balanceAvailable - available balance
-   * @param {number} data.mtsUpdate - timestamp
+   * @param {string} data.currencyName - currency name
+   * @param {string} data.remark - remarks related to movement
+   * @param {number} data.mtsStarted - movement start timestamp
+   * @param {number} data.mtsUpdated - last update timestamp
+   * @param {string} data.status - status
+   * @param {number} data.amount - moved amount
+   * @param {number} data.fees - paid fees
+   * @param {string} data.destinationAddress - destination address
+   * @param {string} data.memo - memo/tag related to transaction
+   * @param {string} data.transactionId - transaction ID
+   * @param {string} data.note - transaction note
+   * @param {number} data.bankFees - wire bank fees
+   * @param {number} data.bankRouterId - identifier of bank router
+   * @param {string} data.externalBankMovId - external provider movement id
+   * @param {string} data.externalBankMovStatus - external provider movement status
+   * @param {string} data.externalBankMovDescription - external provider movement info
+   * @param {object} data.externalBankAccInfo - external provider bank account information for user
    */
   constructor (data = {}) {
     super({ data, fields })
@@ -89,33 +114,41 @@ class WalletHist extends Model {
   }
 
   /**
-   * Validates a given historical wallet instance
+   * Validates a given MovementInfo instance
    *
-   * @param {object[]|object|WalletHist[]|WalletHist|Array} data - instance to validate
+   * @param {object[]|object|MovementInfo[]|MovementInfo|Array} data - instance to validate
    * @returns {string} error - null if instance is valid
    */
   static validate (data) {
     return super.validate({
       data,
       fields,
-
       validators: {
-        type: v => stringValidator(v, types),
+        id: numberValidator,
         currency: currencyValidator,
-        balance: amountValidator,
-        unsettledInterest: amountValidator,
-        balanceAvailable: amountValidator,
-        mtsUpdate: dateValidator
+        currencyName: stringValidator,
+        remark: stringValidator,
+        mtsStarted: dateValidator,
+        mtsUpdated: dateValidator,
+        status: stringValidator,
+        amount: amountValidator,
+        fees: numberValidator,
+        destinationAddress: stringValidator,
+        memo: stringValidator,
+        transactionId: stringValidator,
+        note: stringValidator,
+        bankFees: numberValidator,
+        bankRouterId: numberValidator,
+        externalBankMovId: stringValidator,
+        externalBankMovStatus: stringValidator,
+        externalBankMovDescription: stringValidator,
+        externalBankAccInfo: objectValidator
       }
     })
   }
 }
 
-WalletHist.type = {}
-
-types.forEach(t => (WalletHist.type[t.toUpperCase()] = t))
-
-module.exports = WalletHist
+module.exports = MovementInfo
 </code></pre>
         </article>
     </section>

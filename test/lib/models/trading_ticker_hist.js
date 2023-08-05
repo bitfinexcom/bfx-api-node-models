@@ -71,7 +71,7 @@ describe('TradingTickerHistory model', () => {
 
   it('unserializes live data correctly', async () => {
     const rest = new RESTv2()
-    const arr = await rest.ticker('tBTCUSD')
+    const arr = await rest.ticker({ symbol: 'tBTCUSD' })
     const obj = TradingTickerHist.unserialize(arr)
 
     assert.strictEqual(obj.symbol, arr[0])
