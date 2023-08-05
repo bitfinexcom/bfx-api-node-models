@@ -83,7 +83,7 @@ describe('Position model', () => {
     it('calls claimPosition on the interface', (done) => {
       const p = new Position({ id: 42 })
       p.claim({
-        claimPosition: async ({ id }) => {
+        claimPosition: async (id) => {
           assert.strictEqual(id, 42)
           done()
           return []

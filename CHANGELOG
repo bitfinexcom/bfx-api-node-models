@@ -1,20 +1,10 @@
-# 1.8.1
-- fix: Add extra Weighted Averages fields for trades timestamps
-
-# 1.8.0
-- feature: Weighted Averages model
-
-# 1.7.1
-- fix: Change FundingOffer, Order, Position model to support new rest api signature
-- fix: Test coverage to support new rest api signature
-
-# 1.7.0
-- feature: Currency Movement Info model
+#1.6.4
+- fix: added missing aff_code in updateOrder
 
 #1.6.3
 - fix: public trade unserializing from snapshot
 
-# 1.6.2
+#1.6.2
 - feature: visible on hit option supported for hidden orders
 
 # 1.6.0

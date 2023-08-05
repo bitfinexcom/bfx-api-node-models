@@ -766,10 +766,7 @@ describe('OrderBook model', () => {
 
   it('unserializes live trading data correctly', async () => {
     const rest = new RESTv2()
-    const book = await rest.orderBook({
-      symbol: 'tBTCUSD',
-      prec: 'P0'
-    })
+    const book = await rest.orderBook('tBTCUSD', 'P0')
     const obj = new OrderBook(book)
     let firstAsk = -1
 
@@ -792,10 +789,7 @@ describe('OrderBook model', () => {
 
   it('unserializes live funding data correctly', async () => {
     const rest = new RESTv2()
-    const book = await rest.orderBook({
-      symbol: 'fUSD',
-      prec: 'P0'
-    })
+    const book = await rest.orderBook('fUSD', 'P0')
     const obj = new OrderBook(book)
     let firstAsk = -1
 

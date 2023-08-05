@@ -74,7 +74,7 @@ describe('FundingTicker history model', () => {
 
   it('unserializes live data correctly', async () => {
     const rest = new RESTv2()
-    const arr = await rest.ticker({ symbol: 'fUSD' })
+    const arr = await rest.ticker('fUSD')
     const obj = FundingTickerHist.unserialize(arr)
 
     assert.strictEqual(obj.symbol, arr[0])
