@@ -27,12 +27,7 @@ describe('Candle model', () => {
 
   it('unserializes live data correctly', async () => {
     const rest = new RESTv2()
-
-    const arr = await rest.candles({
-      timeframe: '1D',
-      symbol: 'tBTCUSD',
-      section: 'hist'
-    })
+    const arr = await rest.candles('tBTCUSD')
 
     arr.forEach(candle => {
       const obj = Candle.unserialize(candle)

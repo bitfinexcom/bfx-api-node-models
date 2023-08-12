@@ -512,7 +512,7 @@ describe('Order model', () => {
     it('calls cancelOrder on the interface', (done) => {
       const o = new Order({ id: 42 })
       o.cancel({
-        cancelOrder: async ({ id }) => {
+        cancelOrder: async (id) => {
           assert.strictEqual(id, 42)
           done()
           return []
