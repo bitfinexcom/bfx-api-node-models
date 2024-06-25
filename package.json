@@ -1,6 +1,6 @@
 {
   "name": "bfx-api-node-models",
-  "version": "1.8.1",
+  "version": "1.8.2",
   "description": "Object models for usage with the Bitfinex node API",
   "engines": {
     "node": ">=8.3.0"
@@ -45,6 +45,7 @@
     "chai": "^4.2.0",
     "docdash": "^1.2.0",
     "husky": "^4.2.3",
+    "jsdoc": "^4.0.3",
     "jsdoc-to-markdown": "^5.0.3",
     "mocha": "^7.1.0",
     "nyc": "^15.0.0",
