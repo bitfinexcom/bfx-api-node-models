@@ -1,3 +1,6 @@
+# 1.8.2
+- fix: add missing JSDoc dev dep
+
 # 1.8.1
 - fix: Add extra Weighted Averages fields for trades timestamps
 
