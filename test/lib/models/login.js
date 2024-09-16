@@ -19,8 +19,8 @@ describe('Login entry model', () => {
   testModelValidation({
     model: Login,
     validData: {
-      id: new Array(...(new Array(5))).map(() => Math.random()),
-      time: new Array(...(new Array(5))).map(() => Math.random()),
+      id: [...(new Array(5))].map(() => Math.random()),
+      time: [...(new Array(5))].map(() => Math.random()),
       ip: VALID_SYMBOLS // grab data from somewhere
     }
   })

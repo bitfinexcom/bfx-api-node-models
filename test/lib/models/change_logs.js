@@ -18,7 +18,7 @@ describe('ChangeLog model', () => {
   testModelValidation({
     model: ChangeLog,
     validData: {
-      mtsCreate: new Array(...(new Array(5))).map(() => Math.random()),
+      mtsCreate: [...(new Array(5))].map(() => Math.random()),
       log: ['not', 'today', 'man', 'but', 'maybe', 'tomorrow'],
       ip: ['not', 'today', 'man', 'but', 'maybe', 'tomorrow'],
       userAgent: ['not', 'today', 'man', 'but', 'maybe', 'tomorrow']

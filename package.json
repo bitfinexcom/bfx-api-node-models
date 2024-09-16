@@ -1,9 +1,9 @@
 {
   "name": "bfx-api-node-models",
-  "version": "1.8.2",
+  "version": "2.0.0",
   "description": "Object models for usage with the Bitfinex node API",
   "engines": {
-    "node": ">=8.3.0"
+    "node": ">=18.0.0"
   },
   "main": "index.js",
   "husky": {
@@ -13,9 +13,11 @@
   },
   "scripts": {
     "lint": "standard",
+    "lint:fix": "standard --fix",
     "test": "npm run lint && npm run unit",
     "unit": "NODE_ENV=test nyc --check-coverage --lines 90 --branches 60 --functions 90 --statements 90 --reporter=lcov --reporter=html mocha -b --recursive",
-    "docs": "rm -rf docs && node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
+    "docs": "rm -rf docs && node_modules/.bin/jsdoc --configure .jsdoc.json --verbose",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -41,14 +43,13 @@
   },
   "homepage": "http://bitfinexcom.github.io/bfx-api-node-models/",
   "devDependencies": {
-    "bfx-api-node-rest": "^5.1.0",
-    "chai": "^4.2.0",
-    "docdash": "^1.2.0",
-    "husky": "^4.2.3",
-    "jsdoc-to-markdown": "^5.0.3",
-    "mocha": "^7.1.0",
-    "nyc": "^15.0.0",
-    "standard": "^16.0.3"
+    "bfx-api-node-rest": "^5.6.0",
+    "docdash": "^2.0.2",
+    "husky": "^9.1.6",
+    "jsdoc-to-markdown": "^9.0.1",
+    "mocha": "^10.7.3",
+    "nyc": "^17.0.0",
+    "standard": "^17.1.2"
   },
   "dependencies": {
     "bfx-api-node-util": "^1.0.10",

@@ -19,10 +19,10 @@ describe('Historical wallet model', () => {
     validData: {
       type: Object.values(WALLET_TYPES),
       currency: Object.values(CURRENCIES),
-      balance: new Array(...(new Array(5))).map(() => Math.random()),
-      balanceAvailable: new Array(...(new Array(5))).map(() => Math.random()),
-      unsettledInterest: new Array(...(new Array(5))).map(() => Math.random()),
-      mtsUpdate: new Array(...(new Array(5))).map(() => Math.random())
+      balance: [...(new Array(5))].map(() => Math.random()),
+      balanceAvailable: [...(new Array(5))].map(() => Math.random()),
+      unsettledInterest: [...(new Array(5))].map(() => Math.random()),
+      mtsUpdate: [...(new Array(5))].map(() => Math.random())
     }
   })
 })

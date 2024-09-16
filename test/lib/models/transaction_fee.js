@@ -14,7 +14,7 @@ describe('Transaction Fee model', () => {
     model: TransactionFee,
     validData: {
       symbol: VALID_SYMBOLS,
-      fee: new Array(...(new Array(5))).map(() => Math.random())
+      fee: [...(new Array(5))].map(() => Math.random())
     }
   })
 

@@ -24,11 +24,11 @@ describe('Public Trade model', () => {
   testModelValidation({ // funding
     model: PublicTrade,
     validData: {
-      id: new Array(...(new Array(5))).map(() => Math.random()),
-      mts: new Array(...(new Array(5))).map(() => Math.random()),
-      amount: new Array(...(new Array(5))).map(() => Math.random()),
-      rate: new Array(...(new Array(5))).map(() => Math.random()),
-      period: new Array(...(new Array(5))).map(() => Math.random())
+      id: [...(new Array(5))].map(() => Math.random()),
+      mts: [...(new Array(5))].map(() => Math.random()),
+      amount: [...(new Array(5))].map(() => Math.random()),
+      rate: [...(new Array(5))].map(() => Math.random()),
+      period: [...(new Array(5))].map(() => Math.random())
     }
   })
     */
@@ -36,10 +36,10 @@ describe('Public Trade model', () => {
   testModelValidation({ // trading
     model: PublicTrade,
     validData: {
-      id: new Array(...(new Array(5))).map(() => Math.random()),
-      mts: new Array(...(new Array(5))).map(() => Math.random()),
-      amount: new Array(...(new Array(5))).map(() => Math.random()),
-      price: new Array(...(new Array(5))).map(() => Math.random())
+      id: [...(new Array(5))].map(() => Math.random()),
+      mts: [...(new Array(5))].map(() => Math.random()),
+      amount: [...(new Array(5))].map(() => Math.random()),
+      price: [...(new Array(5))].map(() => Math.random())
     }
   })
 

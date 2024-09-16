@@ -38,9 +38,9 @@ describe('TradingTickerHistory model', () => {
     model: TradingTickerHist,
     validData: {
       symbol: VALID_SYMBOLS,
-      bid: new Array(...(new Array(5))).map(() => Math.random()),
-      ask: new Array(...(new Array(5))).map(() => Math.random()),
-      mtsUpdated: new Array(...(new Array(5))).map(() => Math.random())
+      bid: [...(new Array(5))].map(() => Math.random()),
+      ask: [...(new Array(5))].map(() => Math.random()),
+      mtsUpdated: [...(new Array(5))].map(() => Math.random())
     }
   })
 

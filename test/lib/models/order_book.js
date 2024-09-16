@@ -818,7 +818,7 @@ describe('OrderBook model', () => {
     })
   }).timeout(60000)
 
-  describe.skip('volBPSMid', () => {})
+  describe('volBPSMid', () => {})
 
   describe('spread', () => {
     it('returns total spread', () => {

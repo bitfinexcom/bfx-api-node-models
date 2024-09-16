@@ -27,13 +27,13 @@ describe('Trade model', () => {
       symbol: VALID_SYMBOLS,
       orderID: VALID_SYMBOLS, // get some data
       orderType: Object.values(Order.type),
-      id: new Array(...(new Array(5))).map(() => Math.random()),
-      mtsCreate: new Array(...(new Array(5))).map(() => Math.random()),
-      execAmount: new Array(...(new Array(5))).map(() => Math.random()),
-      execPrice: new Array(...(new Array(5))).map(() => Math.random()),
-      orderPrice: new Array(...(new Array(5))).map(() => Math.random()),
-      maker: new Array(...(new Array(5))).map(() => Math.random() > 0.5),
-      fee: new Array(...(new Array(5))).map(() => Math.random()),
+      id: [...(new Array(5))].map(() => Math.random()),
+      mtsCreate: [...(new Array(5))].map(() => Math.random()),
+      execAmount: [...(new Array(5))].map(() => Math.random()),
+      execPrice: [...(new Array(5))].map(() => Math.random()),
+      orderPrice: [...(new Array(5))].map(() => Math.random()),
+      maker: [...(new Array(5))].map(() => Math.random() > 0.5),
+      fee: [...(new Array(5))].map(() => Math.random()),
       feeCurrency: VALID_CURRENCIES
     }
   })

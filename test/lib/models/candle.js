@@ -16,12 +16,12 @@ describe('Candle model', () => {
   testModelValidation({
     model: Candle,
     validData: {
-      mts: new Array(...(new Array(5))).map(() => Math.random()),
-      open: new Array(...(new Array(5))).map(() => Math.random()),
-      high: new Array(...(new Array(5))).map(() => Math.random()),
-      low: new Array(...(new Array(5))).map(() => Math.random()),
-      close: new Array(...(new Array(5))).map(() => Math.random()),
-      volume: new Array(...(new Array(5))).map(() => Math.random())
+      mts: [...(new Array(5))].map(() => Math.random()),
+      open: [...(new Array(5))].map(() => Math.random()),
+      high: [...(new Array(5))].map(() => Math.random()),
+      low: [...(new Array(5))].map(() => Math.random()),
+      close: [...(new Array(5))].map(() => Math.random()),
+      volume: [...(new Array(5))].map(() => Math.random())
     }
   })
 

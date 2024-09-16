@@ -14,8 +14,8 @@ describe('BalanceInfo model', () => {
   testModelValidation({
     model: BalanceInfo,
     validData: {
-      amount: new Array(...(new Array(5))).map(() => Math.random()),
-      amountNet: new Array(...(new Array(5))).map(() => Math.random())
+      amount: [...(new Array(5))].map(() => Math.random()),
+      amountNet: [...(new Array(5))].map(() => Math.random())
     }
   })
 })

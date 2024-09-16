@@ -41,10 +41,10 @@ describe('FundingTicker history model', () => {
     model: FundingTickerHist,
     validData: {
       symbol: VALID_SYMBOLS,
-      bid: new Array(...(new Array(5))).map(() => Math.random()),
-      bidPeriod: new Array(...(new Array(5))).map(() => Math.random()),
-      ask: new Array(...(new Array(5))).map(() => Math.random()),
-      mtsUpdate: new Array(...(new Array(5))).map(() => Math.random())
+      bid: [...(new Array(5))].map(() => Math.random()),
+      bidPeriod: [...(new Array(5))].map(() => Math.random()),
+      ask: [...(new Array(5))].map(() => Math.random()),
+      mtsUpdate: [...(new Array(5))].map(() => Math.random())
     }
   })
 

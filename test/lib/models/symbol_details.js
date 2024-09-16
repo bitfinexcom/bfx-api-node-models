@@ -14,10 +14,10 @@ describe('Symbol Details model', () => {
     model: SymbolDetails,
     validData: {
       pair: VALID_SYMBOLS,
-      initialMargin: new Array(...(new Array(5))).map(() => Math.random()),
-      minimumMargin: new Array(...(new Array(5))).map(() => Math.random()),
-      maximumOrderSize: new Array(...(new Array(5))).map(() => Math.random().toString()),
-      minimumOrderSize: new Array(...(new Array(5))).map(() => Math.random().toString()),
+      initialMargin: [...(new Array(5))].map(() => Math.random()),
+      minimumMargin: [...(new Array(5))].map(() => Math.random()),
+      maximumOrderSize: [...(new Array(5))].map(() => Math.random().toString()),
+      minimumOrderSize: [...(new Array(5))].map(() => Math.random().toString()),
       margin: [true, false]
     }
   })

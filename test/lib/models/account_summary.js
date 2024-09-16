@@ -56,19 +56,19 @@ describe('Account Summary model', () => {
   testModelValidation({
     model: AccountSummary,
     validData: {
-      trade_vol_30d: new Array(...(new Array(5))).map(() => tradingVol30d),
-      fees_trading_30d: new Array(...(new Array(5))).map(() => OBJ),
-      fees_trading_total_30d: new Array(...(new Array(5))).map(() => Math.random()),
-      fees_funding_30d: new Array(...(new Array(5))).map(() => OBJ),
-      fees_funding_total_30d: new Array(...(new Array(5))).map(() => Math.random()),
-      makerFee: new Array(...(new Array(5))).map(() => Math.random()),
-      derivMakerRebate: new Array(...(new Array(5))).map(() => Math.random()),
-      takerFeeToCrypto: new Array(...(new Array(5))).map(() => Math.random()),
-      takerFeeToStable: new Array(...(new Array(5))).map(() => Math.random()),
-      takerFeeToFiat: new Array(...(new Array(5))).map(() => Math.random()),
-      derivTakerFee: new Array(...(new Array(5))).map(() => Math.random()),
-      leoLev: new Array(...(new Array(5))).map(() => Math.random()),
-      leoAmountAvg: new Array(...(new Array(5))).map(() => Math.random())
+      trade_vol_30d: [...(new Array(5))].map(() => tradingVol30d),
+      fees_trading_30d: [...(new Array(5))].map(() => OBJ),
+      fees_trading_total_30d: [...(new Array(5))].map(() => Math.random()),
+      fees_funding_30d: [...(new Array(5))].map(() => OBJ),
+      fees_funding_total_30d: [...(new Array(5))].map(() => Math.random()),
+      makerFee: [...(new Array(5))].map(() => Math.random()),
+      derivMakerRebate: [...(new Array(5))].map(() => Math.random()),
+      takerFeeToCrypto: [...(new Array(5))].map(() => Math.random()),
+      takerFeeToStable: [...(new Array(5))].map(() => Math.random()),
+      takerFeeToFiat: [...(new Array(5))].map(() => Math.random()),
+      derivTakerFee: [...(new Array(5))].map(() => Math.random()),
+      leoLev: [...(new Array(5))].map(() => Math.random()),
+      leoAmountAvg: [...(new Array(5))].map(() => Math.random())
     }
   })
 

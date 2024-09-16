@@ -19,15 +19,15 @@ describe('WeightedAverages model', () => {
   testModelValidation({
     model: WeightedAverages,
     validData: {
-      tradeCount: new Array(...(new Array(5))).map(() => Math.random()),
-      sumBuyingSpent: new Array(...(new Array(5))).map(() => Math.random()),
-      sumBuyingAmount: new Array(...(new Array(5))).map(() => Math.random()),
-      sumSellingSpent: new Array(...(new Array(5))).map(() => Math.random()),
-      sumSellingAmount: new Array(...(new Array(5))).map(() => Math.random()),
-      buyingWeightedPrice: new Array(...(new Array(5))).map(() => Math.random()),
-      sellingWeightedPrice: new Array(...(new Array(5))).map(() => Math.random()),
-      firstTradeMts: new Array(...(new Array(5))).map(() => Math.random()),
-      lastTradeMts: new Array(...(new Array(5))).map(() => Math.random())
+      tradeCount: [...(new Array(5))].map(() => Math.random()),
+      sumBuyingSpent: [...(new Array(5))].map(() => Math.random()),
+      sumBuyingAmount: [...(new Array(5))].map(() => Math.random()),
+      sumSellingSpent: [...(new Array(5))].map(() => Math.random()),
+      sumSellingAmount: [...(new Array(5))].map(() => Math.random()),
+      buyingWeightedPrice: [...(new Array(5))].map(() => Math.random()),
+      sellingWeightedPrice: [...(new Array(5))].map(() => Math.random()),
+      firstTradeMts: [...(new Array(5))].map(() => Math.random()),
+      lastTradeMts: [...(new Array(5))].map(() => Math.random())
     }
   })
 })
