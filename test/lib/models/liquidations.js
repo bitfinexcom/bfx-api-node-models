@@ -22,12 +22,12 @@ describe('Liquidations entry model', () => {
     model: Liquidations,
     validData: {
       symbol: VALID_SYMBOLS,
-      posId: new Array(...(new Array(5))).map(() => Math.random()),
-      mtsUpdated: new Array(...(new Array(5))).map(() => Math.random()),
-      amount: new Array(...(new Array(5))).map(() => Math.random()),
-      basePrice: new Array(...(new Array(5))).map(() => Math.random()),
-      isMatch: new Array(...(new Array(5))).map(() => Math.random() > 0.5),
-      isMarketSold: new Array(...(new Array(5))).map(() => Math.random() > 0.5)
+      posId: [...(new Array(5))].map(() => Math.random()),
+      mtsUpdated: [...(new Array(5))].map(() => Math.random()),
+      amount: [...(new Array(5))].map(() => Math.random()),
+      basePrice: [...(new Array(5))].map(() => Math.random()),
+      isMatch: [...(new Array(5))].map(() => Math.random() > 0.5),
+      isMarketSold: [...(new Array(5))].map(() => Math.random() > 0.5)
     }
   })
 

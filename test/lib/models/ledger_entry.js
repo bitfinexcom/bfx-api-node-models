@@ -22,10 +22,10 @@ describe('Ledger entry model', () => {
     validData: {
       currency: VALID_CURRENCIES,
       description: VALID_CURRENCIES, // pull data from somewhere
-      id: new Array(...(new Array(5))).map(() => Math.random()),
-      mts: new Array(...(new Array(5))).map(() => Math.random()),
-      amount: new Array(...(new Array(5))).map(() => Math.random()),
-      balance: new Array(...(new Array(5))).map(() => Math.random())
+      id: [...(new Array(5))].map(() => Math.random()),
+      mts: [...(new Array(5))].map(() => Math.random()),
+      amount: [...(new Array(5))].map(() => Math.random()),
+      balance: [...(new Array(5))].map(() => Math.random())
     }
   })
 })

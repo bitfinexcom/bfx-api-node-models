@@ -23,13 +23,13 @@ describe('FundingTrade model', () => {
     model: FundingTrade,
     validData: {
       symbol: VALID_SYMBOLS,
-      id: new Array(...(new Array(5))).map(() => Math.random()),
-      mtsCreate: new Array(...(new Array(5))).map(() => Math.random()),
-      offerID: new Array(...(new Array(5))).map(() => Math.random()),
-      amount: new Array(...(new Array(5))).map(() => Math.random()),
-      rate: new Array(...(new Array(5))).map(() => Math.random()),
-      period: new Array(...(new Array(5))).map(() => Math.random()),
-      maker: new Array(...(new Array(5))).map(() => Math.random() > 0.5)
+      id: [...(new Array(5))].map(() => Math.random()),
+      mtsCreate: [...(new Array(5))].map(() => Math.random()),
+      offerID: [...(new Array(5))].map(() => Math.random()),
+      amount: [...(new Array(5))].map(() => Math.random()),
+      rate: [...(new Array(5))].map(() => Math.random()),
+      period: [...(new Array(5))].map(() => Math.random()),
+      maker: [...(new Array(5))].map(() => Math.random() > 0.5)
     }
   })
 

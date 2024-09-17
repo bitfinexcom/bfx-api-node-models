@@ -26,11 +26,11 @@ describe('Movement model', () => {
       destinationAddress: VALID_CURRENCIES, // pull data from somewhere
       transactionId: VALID_CURRENCIES, // pull data from somewhere
       status: VALID_CURRENCIES, // pull data from somewhere
-      id: new Array(...(new Array(5))).map(() => Math.random()),
-      mtsStarted: new Array(...(new Array(5))).map(() => Math.random()),
-      mtsUpdated: new Array(...(new Array(5))).map(() => Math.random()),
-      amount: new Array(...(new Array(5))).map(() => Math.random()),
-      fees: new Array(...(new Array(5))).map(() => Math.random()),
+      id: [...(new Array(5))].map(() => Math.random()),
+      mtsStarted: [...(new Array(5))].map(() => Math.random()),
+      mtsUpdated: [...(new Array(5))].map(() => Math.random()),
+      amount: [...(new Array(5))].map(() => Math.random()),
+      fees: [...(new Array(5))].map(() => Math.random()),
       note: VALID_CURRENCIES // pull data from somewhere
     }
   })

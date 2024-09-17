@@ -34,7 +34,6 @@ Classes for the following Bitfinex API data types:
 * Order
 * Position
 * PublicTrade
-* PulseMessage
 * StatusMessagesDeriv
 * Trade
 * TradingTicker

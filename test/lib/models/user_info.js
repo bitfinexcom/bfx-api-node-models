@@ -18,7 +18,7 @@ describe('User info model', () => {
   testModelValidation({
     model: UserInfo,
     validData: {
-      id: new Array(...(new Array(5))).map(() => Math.random()),
+      id: [...(new Array(5))].map(() => Math.random()),
       email: ['test@test.com', 'what@testing.com', 'really@nope.com'],
       username: ['not', 'today', 'man', 'but', 'maybe', 'tomorrow'],
       timezone: ['all', 'over', 'the', 'world', 'vim', 'and', 'all'],

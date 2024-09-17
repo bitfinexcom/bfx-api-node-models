@@ -22,9 +22,9 @@ describe('Notification model', () => {
       status: VALID_STRINGS, // pull data from somewhere
       text: VALID_STRINGS, // pull data from somewhere
       type: ['success', 'error', 'info'],
-      mts: new Array(...(new Array(5))).map(() => Math.random()),
-      messageID: new Array(...(new Array(5))).map(() => Math.random()),
-      code: new Array(...(new Array(5))).map(() => Math.random())
+      mts: [...(new Array(5))].map(() => Math.random()),
+      messageID: [...(new Array(5))].map(() => Math.random()),
+      code: [...(new Array(5))].map(() => Math.random())
     }
   })
 })

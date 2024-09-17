@@ -33,20 +33,20 @@ describe('Position model', () => {
     validData: {
       symbol: VALID_SYMBOLS,
       status: VALID_SYMBOLS, // grab data from somewhere
-      amount: new Array(...(new Array(5))).map(() => Math.random()),
-      basePrice: new Array(...(new Array(5))).map(() => Math.random()),
-      marginFunding: new Array(...(new Array(5))).map(() => Math.random()),
+      amount: [...(new Array(5))].map(() => Math.random()),
+      basePrice: [...(new Array(5))].map(() => Math.random()),
+      marginFunding: [...(new Array(5))].map(() => Math.random()),
       marginFundingType: VALID_SYMBOLS, // grab data from somewhere
-      pl: new Array(...(new Array(5))).map(() => Math.random()),
-      plPerc: new Array(...(new Array(5))).map(() => Math.random()),
-      liquidationPrice: new Array(...(new Array(5))).map(() => Math.random()),
-      leverage: new Array(...(new Array(5))).map(() => Math.random()),
-      id: new Array(...(new Array(5))).map(() => Math.random()),
-      mtsCreate: new Array(...(new Array(5))).map(() => Math.random()),
-      mtsUpdate: new Array(...(new Array(5))).map(() => Math.random()),
+      pl: [...(new Array(5))].map(() => Math.random()),
+      plPerc: [...(new Array(5))].map(() => Math.random()),
+      liquidationPrice: [...(new Array(5))].map(() => Math.random()),
+      leverage: [...(new Array(5))].map(() => Math.random()),
+      id: [...(new Array(5))].map(() => Math.random()),
+      mtsCreate: [...(new Array(5))].map(() => Math.random()),
+      mtsUpdate: [...(new Array(5))].map(() => Math.random()),
       type: VALID_SYMBOLS, // grab data from somewhere
-      collateral: new Array(...(new Array(5))).map(() => Math.random()),
-      collateralMin: new Array(...(new Array(5))).map(() => Math.random())
+      collateral: [...(new Array(5))].map(() => Math.random()),
+      collateralMin: [...(new Array(5))].map(() => Math.random())
     }
   })
 

@@ -23,25 +23,25 @@ describe('MovementInfo model', () => {
   testModelValidation({
     model: MovementInfo,
     validData: {
-      id: new Array(...(new Array(5))).map(() => Math.random()),
+      id: [...(new Array(5))].map(() => Math.random()),
       currency: VALID_CURRENCIES,
       currencyName: VALID_CURRENCIES, // pull data from somewhere
       remark: VALID_CURRENCIES,
-      mtsStarted: new Array(...(new Array(5))).map(() => Math.random()),
-      mtsUpdated: new Array(...(new Array(5))).map(() => Math.random()),
+      mtsStarted: [...(new Array(5))].map(() => Math.random()),
+      mtsUpdated: [...(new Array(5))].map(() => Math.random()),
       status: VALID_CURRENCIES,
-      amount: new Array(...(new Array(5))).map(() => Math.random()),
-      fees: new Array(...(new Array(5))).map(() => Math.random()),
+      amount: [...(new Array(5))].map(() => Math.random()),
+      fees: [...(new Array(5))].map(() => Math.random()),
       destinationAddress: VALID_CURRENCIES,
       memo: VALID_CURRENCIES,
       transactionId: VALID_CURRENCIES,
       note: VALID_CURRENCIES,
-      bankFees: new Array(...(new Array(5))).map(() => Math.random()),
-      bankRouterId: new Array(...(new Array(5))).map(() => Math.random()),
+      bankFees: [...(new Array(5))].map(() => Math.random()),
+      bankRouterId: [...(new Array(5))].map(() => Math.random()),
       externalBankMovId: VALID_CURRENCIES,
       externalBankMovStatus: VALID_CURRENCIES,
       externalBankMovDescription: VALID_CURRENCIES,
-      externalBankAccInfo: new Array(...(new Array(5))).map(() => ({
+      externalBankAccInfo: [...(new Array(5))].map(() => ({
         router: `my-router-${Math.random()}`,
         meta: { [`foo-${Math.random()}`]: `bar-${Math.random()}` }
       }))

@@ -36,16 +36,16 @@ describe('TradingTicker model', () => {
     model: TradingTicker,
     validData: {
       symbol: VALID_SYMBOLS,
-      bid: new Array(...(new Array(5))).map(() => Math.random()),
-      bidSize: new Array(...(new Array(5))).map(() => Math.random()),
-      ask: new Array(...(new Array(5))).map(() => Math.random()),
-      askSize: new Array(...(new Array(5))).map(() => Math.random()),
-      dailyChange: new Array(...(new Array(5))).map(() => Math.random()),
-      dailyChangePerc: new Array(...(new Array(5))).map(() => Math.random()),
-      lastPrice: new Array(...(new Array(5))).map(() => Math.random()),
-      volume: new Array(...(new Array(5))).map(() => Math.random()),
-      high: new Array(...(new Array(5))).map(() => Math.random()),
-      low: new Array(...(new Array(5))).map(() => Math.random())
+      bid: [...(new Array(5))].map(() => Math.random()),
+      bidSize: [...(new Array(5))].map(() => Math.random()),
+      ask: [...(new Array(5))].map(() => Math.random()),
+      askSize: [...(new Array(5))].map(() => Math.random()),
+      dailyChange: [...(new Array(5))].map(() => Math.random()),
+      dailyChangePerc: [...(new Array(5))].map(() => Math.random()),
+      lastPrice: [...(new Array(5))].map(() => Math.random()),
+      volume: [...(new Array(5))].map(() => Math.random()),
+      high: [...(new Array(5))].map(() => Math.random()),
+      low: [...(new Array(5))].map(() => Math.random())
     }
   })
 

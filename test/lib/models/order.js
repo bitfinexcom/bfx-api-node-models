@@ -28,25 +28,25 @@ describe('Order model', () => {
     model: Order,
     validData: {
       symbol: VALID_SYMBOLS,
-      id: new Array(...(new Array(5))).map(() => Math.random()),
-      gid: new Array(...(new Array(5))).map(() => Math.random()),
-      cid: new Array(...(new Array(5))).map(() => Math.random()),
-      mtsCreate: new Array(...(new Array(5))).map(() => Math.random()),
-      mtsUpdate: new Array(...(new Array(5))).map(() => Math.random()),
-      amount: new Array(...(new Array(5))).map(() => Math.random()),
-      amountOrig: new Array(...(new Array(5))).map(() => Math.random()),
+      id: [...(new Array(5))].map(() => Math.random()),
+      gid: [...(new Array(5))].map(() => Math.random()),
+      cid: [...(new Array(5))].map(() => Math.random()),
+      mtsCreate: [...(new Array(5))].map(() => Math.random()),
+      mtsUpdate: [...(new Array(5))].map(() => Math.random()),
+      amount: [...(new Array(5))].map(() => Math.random()),
+      amountOrig: [...(new Array(5))].map(() => Math.random()),
       type: Object.values(Order.type),
       typePrev: Object.values(Order.type),
       status: Object.values(Order.type), // get some data
-      mtsTIF: new Array(...(new Array(5))).map(() => Math.random()),
-      flags: new Array(...(new Array(5))).map(() => Math.random()),
-      price: new Array(...(new Array(5))).map(() => Math.random()),
-      priceAvg: new Array(...(new Array(5))).map(() => Math.random()),
-      priceTrailing: new Array(...(new Array(5))).map(() => Math.random()),
-      priceAuxLimit: new Array(...(new Array(5))).map(() => Math.random()),
-      notify: new Array(...(new Array(5))).map(() => Math.random() > 0.5),
-      hidden: new Array(...(new Array(5))).map(() => Math.random() > 0.5),
-      placedId: new Array(...(new Array(5))).map(() => Math.random())
+      mtsTIF: [...(new Array(5))].map(() => Math.random()),
+      flags: [...(new Array(5))].map(() => Math.random()),
+      price: [...(new Array(5))].map(() => Math.random()),
+      priceAvg: [...(new Array(5))].map(() => Math.random()),
+      priceTrailing: [...(new Array(5))].map(() => Math.random()),
+      priceAuxLimit: [...(new Array(5))].map(() => Math.random()),
+      notify: [...(new Array(5))].map(() => Math.random() > 0.5),
+      hidden: [...(new Array(5))].map(() => Math.random() > 0.5),
+      placedId: [...(new Array(5))].map(() => Math.random())
     }
   })
 

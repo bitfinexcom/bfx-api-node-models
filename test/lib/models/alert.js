@@ -16,7 +16,7 @@ describe('Alert model', () => {
     model: Alert,
     validData: {
       symbol: Object.values(SYMBOLS),
-      price: new Array(...(new Array(5))).map(() => Math.random())
+      price: [...(new Array(5))].map(() => Math.random())
     }
   })
 })

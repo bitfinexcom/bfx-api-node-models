@@ -19,7 +19,7 @@ describe('Currency model', () => {
     model: Currency,
     validData: {
       currency: Object.values(CURRENCIES),
-      id: new Array(...(new Array(5))).map(() => Math.random()),
+      id: [...(new Array(5))].map(() => Math.random()),
       name: VALID_STRINGS,
       pool: VALID_STRINGS,
       explorer: new Array(5).fill([]),

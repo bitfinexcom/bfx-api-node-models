@@ -1,3 +1,6 @@
+# 2.0.0
+- chore: deprecated support for pulse endpoints
+
 # 1.8.2
 - feat: add IOC order type
 
