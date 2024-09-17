@@ -1,6 +1,6 @@
 {
   "name": "bfx-api-node-models",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Object models for usage with the Bitfinex node API",
   "engines": {
     "node": ">=18.0.0"
@@ -43,7 +43,7 @@
   },
   "homepage": "http://bitfinexcom.github.io/bfx-api-node-models/",
   "devDependencies": {
-    "bfx-api-node-rest": "^5.6.0",
+    "bfx-api-node-rest": "^6.0.0",
     "docdash": "^2.0.2",
     "husky": "^9.1.6",
     "jsdoc-to-markdown": "^9.0.1",

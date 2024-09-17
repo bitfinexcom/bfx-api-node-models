@@ -1,3 +1,6 @@
+# 2.0.1
+- chore: bump bfx-api-node-rest to 6.0.0
+
 # 2.0.0
 - chore: deprecated support for pulse endpoints
 
