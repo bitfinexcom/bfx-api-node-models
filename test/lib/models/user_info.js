@@ -11,7 +11,7 @@ describe('User info model', () => {
     orderedFields: [
       'id', 'email', 'username', null, null, null, null, 'timezone',
       null, null, null, null, null, null, null, null, null, null, null,
-      null, null, 'isPaperTradeEnabled'
+      null, null, 'isPaperTradeEnabled', 'isUserMerchant'
     ]
   })
 
@@ -22,7 +22,8 @@ describe('User info model', () => {
       email: ['test@test.com', 'what@testing.com', 'really@nope.com'],
       username: ['not', 'today', 'man', 'but', 'maybe', 'tomorrow'],
       timezone: ['all', 'over', 'the', 'world', 'vim', 'and', 'all'],
-      isPaperTradeEnabled: [true, false]
+      isPaperTradeEnabled: [true, false],
+      isUserMerchant: [true, false]
     }
   })
 })
