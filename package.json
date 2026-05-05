@@ -43,7 +43,7 @@
   },
   "homepage": "http://bitfinexcom.github.io/bfx-api-node-models/",
   "devDependencies": {
-    "bfx-api-node-rest": "^6.0.0",
+    "bfx-api-node-rest": "^8.0.0",
     "docdash": "^2.0.2",
     "husky": "^9.1.6",
     "jsdoc-to-markdown": "^9.0.1",
