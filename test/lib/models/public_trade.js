@@ -45,7 +45,7 @@ describe('Public Trade model', () => {
 
   it('unserializes live trading data correctly', async () => {
     const rest = new RESTv2()
-    const arr = await rest.trades('tBTCUSD')
+    const arr = await rest.trades({ symbol: 'tBTCUSD' })
 
     arr.forEach(trade => {
       const obj = PublicTrade.unserialize(trade)
@@ -58,7 +58,7 @@ describe('Public Trade model', () => {
 
   it('unserializes live funding data correctly', async () => {
     const rest = new RESTv2()
-    const arr = await rest.trades('fUSD')
+    const arr = await rest.trades({ symbol: 'fUSD' })
 
     arr.forEach(trade => {
       const obj = PublicTrade.unserialize(trade)
