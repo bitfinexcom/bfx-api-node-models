@@ -1,11 +1,10 @@
 'use strict'
-/* eslint-env mocha */
 
-const assert = require('assert')
+const test = require('brittle')
 const arrFillEmpty = require('../../../lib/util/arr_fill_empty')
 
-describe('arrFillEmpty', () => {
-  it('it should fill empty spots with null', () => {
+test('arrFillEmpty', (t) => {
+  t.test('it should fill empty spots with null', (t) => {
     const arr = new Array(5)
     arr[3] = new Array(3)
     arr[3][1] = true
@@ -14,10 +13,10 @@ describe('arrFillEmpty', () => {
     arrFillEmpty(arr)
     const expected = [null, 'test', null, [null, true, null], null]
 
-    assert.deepStrictEqual(arr, expected)
+    t.alike(arr, expected)
   })
 
-  it('it should fill empty spots with value when specified', () => {
+  t.test('it should fill empty spots with value when specified', (t) => {
     const arr = new Array(5)
     arr[3] = new Array(3)
     arr[3][1] = true
@@ -26,6 +25,6 @@ describe('arrFillEmpty', () => {
     arrFillEmpty(arr, false)
     const expected = [false, 'test', false, [false, true, false], false]
 
-    assert.deepStrictEqual(arr, expected)
+    t.alike(arr, expected)
   })
 })

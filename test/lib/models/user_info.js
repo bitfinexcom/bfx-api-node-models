@@ -1,12 +1,12 @@
-/* eslint-env mocha */
 'use strict'
 
+const test = require('brittle')
 const { UserInfo } = require('../../../lib')
 const testModel = require('../../helpers/test_model')
 const testModelValidation = require('../../helpers/test_model_validation')
 
-describe('User info model', () => {
-  testModel({
+test('User info model', (t) => {
+  testModel(t, {
     model: UserInfo,
     orderedFields: [
       'id', 'email', 'username', null, null, null, null, 'timezone',
@@ -15,7 +15,7 @@ describe('User info model', () => {
     ]
   })
 
-  testModelValidation({
+  testModelValidation(t, {
     model: UserInfo,
     validData: {
       id: [...(new Array(5))].map(() => Math.random()),

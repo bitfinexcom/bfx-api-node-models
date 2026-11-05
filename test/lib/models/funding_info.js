@@ -1,13 +1,12 @@
-/* eslint-env mocha */
 'use strict'
 
-const assert = require('assert')
+const test = require('brittle')
 const { FundingInfo } = require('../../../lib')
 
-describe('FundingInfo model', () => {
+test('FundingInfo model', (t) => {
   // TODO: test validation
 
-  it('initializes correctly', () => {
+  t.test('initializes correctly', (t) => {
     const fi = new FundingInfo([
       'sym',
       'ftEOSUSD',
@@ -19,14 +18,14 @@ describe('FundingInfo model', () => {
       ]
     ])
 
-    assert.strictEqual(fi.symbol, 'ftEOSUSD')
-    assert.strictEqual(fi.yieldLoan, 12)
-    assert.strictEqual(fi.yieldLend, 24)
-    assert.strictEqual(fi.durationLoan, 48)
-    assert.strictEqual(fi.durationLend, 96)
+    t.is(fi.symbol, 'ftEOSUSD')
+    t.is(fi.yieldLoan, 12)
+    t.is(fi.yieldLend, 24)
+    t.is(fi.durationLoan, 48)
+    t.is(fi.durationLend, 96)
   })
 
-  it('serializes correctly', () => {
+  t.test('serializes correctly', (t) => {
     const fi = new FundingInfo([
       'sym',
       'ftEOSUSD',
@@ -39,7 +38,7 @@ describe('FundingInfo model', () => {
     ])
 
     const arr = fi.serialize()
-    assert.deepStrictEqual(arr, [
+    t.alike(arr, [
       'sym',
       'ftEOSUSD',
       [
@@ -51,7 +50,7 @@ describe('FundingInfo model', () => {
     ])
   })
 
-  it('unserializes correctly', () => {
+  t.test('unserializes correctly', (t) => {
     const obj = FundingInfo.unserialize([
       'sym',
       'ftEOSUSD',
@@ -63,10 +62,10 @@ describe('FundingInfo model', () => {
       ]
     ])
 
-    assert.strictEqual(obj.symbol, 'ftEOSUSD')
-    assert.strictEqual(obj.yieldLoan, 12)
-    assert.strictEqual(obj.yieldLend, 24)
-    assert.strictEqual(obj.durationLoan, 48)
-    assert.strictEqual(obj.durationLend, 96)
+    t.is(obj.symbol, 'ftEOSUSD')
+    t.is(obj.yieldLoan, 12)
+    t.is(obj.yieldLend, 24)
+    t.is(obj.durationLoan, 48)
+    t.is(obj.durationLend, 96)
   })
 })

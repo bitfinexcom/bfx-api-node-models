@@ -1,7 +1,6 @@
-/* eslint-env mocha */
 'use strict'
 
-const assert = require('assert')
+const test = require('brittle')
 const _includes = require('lodash/includes')
 const { SYMBOLS } = require('bfx-hf-util')
 const { prepareAmount } = require('bfx-api-node-util')
@@ -12,8 +11,8 @@ const testModelValidation = require('../../helpers/test_model_validation')
 
 const VALID_SYMBOLS = Object.values(SYMBOLS)
 
-describe('FundingOffer model', () => {
-  testModel({
+test('FundingOffer model', async (t) => {
+  testModel(t, {
     model: FundingOffer,
     boolFields: ['notify', 'hidden', 'renew'],
     orderedFields: [
@@ -23,7 +22,7 @@ describe('FundingOffer model', () => {
     ]
   })
 
-  testModelValidation({
+  testModelValidation(t, {
     model: FundingOffer,
     validData: {
       symbol: VALID_SYMBOLS,
@@ -47,8 +46,8 @@ describe('FundingOffer model', () => {
     }
   })
 
-  describe('toNewOfferPacket', () => {
-    it('generates a valid packet for WSv2', () => {
+  await t.test('toNewOfferPacket', (t) => {
+    t.test('generates a valid packet for WSv2', (t) => {
       const data = {
         type: 'test',
         symbol: 'fUSD',
@@ -59,29 +58,30 @@ describe('FundingOffer model', () => {
       }
 
       const fo = new FundingOffer(data)
-      assert.deepStrictEqual(fo.toNewOfferPacket(), data)
+      t.alike(fo.toNewOfferPacket(), data)
     })
   })
 
-  describe('submit', () => {
-    it('throws an error if no API interface is available', (done) => {
+  await t.test('submit', async (t) => {
+    await t.test('throws an error if no API interface is available', async (t) => {
       const fo = new FundingOffer()
-      fo.submit().catch(() => done())
+      await t.exception.all(fo.submit())
     })
 
-    it('calls submitFundingOffer on the RESTv2 instance', (done) => {
+    await t.test('calls submitFundingOffer on the RESTv2 instance', (t) => {
+      t.plan(1)
       const fo = new FundingOffer()
       const rest = new RESTv2()
 
       rest.submitFundingOffer = async () => {
-        done()
+        t.pass()
         return []
       }
 
       fo.submit(rest)
     })
 
-    it('saves received data on itself', async () => {
+    await t.test('saves received data on itself', async (t) => {
       const rest = new RESTv2()
       const fo = new FundingOffer({ symbol: 'tBTCUSD' })
       const remoteFO = new FundingOffer({ symbol: 'just-testing' })
@@ -89,29 +89,30 @@ describe('FundingOffer model', () => {
       rest.submitFundingOffer = async () => remoteFO.serialize()
 
       await fo.submit(rest)
-      assert.strictEqual(fo.symbol, 'just-testing')
+      t.is(fo.symbol, 'just-testing')
     })
   })
 
-  describe('cancel', () => {
-    it('throws an error if no API interface is available', (done) => {
+  await t.test('cancel', async (t) => {
+    await t.test('throws an error if no API interface is available', async (t) => {
       const fo = new FundingOffer()
-      fo.cancel().catch(() => done())
+      await t.exception.all(fo.cancel())
     })
 
-    it('calls cancelFundingOffer on the RESTv2 instance', (done) => {
+    await t.test('calls cancelFundingOffer on the RESTv2 instance', (t) => {
+      t.plan(1)
       const fo = new FundingOffer()
       const rest = new RESTv2()
 
       rest.cancelFundingOffer = async () => {
-        done()
+        t.pass()
         return []
       }
 
       fo.cancel(rest)
     })
 
-    it('saves received data on itself', async () => {
+    await t.test('saves received data on itself', async (t) => {
       const rest = new RESTv2()
       const fo = new FundingOffer({ symbol: 'tBTCUSD' })
       const remoteFO = new FundingOffer({ symbol: 'just-testing' })
@@ -119,29 +120,30 @@ describe('FundingOffer model', () => {
       rest.cancelFundingOffer = async () => remoteFO.serialize()
 
       await fo.cancel(rest)
-      assert.strictEqual(fo.symbol, 'just-testing')
+      t.is(fo.symbol, 'just-testing')
     })
   })
 
-  describe('close', () => {
-    it('throws an error if no API interface is available', (done) => {
+  await t.test('close', async (t) => {
+    await t.test('throws an error if no API interface is available', async (t) => {
       const fo = new FundingOffer()
-      fo.close().catch(() => done())
+      await t.exception.all(fo.close())
     })
 
-    it('calls closeFunding on the RESTv2 instance', (done) => {
+    await t.test('calls closeFunding on the RESTv2 instance', (t) => {
+      t.plan(1)
       const fo = new FundingOffer()
       const rest = new RESTv2()
 
       rest.closeFunding = async () => {
-        done()
+        t.pass()
         return []
       }
 
       fo.close(rest)
     })
 
-    it('saves received data on itself', async () => {
+    await t.test('saves received data on itself', async (t) => {
       const rest = new RESTv2()
       const fo = new FundingOffer({ symbol: 'tBTCUSD' })
       const remoteFO = new FundingOffer({ symbol: 'just-testing' })
@@ -149,12 +151,12 @@ describe('FundingOffer model', () => {
       rest.closeFunding = async () => remoteFO.serialize()
 
       await fo.close(rest)
-      assert.strictEqual(fo.symbol, 'just-testing')
+      t.is(fo.symbol, 'just-testing')
     })
   })
 
-  describe('toString', () => {
-    it('includes pertinent information', () => {
+  await t.test('toString', (t) => {
+    t.test('includes pertinent information', (t) => {
       const fo = new FundingOffer({
         symbol: 'tBTCUSD',
         amount: 42,
@@ -163,10 +165,10 @@ describe('FundingOffer model', () => {
       })
 
       const str = fo.toString()
-      assert.ok(/BTCUSD/.test(str), 'symbol missing')
-      assert.ok(_includes(str, '42'), 'amount missing')
-      assert.ok(_includes(str, '0.1'), 'rate missing')
-      assert.ok(_includes(str, '30'), 'period missing')
+      t.ok(/BTCUSD/.test(str), 'symbol missing')
+      t.ok(_includes(str, '42'), 'amount missing')
+      t.ok(_includes(str, '0.1'), 'rate missing')
+      t.ok(_includes(str, '30'), 'period missing')
     })
   })
 })

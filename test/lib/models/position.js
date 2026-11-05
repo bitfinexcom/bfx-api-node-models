@@ -1,7 +1,6 @@
-/* eslint-env mocha */
 'use strict'
 
-const assert = require('assert')
+const test = require('brittle')
 const _includes = require('lodash/includes')
 const { SYMBOLS } = require('bfx-hf-util')
 const { Position, Order } = require('../../../lib')
@@ -17,8 +16,8 @@ const getTestPosition = (opts = {}) => new Position({
   ...opts
 })
 
-describe('Position model', () => {
-  testModel({
+test('Position model', async (t) => {
+  testModel(t, {
     model: Position,
     orderedFields: [
       'symbol', 'status', 'amount', 'basePrice', 'marginFunding',
@@ -28,7 +27,7 @@ describe('Position model', () => {
     ]
   })
 
-  testModelValidation({
+  testModelValidation(t, {
     model: Position,
     validData: {
       symbol: VALID_SYMBOLS,
@@ -50,48 +49,48 @@ describe('Position model', () => {
     }
   })
 
-  describe('orderToClose', () => {
-    it('generates a MARKET order', () => {
+  await t.test('orderToClose', (t) => {
+    t.test('generates a MARKET order', (t) => {
       const p = getTestPosition()
       const o = p.orderToClose()
 
-      assert.strictEqual(o.type, Order.type.MARKET, 'position close order is not a market order')
+      t.is(o.type, Order.type.MARKET, 'position close order is not a market order')
     })
 
-    it('generates an order that would close the position', () => {
+    t.test('generates an order that would close the position', (t) => {
       const p = getTestPosition({ amount: 20 })
       const o = p.orderToClose()
 
-      assert.strictEqual(+o.amount, -20, 'position close order would not close the position')
+      t.is(+o.amount, -20, 'position close order would not close the position')
     })
 
-    it('sets the reduce-only and pos-close flags', () => {
+    t.test('sets the reduce-only and pos-close flags', (t) => {
       const p = getTestPosition({ amount: 20 })
       const o = p.orderToClose()
 
-      assert.ok(o.flags & Order.flags.REDUCE_ONLY, 'position close order does not have reduce-only flag set')
-      assert.ok(o.flags & Order.flags.REDUCE_ONLY, 'position close order does not have pos-close flag set')
+      t.ok(o.flags & Order.flags.REDUCE_ONLY, 'position close order does not have reduce-only flag set')
+      t.ok(o.flags & Order.flags.REDUCE_ONLY, 'position close order does not have pos-close flag set')
     })
   })
 
-  describe('claim', () => {
-    it('throws an error if no interface provided', (done) => {
+  await t.test('claim', async (t) => {
+    await t.test('throws an error if no interface provided', async (t) => {
       const p = new Position()
-      p.claim().catch(() => done())
+      await t.exception.all(p.claim())
     })
 
-    it('calls claimPosition on the interface', (done) => {
+    await t.test('calls claimPosition on the interface', (t) => {
+      t.plan(1)
       const p = new Position({ id: 42 })
       p.claim({
         claimPosition: async ({ id }) => {
-          assert.strictEqual(id, 42)
-          done()
+          t.is(id, 42)
           return []
         }
       })
     })
 
-    it('saves received data on itself', async () => {
+    await t.test('saves received data on itself', async (t) => {
       const p = new Position({ symbol: 'tBTCUSD' })
       const remoteP = new Position({ symbol: 'just-testing' })
 
@@ -99,29 +98,29 @@ describe('Position model', () => {
         claimPosition: async () => remoteP.serialize()
       })
 
-      assert.strictEqual(p.symbol, 'just-testing')
+      t.is(p.symbol, 'just-testing')
     })
   })
 
-  describe('close', () => {
-    it('throws an error if no interface provided', (done) => {
+  await t.test('close', async (t) => {
+    await t.test('throws an error if no interface provided', async (t) => {
       const p = new Position()
-      p.close().catch(() => done())
+      await t.exception.all(p.close())
     })
 
-    it('calls closePosition on the interface', (done) => {
+    await t.test('calls closePosition on the interface', (t) => {
+      t.plan(1)
       const p = new Position({ id: 42 })
       p.close({
         closePosition: async ({ position_id }) => { // eslint-disable-line
-          assert.strictEqual(position_id, 42) // eslint-disable-line
-          done()
+          t.is(position_id, 42)
         }
       })
     })
   })
 
-  describe('toString', () => {
-    it('includes pertinent information', () => {
+  await t.test('toString', (t) => {
+    t.test('includes pertinent information', (t) => {
       const p = new Position({
         symbol: 'tBTCUSD',
         amount: 42,
@@ -135,11 +134,11 @@ describe('Position model', () => {
       })
 
       const str = p.toString()
-      assert.ok(/BTC\/USD/.test(str), 'symbol missing')
-      assert.ok(_includes(str, '1'), 'price missing')
-      assert.ok(_includes(str, '42'), 'amount missing')
-      assert.ok(_includes(str, '9001'), 'pl missing')
-      assert.ok(_includes(str, '33'), 'liq price missing')
+      t.ok(/BTC\/USD/.test(str), 'symbol missing')
+      t.ok(_includes(str, '1'), 'price missing')
+      t.ok(_includes(str, '42'), 'amount missing')
+      t.ok(_includes(str, '9001'), 'pl missing')
+      t.ok(_includes(str, '33'), 'liq price missing')
     })
   })
 })

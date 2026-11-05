@@ -1,19 +1,18 @@
-/* eslint-env mocha */
 'use strict'
 
-const assert = require('assert')
+const test = require('brittle')
 const { RESTv2 } = require('bfx-api-node-rest')
 const { Candle } = require('../../../lib')
 const testModel = require('../../helpers/test_model')
 const testModelValidation = require('../../helpers/test_model_validation')
 
-describe('Candle model', () => {
-  testModel({
+test('Candle model', async (t) => {
+  testModel(t, {
     model: Candle,
     orderedFields: ['mts', 'open', 'close', 'high', 'low', 'volume']
   })
 
-  testModelValidation({
+  testModelValidation(t, {
     model: Candle,
     validData: {
       mts: [...(new Array(5))].map(() => Math.random()),
@@ -25,7 +24,7 @@ describe('Candle model', () => {
     }
   })
 
-  it('unserializes live data correctly', async () => {
+  await t.test('unserializes live data correctly', { timeout: 4000 }, async (t) => {
     const rest = new RESTv2()
 
     const arr = await rest.candles({
@@ -37,12 +36,12 @@ describe('Candle model', () => {
     arr.forEach(candle => {
       const obj = Candle.unserialize(candle)
 
-      assert.strictEqual(obj.mts, candle[0])
-      assert.strictEqual(obj.open, candle[1])
-      assert.strictEqual(obj.close, candle[2])
-      assert.strictEqual(obj.high, candle[3])
-      assert.strictEqual(obj.low, candle[4])
-      assert.strictEqual(obj.volume, candle[5])
+      t.is(obj.mts, candle[0])
+      t.is(obj.open, candle[1])
+      t.is(obj.close, candle[2])
+      t.is(obj.high, candle[3])
+      t.is(obj.low, candle[4])
+      t.is(obj.volume, candle[5])
     })
-  }).timeout(4000)
+  })
 })

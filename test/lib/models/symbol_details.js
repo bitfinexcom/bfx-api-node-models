@@ -1,7 +1,6 @@
-/* eslint-env mocha */
 'use strict'
 
-const assert = require('assert')
+const test = require('brittle')
 const { SYMBOLS } = require('bfx-hf-util')
 const { SymbolDetails } = require('../../../lib')
 const testModelValidation = require('../../helpers/test_model_validation')
@@ -9,8 +8,8 @@ const testModelValidation = require('../../helpers/test_model_validation')
 const VALID_SYMBOLS = Object.values(SYMBOLS)
 const DATA = ['BTCEUR', [null, null, null, '0.0002', '2000.0', null, null, null, 0.2, 0.1]]
 
-describe('Symbol Details model', () => {
-  testModelValidation({
+test('Symbol Details model', (t) => {
+  testModelValidation(t, {
     model: SymbolDetails,
     validData: {
       pair: VALID_SYMBOLS,
@@ -22,30 +21,30 @@ describe('Symbol Details model', () => {
     }
   })
 
-  it('initializes correctly', () => {
+  t.test('initializes correctly', (t) => {
     const details = new SymbolDetails(DATA)
-    assert.strictEqual(details.pair, 'BTCEUR')
-    assert.strictEqual(details.initialMargin, 0.2)
-    assert.strictEqual(details.minimumMargin, 0.1)
-    assert.strictEqual(details.maximumOrderSize, '2000.0')
-    assert.strictEqual(details.minimumOrderSize, '0.0002')
-    assert.strictEqual(details.margin, true)
+    t.is(details.pair, 'BTCEUR')
+    t.is(details.initialMargin, 0.2)
+    t.is(details.minimumMargin, 0.1)
+    t.is(details.maximumOrderSize, '2000.0')
+    t.is(details.minimumOrderSize, '0.0002')
+    t.is(details.margin, true)
   })
 
-  it('serializes correctly', () => {
+  t.test('serializes correctly', (t) => {
     const details = new SymbolDetails(DATA)
     const arr = details.serialize()
 
-    assert.deepStrictEqual(arr, DATA)
+    t.alike(arr, DATA)
   })
 
-  it('unserializes correctly', () => {
+  t.test('unserializes correctly', (t) => {
     const details = SymbolDetails.unserialize(DATA)
-    assert.strictEqual(details.pair, 'BTCEUR')
-    assert.strictEqual(details.initialMargin, 0.2)
-    assert.strictEqual(details.minimumMargin, 0.1)
-    assert.strictEqual(details.maximumOrderSize, '2000.0')
-    assert.strictEqual(details.minimumOrderSize, '0.0002')
-    assert.strictEqual(details.margin, true)
+    t.is(details.pair, 'BTCEUR')
+    t.is(details.initialMargin, 0.2)
+    t.is(details.minimumMargin, 0.1)
+    t.is(details.maximumOrderSize, '2000.0')
+    t.is(details.minimumOrderSize, '0.0002')
+    t.is(details.margin, true)
   })
 })

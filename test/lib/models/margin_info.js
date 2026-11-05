@@ -1,13 +1,12 @@
-/* eslint-env mocha */
 'use strict'
 
-const assert = require('assert')
+const test = require('brittle')
 const { MarginInfo } = require('../../../lib')
 
-describe('MarginInfo model', () => {
+test('MarginInfo model', (t) => {
   // TODO: test validation
 
-  it('initializes correctly w/ sym', () => {
+  t.test('initializes correctly w/ sym', (t) => {
     const miSym = new MarginInfo([
       'sym',
       'tEOSUSD',
@@ -19,15 +18,15 @@ describe('MarginInfo model', () => {
       ]
     ])
 
-    assert.strictEqual(miSym.type, 'sym')
-    assert.strictEqual(miSym.symbol, 'tEOSUSD')
-    assert.strictEqual(miSym.tradableBalance, 26912)
-    assert.strictEqual(miSym.grossBalance, 51443)
-    assert.strictEqual(miSym.buy, 23397)
-    assert.strictEqual(miSym.sell, 26912)
+    t.is(miSym.type, 'sym')
+    t.is(miSym.symbol, 'tEOSUSD')
+    t.is(miSym.tradableBalance, 26912)
+    t.is(miSym.grossBalance, 51443)
+    t.is(miSym.buy, 23397)
+    t.is(miSym.sell, 26912)
   })
 
-  it('initializes correctly for base', () => {
+  t.test('initializes correctly for base', (t) => {
     const miBase = new MarginInfo([
       'base',
       [
@@ -38,14 +37,14 @@ describe('MarginInfo model', () => {
       ]
     ])
 
-    assert.strictEqual(miBase.type, 'base')
-    assert.strictEqual(miBase.userPL, -4784)
-    assert.strictEqual(miBase.userSwaps, -251)
-    assert.strictEqual(miBase.marginBalance, 16392)
-    assert.strictEqual(miBase.marginNet, 11355)
+    t.is(miBase.type, 'base')
+    t.is(miBase.userPL, -4784)
+    t.is(miBase.userSwaps, -251)
+    t.is(miBase.marginBalance, 16392)
+    t.is(miBase.marginNet, 11355)
   })
 
-  it('serializes correctly w/ sym', () => {
+  t.test('serializes correctly w/ sym', (t) => {
     const miSym = new MarginInfo([
       'sym',
       'tEOSUSD',
@@ -59,7 +58,7 @@ describe('MarginInfo model', () => {
 
     const arr = miSym.serialize()
 
-    assert.deepStrictEqual(arr, [
+    t.alike(arr, [
       'sym',
       'tEOSUSD',
       [
@@ -71,7 +70,7 @@ describe('MarginInfo model', () => {
     ])
   })
 
-  it('serializes correctly for base', () => {
+  t.test('serializes correctly for base', (t) => {
     const miBase = new MarginInfo([
       'base',
       [
@@ -83,7 +82,7 @@ describe('MarginInfo model', () => {
     ])
 
     const arr = miBase.serialize()
-    assert.deepStrictEqual(arr, [
+    t.alike(arr, [
       'base',
       [
         -4784,
@@ -94,7 +93,7 @@ describe('MarginInfo model', () => {
     ])
   })
 
-  it('unserializes correctly w/ sym', () => {
+  t.test('unserializes correctly w/ sym', (t) => {
     const obj = MarginInfo.unserialize([
       'sym',
       'tEOSUSD',
@@ -106,15 +105,15 @@ describe('MarginInfo model', () => {
       ]
     ])
 
-    assert.strictEqual(obj.type, 'sym')
-    assert.strictEqual(obj.symbol, 'tEOSUSD')
-    assert.strictEqual(obj.tradableBalance, 26912)
-    assert.strictEqual(obj.grossBalance, 51443)
-    assert.strictEqual(obj.buy, 23397)
-    assert.strictEqual(obj.sell, 26912)
+    t.is(obj.type, 'sym')
+    t.is(obj.symbol, 'tEOSUSD')
+    t.is(obj.tradableBalance, 26912)
+    t.is(obj.grossBalance, 51443)
+    t.is(obj.buy, 23397)
+    t.is(obj.sell, 26912)
   })
 
-  it('unserializes correctly for base', () => {
+  t.test('unserializes correctly for base', (t) => {
     const obj = MarginInfo.unserialize([
       'base',
       [
@@ -125,10 +124,10 @@ describe('MarginInfo model', () => {
       ]
     ])
 
-    assert.strictEqual(obj.type, 'base')
-    assert.strictEqual(obj.userPL, -4784)
-    assert.strictEqual(obj.userSwaps, -251)
-    assert.strictEqual(obj.marginBalance, 16392)
-    assert.strictEqual(obj.marginNet, 11355)
+    t.is(obj.type, 'base')
+    t.is(obj.userPL, -4784)
+    t.is(obj.userSwaps, -251)
+    t.is(obj.marginBalance, 16392)
+    t.is(obj.marginNet, 11355)
   })
 })

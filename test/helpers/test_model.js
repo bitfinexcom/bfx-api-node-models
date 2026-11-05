@@ -1,10 +1,8 @@
-/* eslint-env mocha */
 'use strict'
 
-const assert = require('assert')
 const _includes = require('lodash/includes')
 
-const testModel = ({ values = {}, model, orderedFields, boolFields = [] }) => {
+const testModel = (t, { values = {}, model, orderedFields, boolFields = [] }) => {
   const Model = model
   const fields = orderedFields
   const fieldValues = fields.slice()
@@ -20,62 +18,62 @@ const testModel = ({ values = {}, model, orderedFields, boolFields = [] }) => {
     }
   }
 
-  const checkModelFields = (m) => {
+  const checkModelFields = (t, m) => {
     fields.forEach((f) => {
-      checkField(m, f)
+      checkField(t, m, f)
     })
   }
 
-  const checkField = (m, f) => {
+  const checkField = (t, m, f) => {
     if (f === null) return
 
     if (_includes(boolFields, f)) {
-      assert.strictEqual(m[f], false)
+      t.is(m[f], false)
     } else if (values[f]) {
-      assert.strictEqual(m[f], values[f])
+      t.is(m[f], values[f])
     } else {
-      assert.strictEqual(m[f], f)
+      t.is(m[f], f)
     }
   }
 
-  it('constructs from an array source', () => {
+  t.test('constructs from an array source', (t) => {
     const m = new Model(fieldValues)
-    checkModelFields(m)
+    checkModelFields(t, m)
   })
 
-  it('constructs from an object source', () => {
+  t.test('constructs from an object source', (t) => {
     const data = {}
     fields.forEach(f => (f !== null) && (data[f] = f))
     boolFields.forEach((f) => { data[f] = false })
     Object.assign(data, values)
 
     const m = new Model(data)
-    checkModelFields(m)
+    checkModelFields(t, m)
   })
 
-  it('constructs from an array of arrays', () => {
+  t.test('constructs from an array of arrays', (t) => {
     const m = new Model([fieldValues, fieldValues, fieldValues])
     const mArr = [...m]
 
     // test [] access
     for (let i = 0; i < m.length; i += 1) {
-      checkModelFields(m[i])
+      checkModelFields(t, m[i])
     }
 
     // test iterator
     for (let i = 0; i < mArr.length; i += 1) {
-      checkModelFields(mArr[i])
+      checkModelFields(t, mArr[i])
     }
 
-    assert.strictEqual(m.length, mArr.length)
+    t.is(m.length, mArr.length)
 
     // test equality
     for (let i = 0; i < m.length; i += 1) {
-      assert.deepStrictEqual(m[i], mArr[i])
+      t.alike(m[i], mArr[i])
     }
   })
 
-  it('constructs from an array of objects', () => {
+  t.test('constructs from an array of objects', (t) => {
     const data = {}
     fields.forEach(f => (f !== null) && (data[f] = f))
     boolFields.forEach((f) => { data[f] = false })
@@ -86,23 +84,23 @@ const testModel = ({ values = {}, model, orderedFields, boolFields = [] }) => {
 
     // test [] access
     for (let i = 0; i < m.length; i += 1) {
-      checkModelFields(m[i])
+      checkModelFields(t, m[i])
     }
 
     // test iterator
     for (let i = 0; i < mArr.length; i += 1) {
-      checkModelFields(mArr[i])
+      checkModelFields(t, mArr[i])
     }
 
-    assert.strictEqual(m.length, mArr.length)
+    t.is(m.length, mArr.length)
 
     // test equality
     for (let i = 0; i < m.length; i += 1) {
-      assert.deepStrictEqual(m[i], mArr[i])
+      t.alike(m[i], mArr[i])
     }
   })
 
-  it('serializes correctly', () => {
+  t.test('serializes correctly', (t) => {
     const data = {}
     fields.forEach(f => (f !== null) && (data[f] = f))
     boolFields.forEach((f) => { data[f] = false })
@@ -112,13 +110,13 @@ const testModel = ({ values = {}, model, orderedFields, boolFields = [] }) => {
     const arr = m.serialize()
 
     arr.forEach((v, i) => {
-      checkField(m, fields[i])
+      checkField(t, m, fields[i])
     })
   })
 
-  it('unserializes correctly', () => {
+  t.test('unserializes correctly', (t) => {
     const m = model.unserialize(fieldValues)
-    checkModelFields(m)
+    checkModelFields(t, m)
   })
 }
 

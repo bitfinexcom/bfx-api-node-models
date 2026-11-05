@@ -1,6 +1,6 @@
-/* eslint-env mocha */
 'use strict'
 
+const test = require('brittle')
 const { CURRENCIES } = require('bfx-hf-util')
 const { Movement } = require('../../../lib')
 const testModel = require('../../helpers/test_model')
@@ -8,8 +8,8 @@ const testModelValidation = require('../../helpers/test_model_validation')
 
 const VALID_CURRENCIES = Object.values(CURRENCIES)
 
-describe('Movement model', () => {
-  testModel({
+test('Movement model', (t) => {
+  testModel(t, {
     model: Movement,
     orderedFields: [
       'id', 'currency', 'currencyName', null, null, 'mtsStarted', 'mtsUpdated',
@@ -18,7 +18,7 @@ describe('Movement model', () => {
     ]
   })
 
-  testModelValidation({
+  testModelValidation(t, {
     model: Movement,
     validData: {
       currency: VALID_CURRENCIES,

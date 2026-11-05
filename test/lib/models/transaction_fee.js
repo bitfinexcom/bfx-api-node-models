@@ -1,7 +1,6 @@
-/* eslint-env mocha */
 'use strict'
 
-const assert = require('assert')
+const test = require('brittle')
 const { SYMBOLS } = require('bfx-hf-util')
 const { TransactionFee } = require('../../../lib')
 const testModelValidation = require('../../helpers/test_model_validation')
@@ -9,8 +8,8 @@ const testModelValidation = require('../../helpers/test_model_validation')
 const VALID_SYMBOLS = Object.values(SYMBOLS)
 const DATA = ['BTC', [0, 0.0004]]
 
-describe('Transaction Fee model', () => {
-  testModelValidation({
+test('Transaction Fee model', (t) => {
+  testModelValidation(t, {
     model: TransactionFee,
     validData: {
       symbol: VALID_SYMBOLS,
@@ -18,22 +17,22 @@ describe('Transaction Fee model', () => {
     }
   })
 
-  it('initializes correctly', () => {
+  t.test('initializes correctly', (t) => {
     const txFee = new TransactionFee(DATA)
-    assert.strictEqual(txFee.symbol, 'BTC')
-    assert.strictEqual(txFee.fee, 0.0004)
+    t.is(txFee.symbol, 'BTC')
+    t.is(txFee.fee, 0.0004)
   })
 
-  it('serializes correctly', () => {
+  t.test('serializes correctly', (t) => {
     const txFee = new TransactionFee(DATA)
     const arr = txFee.serialize()
 
-    assert.deepStrictEqual(arr, DATA)
+    t.alike(arr, DATA)
   })
 
-  it('unserializes correctly', () => {
+  t.test('unserializes correctly', (t) => {
     const txFee = TransactionFee.unserialize(DATA)
-    assert.strictEqual(txFee.symbol, 'BTC')
-    assert.strictEqual(txFee.fee, 0.0004)
+    t.is(txFee.symbol, 'BTC')
+    t.is(txFee.fee, 0.0004)
   })
 })

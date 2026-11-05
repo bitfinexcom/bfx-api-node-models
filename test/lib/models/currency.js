@@ -1,6 +1,6 @@
-/* eslint-env mocha */
 'use strict'
 
+const test = require('brittle')
 const { WALLET_TYPES, CURRENCIES } = require('bfx-hf-util')
 const { Currency } = require('../../../lib')
 const testModel = require('../../helpers/test_model')
@@ -9,13 +9,13 @@ const testModelValidation = require('../../helpers/test_model_validation')
 // get data from somewhere
 const VALID_STRINGS = Object.values(WALLET_TYPES)
 
-describe('Currency model', () => {
-  testModel({
+test('Currency model', (t) => {
+  testModel(t, {
     model: Currency,
     orderedFields: ['id', 'name', 'pool', 'explorer', 'symbol', 'walletFx']
   })
 
-  testModelValidation({
+  testModelValidation(t, {
     model: Currency,
     validData: {
       currency: Object.values(CURRENCIES),

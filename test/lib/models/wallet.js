@@ -1,20 +1,20 @@
-/* eslint-env mocha */
 'use strict'
 
+const test = require('brittle')
 const { CURRENCIES, WALLET_TYPES } = require('bfx-hf-util')
 const { Wallet } = require('../../../lib')
 const testModel = require('../../helpers/test_model')
 const testModelValidation = require('../../helpers/test_model_validation')
 
-describe('Wallet', () => {
-  testModel({
+test('Wallet', (t) => {
+  testModel(t, {
     model: Wallet,
     orderedFields: [
       'type', 'currency', 'balance', 'unsettledInterest', 'balanceAvailable'
     ]
   })
 
-  testModelValidation({
+  testModelValidation(t, {
     model: Wallet,
     validData: {
       type: Object.values(WALLET_TYPES),

@@ -1,6 +1,6 @@
-/* eslint-env mocha */
 'use strict'
 
+const test = require('brittle')
 const { SYMBOLS } = require('bfx-hf-util')
 const { StatusMessagesDeriv } = require('../../../lib')
 const testModel = require('../../helpers/test_model')
@@ -8,8 +8,8 @@ const testModelValidation = require('../../helpers/test_model_validation')
 
 const VALID_STRINGS = Object.values(SYMBOLS)
 
-describe('Derivatives Status Message model', () => {
-  testModel({
+test('Derivatives Status Message model', (t) => {
+  testModel(t, {
     model: StatusMessagesDeriv,
     orderedFields: [
       'key', 'timestamp', null, 'price', 'priceSpot', null, 'fundBal', null,
@@ -18,7 +18,7 @@ describe('Derivatives Status Message model', () => {
     ]
   })
 
-  testModelValidation({
+  testModelValidation(t, {
     model: StatusMessagesDeriv,
     validData: {
       key: VALID_STRINGS, // pull data from somewhere
