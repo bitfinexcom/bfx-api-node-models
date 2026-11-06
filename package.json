@@ -37,7 +37,7 @@
   },
   "homepage": "http://bitfinexcom.github.io/bfx-api-node-models/",
   "devDependencies": {
-    "@bitfinex/lint-js": "1.1.0",
+    "@bitfinex/lint-js": "^1.1.0",
     "bfx-api-node-rest": "^8.0.0",
     "brittle": "^4.5.0",
     "debug": "4.4.3",
