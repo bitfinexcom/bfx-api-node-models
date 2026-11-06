@@ -10,7 +10,8 @@
     "lint": "bfx-lint-js .",
     "lint:fix": "bfx-lint-js . --fix",
     "test": "npm run lint && npm run unit",
-    "unit": "NODE_ENV=test brittle-node --bail 'test/**/*.js'"
+    "unit": "NODE_ENV=test brittle-node --bail 'test/**/*.js'",
+    "docs": "rm -rf docs && jsdoc --configure .jsdoc.json --verbose"
   },
   "repository": {
     "type": "git",
@@ -39,7 +40,9 @@
     "@bitfinex/lint-js": "1.1.0",
     "bfx-api-node-rest": "^8.0.0",
     "brittle": "^4.5.0",
-    "debug": "4.4.3"
+    "debug": "4.4.3",
+    "docdash": "^2.0.2",
+    "jsdoc": "^4.0.5"
   },
   "dependencies": {
     "bfx-api-node-util": "^2.0.0",

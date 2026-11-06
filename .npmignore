@@ -3,4 +3,4 @@ docs
 coverage
 examples
 .github
-.travis.yml
+.jsdoc.json

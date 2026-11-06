@@ -1,7 +1,5 @@
 # Bitfinex Data Models for Node.JS
 
-[![Build Status](https://travis-ci.org/bitfinexcom/bfx-api-node-models.svg?branch=master)](https://travis-ci.org/bitfinexcom/bfx-api-node-models)
-
 This repo contains model classes for working with the data structures returned by the Bitfinex REST & WebSocket APIs. The models can all be initialized with an array-format payload as returned by an API call, and can be unserialized back to the array format when needed.
 
 Some models, such as `Order` and `OrderBook` provide higher level methods which operate on the underlying data sets.
