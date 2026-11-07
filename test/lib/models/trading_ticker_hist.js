@@ -2,7 +2,7 @@
 
 const test = require('brittle')
 const { RESTv2 } = require('bfx-api-node-rest')
-const { SYMBOLS } = require('bfx-hf-util')
+const { SYMBOLS } = require('@bitfinex/bfx-hf-util')
 const { TradingTickerHist } = require('../../../lib')
 const testModel = require('../../helpers/test_model')
 const testModelValidation = require('../../helpers/test_model_validation')

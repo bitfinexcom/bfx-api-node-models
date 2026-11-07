@@ -2,7 +2,7 @@
 
 const test = require('brittle')
 const _includes = require('lodash/includes')
-const { SYMBOLS, CURRENCIES } = require('bfx-hf-util')
+const { SYMBOLS, CURRENCIES } = require('@bitfinex/bfx-hf-util')
 const { Trade, Order } = require('../../../lib')
 const testModel = require('../../helpers/test_model')
 const testModelValidation = require('../../helpers/test_model_validation')

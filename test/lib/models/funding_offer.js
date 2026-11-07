@@ -2,7 +2,7 @@
 
 const test = require('brittle')
 const _includes = require('lodash/includes')
-const { SYMBOLS } = require('bfx-hf-util')
+const { SYMBOLS } = require('@bitfinex/bfx-hf-util')
 const { prepareAmount } = require('bfx-api-node-util')
 const { RESTv2 } = require('bfx-api-node-rest')
 const { FundingOffer } = require('../../../lib')

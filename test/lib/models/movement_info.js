@@ -1,7 +1,7 @@
 'use strict'
 
 const test = require('brittle')
-const { CURRENCIES } = require('bfx-hf-util')
+const { CURRENCIES } = require('@bitfinex/bfx-hf-util')
 const { MovementInfo } = require('../../../lib')
 const testModel = require('../../helpers/test_model')
 const testModelValidation = require('../../helpers/test_model_validation')

@@ -1,7 +1,7 @@
 'use strict'
 
 const test = require('brittle')
-const { SYMBOLS } = require('bfx-hf-util')
+const { SYMBOLS } = require('@bitfinex/bfx-hf-util')
 const { RESTv2 } = require('bfx-api-node-rest')
 const { TradingTicker } = require('../../../lib')
 const testModel = require('../../helpers/test_model')

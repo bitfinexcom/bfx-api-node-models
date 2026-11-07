@@ -4,7 +4,7 @@ const test = require('brittle')
 const _isUndefined = require('lodash/isUndefined')
 const _includes = require('lodash/includes')
 const _isFunction = require('lodash/isFunction')
-const { SYMBOLS } = require('bfx-hf-util')
+const { SYMBOLS } = require('@bitfinex/bfx-hf-util')
 const { Order } = require('../../../lib')
 const testModel = require('../../helpers/test_model')
 const testModelValidation = require('../../helpers/test_model_validation')
@@ -320,9 +320,9 @@ test('Order model', async (t) => {
   })
 
   await t.test('update: rejects with error if applying delta to missing amount', async (t) => {
-    const o = new Order()
+    const o = new Order({}, { updateOrder: () => t.fail('update was sent') })
 
-    await t.exception.all(o.update({ delta: 1 }))
+    await t.exception.all(o.update({ delta: 1 }), /can't apply delta to missing amount/)
   })
 
   await t.test('update: forwards update to ws2', (t) => {

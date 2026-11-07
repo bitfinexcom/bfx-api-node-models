@@ -2,7 +2,7 @@
 
 const test = require('brittle')
 const _isEmpty = require('lodash/isEmpty')
-const { CURRENCIES } = require('bfx-hf-util')
+const { CURRENCIES } = require('@bitfinex/bfx-hf-util')
 const validator = require('../../../lib/validators/currency')
 
 const VALID_CURRENCIES = Object.values(CURRENCIES)

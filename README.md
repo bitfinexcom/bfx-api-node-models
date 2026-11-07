@@ -68,11 +68,6 @@ const o = new Order({
 console.log(o.toNewOrderPacket())
 ```
 
-### Docs
-
-Refer to the [docs/](https://cdn.statically.io/gh/bitfinexcom/bfx-api-node-models/master/docs/index.html)
-folder for JSDoc-generated API documentation covering each model class.
-
 ### Examples
 
 The order model provides helper methods for order submission, updates, and cancellation. These methods are compatible with version 2.0.0 of `bitfinex-api-node`, and return promises which resolve upon receival of the relevant success/error notifications.
