@@ -1,12 +1,12 @@
-//* eslint-env mocha */
 'use strict'
 
+const test = require('brittle')
 const { WeightedAverages } = require('../../../lib')
 const testModel = require('../../helpers/test_model')
 const testModelValidation = require('../../helpers/test_model_validation')
 
-describe('WeightedAverages model', () => {
-  testModel({
+test('WeightedAverages model', (t) => {
+  testModel(t, {
     model: WeightedAverages,
     orderedFields: [
       'tradeCount', 'sumBuyingSpent', 'sumBuyingAmount', null,
@@ -16,7 +16,7 @@ describe('WeightedAverages model', () => {
     ]
   })
 
-  testModelValidation({
+  testModelValidation(t, {
     model: WeightedAverages,
     validData: {
       tradeCount: [...(new Array(5))].map(() => Math.random()),

@@ -1,15 +1,15 @@
-/* eslint-env mocha */
 'use strict'
 
-const { CURRENCIES } = require('bfx-hf-util')
+const test = require('brittle')
+const { CURRENCIES } = require('@bitfinex/bfx-hf-util')
 const { LedgerEntry } = require('../../../lib')
 const testModel = require('../../helpers/test_model')
 const testModelValidation = require('../../helpers/test_model_validation')
 
 const VALID_CURRENCIES = Object.values(CURRENCIES)
 
-describe('Ledger entry model', () => {
-  testModel({
+test('Ledger entry model', (t) => {
+  testModel(t, {
     model: LedgerEntry,
     orderedFields: [
       'id', 'currency', null, 'mts', null, 'amount', 'balance', null,
@@ -17,7 +17,7 @@ describe('Ledger entry model', () => {
     ]
   })
 
-  testModelValidation({
+  testModelValidation(t, {
     model: LedgerEntry,
     validData: {
       currency: VALID_CURRENCIES,

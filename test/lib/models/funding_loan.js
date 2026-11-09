@@ -1,15 +1,15 @@
-/* eslint-env mocha */
 'use strict'
 
-const { SYMBOLS } = require('bfx-hf-util')
+const test = require('brittle')
+const { SYMBOLS } = require('@bitfinex/bfx-hf-util')
 const { FundingLoan } = require('../../../lib')
 const testModel = require('../../helpers/test_model')
 const testModelValidation = require('../../helpers/test_model_validation')
 
 const VALID_SYMBOLS = Object.values(SYMBOLS)
 
-describe('FundingLoan model', () => {
-  testModel({
+test('FundingLoan model', (t) => {
+  testModel(t, {
     model: FundingLoan,
     boolFields: ['notify', 'hidden', 'renew', 'noClose'],
     orderedFields: [
@@ -19,7 +19,7 @@ describe('FundingLoan model', () => {
     ]
   })
 
-  testModelValidation({
+  testModelValidation(t, {
     model: FundingLoan,
     validData: {
       symbol: VALID_SYMBOLS,

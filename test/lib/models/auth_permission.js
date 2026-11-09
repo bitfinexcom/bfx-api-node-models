@@ -1,14 +1,13 @@
-/* eslint-env mocha */
 'use strict'
 
-const assert = require('assert')
+const test = require('brittle')
 const { AuthPermission } = require('../../../lib')
 const testModelValidation = require('../../helpers/test_model_validation')
 
 const DATA = ['orders', 1, 0]
 
-describe('Auth Permission model', () => {
-  testModelValidation({
+test('Auth Permission model', (t) => {
+  testModelValidation(t, {
     model: AuthPermission,
     validData: {
       key: ['account', 'orders', 'funding', 'settings', 'wallets', 'withdraw'],
@@ -17,24 +16,24 @@ describe('Auth Permission model', () => {
     }
   })
 
-  it('initializes correctly', () => {
+  t.test('initializes correctly', (t) => {
     const perm = new AuthPermission(DATA)
-    assert.strictEqual(perm.key, 'orders')
-    assert.strictEqual(perm.read, true)
-    assert.strictEqual(perm.write, false)
+    t.is(perm.key, 'orders')
+    t.is(perm.read, true)
+    t.is(perm.write, false)
   })
 
-  it('serializes correctly', () => {
+  t.test('serializes correctly', (t) => {
     const details = new AuthPermission(DATA)
     const arr = details.serialize()
 
-    assert.deepStrictEqual(arr, DATA)
+    t.alike(arr, DATA)
   })
 
-  it('unserializes correctly', () => {
+  t.test('unserializes correctly', (t) => {
     const perm = AuthPermission.unserialize(DATA)
-    assert.strictEqual(perm.key, 'orders')
-    assert.strictEqual(perm.read, true)
-    assert.strictEqual(perm.write, false)
+    t.is(perm.key, 'orders')
+    t.is(perm.read, true)
+    t.is(perm.write, false)
   })
 })

@@ -1,7 +1,5 @@
 # Bitfinex Data Models for Node.JS
 
-[![Build Status](https://travis-ci.org/bitfinexcom/bfx-api-node-models.svg?branch=master)](https://travis-ci.org/bitfinexcom/bfx-api-node-models)
-
 This repo contains model classes for working with the data structures returned by the Bitfinex REST & WebSocket APIs. The models can all be initialized with an array-format payload as returned by an API call, and can be unserialized back to the array format when needed.
 
 Some models, such as `Order` and `OrderBook` provide higher level methods which operate on the underlying data sets.
@@ -70,11 +68,6 @@ const o = new Order({
 console.log(o.toNewOrderPacket())
 ```
 
-### Docs
-
-Refer to the [docs/](https://cdn.statically.io/gh/bitfinexcom/bfx-api-node-models/master/docs/index.html)
-folder for JSDoc-generated API documentation covering each model class.
-
 ### Examples
 
 The order model provides helper methods for order submission, updates, and cancellation. These methods are compatible with version 2.0.0 of `bitfinex-api-node`, and return promises which resolve upon receival of the relevant success/error notifications.
@@ -101,20 +94,20 @@ let closed = false
 o.registerListeners()
 
 o.on('update', () => {
-  debug('order updated: %j', o.serialize())
+  console.log('order updated: %j', o.serialize())
 })
 
 o.on('close', () => {
-  debug('order closed: %s', o.status)
+  console.log('order closed: %s', o.status)
   closed = true
 })
 
-debug('submitting order %d', o.cid)
+console.log('submitting order %d', o.cid)
 
 o.submit().then(() => {
-  debug('got submit confirmation for order %d [%d]', o.cid, o.id)
+  console.log('got submit confirmation for order %d [%d]', o.cid, o.id)
 }).catch((err) => {
-  debug('failed to submit order: %s', err.message)
+  console.log('failed to submit order: %s', err.message)
 })
 ```
 

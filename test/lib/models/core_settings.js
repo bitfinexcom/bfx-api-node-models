@@ -1,7 +1,6 @@
-/* eslint-env mocha */
 'use strict'
 
-const assert = require('assert')
+const test = require('brittle')
 const { CoreSettings } = require('../../../lib')
 
 const DATA = [
@@ -12,23 +11,23 @@ const DATA = [
   ]
 ]
 
-describe('Core Settings model', () => {
-  it('initializes correctly', () => {
+test('Core Settings model', (t) => {
+  t.test('initializes correctly', (t) => {
     const coreSettings = new CoreSettings(DATA)
-    assert.strictEqual(coreSettings.key, 'te_limit_order_*')
-    assert.strictEqual(coreSettings.value, DATA[1])
+    t.is(coreSettings.key, 'te_limit_order_*')
+    t.is(coreSettings.value, DATA[1])
   })
 
-  it('serializes correctly', () => {
+  t.test('serializes correctly', (t) => {
     const details = new CoreSettings(DATA)
     const arr = details.serialize()
 
-    assert.deepStrictEqual(arr, DATA)
+    t.alike(arr, DATA)
   })
 
-  it('unserializes correctly', () => {
+  t.test('unserializes correctly', (t) => {
     const coreSettings = CoreSettings.unserialize(DATA)
-    assert.strictEqual(coreSettings.key, 'te_limit_order_*')
-    assert.strictEqual(coreSettings.value, DATA[1])
+    t.is(coreSettings.key, 'te_limit_order_*')
+    t.is(coreSettings.value, DATA[1])
   })
 })

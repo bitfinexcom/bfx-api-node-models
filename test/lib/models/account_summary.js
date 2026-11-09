@@ -1,7 +1,6 @@
-/* eslint-env mocha */
 'use strict'
 
-const assert = require('assert')
+const test = require('brittle')
 const { AccountSummary } = require('../../../lib')
 const testModelValidation = require('../../helpers/test_model_validation')
 const tradingVol30d = [
@@ -52,8 +51,8 @@ const DATA = [
   { leo_lev: 0, leo_amount_avg: 0.002 }
 ]
 
-describe('Account Summary model', () => {
-  testModelValidation({
+test('Account Summary model', (t) => {
+  testModelValidation(t, {
     model: AccountSummary,
     validData: {
       trade_vol_30d: [...(new Array(5))].map(() => tradingVol30d),
@@ -72,56 +71,56 @@ describe('Account Summary model', () => {
     }
   })
 
-  it('initializes correctly', () => {
+  t.test('initializes correctly', (t) => {
     const summary = new AccountSummary(DATA)
-    assert.deepStrictEqual(summary.trade_vol_30d, tradingVol30d)
-    assert.deepStrictEqual(
+    t.alike(summary.trade_vol_30d, tradingVol30d)
+    t.alike(
       summary.fees_trading_30d,
       { USD: 8.56966754, BTC: 1.00006754 }
     )
-    assert.strictEqual(summary.fees_trading_total_30d, 30008.56966754)
-    assert.deepStrictEqual(
+    t.is(summary.fees_trading_total_30d, 30008.56966754)
+    t.alike(
       summary.fees_funding_30d,
       { USD: 3.14966754, ETH: 0.10302856 }
     )
-    assert.strictEqual(summary.fees_funding_total_30d, 283.14966754)
-    assert.strictEqual(summary.makerFee, 0.001)
-    assert.strictEqual(summary.derivMakerRebate, -0.0002)
-    assert.strictEqual(summary.takerFeeToCrypto, 0.002)
-    assert.strictEqual(summary.takerFeeToStable, 0.0021)
-    assert.strictEqual(summary.takerFeeToFiat, 0.0022)
-    assert.strictEqual(summary.derivTakerFee, 0.00075)
-    assert.strictEqual(summary.leoLev, 0)
-    assert.strictEqual(summary.leoAmountAvg, 0.002)
+    t.is(summary.fees_funding_total_30d, 283.14966754)
+    t.is(summary.makerFee, 0.001)
+    t.is(summary.derivMakerRebate, -0.0002)
+    t.is(summary.takerFeeToCrypto, 0.002)
+    t.is(summary.takerFeeToStable, 0.0021)
+    t.is(summary.takerFeeToFiat, 0.0022)
+    t.is(summary.derivTakerFee, 0.00075)
+    t.is(summary.leoLev, 0)
+    t.is(summary.leoAmountAvg, 0.002)
   })
 
-  it('serializes correctly', () => {
+  t.test('serializes correctly', (t) => {
     const summary = new AccountSummary(DATA)
     const arr = summary.serialize()
 
-    assert.deepStrictEqual(arr, DATA)
+    t.alike(arr, DATA)
   })
 
-  it('unserializes correctly', () => {
+  t.test('unserializes correctly', (t) => {
     const summary = AccountSummary.unserialize(DATA)
-    assert.deepStrictEqual(summary.trade_vol_30d, tradingVol30d)
-    assert.deepStrictEqual(
+    t.alike(summary.trade_vol_30d, tradingVol30d)
+    t.alike(
       summary.fees_trading_30d,
       { USD: 8.56966754, BTC: 1.00006754 }
     )
-    assert.strictEqual(summary.fees_trading_total_30d, 30008.56966754)
-    assert.deepStrictEqual(
+    t.is(summary.fees_trading_total_30d, 30008.56966754)
+    t.alike(
       summary.fees_funding_30d,
       { USD: 3.14966754, ETH: 0.10302856 }
     )
-    assert.strictEqual(summary.fees_funding_total_30d, 283.14966754)
-    assert.strictEqual(summary.makerFee, 0.001)
-    assert.strictEqual(summary.derivMakerRebate, -0.0002)
-    assert.strictEqual(summary.takerFeeToCrypto, 0.002)
-    assert.strictEqual(summary.takerFeeToStable, 0.0021)
-    assert.strictEqual(summary.takerFeeToFiat, 0.0022)
-    assert.strictEqual(summary.derivTakerFee, 0.00075)
-    assert.strictEqual(summary.leoLev, 0)
-    assert.strictEqual(summary.leoAmountAvg, 0.002)
+    t.is(summary.fees_funding_total_30d, 283.14966754)
+    t.is(summary.makerFee, 0.001)
+    t.is(summary.derivMakerRebate, -0.0002)
+    t.is(summary.takerFeeToCrypto, 0.002)
+    t.is(summary.takerFeeToStable, 0.0021)
+    t.is(summary.takerFeeToFiat, 0.0022)
+    t.is(summary.derivTakerFee, 0.00075)
+    t.is(summary.leoLev, 0)
+    t.is(summary.leoAmountAvg, 0.002)
   })
 })

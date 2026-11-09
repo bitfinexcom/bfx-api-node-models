@@ -1,21 +1,20 @@
-/* eslint-env mocha */
 'use strict'
 
-const assert = require('assert')
+const test = require('brittle')
 const _isEmpty = require('lodash/isEmpty')
 const validator = require('../../../lib/validators/bool')
 
-describe('bool validator', () => {
-  it('returns no error if given a bool', () => {
-    assert.strictEqual(validator(true), null, 'failed validation for true')
-    assert.strictEqual(validator(false), null, 'failed validation for false')
+test('bool validator', (t) => {
+  t.test('returns no error if given a bool', (t) => {
+    t.is(validator(true), null, 'failed validation for true')
+    t.is(validator(false), null, 'failed validation for false')
   })
 
-  it('returns an error for any other value', () => {
-    assert.ok(!_isEmpty(validator(3)), 'passed validation for number')
-    assert.ok(!_isEmpty(validator('42')), 'passed validation for number')
-    assert.ok(!_isEmpty(validator({})), 'passed validation for object')
-    assert.ok(!_isEmpty(validator([])), 'passed validation for array')
-    assert.ok(!_isEmpty(validator(() => {})), 'passed validation for func')
+  t.test('returns an error for any other value', (t) => {
+    t.ok(!_isEmpty(validator(3)), 'passed validation for number')
+    t.ok(!_isEmpty(validator('42')), 'passed validation for number')
+    t.ok(!_isEmpty(validator({})), 'passed validation for object')
+    t.ok(!_isEmpty(validator([])), 'passed validation for array')
+    t.ok(!_isEmpty(validator(() => {})), 'passed validation for func')
   })
 })

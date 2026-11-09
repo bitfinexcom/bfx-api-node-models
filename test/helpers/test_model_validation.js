@@ -1,7 +1,5 @@
-/* eslint-env mocha */
 'use strict'
 
-const assert = require('assert')
 const _min = require('lodash/min')
 const _sample = require('lodash/sample')
 const _isArray = require('lodash/isArray')
@@ -12,12 +10,13 @@ const _flattenDeep = require('lodash/flattenDeep')
 /**
  * Runs basic checks on a model's validate method
  *
+ * @param {any} t - brittle test to add the subtests
  * @param {object} args - arguments
  * @param {object} args.model - class
  * @param {object} args.validData - map of arrays for each key containing valid values
  */
-module.exports = ({ model, validData }) => {
-  it('validate: is provided', () => {
+module.exports = (t, { model, validData }) => {
+  t.test('validate: is provided', (t) => {
     _isFunction(model.validate)
   })
 
@@ -41,35 +40,35 @@ module.exports = ({ model, validData }) => {
     invalid.push(invalidParamSet)
   }
 
-  it('validate: false for invalid instance(s)', () => {
+  t.test('validate: false for invalid instance(s)', (t) => {
     if (_isArray(invalid)) {
-      assert(_isError(model.validate(invalid))) // test all
+      t.ok(_isError(model.validate(invalid))) // test all
 
       invalid.forEach(i => { // test single & array of one
-        assert(_isError(model.validate(i)))
-        assert(_isError(model.validate([i])))
+        t.ok(_isError(model.validate(i)))
+        t.ok(_isError(model.validate([i])))
       })
     } else { // test single & array of one
-      assert(_isError(model.validate(invalid)))
-      assert(_isError(model.validate([invalid])))
+      t.ok(_isError(model.validate(invalid)))
+      t.ok(_isError(model.validate([invalid])))
     }
   })
 
-  it('validate: true for valid instance(s)', () => {
+  t.test('validate: true for valid instance(s)', (t) => {
     if (_isArray(valid)) {
-      assert.strictEqual(model.validate(valid), null) // test all
+      t.is(model.validate(valid), null) // test all
 
       valid.forEach(i => { // test single & array of one
-        assert.strictEqual(model.validate(i), null)
-        assert.strictEqual(model.validate([i]), null)
+        t.is(model.validate(i), null)
+        t.is(model.validate([i]), null)
       })
     } else { // test single & array of one
-      assert.strictEqual(model.validate(valid), null)
-      assert.strictEqual(model.validate([valid]), null)
+      t.is(model.validate(valid), null)
+      t.is(model.validate([valid]), null)
     }
   })
 
-  it('validate: false if one instance out of a set is invalid', () => {
-    assert(_isError(model.validate(_flattenDeep([valid, invalid]))))
+  t.test('validate: false if one instance out of a set is invalid', (t) => {
+    t.ok(_isError(model.validate(_flattenDeep([valid, invalid]))))
   })
 }

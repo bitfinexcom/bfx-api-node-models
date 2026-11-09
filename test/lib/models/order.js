@@ -1,19 +1,18 @@
-/* eslint-env mocha */
 'use strict'
 
-const assert = require('assert')
+const test = require('brittle')
 const _isUndefined = require('lodash/isUndefined')
 const _includes = require('lodash/includes')
 const _isFunction = require('lodash/isFunction')
-const { SYMBOLS } = require('bfx-hf-util')
+const { SYMBOLS } = require('@bitfinex/bfx-hf-util')
 const { Order } = require('../../../lib')
 const testModel = require('../../helpers/test_model')
 const testModelValidation = require('../../helpers/test_model_validation')
 
 const VALID_SYMBOLS = Object.values(SYMBOLS)
 
-describe('Order model', () => {
-  testModel({
+test('Order model', async (t) => {
+  testModel(t, {
     model: Order,
     boolFields: ['notify', 'hidden'],
     orderedFields: [
@@ -24,7 +23,7 @@ describe('Order model', () => {
     ]
   })
 
-  testModelValidation({
+  testModelValidation(t, {
     model: Order,
     validData: {
       symbol: VALID_SYMBOLS,
@@ -50,7 +49,7 @@ describe('Order model', () => {
     }
   })
 
-  it('toNewOrderPacket: uses correct values', () => {
+  await t.test('toNewOrderPacket: uses correct values', (t) => {
     const o = new Order({
       id: 1,
       gid: 2,
@@ -66,40 +65,40 @@ describe('Order model', () => {
 
     let p = o.toNewOrderPacket()
 
-    assert.strictEqual(p.constructor.name, 'Object')
-    assert(!p.id)
-    assert.strictEqual(p.gid, 2)
-    assert.strictEqual(p.cid, 3)
-    assert.strictEqual(p.symbol, 'tBTCUSD')
-    assert.strictEqual(p.type, 'EXCHANGE LIMIT')
-    assert.strictEqual(p.price_trailing, '0.10000')
-    assert.strictEqual(p.price_aux_limit, '0.20000')
-    assert.strictEqual(p.price, '0.30000')
-    assert.strictEqual(p.amount, '0.40000000')
-    assert(!(p.flags & Order.flags.OCO))
-    assert(!(p.flags & Order.flags.HIDDEN))
-    assert(!(p.flags & Order.flags.POSTONLY))
-    assert.strictEqual(p.meta.aff_code, 'insert some unique/thoughtful comment here')
+    t.is(p.constructor.name, 'Object')
+    t.ok(!p.id)
+    t.is(p.gid, 2)
+    t.is(p.cid, 3)
+    t.is(p.symbol, 'tBTCUSD')
+    t.is(p.type, 'EXCHANGE LIMIT')
+    t.is(p.price_trailing, '0.10000')
+    t.is(p.price_aux_limit, '0.20000')
+    t.is(p.price, '0.30000')
+    t.is(p.amount, '0.40000000')
+    t.ok(!(p.flags & Order.flags.OCO))
+    t.ok(!(p.flags & Order.flags.HIDDEN))
+    t.ok(!(p.flags & Order.flags.POSTONLY))
+    t.is(p.meta.aff_code, 'insert some unique/thoughtful comment here')
 
     o.setHidden(true)
     p = o.toNewOrderPacket()
-    assert(p.flags & Order.flags.HIDDEN)
-    assert(!(p.flags & Order.flags.OCO))
-    assert(!(p.flags & Order.flags.POSTONLY))
+    t.ok(p.flags & Order.flags.HIDDEN)
+    t.ok(!(p.flags & Order.flags.OCO))
+    t.ok(!(p.flags & Order.flags.POSTONLY))
     o.setHidden(false)
 
     o.setPostOnly(true)
     p = o.toNewOrderPacket()
-    assert(p.flags & Order.flags.POSTONLY)
-    assert(!(p.flags & Order.flags.OCO))
-    assert(!(p.flags & Order.flags.HIDDEN))
+    t.ok(p.flags & Order.flags.POSTONLY)
+    t.ok(!(p.flags & Order.flags.OCO))
+    t.ok(!(p.flags & Order.flags.HIDDEN))
     o.setPostOnly(false)
 
     o.setOCO(true)
     p = o.toNewOrderPacket()
-    assert(p.flags & Order.flags.OCO)
-    assert(!(p.flags & Order.flags.HIDDEN))
-    assert(!(p.flags & Order.flags.POSTONLY))
+    t.ok(p.flags & Order.flags.OCO)
+    t.ok(!(p.flags & Order.flags.HIDDEN))
+    t.ok(!(p.flags & Order.flags.POSTONLY))
     o.setOCO(false)
 
     // Just to make sure...
@@ -108,257 +107,253 @@ describe('Order model', () => {
     o.setPostOnly(true)
     p = o.toNewOrderPacket()
 
-    assert(p.flags & Order.flags.OCO)
-    assert(p.flags & Order.flags.HIDDEN)
-    assert(p.flags & Order.flags.POSTONLY)
+    t.ok(p.flags & Order.flags.OCO)
+    t.ok(p.flags & Order.flags.HIDDEN)
+    t.ok(p.flags & Order.flags.POSTONLY)
   })
 
-  it('constructor: sets flags based on bool flag keys', () => {
+  await t.test('constructor: sets flags based on bool flag keys', (t) => {
     const oHidden = new Order({ hidden: true })
     const oPostOnly = new Order({ postonly: true })
     const oOCO = new Order({ oco: true, priceAuxLimit: 42 })
 
-    assert(oHidden.isHidden())
-    assert(!oHidden.isPostOnly())
-    assert(!oHidden.isOCO())
-    assert(oHidden.flags & Order.flags.HIDDEN)
-    assert(!(oHidden.flags & Order.flags.POSTONLY))
-    assert(!(oHidden.flags & Order.flags.OCO))
+    t.ok(oHidden.isHidden())
+    t.ok(!oHidden.isPostOnly())
+    t.ok(!oHidden.isOCO())
+    t.ok(oHidden.flags & Order.flags.HIDDEN)
+    t.ok(!(oHidden.flags & Order.flags.POSTONLY))
+    t.ok(!(oHidden.flags & Order.flags.OCO))
 
-    assert(oPostOnly.isPostOnly())
-    assert(!oPostOnly.isHidden())
-    assert(!oPostOnly.isOCO())
-    assert(oPostOnly.flags & Order.flags.POSTONLY)
-    assert(!(oPostOnly.flags & Order.flags.HIDDEN))
-    assert(!(oPostOnly.flags & Order.flags.OCO))
+    t.ok(oPostOnly.isPostOnly())
+    t.ok(!oPostOnly.isHidden())
+    t.ok(!oPostOnly.isOCO())
+    t.ok(oPostOnly.flags & Order.flags.POSTONLY)
+    t.ok(!(oPostOnly.flags & Order.flags.HIDDEN))
+    t.ok(!(oPostOnly.flags & Order.flags.OCO))
 
-    assert(oOCO.isOCO())
-    assert(!oOCO.isHidden())
-    assert(!oOCO.isPostOnly())
-    assert(oOCO.flags & Order.flags.OCO)
-    assert(!(oOCO.flags & Order.flags.HIDDEN))
-    assert(!(oOCO.flags & Order.flags.POSTONLY))
-    assert.strictEqual(oOCO.priceAuxLimit, 42)
+    t.ok(oOCO.isOCO())
+    t.ok(!oOCO.isHidden())
+    t.ok(!oOCO.isPostOnly())
+    t.ok(oOCO.flags & Order.flags.OCO)
+    t.ok(!(oOCO.flags & Order.flags.HIDDEN))
+    t.ok(!(oOCO.flags & Order.flags.POSTONLY))
+    t.is(oOCO.priceAuxLimit, 42)
   })
 
-  it('isOCO, setOCO: updates/reads OCO flag & price', () => {
+  await t.test('isOCO, setOCO: updates/reads OCO flag & price', (t) => {
     const o = new Order()
 
-    assert(!o.isOCO())
+    t.ok(!o.isOCO())
     o.setOCO(true, 42)
-    assert(o.isOCO())
-    assert.strictEqual(o.priceAuxLimit, 42)
+    t.ok(o.isOCO())
+    t.is(o.priceAuxLimit, 42)
 
     o.setOCO(false)
-    assert(!o.isOCO())
+    t.ok(!o.isOCO())
 
     o.setOCO(true)
-    assert(o.isOCO())
+    t.ok(o.isOCO())
   })
 
-  it('isHidden, setHidden: updates/reads hidden flag', () => {
+  await t.test('isHidden, setHidden: updates/reads hidden flag', (t) => {
     const o = new Order()
-    assert(!o.isHidden())
+    t.ok(!o.isHidden())
     o.setHidden(true)
-    assert(o.isHidden())
+    t.ok(o.isHidden())
 
     o.setHidden(false)
-    assert(!o.isHidden())
+    t.ok(!o.isHidden())
 
     o.setHidden(true)
-    assert(o.isHidden())
+    t.ok(o.isHidden())
   })
 
-  it('isVisibleOnHit, setVisibleOnHit: updates/reads if the hidden orders are visible on hit or not', () => {
+  await t.test('isVisibleOnHit, setVisibleOnHit: updates/reads if the hidden orders are visible on hit or not', (t) => {
     const o = new Order()
-    assert(!o.isHidden())
-    assert(!o.isVisibleOnHit())
+    t.ok(!o.isHidden())
+    t.ok(!o.isVisibleOnHit())
 
     o.setVisibleOnHit(true)
-    assert(!o.isVisibleOnHit())
+    t.ok(!o.isVisibleOnHit())
 
     o.setHidden(true)
     o.setVisibleOnHit(true)
-    assert(o.isVisibleOnHit())
+    t.ok(o.isVisibleOnHit())
 
     o.setHidden(false)
-    assert(!o.isHidden())
-    assert(!o.isVisibleOnHit())
+    t.ok(!o.isHidden())
+    t.ok(!o.isVisibleOnHit())
   })
 
-  it('isPostOnly, setPostOnly: updates/reads postonly flag', () => {
+  await t.test('isPostOnly, setPostOnly: updates/reads postonly flag', (t) => {
     const o = new Order()
-    assert(!o.isPostOnly())
+    t.ok(!o.isPostOnly())
     o.setPostOnly(true)
-    assert(o.isPostOnly())
+    t.ok(o.isPostOnly())
 
     o.setPostOnly(false)
-    assert(!o.isPostOnly())
+    t.ok(!o.isPostOnly())
 
     o.setPostOnly(true)
-    assert(o.isPostOnly())
+    t.ok(o.isPostOnly())
   })
 
-  it('includesVariableRates, setVariableRates: updates/reads NO_VR flag', () => {
+  await t.test('includesVariableRates, setVariableRates: updates/reads NO_VR flag', (t) => {
     const o = new Order()
-    assert(o.includesVariableRates())
+    t.ok(o.includesVariableRates())
     o.setNoVariableRates(true)
-    assert(!o.includesVariableRates())
+    t.ok(!o.includesVariableRates())
 
     o.setNoVariableRates(false)
-    assert(o.includesVariableRates())
+    t.ok(o.includesVariableRates())
 
     o.setNoVariableRates(true)
-    assert(!o.includesVariableRates())
+    t.ok(!o.includesVariableRates())
   })
 
-  it('isPositionClose, setPositionClose: updates/reads posclose flag', () => {
+  await t.test('isPositionClose, setPositionClose: updates/reads posclose flag', (t) => {
     const o = new Order()
-    assert(!o.isPositionClose())
+    t.ok(!o.isPositionClose())
     o.setPositionClose(true)
-    assert(o.isPositionClose())
+    t.ok(o.isPositionClose())
 
     o.setPositionClose(false)
-    assert(!o.isPositionClose())
+    t.ok(!o.isPositionClose())
 
     o.setPositionClose(true)
-    assert(o.isPositionClose())
+    t.ok(o.isPositionClose())
   })
 
-  it('isReduceOnly, setReduceOnly: updates/reads reduceOnly flag', () => {
+  await t.test('isReduceOnly, setReduceOnly: updates/reads reduceOnly flag', (t) => {
     const o = new Order()
-    assert(!o.isReduceOnly())
+    t.ok(!o.isReduceOnly())
     o.setReduceOnly(true)
-    assert(o.isReduceOnly())
+    t.ok(o.isReduceOnly())
 
     o.setReduceOnly(false)
-    assert(!o.isReduceOnly())
+    t.ok(!o.isReduceOnly())
 
     o.setReduceOnly(true)
-    assert(o.isReduceOnly())
+    t.ok(o.isReduceOnly())
   })
 
-  it('update: applies changeset to order model', (done) => {
+  await t.test('update: applies changeset to order model', (t) => {
     const o = new Order({ price: 42, amount: 1 }, { updateOrder: () => Promise.resolve() })
-    assert.strictEqual(o.price, 42)
-    assert.strictEqual(o.amount, 1)
+    t.is(o.price, 42)
+    t.is(o.amount, 1)
 
-    o.update({ delta: 1, price: 43 }).catch(done)
+    o.update({ delta: 1, price: 43 }).catch((err) => t.fail(String(err)))
 
-    assert.strictEqual(o.price, 43)
-    assert.strictEqual(o.amount, 2)
+    t.is(o.price, 43)
+    t.is(o.amount, 2)
 
-    assert(_isUndefined(o.priceAuxLimit))
-    o.update({ price_aux_limit: 42 }).catch(done)
-    assert(_isUndefined(o.price_aux_limit))
-    assert.strictEqual(o.priceAuxLimit, 42)
+    t.ok(_isUndefined(o.priceAuxLimit))
+    o.update({ price_aux_limit: 42 }).catch((err) => t.fail(String(err)))
+    t.ok(_isUndefined(o.price_aux_limit))
+    t.is(o.priceAuxLimit, 42)
 
-    assert(_isUndefined(o.priceTrailing))
-    o.update({ price_trailing: 42 }).catch(done)
-    assert(_isUndefined(o.price_trailing))
-    assert.strictEqual(o.priceTrailing, 42)
+    t.ok(_isUndefined(o.priceTrailing))
+    o.update({ price_trailing: 42 }).catch((err) => t.fail(String(err)))
+    t.ok(_isUndefined(o.price_trailing))
+    t.is(o.priceTrailing, 42)
 
-    assert(o.gid !== 42)
-    o.update({ gid: 42 }).catch(done)
-    assert.strictEqual(o.gid, 42)
-
-    done()
+    t.ok(o.gid !== 42)
+    o.update({ gid: 42 }).catch((err) => t.fail(String(err)))
+    t.is(o.gid, 42)
   })
 
-  it('update: prepares price & amount', (done) => {
+  await t.test('update: prepares price & amount', (t) => {
+    t.plan(2)
     const o = new Order({
       price: 42,
       amount: 1
     }, {
       updateOrder: (changes) => {
-        assert.strictEqual(changes.price, '43.000')
-        assert.strictEqual(changes.amount, '3.00000000')
-        done()
+        t.is(changes.price, '43.000')
+        t.is(changes.amount, '3.00000000')
       }
     })
 
     o.update({ price: 43, amount: 3 })
   })
 
-  it('update: prepares delta', (done) => {
+  await t.test('update: prepares delta', (t) => {
+    t.plan(1)
     const o = new Order({
       price: 42,
       amount: 1
     }, {
       updateOrder: (changes) => {
-        assert.strictEqual(changes.delta, '3.00000000')
-        done()
+        t.is(changes.delta, '3.00000000')
       }
     })
 
     o.update({ delta: 3 })
   })
 
-  it('update: prepares aux limit price', (done) => {
+  await t.test('update: prepares aux limit price', (t) => {
+    t.plan(1)
     const o = new Order({
       price: 42,
       amount: 1
     }, {
       updateOrder: (changes) => {
-        assert.strictEqual(changes.price_aux_limit, '3.0000')
-        done()
+        t.is(changes.price_aux_limit, '3.0000')
       }
     })
 
     o.update({ price_aux_limit: 3 })
   })
 
-  it('update: prepares trailing price', (done) => {
+  await t.test('update: prepares trailing price', (t) => {
+    t.plan(1)
     const o = new Order({
       price: 42,
       amount: 1
     }, {
       updateOrder: (changes) => {
-        assert.strictEqual(changes.price_trailing, '43.000')
-        done()
+        t.is(changes.price_trailing, '43.000')
       }
     })
 
     o.update({ price_trailing: 43 })
   })
 
-  it('update: rejects with error if applying delta to missing amount', (done) => {
-    const o = new Order()
+  await t.test('update: rejects with error if applying delta to missing amount', async (t) => {
+    const o = new Order({}, { updateOrder: () => t.fail('update was sent') })
 
-    o.update({ delta: 1 }).catch(() => {
-      done() // no error
-    })
+    await t.exception.all(o.update({ delta: 1 }), /can't apply delta to missing amount/)
   })
 
-  it('update: forwards update to ws2', (done) => {
+  await t.test('update: forwards update to ws2', (t) => {
+    t.plan(2)
     const o = new Order({}, { // dirty ws2 mock
       updateOrder: (o) => {
-        assert(o)
-        assert.strictEqual(o.test, 42)
-        done()
+        t.ok(o)
+        t.is(o.test, 42)
       }
     })
 
-    o.update({ test: 42 }).catch(done)
+    o.update({ test: 42 }).catch((err) => t.fail(String(err)))
   })
 
-  it('isPartiallyFilled: returns true if the order is partially filled', () => {
-    assert(new Order({ amount: 5, amountOrig: 25 }).isPartiallyFilled())
-    assert(!new Order({ amount: 0, amountOrig: 25 }).isPartiallyFilled())
-    assert(!new Order({ amount: 25, amountOrig: 25 }).isPartiallyFilled())
+  await t.test('isPartiallyFilled: returns true if the order is partially filled', (t) => {
+    t.ok(new Order({ amount: 5, amountOrig: 25 }).isPartiallyFilled())
+    t.ok(!new Order({ amount: 0, amountOrig: 25 }).isPartiallyFilled())
+    t.ok(!new Order({ amount: 25, amountOrig: 25 }).isPartiallyFilled())
   })
 
-  it('lev: field is passed into newOrderPacket', () => {
+  await t.test('lev: field is passed into newOrderPacket', (t) => {
     const o = new Order({
       price: 42,
       amount: 1,
       lev: 100
     })
-    assert(o.toNewOrderPacket().lev, 100)
+    t.ok(o.toNewOrderPacket().lev, 100)
   })
 
-  describe('toString', () => {
-    it('includes pertinent information', () => {
+  await t.test('toString', (t) => {
+    t.test('includes pertinent information', (t) => {
       const o = new Order({
         symbol: 'tBTCUSD',
         amount: 42,
@@ -373,20 +368,20 @@ describe('Order model', () => {
       o.status = 'awesome'
 
       const str = o.toString()
-      assert.ok(/BTC\/USD/.test(str), 'symbol missing')
-      assert.ok(/STOP/.test(str), 'type missing')
-      assert.ok(/hidden/.test(str), 'hidden flag missing')
-      assert.ok(/post-only/.test(str), 'post-only flag missing')
-      assert.ok(/reduce-only/.test(str), 'reduce-only flag missing')
-      assert.ok(/awesome/.test(str), 'status missing')
-      assert.ok(_includes(str, '1'), 'price missing')
-      assert.ok(_includes(str, '41'), 'amount missing')
-      assert.ok(_includes(str, '42'), 'original amount missing')
+      t.ok(/BTC\/USD/.test(str), 'symbol missing')
+      t.ok(/STOP/.test(str), 'type missing')
+      t.ok(/hidden/.test(str), 'hidden flag missing')
+      t.ok(/post-only/.test(str), 'post-only flag missing')
+      t.ok(/reduce-only/.test(str), 'reduce-only flag missing')
+      t.ok(/awesome/.test(str), 'status missing')
+      t.ok(_includes(str, '1'), 'price missing')
+      t.ok(_includes(str, '41'), 'amount missing')
+      t.ok(_includes(str, '42'), 'original amount missing')
     })
   })
 
-  describe('toPreview', () => {
-    it('returns a valid preview object for the HF', () => {
+  await t.test('toPreview', (t) => {
+    t.test('returns a valid preview object for the HF', (t) => {
       const data = {
         gid: 1,
         cid: 2,
@@ -399,22 +394,22 @@ describe('Order model', () => {
       }
 
       const o = new Order(data)
-      assert.deepStrictEqual(o.toPreview(), data)
+      t.alike(o.toPreview(), data)
     })
   })
 
-  describe('registerListeners', () => {
-    it('does nothing if no interface available', () => {
+  await t.test('registerListeners', (t) => {
+    t.test('does nothing if no interface available', (t) => {
       const o = new Order()
 
       o.registerListeners({
-        onOrderNew: () => assert(false),
-        onOrderUpdate: () => assert(false),
-        onOrderClose: () => assert(false)
+        onOrderNew: () => t.ok(false),
+        onOrderUpdate: () => t.ok(false),
+        onOrderClose: () => t.ok(false)
       })
     })
 
-    it('sets up listeners with correct channel filters', () => {
+    t.test('sets up listeners with correct channel filters', (t) => {
       const o = new Order({
         symbol: 'tBTCUSD',
         id: '1',
@@ -425,8 +420,8 @@ describe('Order model', () => {
       o.cbGID = () => -1
 
       const testListener = (chanData, cb) => {
-        assert.ok(_isFunction(cb), 'listener was not given cb')
-        assert.deepStrictEqual(chanData, {
+        t.ok(_isFunction(cb), 'listener was not given cb')
+        t.alike(chanData, {
           symbol: 'tBTCUSD',
           cbGID: -1,
           id: 1,
@@ -443,48 +438,49 @@ describe('Order model', () => {
     })
   })
 
-  describe('removeListeners', () => {
-    it('calls removeListeners on the interface if provided', (done) => {
+  await t.test('removeListeners', async (t) => {
+    await t.test('calls removeListeners on the interface if provided', (t) => {
+      t.plan(1)
       const o = new Order()
       o.cbGID = () => -1
       o.removeListeners({
         removeListeners: (cbGID) => {
-          assert.strictEqual(cbGID, -1)
-          done()
+          t.is(cbGID, -1)
         }
       })
     })
   })
 
-  describe('cbGID', () => {
-    it('includes cid', () => {
+  await t.test('cbGID', (t) => {
+    t.test('includes cid', (t) => {
       const o = new Order({ cid: 'test' })
-      assert.ok(/test/.test(o.cbGID()), 'cid not on callback group ID')
+      t.ok(/test/.test(o.cbGID()), 'cid not on callback group ID')
     })
 
-    it('includes gid', () => {
+    t.test('includes gid', (t) => {
       const o = new Order({ gid: 'test' })
-      assert.ok(/test/.test(o.cbGID()), 'gid not on callback group ID')
+      t.ok(/test/.test(o.cbGID()), 'gid not on callback group ID')
     })
   })
 
-  describe('submit', () => {
-    it('throws an error if no interface provided', (done) => {
+  await t.test('submit', async (t) => {
+    await t.test('throws an error if no interface provided', async (t) => {
       const o = new Order()
-      o.submit().catch(() => done())
+      await t.exception.all(o.submit())
     })
 
-    it('calls submitOrder on the interface', (done) => {
+    await t.test('calls submitOrder on the interface', (t) => {
+      t.plan(1)
       const o = new Order()
       o.submit({
         submitOrder: async () => {
-          done()
+          t.pass()
           return []
         }
       })
     })
 
-    it('saves received data on itself', async () => {
+    await t.test('saves received data on itself', async (t) => {
       const o = new Order({ symbol: 'tBTCUSD' })
       const remoteO = new Order({ symbol: 'just-testing' })
 
@@ -492,90 +488,91 @@ describe('Order model', () => {
         submitOrder: async () => remoteO.serialize()
       })
 
-      assert.strictEqual(o.symbol, 'just-testing')
+      t.is(o.symbol, 'just-testing')
     })
   })
 
-  describe('cancel', () => {
-    it('throws an error if no interface provided', (done) => {
+  await t.test('cancel', async (t) => {
+    await t.test('throws an error if no interface provided', async (t) => {
       const o = new Order({ id: 42 })
-      o.cancel().catch(() => done())
+      await t.exception.all(o.cancel())
     })
 
-    it('throws an error if the order lacks an ID', (done) => {
+    await t.test('throws an error if the order lacks an ID', async (t) => {
       const o = new Order()
-      o.cancel({
+      await t.exception.all(o.cancel({
         cancelOrder: async () => {}
-      }).catch(() => done())
+      }))
     })
 
-    it('calls cancelOrder on the interface', (done) => {
+    await t.test('calls cancelOrder on the interface', (t) => {
+      t.plan(1)
       const o = new Order({ id: 42 })
       o.cancel({
         cancelOrder: async ({ id }) => {
-          assert.strictEqual(id, 42)
-          done()
+          t.is(id, 42)
           return []
         }
       })
     })
   })
 
-  describe('recreate', () => {
-    it('throws an error if no interface provided', (done) => {
+  await t.test('recreate', async (t) => {
+    await t.test('throws an error if no interface provided', async (t) => {
       const o = new Order({ id: 42 })
-      o.recreate().catch(() => done())
+      await t.exception.all(o.recreate())
     })
 
-    it('throws an error if the order lacks an ID', (done) => {
+    await t.test('throws an error if the order lacks an ID', async (t) => {
       const o = new Order()
-      o.recreate({
+      await t.exception.all(o.recreate({
         cancelOrder: async () => {}
-      }).catch(() => done())
+      }))
     })
 
-    it('cancels itself', (done) => {
+    await t.test('cancels itself', (t) => {
+      t.plan(1)
       const o = new Order({ id: 42 })
 
-      o.cancel = async () => { done() }
+      o.cancel = async () => { t.pass() }
       o.submit = async () => {}
       o.recreate({})
     })
 
-    it('clears its ID', async () => {
+    await t.test('clears its ID', async (t) => {
       const o = new Order({ id: 42 })
 
       o.cancel = async () => {}
       o.submit = async () => {}
 
       await o.recreate({})
-      assert.ok(!o.id, 'ID not cleared')
+      t.ok(!o.id, 'ID not cleared')
     })
 
-    it('submits itself after ID clear', (done) => {
+    await t.test('submits itself after ID clear', (t) => {
+      t.plan(1)
       const o = new Order({ id: 42 })
 
       o.cancel = async () => {}
       o.submit = async () => {
-        assert.ok(!o.id, 'ID not cleared')
-        done()
+        t.ok(!o.id, 'ID not cleared')
       }
 
       o.recreate({})
     })
   })
 
-  describe('updateFrom', () => {
-    it('throws an error if order IDs and CIDs, or GIDs, do not match', () => {
+  await t.test('updateFrom', (t) => {
+    t.test('throws an error if order IDs and CIDs, or GIDs, do not match', (t) => {
       const o = new Order({ id: 1, gid: 2, cid: 3 })
 
-      assert.throws(() => o.updateFrom({}))
-      assert.throws(() => o.updateFrom({ id: 1 }))
-      assert.throws(() => o.updateFrom({ id: 1, cid: 4 }))
-      assert.throws(() => o.updateFrom({ gid: 3 }))
+      t.exception.all(() => o.updateFrom({}))
+      t.exception.all(() => o.updateFrom({ id: 1 }))
+      t.exception.all(() => o.updateFrom({ id: 1, cid: 4 }))
+      t.exception.all(() => o.updateFrom({ gid: 3 }))
     })
 
-    it('does not throw error if IDs and CIDs, or GIDs match', () => {
+    t.test('does not throw error if IDs and CIDs, or GIDs match', (t) => {
       const oByCID = new Order({ id: 1, cid: 3 })
       const oByGID = new Order({ gid: 42 })
 
@@ -583,7 +580,7 @@ describe('Order model', () => {
       oByGID.updateFrom({ gid: 42 })
     })
 
-    it('updates properties from the provided order', () => {
+    t.test('updates properties from the provided order', (t) => {
       const o = new Order({
         id: 1,
         gid: -1,
@@ -602,95 +599,98 @@ describe('Order model', () => {
         priceAvg: 42
       })
 
-      assert.strictEqual(o.id, 999)
-      assert.strictEqual(o.amount, 41)
-      assert.strictEqual(o.status, 'TESTED')
-      assert.strictEqual(o.mtsUpdate, -1)
-      assert.strictEqual(o.priceAvg, 42)
+      t.is(o.id, 999)
+      t.is(o.amount, 41)
+      t.is(o.status, 'TESTED')
+      t.is(o.mtsUpdate, -1)
+      t.is(o.priceAvg, 42)
     })
   })
 
-  describe('getLastFillAmount', () => {
-    it('returns difference in amount since last update', () => {
+  await t.test('getLastFillAmount', (t) => {
+    t.test('returns difference in amount since last update', (t) => {
       const o = new Order({ gid: 42, amount: 40 })
       o.updateFrom({ gid: 42, amount: 10 })
-      assert.strictEqual(o.getLastFillAmount(), 30)
+      t.is(o.getLastFillAmount(), 30)
     })
   })
 
-  describe('resetFilledAmount', () => {
-    it('clears last fill amount', () => {
+  await t.test('resetFilledAmount', (t) => {
+    t.test('clears last fill amount', (t) => {
       const o = new Order({ gid: 42, amount: 40 })
       o.updateFrom({ gid: 42, amount: 10 })
       o.resetFilledAmount()
-      assert.strictEqual(o.getLastFillAmount(), 0)
+      t.is(o.getLastFillAmount(), 0)
     })
   })
 
-  describe('getBaseCurrent', () => {
-    it('returns the base currency for the order', () => {
+  await t.test('getBaseCurrent', (t) => {
+    t.test('returns the base currency for the order', (t) => {
       const o = new Order({ symbol: 'tBTCUSD' })
-      assert.strictEqual(o.getBaseCurrency(), 'BTC')
+      t.is(o.getBaseCurrency(), 'BTC')
     })
   })
 
-  describe('getQuoteCurrency', () => {
-    it('returns the base currency for the order', () => {
+  await t.test('getQuoteCurrency', (t) => {
+    t.test('returns the base currency for the order', (t) => {
       const o = new Order({ symbol: 'tBTCUSD' })
-      assert.strictEqual(o.getQuoteCurrency(), 'USD')
+      t.is(o.getQuoteCurrency(), 'USD')
     })
   })
 
-  describe('getNotionalValue', () => {
-    it('returns the nv for the order', () => {
+  await t.test('getNotionalValue', (t) => {
+    t.test('returns the nv for the order', (t) => {
       const o = new Order({ price: 2, amount: 10 })
-      assert.strictEqual(o.getNotionalValue(), 20)
+      t.is(o.getNotionalValue(), 20)
     })
   })
 
-  describe('_onWSOrderUpdate', () => {
-    it('updates from the provided packet', () => {
+  await t.test('_onWSOrderUpdate', async (t) => {
+    await t.test('updates from the provided packet', (t) => {
       const o = new Order({ symbol: 'tBTCUSD' })
       o._onWSOrderUpdate(new Order({ symbol: 'fUSD' }))
-      assert.strictEqual(o.symbol, 'fUSD')
+      t.is(o.symbol, 'fUSD')
     })
 
-    it('emits an update event', (done) => {
+    await t.test('emits an update event', (t) => {
+      t.plan(1)
       const o = new Order({ symbol: 'tBTCUSD' })
-      o.once('update', () => done())
+      o.once('update', () => t.pass())
       o._onWSOrderUpdate(new Order({ symbol: 'fUSD' }))
     })
   })
 
-  describe('_onWSOderClose', () => {
-    it('updates from the provided packet', () => {
+  await t.test('_onWSOderClose', async (t) => {
+    await t.test('updates from the provided packet', (t) => {
       const o = new Order({ symbol: 'tBTCUSD' })
       o._onWSOrderClose(new Order({ symbol: 'fUSD' }))
-      assert.strictEqual(o.symbol, 'fUSD')
+      t.is(o.symbol, 'fUSD')
     })
 
-    it('emits an update event', (done) => {
+    await t.test('emits an update event', (t) => {
+      t.plan(1)
       const o = new Order({ symbol: 'tBTCUSD' })
-      o.once('update', () => done())
+      o.once('update', () => t.pass())
       o._onWSOrderClose(new Order({ symbol: 'fUSD' }))
     })
 
-    it('emits a close event', (done) => {
+    await t.test('emits a close event', (t) => {
+      t.plan(1)
       const o = new Order({ symbol: 'tBTCUSD' })
-      o.once('close', () => done())
+      o.once('close', () => t.pass())
       o._onWSOrderClose(new Order({ symbol: 'fUSD' }))
     })
   })
 
-  describe('static getBaseCurrency', () => {
-    it('returns the base currency for an array-format order', () => {
-      assert.strictEqual(Order.getBaseCurrency([null, null, null, 'tBTCUSD']), 'BTC')
+  await t.test('static getBaseCurrency', (t) => {
+    t.test('returns the base currency for an array-format order', (t) => {
+      t.is(Order.getBaseCurrency([null, null, null, 'tBTCUSD']), 'BTC')
     })
   })
 
-  describe('static getQuoteCurrency', () => {
-    it('returns the quote currency for an array-format order', () => {
-      assert.strictEqual(Order.getQuoteCurrency([null, null, null, 'tBTCUSD']), 'USD')
+  await t.test('static getQuoteCurrency', (t) => {
+    t.test('returns the quote currency for an array-format order', (t) => {
+      t.is(Order.getQuoteCurrency([null, null, null, 'tBTCUSD']), 'USD')
     })
   })
 })

@@ -1,9 +1,8 @@
-/* eslint-env mocha */
 'use strict'
 
-const assert = require('assert')
+const test = require('brittle')
 const { RESTv2 } = require('bfx-api-node-rest')
-const { SYMBOLS } = require('bfx-hf-util')
+const { SYMBOLS } = require('@bitfinex/bfx-hf-util')
 const { TradingTickerHist } = require('../../../lib')
 const testModel = require('../../helpers/test_model')
 const testModelValidation = require('../../helpers/test_model_validation')
@@ -25,8 +24,8 @@ const DATA = [
   1544097835000
 ]
 
-describe('TradingTickerHistory model', () => {
-  testModel({
+test('TradingTickerHistory model', async (t) => {
+  testModel(t, {
     model: TradingTickerHist,
     orderedFields: [
       'symbol', 'bid', null, 'ask', null, null, null, null, null, null, null,
@@ -34,7 +33,7 @@ describe('TradingTickerHistory model', () => {
     ]
   })
 
-  testModelValidation({
+  testModelValidation(t, {
     model: TradingTickerHist,
     validData: {
       symbol: VALID_SYMBOLS,
@@ -44,53 +43,53 @@ describe('TradingTickerHistory model', () => {
     }
   })
 
-  it('initializes correctly', () => {
+  await t.test('initializes correctly', (t) => {
     const ticker = new TradingTickerHist(DATA)
 
-    assert.strictEqual(ticker.symbol, 'tBTCUSD')
-    assert.strictEqual(ticker.bid, 228.56)
-    assert.strictEqual(ticker.ask, 228.58)
-    assert.strictEqual(ticker.mtsUpdate, 1544097835000)
+    t.is(ticker.symbol, 'tBTCUSD')
+    t.is(ticker.bid, 228.56)
+    t.is(ticker.ask, 228.58)
+    t.is(ticker.mtsUpdate, 1544097835000)
   })
 
-  it('serializes correctly', () => {
+  await t.test('serializes correctly', (t) => {
     const ticker = new TradingTickerHist(DATA)
     const arr = ticker.serialize()
 
-    assert.strictEqual(JSON.stringify(arr), JSON.stringify(DATA))
+    t.is(JSON.stringify(arr), JSON.stringify(DATA))
   })
 
-  it('unserializes correctly', () => {
+  await t.test('unserializes correctly', (t) => {
     const obj = TradingTickerHist.unserialize(DATA)
 
-    assert.strictEqual(obj.symbol, 'tBTCUSD')
-    assert.strictEqual(obj.bid, 228.56)
-    assert.strictEqual(obj.ask, 228.58)
-    assert.strictEqual(obj.mtsUpdate, 1544097835000)
+    t.is(obj.symbol, 'tBTCUSD')
+    t.is(obj.bid, 228.56)
+    t.is(obj.ask, 228.58)
+    t.is(obj.mtsUpdate, 1544097835000)
   })
 
-  it('unserializes live data correctly', async () => {
+  await t.test('unserializes live data correctly', async (t) => {
     const rest = new RESTv2()
     const arr = await rest.ticker({ symbol: 'tBTCUSD' })
     const obj = TradingTickerHist.unserialize(arr)
 
-    assert.strictEqual(obj.symbol, arr[0])
-    assert.strictEqual(obj.bid, arr[1])
-    assert.strictEqual(obj.ask, arr[3])
-    assert.strictEqual(obj.mtsUpdate, arr[12])
+    t.is(obj.symbol, arr[0])
+    t.is(obj.bid, arr[1])
+    t.is(obj.ask, arr[3])
+    t.is(obj.mtsUpdate, arr[12])
   })
 
-  describe('base', () => {
-    it('returns the base currency for the ticker', () => {
-      const t = new TradingTickerHist({ symbol: 'tBTCUSD' })
-      assert.strictEqual(t.base(), 'BTC')
+  await t.test('base', (t) => {
+    t.test('returns the base currency for the ticker', (t) => {
+      const ticker = new TradingTickerHist({ symbol: 'tBTCUSD' })
+      t.is(ticker.base(), 'BTC')
     })
   })
 
-  describe('quote', () => {
-    it('returns the quote currency for the ticker', () => {
-      const t = new TradingTickerHist({ symbol: 'tBTCUSD' })
-      assert.strictEqual(t.quote(), 'USD')
+  await t.test('quote', (t) => {
+    t.test('returns the quote currency for the ticker', (t) => {
+      const ticker = new TradingTickerHist({ symbol: 'tBTCUSD' })
+      t.is(ticker.quote(), 'USD')
     })
   })
 })

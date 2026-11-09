@@ -1,22 +1,22 @@
-/* eslint-env mocha */
 'use strict'
 
-const { SYMBOLS } = require('bfx-hf-util')
+const test = require('brittle')
+const { SYMBOLS } = require('@bitfinex/bfx-hf-util')
 const { Notification } = require('../../../lib')
 const testModel = require('../../helpers/test_model')
 const testModelValidation = require('../../helpers/test_model_validation')
 
 const VALID_STRINGS = Object.values(SYMBOLS)
 
-describe('Notification model', () => {
-  testModel({
+test('Notification model', (t) => {
+  testModel(t, {
     model: Notification,
     orderedFields: [
       'mts', 'type', 'messageID', null, 'notifyInfo', 'code', 'status', 'text'
     ]
   })
 
-  testModelValidation({
+  testModelValidation(t, {
     model: Notification,
     validData: {
       status: VALID_STRINGS, // pull data from somewhere

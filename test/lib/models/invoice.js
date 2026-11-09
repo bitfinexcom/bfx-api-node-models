@@ -1,14 +1,13 @@
-/* eslint-env mocha */
 'use strict'
 
-const assert = require('assert')
+const test = require('brittle')
 const _compact = require('lodash/compact')
 const _includes = require('lodash/includes')
 const { Invoice } = require('../../../lib')
 const testModel = require('../../helpers/test_model')
 
-describe('Invoice model', () => {
-  testModel({
+test('Invoice model', (t) => {
+  testModel(t, {
     model: Invoice,
     orderedFields: [
       'invoiceHash',
@@ -19,7 +18,7 @@ describe('Invoice model', () => {
     ]
   })
 
-  it('initializes correctly', () => {
+  t.test('initializes correctly', (t) => {
     const invc = new Invoice([
       'invoiceHash',
       'invoice',
@@ -28,12 +27,12 @@ describe('Invoice model', () => {
       'amount'
     ])
 
-    assert.strictEqual(invc.invoiceHash, 'invoiceHash')
-    assert.strictEqual(invc.invoice, 'invoice')
-    assert.strictEqual(invc.amount, 'amount')
+    t.is(invc.invoiceHash, 'invoiceHash')
+    t.is(invc.invoice, 'invoice')
+    t.is(invc.amount, 'amount')
   })
 
-  it('serializes correctly', () => {
+  t.test('serializes correctly', (t) => {
     const invc = new Invoice([
       'invoiceHash',
       'invoice',
@@ -43,14 +42,14 @@ describe('Invoice model', () => {
     ])
 
     const arr = _compact(invc.serialize())
-    assert.deepStrictEqual(arr, [
+    t.alike(arr, [
       'invoiceHash',
       'invoice',
       'amount'
     ])
   })
 
-  it('unserializes correctly', () => {
+  t.test('unserializes correctly', (t) => {
     const obj = Invoice.unserialize([
       'invoiceHash',
       'invoice',
@@ -59,13 +58,13 @@ describe('Invoice model', () => {
       'amount'
     ])
 
-    assert.strictEqual(obj.invoiceHash, 'invoiceHash')
-    assert.strictEqual(obj.invoice, 'invoice')
-    assert.strictEqual(obj.amount, 'amount')
+    t.is(obj.invoiceHash, 'invoiceHash')
+    t.is(obj.invoice, 'invoice')
+    t.is(obj.amount, 'amount')
   })
 
-  describe('toString', () => {
-    it('includes pertinent information', () => {
+  t.test('toString', (t) => {
+    t.test('includes pertinent information', (t) => {
       const invc = new Invoice({
         invoiceHash: 'invoiceHash',
         invoice: 'invoice',
@@ -73,9 +72,9 @@ describe('Invoice model', () => {
       })
 
       const str = invc.toString()
-      assert.ok(_includes(str, 'invoiceHash: invoiceHash'), 'invoiceHash missing')
-      assert.ok(_includes(str, 'invoice: invoice'), 'invoice missing')
-      assert.ok(_includes(str, 'amount: 0.0001'), 'amount missing')
+      t.ok(_includes(str, 'invoiceHash: invoiceHash'), 'invoiceHash missing')
+      t.ok(_includes(str, 'invoice: invoice'), 'invoice missing')
+      t.ok(_includes(str, 'amount: 0.0001'), 'amount missing')
     })
   })
 })

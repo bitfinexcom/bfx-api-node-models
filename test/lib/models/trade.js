@@ -1,9 +1,8 @@
-/* eslint-env mocha */
 'use strict'
 
-const assert = require('assert')
+const test = require('brittle')
 const _includes = require('lodash/includes')
-const { SYMBOLS, CURRENCIES } = require('bfx-hf-util')
+const { SYMBOLS, CURRENCIES } = require('@bitfinex/bfx-hf-util')
 const { Trade, Order } = require('../../../lib')
 const testModel = require('../../helpers/test_model')
 const testModelValidation = require('../../helpers/test_model_validation')
@@ -11,8 +10,8 @@ const testModelValidation = require('../../helpers/test_model_validation')
 const VALID_CURRENCIES = Object.values(CURRENCIES)
 const VALID_SYMBOLS = Object.values(SYMBOLS)
 
-describe('Trade model', () => {
-  testModel({
+test('Trade model', (t) => {
+  testModel(t, {
     model: Trade,
     boolFields: ['maker'],
     orderedFields: [
@@ -21,7 +20,7 @@ describe('Trade model', () => {
     ]
   })
 
-  testModelValidation({
+  testModelValidation(t, {
     model: Trade,
     validData: {
       symbol: VALID_SYMBOLS,
@@ -38,9 +37,9 @@ describe('Trade model', () => {
     }
   })
 
-  describe('toString', () => {
-    it('includes pertinent information', () => {
-      const t = new Trade({
+  t.test('toString', (t) => {
+    t.test('includes pertinent information', (t) => {
+      const trade = new Trade({
         symbol: 'tBTCUSD',
         id: 1,
         execAmount: 24,
@@ -50,14 +49,14 @@ describe('Trade model', () => {
         feeCurrency: 'ETH'
       })
 
-      const str = t.toString()
-      assert.ok(/tBTCUSD/.test(str), 'symbol missing')
-      assert.ok(_includes(str, '1'), 'id missing')
-      assert.ok(_includes(str, '32'), 'exec price missing')
-      assert.ok(_includes(str, '24'), 'exec amount missing')
-      assert.ok(/maker/.test(str), 'maker flag missing')
-      assert.ok(_includes(str, '7'), 'fee missing')
-      assert.ok(/ETH/.test(str), 'fee currency missing')
+      const str = trade.toString()
+      t.ok(/tBTCUSD/.test(str), 'symbol missing')
+      t.ok(_includes(str, '1'), 'id missing')
+      t.ok(_includes(str, '32'), 'exec price missing')
+      t.ok(_includes(str, '24'), 'exec amount missing')
+      t.ok(/maker/.test(str), 'maker flag missing')
+      t.ok(_includes(str, '7'), 'fee missing')
+      t.ok(/ETH/.test(str), 'fee currency missing')
     })
   })
 })

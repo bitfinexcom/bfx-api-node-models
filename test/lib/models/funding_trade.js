@@ -1,17 +1,16 @@
-/* eslint-env mocha */
 'use strict'
 
-const assert = require('assert')
+const test = require('brittle')
 const _includes = require('lodash/includes')
-const { SYMBOLS } = require('bfx-hf-util')
+const { SYMBOLS } = require('@bitfinex/bfx-hf-util')
 const { FundingTrade } = require('../../../lib')
 const testModel = require('../../helpers/test_model')
 const testModelValidation = require('../../helpers/test_model_validation')
 
 const VALID_SYMBOLS = Object.values(SYMBOLS)
 
-describe('FundingTrade model', () => {
-  testModel({
+test('FundingTrade model', (t) => {
+  testModel(t, {
     model: FundingTrade,
     orderedFields: [
       'id', 'symbol', 'mtsCreate', 'offerID', 'amount', 'rate', 'period',
@@ -19,7 +18,7 @@ describe('FundingTrade model', () => {
     ]
   })
 
-  testModelValidation({
+  testModelValidation(t, {
     model: FundingTrade,
     validData: {
       symbol: VALID_SYMBOLS,
@@ -33,8 +32,8 @@ describe('FundingTrade model', () => {
     }
   })
 
-  describe('toString', () => {
-    it('includes pertinent information', () => {
+  t.test('toString', (t) => {
+    t.test('includes pertinent information', (t) => {
       const ft = new FundingTrade({
         symbol: 'tBTCUSD',
         amount: 42,
@@ -43,10 +42,10 @@ describe('FundingTrade model', () => {
       })
 
       const str = ft.toString()
-      assert.ok(/BTCUSD/.test(str), 'symbol missing')
-      assert.ok(_includes(str, '42'), 'amount missing')
-      assert.ok(_includes(str, '0.1'), 'rate missing')
-      assert.ok(_includes(str, '30'), 'period missing')
+      t.ok(/BTCUSD/.test(str), 'symbol missing')
+      t.ok(_includes(str, '42'), 'amount missing')
+      t.ok(_includes(str, '0.1'), 'rate missing')
+      t.ok(_includes(str, '30'), 'period missing')
     })
   })
 })
