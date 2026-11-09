@@ -94,20 +94,20 @@ let closed = false
 o.registerListeners()
 
 o.on('update', () => {
-  debug('order updated: %j', o.serialize())
+  console.log('order updated: %j', o.serialize())
 })
 
 o.on('close', () => {
-  debug('order closed: %s', o.status)
+  console.log('order closed: %s', o.status)
   closed = true
 })
 
-debug('submitting order %d', o.cid)
+console.log('submitting order %d', o.cid)
 
 o.submit().then(() => {
-  debug('got submit confirmation for order %d [%d]', o.cid, o.id)
+  console.log('got submit confirmation for order %d [%d]', o.cid, o.id)
 }).catch((err) => {
-  debug('failed to submit order: %s', err.message)
+  console.log('failed to submit order: %s', err.message)
 })
 ```
 

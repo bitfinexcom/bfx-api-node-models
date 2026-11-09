@@ -1,8 +1,5 @@
 'use strict'
 
-process.env.DEBUG = '*'
-
-const debug = require('debug')('bfx:api:models:examples:order')
 const { Order } = require('../')
 const o = new Order({
   type: Order.type.EXCHANGE_LIMIT,
@@ -12,5 +9,5 @@ const o = new Order({
   hidden: true
 })
 
-debug('generated ws2 compatible new order packet:')
-debug(JSON.stringify(o.toNewOrderPacket(), null, 2))
+console.log('generated ws2 compatible new order packet:')
+console.log(JSON.stringify(o.toNewOrderPacket(), null, 2))
